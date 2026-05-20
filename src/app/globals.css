@@ -1,61 +1,61 @@
 @import "tailwindcss";
 
 /*
-  Design tokens IOP — derivati da DESIGN.md (sistema editoriale stile Airtable).
-  Canvas bianco, ink quasi-nero, CTA near-black, signature cards, type Inter
-  (sostituto raccomandato di Haas Grotesk), ritmo verticale a 96px.
+  Design tokens IOP — derivati da DESIGN.md (sistema editoriale monocromatico,
+  ispirato a RunwayML). Inchiostro nero su carta bianca, scala di grigi neutra,
+  nessun colore d'accento, bottoni a pillola neri, angoli netti su input e celle,
+  divisori hairline, niente ombre, tracking negativo sui titoli. Font: Inter
+  (sostituto raccomandato di abcNormal/ABC Diatype).
 */
 @theme {
-  /* Brand & ink */
-  --color-primary: #181d26;
-  --color-primary-active: #0d1218;
-  --color-ink: #181d26;
-  --color-body: #333840;
-  --color-muted: #41454d;
-  --color-hairline: #dddddd;
-  --color-border-strong: #9297a0;
-
-  /* Surfaces */
-  --color-canvas: #ffffff;
-  --color-surface-soft: #f8fafc;
-  --color-surface-strong: #e0e2e6;
-  --color-surface-dark: #181d26;
-  --color-surface-dark-elevated: #1d1f25;
-
-  /* Signature cards */
-  --color-signature-coral: #aa2d00;
-  --color-signature-forest: #0a2e0e;
-  --color-signature-cream: #f5e9d4;
-  --color-signature-peach: #fcab79;
-  --color-signature-mint: #a8d8c4;
-  --color-signature-yellow: #f4d35e;
-  --color-signature-mustard: #d9a441;
-
-  /* On-color text */
+  /* Brand & azione */
+  --color-primary: #000000;
+  --color-primary-active: #1a1a1a;
   --color-on-primary: #ffffff;
   --color-on-dark: #ffffff;
 
-  /* Semantic */
-  --color-link: #1b61c9;
-  --color-link-active: #1a3866;
-  --color-info: #254fad;
-  --color-info-border: #458fff;
-  --color-success: #006400;
-  --color-success-border: #39bf45;
+  /* Scala neutra */
+  --color-ink: #030303;
+  --color-ink-soft: #1a1a1a;
+  --color-body: #404040; /* graphite */
+  --color-graphite: #404040;
+  --color-muted: #6b7280; /* mute */
+  --color-slate: #676f7b;
+  --color-stone: #939393;
+  --color-ash: #999999;
+  --color-hairline: #e7eaf0;
+  --color-hairline-soft: #c9ccd1;
+  --color-border-strong: #c9ccd1;
+
+  /* Superfici */
+  --color-canvas: #ffffff;
+  --color-canvas-warm: #fefefe;
+  --color-surface-soft: #f7f8fa;
+  --color-surface-strong: #e7eaf0; /* infill "featured" */
+  --color-surface-cool: #d0d4d4;
+  --color-scrim: #1a1a1a;
+  --color-footer: #030303;
+
+  /* Funzionali (monocromatici per restare on-brand) */
+  --color-link: #030303;
+  --color-link-active: #1a1a1a;
+  --color-info: #030303;
+  --color-info-border: #030303;
+  --color-success: #404040;
 
   /* Type */
   --font-sans:
     var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", sans-serif;
 
-  /* Radii (DESIGN.md) */
-  --radius-xs: 2px;
+  /* Radii (DESIGN.md RunwayML) */
+  --radius-xs: 4px;
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 12px;
-  --radius-pill: 9999px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
 
-  /* Spacing extra (ritmo editoriale) */
+  /* Ritmo editoriale */
   --spacing-section: 96px;
 }
 
@@ -70,32 +70,44 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Display: peso 400/500, mai bold (principio Haas/DESIGN.md) */
+/* Titoli: peso 400, tracking negativo (silhouette compressa) */
 .display-xl {
   font-size: 48px;
-  font-weight: 500;
-  line-height: 1.1;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -1.4px;
 }
 .display-lg {
   font-size: 40px;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1;
+  letter-spacing: -1px;
 }
 .display-md {
   font-size: 32px;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.05;
+  letter-spacing: -0.8px;
 }
 .title-lg {
   font-size: 24px;
   font-weight: 400;
-  line-height: 1.35;
-  letter-spacing: 0.12px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
 }
 .title-sm {
   font-size: 18px;
   font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.2px;
+}
+/* Eyebrow: etichetta maiuscola sopra i titoli */
+.eyebrow {
+  font-size: 13px;
+  font-weight: 500;
   line-height: 1.4;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
 }
 
 @media print {

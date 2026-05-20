@@ -62,7 +62,7 @@ export function SettingsForm({ org }: { org: Tables<"organizations"> }) {
             <button
               type="button"
               onClick={() => setLogoUrl("")}
-              className="ml-3 text-sm text-signature-coral"
+              className="ml-3 text-sm text-ink underline underline-offset-2"
             >
               Rimuovi
             </button>

@@ -45,7 +45,7 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
     [edificio?.indirizzo, edificio?.comune].filter(Boolean).join(" - ") || "—";
 
   return (
-    <article className="mx-auto max-w-[820px] bg-canvas p-10 text-ink shadow-sm ring-1 ring-hairline print:shadow-none print:ring-0">
+    <article className="mx-auto max-w-[820px] border border-hairline bg-canvas p-10 text-ink print:border-0">
       {/* Intestazione */}
       <header className="mb-8 border-b border-hairline pb-6">
         <div className="mb-6 flex items-start justify-between gap-4">

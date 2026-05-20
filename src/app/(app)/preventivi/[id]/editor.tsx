@@ -148,7 +148,7 @@ export function PreventivoEditor({
               href={`/preventivi/${preventivo.id}/stampa`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg border border-hairline bg-canvas px-6 py-4 text-base font-medium text-ink"
+              className="inline-flex h-10 items-center justify-center rounded-full border border-ink bg-canvas px-5 text-sm font-semibold text-ink"
             >
               Stampa / PDF
             </a>
@@ -437,7 +437,7 @@ function FotoTab({
       ) : null}
 
       {error ? (
-        <p className="rounded-sm border border-signature-coral/30 bg-signature-coral/5 px-3 py-2 text-sm text-signature-coral">
+        <p className="border border-hairline-soft bg-surface-soft px-3 py-2 text-sm text-ink">
           {error}
         </p>
       ) : null}
@@ -510,7 +510,7 @@ function CapitolatoTab({
         placeholder="Incolla qui il capitolato…"
       />
       {error ? (
-        <p className="rounded-sm border border-signature-coral/30 bg-signature-coral/5 px-3 py-2 text-sm text-signature-coral">
+        <p className="border border-hairline-soft bg-surface-soft px-3 py-2 text-sm text-ink">
           {error}
         </p>
       ) : null}
@@ -648,7 +648,7 @@ function InterventoRow({
         <Button
           type="button"
           variant="ghost"
-          className="px-4 py-2 text-signature-coral"
+          className="px-4 py-2 text-ink underline underline-offset-2"
           disabled={pending}
           onClick={() => start(() => deleteIntervento(i.id, preventivoId))}
         >

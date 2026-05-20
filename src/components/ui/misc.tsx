@@ -4,33 +4,36 @@ function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
 }
 
+// Card piatta, niente ombra: 1px hairline su canvas, angoli netti.
 export function Card({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={cx(
-        "rounded-md border border-hairline bg-canvas p-6",
-        className,
-      )}
+      className={cx("border border-hairline bg-canvas p-6", className)}
       {...props}
     />
   );
 }
 
 export function PageHeader({
+  eyebrow,
   title,
   description,
   action,
 }: {
+  eyebrow?: string;
   title: string;
   description?: string;
   action?: ReactNode;
 }) {
   return (
-    <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+    <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-hairline pb-6">
       <div>
+        {eyebrow ? (
+          <p className="eyebrow mb-2 text-stone">{eyebrow}</p>
+        ) : null}
         <h1 className="display-md text-ink">{title}</h1>
         {description ? (
-          <p className="mt-2 text-sm text-muted">{description}</p>
+          <p className="mt-2 max-w-2xl text-base text-graphite">{description}</p>
         ) : null}
       </div>
       {action}
@@ -40,16 +43,16 @@ export function PageHeader({
 
 const statoTone: Record<string, string> = {
   bozza: "bg-surface-strong text-ink",
-  inviato: "bg-signature-cream text-ink",
-  accettato: "bg-success/10 text-success",
-  rifiutato: "bg-signature-coral/10 text-signature-coral",
+  inviato: "border border-ink text-ink",
+  accettato: "bg-primary text-on-primary",
+  rifiutato: "border border-hairline-soft text-stone line-through",
 };
 
 export function StatoBadge({ stato }: { stato: string }) {
   return (
     <span
       className={cx(
-        "inline-flex items-center rounded-pill px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
         statoTone[stato] ?? "bg-surface-soft text-body",
       )}
     >
@@ -68,10 +71,12 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-dashed border-hairline px-6 py-16 text-center">
+    <div className="border border-hairline px-6 py-20 text-center">
       <p className="title-sm text-ink">{title}</p>
       {description ? (
-        <p className="mx-auto mt-1 max-w-sm text-sm text-muted">{description}</p>
+        <p className="mx-auto mt-1 max-w-sm text-sm text-graphite">
+          {description}
+        </p>
       ) : null}
       {action ? <div className="mt-6 flex justify-center">{action}</div> : null}
     </div>

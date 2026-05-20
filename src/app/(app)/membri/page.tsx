@@ -78,7 +78,7 @@ export default async function MembriPage() {
                         <input type="hidden" name="user_id" value={m.user_id} />
                         <button
                           type="submit"
-                          className="text-sm text-signature-coral"
+                          className="text-sm text-ink underline underline-offset-2"
                         >
                           Rimuovi
                         </button>
