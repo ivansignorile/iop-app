@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { StatoBadge } from "@/components/ui/misc";
 import { UNITA_LABEL, formatEuro } from "@/lib/format";
+import { createClient } from "@/lib/supabase/client";
 import type { Tables } from "@/lib/supabase/types";
 import {
   addInterventoBlank,
@@ -34,7 +36,6 @@ const UNITA: Array<Tables<"preventivo_interventi">["unita"]> = [
   "kg",
 ];
 const STATI: Stato[] = ["bozza", "inviato", "accettato", "rifiutato"];
-const tabs = ["Anagrafica", "Interventi", "Anteprima"] as const;
 
 export function PreventivoEditor({
   preventivo,
@@ -51,7 +52,11 @@ export function PreventivoEditor({
   cicli: Ciclo[];
   preview: PreviewData;
 }) {
-  const [tab, setTab] = useState<(typeof tabs)[number]>("Anagrafica");
+  const tabs =
+    preventivo.modalita === "capitolato"
+      ? (["Capitolato", "Anagrafica", "Interventi", "Anteprima"] as const)
+      : (["Anagrafica", "Interventi", "Anteprima"] as const);
+  const [tab, setTab] = useState<string>(tabs[0]);
   const [pending, startTransition] = useTransition();
   const totale = interventi.reduce((a, i) => a + Number(i.importo ?? 0), 0);
 
@@ -109,6 +114,10 @@ export function PreventivoEditor({
         </div>
       </div>
 
+      {tab === "Capitolato" && (
+        <CapitolatoTab preventivo={preventivo} onDone={() => setTab("Interventi")} />
+      )}
+
       {tab === "Anagrafica" && (
         <AnagraficaTab
           preventivo={preventivo}
@@ -130,9 +139,14 @@ export function PreventivoEditor({
       {tab === "Anteprima" && (
         <div>
           <div className="mb-4 flex justify-end print:hidden">
-            <Button variant="secondary" onClick={() => window.print()}>
+            <a
+              href={`/preventivi/${preventivo.id}/stampa`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-lg border border-hairline bg-canvas px-6 py-4 text-base font-medium text-ink"
+            >
               Stampa / PDF
-            </Button>
+            </a>
           </div>
           <PreventivoPreview data={preview} />
         </div>
@@ -329,6 +343,72 @@ function InterventiTab({
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function CapitolatoTab({
+  preventivo,
+  onDone,
+}: {
+  preventivo: Tables<"preventivi">;
+  onDone: () => void;
+}) {
+  const router = useRouter();
+  const [testo, setTesto] = useState(preventivo.capitolato_testo ?? "");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [done, setDone] = useState<string | null>(null);
+
+  async function genera() {
+    setLoading(true);
+    setError(null);
+    setDone(null);
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.functions.invoke("parse-capitolato", {
+        body: { preventivo_id: preventivo.id, testo },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      setDone(`Generati ${data.interventi_creati} interventi.`);
+      router.refresh();
+      setTimeout(onDone, 800);
+    } catch (e) {
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Generazione non riuscita. Verifica che la chiave AI sia configurata.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="max-w-3xl space-y-4">
+      <div>
+        <h2 className="title-sm text-ink">Capitolato / computo metrico</h2>
+        <p className="mt-1 text-sm text-muted">
+          Incolla il testo del capitolato o del computo. L&apos;AI lo trasforma in
+          interventi, prezzi e anagrafica, che potrai rivedere e modificare.
+        </p>
+      </div>
+      <Textarea
+        rows={16}
+        value={testo}
+        onChange={(e) => setTesto(e.target.value)}
+        placeholder="Incolla qui il capitolato…"
+      />
+      {error ? (
+        <p className="rounded-sm border border-signature-coral/30 bg-signature-coral/5 px-3 py-2 text-sm text-signature-coral">
+          {error}
+        </p>
+      ) : null}
+      {done ? <p className="text-sm text-success">{done}</p> : null}
+      <Button onClick={genera} disabled={loading || testo.trim().length < 20}>
+        {loading ? "Generazione in corso…" : "Genera preventivo"}
+      </Button>
     </div>
   );
 }

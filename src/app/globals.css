@@ -97,3 +97,13 @@ body {
   font-weight: 500;
   line-height: 1.4;
 }
+
+@media print {
+  html,
+  body {
+    background: #fff;
+  }
+  @page {
+    margin: 16mm;
+  }
+}
