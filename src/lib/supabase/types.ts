@@ -1,15 +1,672 @@
-/**
- * Tipi del database Supabase.
- * Placeholder: verrà rigenerato con
- *   supabase gen types typescript --project-id <ref> > src/lib/supabase/types.ts
- * dopo l'applicazione delle migration.
- */
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
 export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "14.5"
+  }
   public: {
-    Tables: Record<string, never>;
-    Views: Record<string, never>;
-    Functions: Record<string, never>;
-    Enums: Record<string, never>;
-    CompositeTypes: Record<string, never>;
-  };
-};
+    Tables: {
+      cicli_lavorazione: {
+        Row: {
+          categoria: string | null
+          codice: string | null
+          created_at: string
+          descrizione_fasi: string
+          id: string
+          org_id: string | null
+          prezzo_default: number | null
+          tags: string[] | null
+          titolo: string
+          unita_default: Database["public"]["Enums"]["unita_misura"]
+        }
+        Insert: {
+          categoria?: string | null
+          codice?: string | null
+          created_at?: string
+          descrizione_fasi: string
+          id?: string
+          org_id?: string | null
+          prezzo_default?: number | null
+          tags?: string[] | null
+          titolo: string
+          unita_default?: Database["public"]["Enums"]["unita_misura"]
+        }
+        Update: {
+          categoria?: string | null
+          codice?: string | null
+          created_at?: string
+          descrizione_fasi?: string
+          id?: string
+          org_id?: string | null
+          prezzo_default?: number | null
+          tags?: string[] | null
+          titolo?: string
+          unita_default?: Database["public"]["Enums"]["unita_misura"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cicli_lavorazione_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clienti: {
+        Row: {
+          amministratore: string | null
+          cap: string | null
+          codice_fiscale: string | null
+          comune: string | null
+          created_at: string
+          email: string | null
+          id: string
+          indirizzo: string | null
+          nome: string
+          note: string | null
+          org_id: string
+          partita_iva: string | null
+          provincia: string | null
+          telefono: string | null
+          tipo: Database["public"]["Enums"]["cliente_tipo"]
+          updated_at: string
+        }
+        Insert: {
+          amministratore?: string | null
+          cap?: string | null
+          codice_fiscale?: string | null
+          comune?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          indirizzo?: string | null
+          nome: string
+          note?: string | null
+          org_id: string
+          partita_iva?: string | null
+          provincia?: string | null
+          telefono?: string | null
+          tipo?: Database["public"]["Enums"]["cliente_tipo"]
+          updated_at?: string
+        }
+        Update: {
+          amministratore?: string | null
+          cap?: string | null
+          codice_fiscale?: string | null
+          comune?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          indirizzo?: string | null
+          nome?: string
+          note?: string | null
+          org_id?: string
+          partita_iva?: string | null
+          provincia?: string | null
+          telefono?: string | null
+          tipo?: Database["public"]["Enums"]["cliente_tipo"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clienti_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      degrado_samples: {
+        Row: {
+          created_at: string
+          descrizione: string | null
+          id: string
+          image_path: string | null
+          intervento: string
+          livello: number
+          org_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          descrizione?: string | null
+          id?: string
+          image_path?: string | null
+          intervento: string
+          livello: number
+          org_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          descrizione?: string | null
+          id?: string
+          image_path?: string | null
+          intervento?: string
+          livello?: number
+          org_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "degrado_samples_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      edifici: {
+        Row: {
+          balconi: number | null
+          cap: string | null
+          cliente_id: string | null
+          comune: string | null
+          created_at: string
+          facciate: number | null
+          id: string
+          indirizzo: string | null
+          lat: number | null
+          lng: number | null
+          note: string | null
+          org_id: string
+          piani: number | null
+          porzione: string | null
+          provincia: string | null
+          tipo_copertura: string | null
+          updated_at: string
+        }
+        Insert: {
+          balconi?: number | null
+          cap?: string | null
+          cliente_id?: string | null
+          comune?: string | null
+          created_at?: string
+          facciate?: number | null
+          id?: string
+          indirizzo?: string | null
+          lat?: number | null
+          lng?: number | null
+          note?: string | null
+          org_id: string
+          piani?: number | null
+          porzione?: string | null
+          provincia?: string | null
+          tipo_copertura?: string | null
+          updated_at?: string
+        }
+        Update: {
+          balconi?: number | null
+          cap?: string | null
+          cliente_id?: string | null
+          comune?: string | null
+          created_at?: string
+          facciate?: number | null
+          id?: string
+          indirizzo?: string | null
+          lat?: number | null
+          lng?: number | null
+          note?: string | null
+          org_id?: string
+          piani?: number | null
+          porzione?: string | null
+          provincia?: string | null
+          tipo_copertura?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "edifici_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clienti"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "edifici_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      materiali_prodotti: {
+        Row: {
+          alternativa: string | null
+          created_at: string
+          id: string
+          lavorazione_keyword: string
+          marca: string | null
+          note: string | null
+          org_id: string | null
+          prodotto: string
+          scheda_tecnica_url: string | null
+        }
+        Insert: {
+          alternativa?: string | null
+          created_at?: string
+          id?: string
+          lavorazione_keyword: string
+          marca?: string | null
+          note?: string | null
+          org_id?: string | null
+          prodotto: string
+          scheda_tecnica_url?: string | null
+        }
+        Update: {
+          alternativa?: string | null
+          created_at?: string
+          id?: string
+          lavorazione_keyword?: string
+          marca?: string | null
+          note?: string | null
+          org_id?: string | null
+          prodotto?: string
+          scheda_tecnica_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "materiali_prodotti_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      memberships: {
+        Row: {
+          created_at: string
+          id: string
+          org_id: string
+          role: Database["public"]["Enums"]["membership_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          org_id: string
+          role?: Database["public"]["Enums"]["membership_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          org_id?: string
+          role?: Database["public"]["Enums"]["membership_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memberships_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          cap: string | null
+          comune: string | null
+          costo_giornaliero: number | null
+          created_at: string
+          default_iva: number
+          email: string | null
+          id: string
+          indirizzo: string | null
+          logo_url: string | null
+          name: string
+          partita_iva: string | null
+          provincia: string | null
+          ragione_sociale: string | null
+          slug: string | null
+          telefono: string | null
+          updated_at: string
+        }
+        Insert: {
+          cap?: string | null
+          comune?: string | null
+          costo_giornaliero?: number | null
+          created_at?: string
+          default_iva?: number
+          email?: string | null
+          id?: string
+          indirizzo?: string | null
+          logo_url?: string | null
+          name: string
+          partita_iva?: string | null
+          provincia?: string | null
+          ragione_sociale?: string | null
+          slug?: string | null
+          telefono?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cap?: string | null
+          comune?: string | null
+          costo_giornaliero?: number | null
+          created_at?: string
+          default_iva?: number
+          email?: string | null
+          id?: string
+          indirizzo?: string | null
+          logo_url?: string | null
+          name?: string
+          partita_iva?: string | null
+          provincia?: string | null
+          ragione_sociale?: string | null
+          slug?: string | null
+          telefono?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      preventivi: {
+        Row: {
+          capitolato_testo: string | null
+          cliente_id: string | null
+          created_at: string
+          created_by: string | null
+          data: string
+          edificio_id: string | null
+          id: string
+          iva: number
+          modalita: Database["public"]["Enums"]["preventivo_modalita"]
+          note: string | null
+          numero_protocollo: string | null
+          oggetto: string | null
+          org_id: string
+          stato: Database["public"]["Enums"]["preventivo_stato"]
+          totale_imponibile: number
+          updated_at: string
+        }
+        Insert: {
+          capitolato_testo?: string | null
+          cliente_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          data?: string
+          edificio_id?: string | null
+          id?: string
+          iva?: number
+          modalita?: Database["public"]["Enums"]["preventivo_modalita"]
+          note?: string | null
+          numero_protocollo?: string | null
+          oggetto?: string | null
+          org_id: string
+          stato?: Database["public"]["Enums"]["preventivo_stato"]
+          totale_imponibile?: number
+          updated_at?: string
+        }
+        Update: {
+          capitolato_testo?: string | null
+          cliente_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          data?: string
+          edificio_id?: string | null
+          id?: string
+          iva?: number
+          modalita?: Database["public"]["Enums"]["preventivo_modalita"]
+          note?: string | null
+          numero_protocollo?: string | null
+          oggetto?: string | null
+          org_id?: string
+          stato?: Database["public"]["Enums"]["preventivo_stato"]
+          totale_imponibile?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "preventivi_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clienti"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "preventivi_edificio_id_fkey"
+            columns: ["edificio_id"]
+            isOneToOne: false
+            referencedRelation: "edifici"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "preventivi_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      preventivo_allegati: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          livello_degrado: number | null
+          org_id: string
+          preventivo_id: string
+          storage_path: string
+          tipo: string | null
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          livello_degrado?: number | null
+          org_id: string
+          preventivo_id: string
+          storage_path: string
+          tipo?: string | null
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          livello_degrado?: number | null
+          org_id?: string
+          preventivo_id?: string
+          storage_path?: string
+          tipo?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "preventivo_allegati_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "preventivo_allegati_preventivo_id_fkey"
+            columns: ["preventivo_id"]
+            isOneToOne: false
+            referencedRelation: "preventivi"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      preventivo_interventi: {
+        Row: {
+          ciclo_id: string | null
+          created_at: string
+          descrizione: string | null
+          gruppo: string | null
+          id: string
+          importo: number | null
+          ordine: number
+          org_id: string
+          preventivo_id: string
+          prezzo_unitario: number
+          quantita: number
+          sconto: number
+          titolo: string
+          unita: Database["public"]["Enums"]["unita_misura"]
+        }
+        Insert: {
+          ciclo_id?: string | null
+          created_at?: string
+          descrizione?: string | null
+          gruppo?: string | null
+          id?: string
+          importo?: number | null
+          ordine?: number
+          org_id: string
+          preventivo_id: string
+          prezzo_unitario?: number
+          quantita?: number
+          sconto?: number
+          titolo: string
+          unita?: Database["public"]["Enums"]["unita_misura"]
+        }
+        Update: {
+          ciclo_id?: string | null
+          created_at?: string
+          descrizione?: string | null
+          gruppo?: string | null
+          id?: string
+          importo?: number | null
+          ordine?: number
+          org_id?: string
+          preventivo_id?: string
+          prezzo_unitario?: number
+          quantita?: number
+          sconto?: number
+          titolo?: string
+          unita?: Database["public"]["Enums"]["unita_misura"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "preventivo_interventi_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "preventivo_interventi_preventivo_id_fkey"
+            columns: ["preventivo_id"]
+            isOneToOne: false
+            referencedRelation: "preventivi"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prezzi_unitari: {
+        Row: {
+          categoria: string | null
+          created_at: string
+          id: string
+          note: string | null
+          org_id: string | null
+          prezzo: number
+          unita: Database["public"]["Enums"]["unita_misura"]
+          voce: string
+        }
+        Insert: {
+          categoria?: string | null
+          created_at?: string
+          id?: string
+          note?: string | null
+          org_id?: string | null
+          prezzo: number
+          unita: Database["public"]["Enums"]["unita_misura"]
+          voce: string
+        }
+        Update: {
+          categoria?: string | null
+          created_at?: string
+          id?: string
+          note?: string | null
+          org_id?: string | null
+          prezzo?: number
+          unita?: Database["public"]["Enums"]["unita_misura"]
+          voce?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prezzi_unitari_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          current_org_id: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_org_id?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_org_id?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_current_org_id_fkey"
+            columns: ["current_org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      create_organization: { Args: { org_name: string }; Returns: string }
+      is_org_admin: { Args: { target_org: string }; Returns: boolean }
+      user_org_ids: { Args: Record<PropertyKey, never>; Returns: string[] }
+    }
+    Enums: {
+      cliente_tipo: "condominio" | "privato" | "azienda"
+      membership_role: "owner" | "admin" | "member"
+      preventivo_modalita: "capitolato" | "manuale"
+      preventivo_stato: "bozza" | "inviato" | "accettato" | "rifiutato"
+      unita_misura: "corpo" | "mq" | "ml" | "mc" | "giorno" | "cad" | "kg"
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+}
+
+type DefaultSchema = Database["public"]
+
+export type Tables<T extends keyof DefaultSchema["Tables"]> =
+  DefaultSchema["Tables"][T]["Row"]
+export type TablesInsert<T extends keyof DefaultSchema["Tables"]> =
+  DefaultSchema["Tables"][T]["Insert"]
+export type TablesUpdate<T extends keyof DefaultSchema["Tables"]> =
+  DefaultSchema["Tables"][T]["Update"]
+export type Enums<T extends keyof DefaultSchema["Enums"]> =
+  DefaultSchema["Enums"][T]
