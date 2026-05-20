@@ -8,6 +8,7 @@ import {
   CicloRow,
   PrezzoRow,
 } from "./forms";
+import { ImportListino } from "./import-listino";
 
 export default async function LibreriaPage() {
   const { org } = await requireContext();
@@ -48,6 +49,8 @@ export default async function LibreriaPage() {
         title="Libreria prezzi e cicli"
         description="I prezzi e i cicli della tua impresa hanno priorità e vengono usati dall'AI per generare i preventivi. Quelli globali restano come riferimento."
       />
+
+      <ImportListino />
 
       {/* ---------- Prezzi ---------- */}
       <section className="mb-12">
