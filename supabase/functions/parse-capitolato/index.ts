@@ -1,7 +1,7 @@
 // Edge function: parse-capitolato
-// Trasforma un capitolato/computo metrico in interventi di preventivo (lavori su corda),
-// usando Claude (Anthropic Messages API) con la libreria cicli come grounding.
-// verify_jwt = true: l'utente è autenticato; usiamo il suo JWT per rispettare le RLS.
+// Trasforma un capitolato/computo metrico (testo incollato O file PDF caricato)
+// in interventi di preventivo ricchi e dettagliati (lavori su corda), usando
+// Claude con la libreria cicli come grounding. verify_jwt = true.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -15,37 +15,12 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-type Intervento = {
-  titolo: string;
-  gruppo: string | null;
-  descrizione: string | null;
-  unita: "corpo" | "mq" | "ml" | "mc" | "giorno" | "cad" | "kg";
-  quantita: number;
-  prezzo_unitario: number;
-};
-
-type ParseResult = {
-  oggetto: string;
-  cliente: {
-    tipo: "condominio" | "privato" | "azienda";
-    nome: string;
-    amministratore: string | null;
-  };
-  edificio: {
-    indirizzo: string | null;
-    comune: string | null;
-    cap: string | null;
-    provincia: string | null;
-    piani: number | null;
-  };
-  interventi: Intervento[];
-};
-
 const RESULT_SCHEMA = {
   type: "object",
   additionalProperties: false,
   properties: {
     oggetto: { type: "string" },
+    relazione: { type: "string" },
     cliente: {
       type: "object",
       additionalProperties: false,
@@ -76,7 +51,7 @@ const RESULT_SCHEMA = {
         properties: {
           titolo: { type: "string" },
           gruppo: { type: ["string", "null"] },
-          descrizione: { type: ["string", "null"] },
+          descrizione: { type: "string" },
           unita: {
             type: "string",
             enum: ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"],
@@ -84,24 +59,15 @@ const RESULT_SCHEMA = {
           quantita: { type: "number" },
           prezzo_unitario: { type: "number" },
         },
-        required: [
-          "titolo",
-          "gruppo",
-          "descrizione",
-          "unita",
-          "quantita",
-          "prezzo_unitario",
-        ],
+        required: ["titolo", "gruppo", "descrizione", "unita", "quantita", "prezzo_unitario"],
       },
     },
   },
-  required: ["oggetto", "cliente", "edificio", "interventi"],
+  required: ["oggetto", "relazione", "cliente", "edificio", "interventi"],
 };
 
 Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
-  }
+  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
     const authHeader = req.headers.get("Authorization") ?? "";
     const supabase = createClient(
@@ -110,12 +76,13 @@ Deno.serve(async (req) => {
       { global: { headers: { Authorization: authHeader } } },
     );
 
-    const { preventivo_id, testo } = await req.json();
-    if (!preventivo_id || !testo || String(testo).trim().length < 20) {
-      return json({ error: "preventivo_id e testo (capitolato) richiesti" }, 400);
+    const { preventivo_id, testo, file_base64, media_type, filename } = await req.json();
+    const hasText = typeof testo === "string" && testo.trim().length >= 20;
+    const hasFile = typeof file_base64 === "string" && file_base64.length > 0;
+    if (!preventivo_id || (!hasText && !hasFile)) {
+      return json({ error: "preventivo_id e (testo o file) richiesti" }, 400);
     }
 
-    // Preventivo (RLS garantisce ownership)
     const { data: prev, error: prevErr } = await supabase
       .from("preventivi")
       .select("id, org_id, cliente_id, edificio_id")
@@ -123,7 +90,6 @@ Deno.serve(async (req) => {
       .single();
     if (prevErr || !prev) return json({ error: "Preventivo non trovato" }, 404);
 
-    // Libreria cicli per grounding (globali + org)
     const { data: cicli } = await supabase
       .from("cicli_lavorazione")
       .select("titolo, categoria, unita_default, prezzo_default, descrizione_fasi");
@@ -131,40 +97,55 @@ Deno.serve(async (req) => {
     const libreria = (cicli ?? [])
       .map(
         (c) =>
-          `- ${c.titolo} [${c.categoria}] (${c.unita_default}${
+          `### ${c.titolo} [${c.categoria}] — ${c.unita_default}${
             c.prezzo_default ? `, rif. €${c.prezzo_default}` : ""
-          })`,
+          }\n${c.descrizione_fasi}`,
       )
-      .join("\n");
+      .join("\n\n");
 
     const system = [
       {
         type: "text",
         text:
-          "Sei un assistente tecnico di un'impresa edile che opera con lavori su corda (rope access). " +
-          "Ricevi il testo di un capitolato o computo metrico e lo trasformi in una lista di interventi per un'offerta tecnico-economica. " +
-          "Raggruppa le lavorazioni in interventi sensati (allestimento cantiere, ripristini, impermeabilizzazioni, balconi, ecc.). " +
-          "Per ogni intervento scegli l'unità di misura adatta (corpo, mq, ml, cad, giorno) e una quantità coerente col computo; " +
-          "se un prezzo non è ricavabile, stima un prezzo_unitario ragionevole basandoti sui riferimenti della libreria, altrimenti 0. " +
-          "La descrizione deve elencare le fasi del ciclo di lavorazione. Estrai anche committente, oggetto e dati edificio se presenti.\n\n" +
-          "LIBRERIA CICLI DI RIFERIMENTO:\n" +
+          "Sei un capitolatista esperto di un'impresa edile che opera con lavori su corda (rope access). " +
+          "Ricevi un capitolato o computo metrico (testo o PDF) e produci un'offerta tecnico-economica RICCA e DETTAGLIATA. " +
+          "Linee guida fondamentali:\n" +
+          "- Raggruppa le lavorazioni in interventi sensati (allestimento cantiere e sicurezza, ripristini, impermeabilizzazioni, balconi, facciate, ferro, ecc.).\n" +
+          "- Per OGNI intervento scrivi una descrizione ESTESA e professionale: elenca tutte le fasi del ciclo di lavorazione, i materiali con marca tipica (Kerakoll, Mapei, Boero…) e relative alternative, le finiture, le norme applicabili e lo smaltimento. NON limitarti a una riga: arricchisci con il dettaglio tecnico tipico di un capitolato (più frasi per intervento), attingendo alla libreria cicli qui sotto.\n" +
+          "- Scegli unità di misura coerenti (corpo, mq, ml, cad, giorno) e quantità ricavate dal computo; se un prezzo non è ricavabile, stimalo dai riferimenti della libreria, altrimenti 0.\n" +
+          "- Inserisci sempre un intervento di 'Allestimento cantiere e apprestamenti di sicurezza' se non presente.\n" +
+          "- Scrivi una 'relazione' introduttiva di 3-5 frasi che descrive il contesto e gli obiettivi dell'intervento.\n" +
+          "- Estrai committente, oggetto e dati edificio se presenti.\n\n" +
+          "LIBRERIA CICLI DI RIFERIMENTO (usa queste descrizioni come base da espandere):\n\n" +
           libreria,
         cache_control: { type: "ephemeral" },
       },
     ];
 
+    const istruzione =
+      "Analizza il capitolato/computo seguente e produci l'offerta tecnico-economica dettagliata in JSON.";
+    let userContent: unknown;
+    if (hasFile && media_type === "application/pdf") {
+      userContent = [
+        { type: "document", source: { type: "base64", media_type: "application/pdf", data: file_base64 } },
+        { type: "text", text: istruzione },
+      ];
+    } else if (hasFile && String(media_type).startsWith("image/")) {
+      userContent = [
+        { type: "image", source: { type: "base64", media_type, data: file_base64 } },
+        { type: "text", text: istruzione },
+      ];
+    } else {
+      userContent = `${istruzione}\n\n${testo}`;
+    }
+
     const body = {
       model: MODEL,
-      max_tokens: 8000,
+      max_tokens: 12000,
       system,
-      messages: [
-        {
-          role: "user",
-          content: `Trasforma questo capitolato in interventi di preventivo:\n\n${testo}`,
-        },
-      ],
+      messages: [{ role: "user", content: userContent }],
       output_config: {
-        effort: "medium",
+        effort: "high",
         format: { type: "json_schema", schema: RESULT_SCHEMA },
       },
     };
@@ -178,20 +159,13 @@ Deno.serve(async (req) => {
       },
       body: JSON.stringify(body),
     });
-
-    if (!aiRes.ok) {
-      const errText = await aiRes.text();
-      return json({ error: "Errore AI", detail: errText }, 502);
-    }
+    if (!aiRes.ok) return json({ error: "Errore AI", detail: await aiRes.text() }, 502);
 
     const aiData = await aiRes.json();
-    const textBlock = (aiData.content ?? []).find(
-      (b: { type: string }) => b.type === "text",
-    );
+    const textBlock = (aiData.content ?? []).find((b: { type: string }) => b.type === "text");
     if (!textBlock) return json({ error: "Risposta AI vuota" }, 502);
-    const parsed = JSON.parse(textBlock.text) as ParseResult;
+    const parsed = JSON.parse(textBlock.text);
 
-    // Upsert committente
     let clienteId = prev.cliente_id as string | null;
     const clientePatch = {
       org_id: prev.org_id,
@@ -199,34 +173,22 @@ Deno.serve(async (req) => {
       nome: parsed.cliente.nome,
       amministratore: parsed.cliente.amministratore,
     };
-    if (clienteId) {
-      await supabase.from("clienti").update(clientePatch).eq("id", clienteId);
-    } else {
-      const { data } = await supabase
-        .from("clienti")
-        .insert(clientePatch)
-        .select("id")
-        .single();
+    if (clienteId) await supabase.from("clienti").update(clientePatch).eq("id", clienteId);
+    else {
+      const { data } = await supabase.from("clienti").insert(clientePatch).select("id").single();
       clienteId = data?.id ?? null;
     }
 
-    // Upsert edificio
     let edificioId = prev.edificio_id as string | null;
     const edificioPatch = { org_id: prev.org_id, cliente_id: clienteId, ...parsed.edificio };
-    if (edificioId) {
-      await supabase.from("edifici").update(edificioPatch).eq("id", edificioId);
-    } else {
-      const { data } = await supabase
-        .from("edifici")
-        .insert(edificioPatch)
-        .select("id")
-        .single();
+    if (edificioId) await supabase.from("edifici").update(edificioPatch).eq("id", edificioId);
+    else {
+      const { data } = await supabase.from("edifici").insert(edificioPatch).select("id").single();
       edificioId = data?.id ?? null;
     }
 
-    // Sostituisci interventi
     await supabase.from("preventivo_interventi").delete().eq("preventivo_id", preventivo_id);
-    const rows = parsed.interventi.map((i, idx) => ({
+    const rows = parsed.interventi.map((i: Record<string, unknown>, idx: number) => ({
       org_id: prev.org_id,
       preventivo_id,
       ordine: idx,
@@ -239,7 +201,6 @@ Deno.serve(async (req) => {
     }));
     if (rows.length) await supabase.from("preventivo_interventi").insert(rows);
 
-    // Ricalcola totale e aggiorna preventivo
     const { data: imp } = await supabase
       .from("preventivo_interventi")
       .select("importo")
@@ -250,20 +211,16 @@ Deno.serve(async (req) => {
       .from("preventivi")
       .update({
         oggetto: parsed.oggetto,
+        note: parsed.relazione,
         modalita: "capitolato",
-        capitolato_testo: testo,
+        capitolato_testo: hasText ? testo : `[file: ${filename ?? "capitolato"}]`,
         cliente_id: clienteId,
         edificio_id: edificioId,
         totale_imponibile: totale,
       })
       .eq("id", preventivo_id);
 
-    return json({
-      ok: true,
-      interventi_creati: rows.length,
-      totale_imponibile: totale,
-      usage: aiData.usage,
-    });
+    return json({ ok: true, interventi_creati: rows.length, totale_imponibile: totale, usage: aiData.usage });
   } catch (e) {
     return json({ error: String(e) }, 500);
   }

@@ -145,7 +145,7 @@ export function PreventivoEditor({
         <div>
           <div className="mb-4 flex justify-end print:hidden">
             <a
-              href={`/preventivi/${preventivo.id}/stampa`}
+              href={`/stampa/preventivo/${preventivo.id}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-10 items-center justify-center rounded-full border border-ink bg-canvas px-5 text-sm font-semibold text-ink"
@@ -400,8 +400,13 @@ function FotoTab({
       if (error || data?.error) throw new Error("errore");
       const v = data.valutazione;
       setResult(v);
-      await saveAllegato(preventivoId, path, v.livello, v.intervento);
-      setSavedMsg("Foto salvata e allegata al preventivo.");
+      await saveAllegato(
+        preventivoId,
+        path,
+        v.livello,
+        `${v.intervento}. ${v.descrizione}`,
+      );
+      setSavedMsg("Foto e descrizione aggiunte al report fotografico del preventivo.");
     } catch {
       setError("Analisi non riuscita (verifica la chiave AI).");
     } finally {
@@ -464,25 +469,48 @@ function CapitolatoTab({
   onDone: () => void;
 }) {
   const router = useRouter();
-  const [testo, setTesto] = useState(preventivo.capitolato_testo ?? "");
+  const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
 
+  function fileToBase64(f: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result).split(",")[1]);
+      r.onerror = reject;
+      r.readAsDataURL(f);
+    });
+  }
+
   async function genera() {
+    if (!file) return;
     setLoading(true);
     setError(null);
     setDone(null);
     try {
       const supabase = createClient();
-      const { data, error } = await supabase.functions.invoke("parse-capitolato", {
-        body: { preventivo_id: preventivo.id, testo },
-      });
+      const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+      const isText = file.type.startsWith("text/") || file.name.toLowerCase().endsWith(".txt");
+
+      let body: Record<string, unknown>;
+      if (isText) {
+        body = { preventivo_id: preventivo.id, testo: await file.text(), filename: file.name };
+      } else {
+        body = {
+          preventivo_id: preventivo.id,
+          file_base64: await fileToBase64(file),
+          media_type: isPdf ? "application/pdf" : file.type || "application/pdf",
+          filename: file.name,
+        };
+      }
+
+      const { data, error } = await supabase.functions.invoke("parse-capitolato", { body });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
       setDone(`Generati ${data.interventi_creati} interventi.`);
       router.refresh();
-      setTimeout(onDone, 800);
+      setTimeout(onDone, 1000);
     } catch (e) {
       setError(
         e instanceof Error
@@ -495,28 +523,40 @@ function CapitolatoTab({
   }
 
   return (
-    <div className="max-w-3xl space-y-4">
+    <div className="max-w-2xl space-y-4">
       <div>
         <h2 className="title-sm text-ink">Capitolato / computo metrico</h2>
-        <p className="mt-1 text-sm text-muted">
-          Incolla il testo del capitolato o del computo. L&apos;AI lo trasforma in
-          interventi, prezzi e anagrafica, che potrai rivedere e modificare.
+        <p className="mt-1 text-sm text-graphite">
+          Carica il file del capitolato o del computo (PDF o testo). L&apos;AI lo
+          esamina e genera interventi, prezzi e anagrafica, che potrai rivedere e
+          modificare.
         </p>
       </div>
-      <Textarea
-        rows={16}
-        value={testo}
-        onChange={(e) => setTesto(e.target.value)}
-        placeholder="Incolla qui il capitolato…"
-      />
+
+      <label className="inline-flex cursor-pointer items-center rounded-full border border-ink px-5 py-2 text-sm font-semibold text-ink">
+        {file ? "Cambia file" : "Scegli file"}
+        <input
+          type="file"
+          accept=".pdf,.txt,application/pdf,text/plain"
+          className="hidden"
+          onChange={(e) => {
+            setFile(e.target.files?.[0] ?? null);
+            setDone(null);
+            setError(null);
+          }}
+        />
+      </label>
+      {file ? <p className="text-sm text-ink">{file.name}</p> : null}
+
       {error ? (
         <p className="border border-hairline-soft bg-surface-soft px-3 py-2 text-sm text-ink">
           {error}
         </p>
       ) : null}
       {done ? <p className="text-sm text-success">{done}</p> : null}
-      <Button onClick={genera} disabled={loading || testo.trim().length < 20}>
-        {loading ? "Generazione in corso…" : "Genera preventivo"}
+
+      <Button onClick={genera} disabled={loading || !file}>
+        {loading ? "Analisi del capitolato in corso…" : "Genera preventivo dal file"}
       </Button>
     </div>
   );

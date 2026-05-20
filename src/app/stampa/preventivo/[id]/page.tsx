@@ -36,12 +36,31 @@ export default async function StampaPreventivoPage({
         .order("ordine", { ascending: true }),
     ]);
 
+  const { data: allegatiRows } = await supabase
+    .from("preventivo_allegati")
+    .select("storage_path, caption, livello_degrado")
+    .eq("preventivo_id", id)
+    .eq("tipo", "foto")
+    .order("created_at", { ascending: true });
+
+  const allegati = [] as PreviewData["allegati"];
+  if (allegatiRows && allegatiRows.length > 0) {
+    const { data: signed } = await supabase.storage
+      .from("preventivi")
+      .createSignedUrls(allegatiRows.map((a) => a.storage_path), 3600);
+    allegatiRows.forEach((a, idx) => {
+      const url = signed?.[idx]?.signedUrl;
+      if (url) allegati!.push({ url, caption: a.caption, livello: a.livello_degrado });
+    });
+  }
+
   const preview: PreviewData = {
     org,
     preventivo,
     cliente,
     edificio,
     interventi: interventi ?? [],
+    allegati,
   };
 
   return (
