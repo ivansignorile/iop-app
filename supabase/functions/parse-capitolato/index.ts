@@ -92,7 +92,8 @@ Deno.serve(async (req) => {
 
     const { data: cicli } = await supabase
       .from("cicli_lavorazione")
-      .select("titolo, categoria, unita_default, prezzo_default, descrizione_fasi");
+      .select("titolo, categoria, unita_default, prezzo_default, descrizione_fasi")
+      .order("org_id", { ascending: true, nullsFirst: false });
 
     const libreria = (cicli ?? [])
       .map(
@@ -102,6 +103,16 @@ Deno.serve(async (req) => {
           }\n${c.descrizione_fasi}`,
       )
       .join("\n\n");
+
+    // Prezzi unitari (org prima dei globali → priorità al listino dell'impresa)
+    const { data: prezzi } = await supabase
+      .from("prezzi_unitari")
+      .select("voce, unita, prezzo")
+      .order("org_id", { ascending: true, nullsFirst: false });
+
+    const listino = (prezzi ?? [])
+      .map((p) => `- ${p.voce}: €${p.prezzo} / ${p.unita}`)
+      .join("\n");
 
     const system = [
       {
@@ -116,7 +127,9 @@ Deno.serve(async (req) => {
           "- Inserisci sempre un intervento di 'Allestimento cantiere e apprestamenti di sicurezza' se non presente.\n" +
           "- Scrivi una 'relazione' introduttiva di 3-5 frasi che descrive il contesto e gli obiettivi dell'intervento.\n" +
           "- Estrai committente, oggetto e dati edificio se presenti.\n\n" +
-          "LIBRERIA CICLI DI RIFERIMENTO (usa queste descrizioni come base da espandere):\n\n" +
+          "PREZZI UNITARI DI RIFERIMENTO (usa SEMPRE questi quando la voce è applicabile; in caso di voci simili preferisci la prima elencata, che è il listino dell'impresa). Stima un prezzo solo se nessuna voce è pertinente:\n" +
+          listino +
+          "\n\nLIBRERIA CICLI DI RIFERIMENTO (usa queste descrizioni come base da espandere):\n\n" +
           libreria,
         cache_control: { type: "ephemeral" },
       },
