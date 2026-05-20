@@ -206,6 +206,25 @@ export async function deleteIntervento(
   revalidatePath(`/preventivi/${preventivoId}`);
 }
 
+export async function saveAllegato(
+  preventivoId: string,
+  storagePath: string,
+  livello: number | null,
+  caption: string | null,
+) {
+  const { org } = await requireContext();
+  const supabase = await createClient();
+  await supabase.from("preventivo_allegati").insert({
+    org_id: org.id,
+    preventivo_id: preventivoId,
+    storage_path: storagePath,
+    tipo: "foto",
+    caption,
+    livello_degrado: livello,
+  });
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
 export async function updateStato(preventivoId: string, stato: Stato) {
   await requireContext();
   const supabase = await createClient();

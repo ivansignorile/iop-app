@@ -13,6 +13,7 @@ import {
   addInterventoBlank,
   addInterventoFromCiclo,
   deleteIntervento,
+  saveAllegato,
   saveAnagrafica,
   updateIntervento,
   updateStato,
@@ -54,8 +55,8 @@ export function PreventivoEditor({
 }) {
   const tabs =
     preventivo.modalita === "capitolato"
-      ? (["Capitolato", "Anagrafica", "Interventi", "Anteprima"] as const)
-      : (["Anagrafica", "Interventi", "Anteprima"] as const);
+      ? (["Capitolato", "Anagrafica", "Interventi", "Foto", "Anteprima"] as const)
+      : (["Anagrafica", "Interventi", "Foto", "Anteprima"] as const);
   const [tab, setTab] = useState<string>(tabs[0]);
   const [pending, startTransition] = useTransition();
   const totale = interventi.reduce((a, i) => a + Number(i.importo ?? 0), 0);
@@ -134,6 +135,10 @@ export function PreventivoEditor({
           pending={pending}
           start={startTransition}
         />
+      )}
+
+      {tab === "Foto" && (
+        <FotoTab preventivoId={preventivo.id} orgId={preventivo.org_id} />
       )}
 
       {tab === "Anteprima" && (
@@ -347,6 +352,110 @@ function InterventiTab({
   );
 }
 
+function FotoTab({
+  preventivoId,
+  orgId,
+}: {
+  preventivoId: string;
+  orgId: string;
+}) {
+  const [preview, setPreview] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<
+    { livello: number; intervento: string; descrizione: string } | null
+  >(null);
+  const [error, setError] = useState<string | null>(null);
+  const [savedMsg, setSavedMsg] = useState<string | null>(null);
+
+  function onFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0] ?? null;
+    setFile(f);
+    setResult(null);
+    setSavedMsg(null);
+    setError(null);
+    setPreview(f ? URL.createObjectURL(f) : null);
+  }
+
+  async function analizza() {
+    if (!file) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(String(r.result).split(",")[1]);
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
+      const supabase = createClient();
+
+      // Carica la foto nello storage e registra l'allegato col livello
+      const path = `${orgId}/${preventivoId}/foto-${Date.now()}.${file.name.split(".").pop() ?? "jpg"}`;
+      await supabase.storage.from("preventivi").upload(path, file, { upsert: true });
+
+      const { data, error } = await supabase.functions.invoke("classify-degrado", {
+        body: { image_base64: base64, media_type: file.type || "image/jpeg" },
+      });
+      if (error || data?.error) throw new Error("errore");
+      const v = data.valutazione;
+      setResult(v);
+      await saveAllegato(preventivoId, path, v.livello, v.intervento);
+      setSavedMsg("Foto salvata e allegata al preventivo.");
+    } catch {
+      setError("Analisi non riuscita (verifica la chiave AI).");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="max-w-2xl space-y-4">
+      <div>
+        <h2 className="title-sm text-ink">Analisi degrado da foto</h2>
+        <p className="mt-1 text-sm text-muted">
+          Carica una foto della facciata: l&apos;AI stima il grado di degrado
+          (1-9) e suggerisce l&apos;intervento. La foto viene allegata al
+          preventivo.
+        </p>
+      </div>
+
+      <label className="inline-flex cursor-pointer items-center rounded-md border border-hairline px-4 py-2 text-sm text-ink">
+        Scegli foto
+        <input type="file" accept="image/*" className="hidden" onChange={onFile} />
+      </label>
+
+      {preview ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={preview} alt="Anteprima" className="max-h-72 rounded-md border border-hairline" />
+      ) : null}
+
+      {file ? (
+        <Button onClick={analizza} disabled={loading}>
+          {loading ? "Analisi in corso…" : "Analizza degrado"}
+        </Button>
+      ) : null}
+
+      {error ? (
+        <p className="rounded-sm border border-signature-coral/30 bg-signature-coral/5 px-3 py-2 text-sm text-signature-coral">
+          {error}
+        </p>
+      ) : null}
+
+      {result ? (
+        <div className="rounded-md border border-hairline bg-surface-soft p-4">
+          <p className="text-sm">
+            <span className="font-medium text-ink">Livello {result.livello}/9</span>{" "}
+            · {result.intervento}
+          </p>
+          <p className="mt-1 text-sm text-body">{result.descrizione}</p>
+          {savedMsg ? <p className="mt-2 text-sm text-success">{savedMsg}</p> : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function CapitolatoTab({
   preventivo,
   onDone,
@@ -424,6 +533,32 @@ function InterventoRow({
   pending: boolean;
   start: (cb: () => void) => void;
 }) {
+  const [descrizione, setDescrizione] = useState(i.descrizione ?? "");
+  const [sugg, setSugg] = useState<string | null>(null);
+  const [suggLoading, setSuggLoading] = useState(false);
+
+  async function suggerisci() {
+    setSuggLoading(true);
+    setSugg(null);
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.functions.invoke("suggest-materiali", {
+        body: { lavorazione: i.titolo },
+      });
+      if (error || data?.error) throw new Error("errore");
+      const s = data.suggerimento;
+      setSugg(
+        `${s.prodotto}${s.marca ? ` (${s.marca})` : ""}${
+          s.alternativa ? ` — alt: ${s.alternativa}` : ""
+        }`,
+      );
+    } catch {
+      setSugg("Suggerimento non disponibile (verifica la chiave AI).");
+    } finally {
+      setSuggLoading(false);
+    }
+  }
+
   return (
     <form
       action={updateIntervento.bind(null, i.id, preventivoId)}
@@ -447,10 +582,35 @@ function InterventoRow({
         <Textarea
           id={`d-${i.id}`}
           name="descrizione"
-          defaultValue={i.descrizione ?? ""}
+          value={descrizione}
+          onChange={(e) => setDescrizione(e.target.value)}
           rows={4}
         />
       </Field>
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          onClick={suggerisci}
+          disabled={suggLoading}
+          className="rounded-md border border-hairline px-3 py-1.5 text-xs text-ink"
+        >
+          {suggLoading ? "…" : "Suggerisci materiale (AI)"}
+        </button>
+        {sugg ? (
+          <>
+            <span className="text-xs text-body">{sugg}</span>
+            <button
+              type="button"
+              onClick={() =>
+                setDescrizione((d) => `${d}${d ? "\n" : ""}Materiale: ${sugg}`)
+              }
+              className="text-xs text-link"
+            >
+              + aggiungi
+            </button>
+          </>
+        ) : null}
+      </div>
 
       <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-5">
         <Field label="Unità" htmlFor={`u-${i.id}`}>

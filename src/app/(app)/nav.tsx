@@ -10,6 +10,8 @@ const links = [
   { href: "/preventivi", label: "Preventivi" },
   { href: "/clienti", label: "Clienti" },
   { href: "/libreria", label: "Libreria" },
+  { href: "/membri", label: "Membri" },
+  { href: "/impostazioni", label: "Impostazioni" },
 ];
 
 export function AppNav({ orgName }: { orgName: string }) {

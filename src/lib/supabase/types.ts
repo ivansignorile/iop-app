@@ -646,6 +646,24 @@ export type Database = {
       create_organization: { Args: { org_name: string }; Returns: string }
       is_org_admin: { Args: { target_org: string }; Returns: boolean }
       user_org_ids: { Args: Record<PropertyKey, never>; Returns: string[] }
+      invite_member: {
+        Args: {
+          target_org: string
+          member_email: string
+          member_role?: Database["public"]["Enums"]["membership_role"]
+        }
+        Returns: string
+      }
+      list_org_members: {
+        Args: { target_org: string }
+        Returns: {
+          user_id: string
+          email: string
+          full_name: string | null
+          role: Database["public"]["Enums"]["membership_role"]
+          joined_at: string
+        }[]
+      }
     }
     Enums: {
       cliente_tipo: "condominio" | "privato" | "azienda"

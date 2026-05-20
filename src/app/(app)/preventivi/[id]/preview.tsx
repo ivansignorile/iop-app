@@ -48,7 +48,21 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
     <article className="mx-auto max-w-[820px] bg-canvas p-10 text-ink shadow-sm ring-1 ring-hairline print:shadow-none print:ring-0">
       {/* Intestazione */}
       <header className="mb-8 border-b border-hairline pb-6">
-        <h2 className="title-lg mb-6">OFFERTA TECNICO ECONOMICA</h2>
+        <div className="mb-6 flex items-start justify-between gap-4">
+          <h2 className="title-lg">OFFERTA TECNICO ECONOMICA</h2>
+          {org.logo_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={org.logo_url}
+              alt={org.name}
+              className="h-14 w-auto object-contain"
+            />
+          ) : (
+            <span className="text-lg font-medium text-ink">
+              {org.ragione_sociale ?? org.name}
+            </span>
+          )}
+        </div>
         <div className="grid grid-cols-3 gap-4 text-sm">
           <div>
             <p className="text-xs uppercase tracking-wide text-muted">
@@ -174,7 +188,13 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
       <footer className="border-t border-hairline pt-4 text-xs text-muted">
         {org.ragione_sociale ?? org.name}
         {org.partita_iva ? ` · P.IVA ${org.partita_iva}` : ""}
-        {org.indirizzo ? ` · ${org.indirizzo}` : ""}
+        {[org.indirizzo, org.cap, org.comune, org.provincia]
+          .filter(Boolean)
+          .join(" ")
+          ? ` · ${[org.indirizzo, org.cap, org.comune, org.provincia].filter(Boolean).join(" ")}`
+          : ""}
+        {org.email ? ` · ${org.email}` : ""}
+        {org.telefono ? ` · ${org.telefono}` : ""}
       </footer>
     </article>
   );
