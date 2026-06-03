@@ -7,6 +7,11 @@ export type PreviewAllegato = {
   livello: number | null;
 };
 
+export type PreviewFotoDescrizione = {
+  url: string;
+  punti: { x: number; y: number; numero: number; lavorazione: string }[];
+};
+
 export type PreviewData = {
   org: Tables<"organizations">;
   preventivo: Pick<
@@ -26,6 +31,7 @@ export type PreviewData = {
     "id" | "gruppo" | "titolo" | "descrizione" | "unita" | "quantita" | "prezzo_unitario" | "importo" | "prezzo_mercato"
   >[];
   allegati?: PreviewAllegato[];
+  fotoDescrizioni?: PreviewFotoDescrizione[];
 };
 
 function groupBy(interventi: PreviewData["interventi"]) {
@@ -52,7 +58,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 }
 
 export function PreventivoPreview({ data }: { data: PreviewData }) {
-  const { org, preventivo, cliente, edificio, interventi, allegati } = data;
+  const { org, preventivo, cliente, edificio, interventi, allegati, fotoDescrizioni } = data;
   const groups = groupBy(interventi);
   const totale = interventi.reduce((a, i) => a + Number(i.importo ?? 0), 0);
   const iva = Number(preventivo.iva);
@@ -272,6 +278,32 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
           </div>
         </dl>
       </section>
+
+      {fotoDescrizioni && fotoDescrizioni.length > 0 ? (
+        <section className="mb-8 break-inside-avoid">
+          <SectionTitle>Approfondimento — compilazione tramite foto</SectionTitle>
+          <div className="space-y-6">
+            {fotoDescrizioni.map((f, idx) => (
+              <figure key={idx} className="break-inside-avoid">
+                <div className="relative overflow-hidden rounded-md border border-hairline">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={f.url} alt="Foto descrizione" className="w-full" />
+                  {f.punti.map((p, j) => (
+                    <span key={j} className="absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-canvas bg-ink text-xs font-semibold text-canvas" style={{ left: `${p.x * 100}%`, top: `${p.y * 100}%` }}>{p.numero}</span>
+                  ))}
+                </div>
+                <figcaption className="mt-2 text-xs text-graphite">
+                  <ul className="space-y-0.5">
+                    {f.punti.map((p, j) => (
+                      <li key={j}><span className="font-semibold text-ink">{p.numero}.</span> {p.lavorazione}</li>
+                    ))}
+                  </ul>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <footer className="border-t border-hairline pt-4 text-xs text-slate">
         {azienda}

@@ -54,6 +54,31 @@ export default async function StampaPreventivoPage({
     });
   }
 
+  const { data: annotazioniRows } = await supabase
+    .from("foto_annotazioni")
+    .select("storage_path, punti")
+    .eq("preventivo_id", id)
+    .order("created_at", { ascending: true });
+
+  const fotoDescrizioni = [] as NonNullable<PreviewData["fotoDescrizioni"]>;
+  if (annotazioniRows && annotazioniRows.length > 0) {
+    const { data: signedAnnot } = await supabase.storage
+      .from("preventivi")
+      .createSignedUrls(annotazioniRows.map((a) => a.storage_path), 3600);
+    annotazioniRows.forEach((a, idx) => {
+      const url = signedAnnot?.[idx]?.signedUrl;
+      if (url) {
+        const punti = (Array.isArray(a.punti) ? a.punti : []) as {
+          x: number;
+          y: number;
+          numero: number;
+          lavorazione: string;
+        }[];
+        fotoDescrizioni.push({ url, punti });
+      }
+    });
+  }
+
   const preview: PreviewData = {
     org,
     preventivo,
@@ -61,6 +86,7 @@ export default async function StampaPreventivoPage({
     edificio,
     interventi: interventi ?? [],
     allegati,
+    fotoDescrizioni,
   };
 
   return (
