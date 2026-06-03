@@ -69,15 +69,18 @@ export default async function StampaPreventivoPage({
       const url = signedAnnot?.[idx]?.signedUrl;
       if (url) {
         const punti = Array.isArray(a.punti)
-          ? (a.punti as unknown[]).filter(
-              (p): p is { x: number; y: number; numero: number; lavorazione: string } =>
-                !!p &&
-                typeof p === "object" &&
-                typeof (p as Record<string, unknown>).x === "number" &&
-                typeof (p as Record<string, unknown>).y === "number" &&
-                typeof (p as Record<string, unknown>).numero === "number" &&
-                typeof (p as Record<string, unknown>).lavorazione === "string",
-            )
+          ? (a.punti as unknown[])
+              .filter(
+                (p): p is { x: number; y: number; livello: number; nota?: string } =>
+                  !!p &&
+                  typeof p === "object" &&
+                  typeof (p as Record<string, unknown>).x === "number" &&
+                  typeof (p as Record<string, unknown>).y === "number" &&
+                  typeof (p as Record<string, unknown>).livello === "number" &&
+                  ((p as Record<string, unknown>).nota === undefined ||
+                    typeof (p as Record<string, unknown>).nota === "string"),
+              )
+              .map((p) => ({ x: p.x, y: p.y, livello: p.livello, nota: p.nota }))
           : [];
         fotoDescrizioni.push({ url, punti });
       }

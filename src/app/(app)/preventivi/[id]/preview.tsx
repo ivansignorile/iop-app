@@ -9,7 +9,7 @@ export type PreviewAllegato = {
 
 export type PreviewFotoDescrizione = {
   url: string;
-  punti: { x: number; y: number; numero: number; lavorazione: string }[];
+  punti: { x: number; y: number; livello: number; nota?: string }[];
 };
 
 export type PreviewData = {
@@ -289,13 +289,13 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={f.url} alt="Foto descrizione" className="w-full" />
                   {f.punti.map((p, j) => (
-                    <span key={j} className="absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-canvas bg-ink text-xs font-semibold text-canvas" style={{ left: `${p.x * 100}%`, top: `${p.y * 100}%` }}>{p.numero}</span>
+                    <span key={j} className="absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-canvas bg-ink text-xs font-semibold text-canvas" style={{ left: `${p.x * 100}%`, top: `${p.y * 100}%` }}>{p.livello}</span>
                   ))}
                 </div>
                 <figcaption className="mt-2 text-xs text-graphite">
                   <ul className="space-y-0.5">
                     {f.punti.map((p, j) => (
-                      <li key={j}><span className="font-semibold text-ink">{p.numero}.</span> {p.lavorazione}</li>
+                      <li key={j}><span className="font-semibold text-ink">Livello {p.livello}.</span> {p.nota ?? ""}</li>
                     ))}
                   </ul>
                 </figcaption>
