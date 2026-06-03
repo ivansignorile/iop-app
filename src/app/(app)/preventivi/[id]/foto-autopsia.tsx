@@ -51,6 +51,7 @@ export function FotoAutopsia({
             key={i}
             className="absolute flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-canvas bg-ink text-xs font-semibold text-canvas"
             style={{ left: `${pt.x * 100}%`, top: `${pt.y * 100}%` }}
+            onClick={(e) => e.stopPropagation()}
           >
             {pt.livello}
           </span>

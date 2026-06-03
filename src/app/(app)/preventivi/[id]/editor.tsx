@@ -676,7 +676,7 @@ function FotoDescrizioneTab({
       const supabase = createClient();
       const { data } = await supabase
         .from("degrado_samples")
-        .select("livello, intervento, org_id, ciclo_id, cicli_lavorazione(titolo, descrizione_fasi, unita_default, prezzo_default)")
+        .select("livello, intervento, descrizione, org_id, ciclo_id, cicli_lavorazione(titolo, descrizione_fasi, unita_default, prezzo_default)")
         .order("org_id", { ascending: false, nullsFirst: false });
 
       const byLiv: Record<number, string> = {};
@@ -694,6 +694,13 @@ function FotoDescrizioneTab({
             descrizione_fasi: ciclo.descrizione_fasi ?? "",
             unita_default: ciclo.unita_default ?? "corpo",
             prezzo_default: ciclo.prezzo_default ?? null,
+          };
+        } else {
+          byCiclo[r.livello] = {
+            titolo: r.intervento,
+            descrizione_fasi: r.descrizione ?? "",
+            unita_default: "corpo",
+            prezzo_default: null,
           };
         }
       }
