@@ -85,9 +85,9 @@ Deno.serve(async (req) => {
           type: "text",
           text:
             "Sei un computista edile. L'utente ha annotato una foto di facciata con punti, ognuno con un LIVELLO di degrado 1-9. " +
-            "Per ogni livello è dato il CICLO associato (titolo, fasi, unità, prezzo). Genera gli interventi così: " +
-            "1) Per ogni punto con livello da 1 a 6: una voce con il ciclo associato a quel livello; stima la QUANTITÀ guardando la foto, coerente con l'unità del ciclo; usa il prezzo del ciclo. " +
-            "2) Se ALMENO UN punto ha livello >= 7: genera UNA SOLA voce di pitturazione totale dell'intera superficie usando il ciclo associato al livello >=7; stima i mq totali della facciata dalla foto (1 fila di finestre ~ 1 piano ~3 m, finestra larga 1-1,20 m); NON generare voci singole per i punti >=7. " +
+            "Per ogni livello è dato il CICLO associato (titolo, fasi, unità, prezzo). REGOLE: " +
+            "1) Genera UNA voce per OGNI punto (anche se più punti hanno lo stesso livello: voci separate, NON accorpare). Usa il ciclo associato al livello del punto; stima la QUANTITÀ guardando la foto, coerente con l'unità del ciclo; usa il prezzo del ciclo. " +
+            "2) Se ALMENO UN punto ha livello >= 7: aggiungi UNA SOLA voce ulteriore di 'pitturazione intera superficie' (ciclo associato al livello >=7, quantità = mq totali stimati della facciata: 1 fila di finestre ~ 1 piano ~3 m, finestra larga 1-1,20 m). Questa voce è AGGIUNTIVA: i punti >=7 mantengono comunque la loro voce di porzione. " +
             "Le quantità sono stime modificabili." +
             "\n\nMAPPA LIVELLO->CICLO:\n" + JSON.stringify(mappa ?? {}) +
             "\n\nLIBRERIA CICLI:\n" +
