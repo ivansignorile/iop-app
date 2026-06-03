@@ -10,6 +10,7 @@ import { UNITA_LABEL, formatEuro } from "@/lib/format";
 import { createClient } from "@/lib/supabase/client";
 import type { Tables } from "@/lib/supabase/types";
 import {
+  addCicloPitturazione,
   addInterventoBlank,
   addInterventoFromCiclo,
   deleteIntervento,
@@ -466,6 +467,24 @@ function FotoTab({
           </p>
           <p className="mt-1 text-sm text-body">{result.descrizione}</p>
           {savedMsg ? <p className="mt-2 text-sm text-success">{savedMsg}</p> : null}
+        </div>
+      ) : null}
+
+      {result && result.livello >= 7 ? (
+        <div className="mt-3 rounded-md border border-ink bg-surface-soft p-3 text-sm">
+          <p className="font-semibold text-ink">⚠ Degrado livello {result.livello}/9 — pitturazione totale consigliata</p>
+          <p className="mt-1 text-graphite">
+            Dal livello 7 in su i lavori sono significativamente importanti e l&apos;area è
+            certamente estesa: si consiglia la pitturazione totale della superficie e si prevede
+            il relativo ciclo di lavorazione.
+          </p>
+          <button
+            type="button"
+            onClick={() => addCicloPitturazione(preventivoId, null)}
+            className="mt-2 text-link underline"
+          >
+            Aggiungi ciclo pitturazione totale
+          </button>
         </div>
       ) : null}
     </div>
