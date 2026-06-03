@@ -22,6 +22,7 @@ const SCHEMA = {
     marca: { type: ["string", "null"] },
     alternativa: { type: ["string", "null"] },
     motivazione: { type: "string" },
+    scheda_tecnica_url: { type: "string" },
   },
   required: ["prodotto", "marca", "alternativa", "motivazione"],
 };
@@ -41,14 +42,14 @@ Deno.serve(async (req) => {
 
     const { data: materiali } = await supabase
       .from("materiali_prodotti")
-      .select("lavorazione_keyword, prodotto, marca, alternativa, note");
+      .select("lavorazione_keyword, prodotto, marca, alternativa, note, scheda_tecnica_url");
 
     const mappa = (materiali ?? [])
       .map(
         (m) =>
           `- ${m.lavorazione_keyword} → ${m.prodotto}${m.marca ? ` (${m.marca})` : ""}${
             m.alternativa ? `, alt: ${m.alternativa}` : ""
-          }`,
+          }${m.scheda_tecnica_url ? ` [scheda: ${m.scheda_tecnica_url}]` : ""}`,
       )
       .join("\n");
 
@@ -60,7 +61,11 @@ Deno.serve(async (req) => {
           type: "text",
           text:
             "Sei un tecnico edile. Data una lavorazione, suggerisci il prodotto più adatto basandoti sulla mappa materiali. " +
-            "Se non c'è corrispondenza esatta, scegli il prodotto più pertinente e spiega brevemente.\n\nMAPPA MATERIALI:\n" +
+            "Se non c'è corrispondenza esatta, scegli il prodotto più pertinente e spiega brevemente.\n\n" +
+            "Se nella mappa materiali è presente l'URL della scheda tecnica del prodotto consigliato (campo [scheda: ...]), " +
+            "riportalo nel campo scheda_tecnica_url. Se non è presente in mappa ma conosci l'URL ufficiale della scheda tecnica " +
+            "o della pagina prodotto del produttore, forniscilo. Altrimenti lascia scheda_tecnica_url vuoto.\n\n" +
+            "MAPPA MATERIALI:\n" +
             mappa,
           cache_control: { type: "ephemeral" },
         },
