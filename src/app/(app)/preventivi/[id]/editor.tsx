@@ -567,9 +567,11 @@ function FotoTab({
               type="number"
               step="0.01"
               value={superfici.superficie_mq}
-              onChange={(e) =>
-                setSuperfici((s) => s ? { ...s, superficie_mq: Number(e.target.value) } : s)
-              }
+              onChange={(e) => {
+                const v = Number(e.target.value);
+                setSuperfici((s) => s ? { ...s, superficie_mq: Number.isFinite(v) ? v : 0 } : s);
+                setSuperficiSaved(false);
+              }}
             />
           </Field>
           {superficiSaved ? (

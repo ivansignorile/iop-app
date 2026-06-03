@@ -262,7 +262,9 @@ export async function saveSuperficie(
       .insert({ org_id: org.id, superficie_stimata_mq: superficieMq })
       .select("id")
       .single();
-    await supabase.from("preventivi").update({ edificio_id: data?.id ?? null }).eq("id", preventivoId);
+    if (data?.id) {
+      await supabase.from("preventivi").update({ edificio_id: data.id }).eq("id", preventivoId);
+    }
   }
   revalidatePath(`/preventivi/${preventivoId}`);
 }
