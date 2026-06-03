@@ -23,7 +23,7 @@ import {
   updateIntervento,
   updateStato,
 } from "./actions";
-import { FotoAutopsia, type Punto } from "./foto-autopsia";
+import { FotoAutopsia, type Punto, type Sospetto } from "./foto-autopsia";
 import { PreventivoPreview, type PreviewData } from "./preview";
 
 type Ciclo = Pick<
@@ -742,6 +742,19 @@ function FotoDescrizioneTab({
     }
   }
 
+  async function onRilevaFoto(punti: Punto[]): Promise<Sospetto[]> {
+    if (!signedUrl) return [];
+    const supabase = createClient();
+    const { data, error } = await supabase.functions.invoke("rileva-punti-mancanti", {
+      body: {
+        image_url: signedUrl,
+        punti: punti.map((p) => ({ x: p.x, y: p.y, livello: p.livello })),
+      },
+    });
+    if (error || !data?.ok) return [];
+    return (data.sospetti ?? []) as Sospetto[];
+  }
+
   async function handleSave(punti: Punto[]) {
     setPuntiState(punti);
     if (!storagePath) return;
@@ -804,6 +817,7 @@ function FotoDescrizioneTab({
           mappa={mappa}
           onSave={handleSave}
           onAvvia={handleAvvia}
+          onRileva={onRilevaFoto}
         />
       ) : null}
 
