@@ -628,7 +628,7 @@ function FotoTab({
               if (addingCiclo) return;
               setAddingCiclo(true);
               try {
-                await addCicloPitturazione(preventivoId, null);
+                await addCicloPitturazione(preventivoId, superfici?.superficie_mq ?? null);
               } finally {
                 setAddingCiclo(false);
               }
