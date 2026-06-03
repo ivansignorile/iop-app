@@ -16,6 +16,7 @@ import {
   deleteIntervento,
   saveAllegato,
   saveAnagrafica,
+  saveSuperficie,
   setPrezzoMercato,
   updateIntervento,
   updateStato,
@@ -147,7 +148,7 @@ export function PreventivoEditor({
       )}
 
       {tab === "Foto" && (
-        <FotoTab preventivoId={preventivo.id} orgId={preventivo.org_id} />
+        <FotoTab preventivoId={preventivo.id} orgId={preventivo.org_id} edificio={edificio} />
       )}
 
       {tab === "Anteprima" && (
@@ -367,9 +368,11 @@ function InterventiTab({
 function FotoTab({
   preventivoId,
   orgId,
+  edificio,
 }: {
   preventivoId: string;
   orgId: string;
+  edificio: Tables<"edifici"> | null;
 }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -380,6 +383,16 @@ function FotoTab({
   >(null);
   const [error, setError] = useState<string | null>(null);
   const [savedMsg, setSavedMsg] = useState<string | null>(null);
+  const [superfici, setSuperfici] = useState<{
+    superficie_mq: number;
+    larghezza_m?: number;
+    altezza_m?: number;
+    piani_stimati?: number;
+    finestre_contate?: number;
+    ragionamento: string;
+  } | null>(null);
+  const [superficiError, setSuperficiError] = useState<string | null>(null);
+  const [superficiSaved, setSuperficiSaved] = useState(false);
 
   function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0] ?? null;
@@ -387,7 +400,36 @@ function FotoTab({
     setResult(null);
     setSavedMsg(null);
     setError(null);
+    setSuperfici(null);
+    setSuperficiError(null);
+    setSuperficiSaved(false);
     setPreview(f ? URL.createObjectURL(f) : null);
+  }
+
+  async function stimaSuperfici() {
+    if (!file) return;
+    setLoading(true);
+    setSuperficiError(null);
+    setSuperfici(null);
+    setSuperficiSaved(false);
+    try {
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(String(r.result).split(",")[1]);
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
+      const supabase = createClient();
+      const { data, error } = await supabase.functions.invoke("stima-superfici", {
+        body: { image_base64: base64, media_type: file.type || "image/jpeg" },
+      });
+      if (error || data?.error) throw new Error(data?.error ?? "errore");
+      setSuperfici(data.stima);
+    } catch {
+      setSuperficiError("Stima non riuscita (verifica la chiave AI).");
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function analizza() {
@@ -449,9 +491,14 @@ function FotoTab({
       ) : null}
 
       {file ? (
-        <Button onClick={analizza} disabled={loading}>
-          {loading ? "Analisi in corso…" : "Analizza degrado"}
-        </Button>
+        <div className="flex flex-wrap gap-3">
+          <Button onClick={analizza} disabled={loading}>
+            {loading ? "Analisi in corso…" : "Analizza degrado"}
+          </Button>
+          <Button variant="secondary" onClick={stimaSuperfici} disabled={loading}>
+            {loading ? "Stima in corso…" : "Stima superficie dalla foto"}
+          </Button>
+        </div>
       ) : null}
 
       {error ? (
@@ -475,6 +522,75 @@ function FotoTab({
           >
             Perché questo livello? Apri la guida
           </a>
+        </div>
+      ) : null}
+
+      {superficiError ? (
+        <p className="border border-hairline-soft bg-surface-soft px-3 py-2 text-sm text-ink">
+          {superficiError}
+        </p>
+      ) : null}
+
+      {superfici ? (
+        <div className="rounded-md border border-hairline bg-surface-soft p-4 space-y-3">
+          <p className="text-sm font-medium text-ink">Stima superficie facciata</p>
+          <p className="text-xs text-body">{superfici.ragionamento}</p>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+            {superfici.piani_stimati != null ? (
+              <div>
+                <span className="block text-xs text-muted">Piani stimati</span>
+                <span className="text-sm text-ink">{superfici.piani_stimati}</span>
+              </div>
+            ) : null}
+            {superfici.finestre_contate != null ? (
+              <div>
+                <span className="block text-xs text-muted">Finestre contate</span>
+                <span className="text-sm text-ink">{superfici.finestre_contate}</span>
+              </div>
+            ) : null}
+            {superfici.larghezza_m != null ? (
+              <div>
+                <span className="block text-xs text-muted">Larghezza stimata</span>
+                <span className="text-sm text-ink">{superfici.larghezza_m} m</span>
+              </div>
+            ) : null}
+            {superfici.altezza_m != null ? (
+              <div>
+                <span className="block text-xs text-muted">Altezza stimata</span>
+                <span className="text-sm text-ink">{superfici.altezza_m} m</span>
+              </div>
+            ) : null}
+          </div>
+          <Field label="Superficie facciata (mq)" htmlFor="superficie-mq">
+            <Input
+              id="superficie-mq"
+              type="number"
+              step="0.01"
+              value={superfici.superficie_mq}
+              onChange={(e) =>
+                setSuperfici((s) => s ? { ...s, superficie_mq: Number(e.target.value) } : s)
+              }
+            />
+          </Field>
+          {superficiSaved ? (
+            <p className="text-sm text-success">Superficie salvata.</p>
+          ) : (
+            <Button
+              variant="secondary"
+              disabled={loading}
+              onClick={async () => {
+                setLoading(true);
+                try {
+                  await saveSuperficie(preventivoId, edificio?.id ?? null, superfici.superficie_mq);
+                  setSuperficiSaved(true);
+                } finally {
+                  setLoading(false);
+                }
+              }}
+            >
+              Salva superficie
+            </Button>
+          )}
         </div>
       ) : null}
 

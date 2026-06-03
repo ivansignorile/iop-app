@@ -247,6 +247,26 @@ export async function setPrezzoMercato(
   revalidatePath(`/preventivi/${preventivoId}`);
 }
 
+export async function saveSuperficie(
+  preventivoId: string,
+  edificioId: string | null,
+  superficieMq: number,
+) {
+  const { org } = await requireContext();
+  const supabase = await createClient();
+  if (edificioId) {
+    await supabase.from("edifici").update({ superficie_stimata_mq: superficieMq }).eq("id", edificioId);
+  } else {
+    const { data } = await supabase
+      .from("edifici")
+      .insert({ org_id: org.id, superficie_stimata_mq: superficieMq })
+      .select("id")
+      .single();
+    await supabase.from("preventivi").update({ edificio_id: data?.id ?? null }).eq("id", preventivoId);
+  }
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
 export async function addCicloPitturazione(
   preventivoId: string,
   superficieMq: number | null,
