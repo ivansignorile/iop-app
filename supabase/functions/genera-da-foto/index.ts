@@ -1,5 +1,5 @@
 // Edge function: genera-da-foto
-// Da una foto annotata con punti numerati genera interventi pre-compilati.
+// Da una foto annotata con punti (livello 1-9) genera interventi pre-compilati.
 // verify_jwt = true.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
@@ -29,6 +29,7 @@ const SCHEMA = {
           unita: { type: "string", enum: ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"] },
           quantita: { type: "number" },
           prezzo_unitario: { type: "number" },
+          livello: { type: "integer" },
         },
         required: ["titolo", "descrizione", "unita", "quantita", "prezzo_unitario"],
       },
@@ -47,11 +48,11 @@ Deno.serve(async (req) => {
       { global: { headers: { Authorization: authHeader } } },
     );
 
-    const { image_base64, media_type, image_url, punti, legenda } = await req.json();
+    const { image_base64, media_type, image_url, punti, mappa } = await req.json();
     if (!image_base64 && !image_url)
       return json({ error: "image_base64 o image_url richiesti" }, 400);
 
-    // Libreria cicli (RLS: org + global)
+    // Libreria cicli (RLS: org + global) — contesto extra
     const { data: cicli } = await supabase
       .from("cicli_lavorazione")
       .select("titolo, categoria, unita_default, prezzo_default, descrizione_fasi");
@@ -83,16 +84,16 @@ Deno.serve(async (req) => {
         {
           type: "text",
           text:
-            "Sei un computista edile. L'utente ha annotato una foto di facciata con punti numerati; " +
-            "ogni numero indica una porzione e un tipo di lavorazione. " +
-            "Genera un elenco di interventi pre-compilati (titolo, descrizione, unità, quantità, prezzo unitario) " +
-            "coerenti con le annotazioni e con la foto. " +
-            "Usa PRIMA i cicli e i prezzi della libreria; se mancano, deduci valori realistici. " +
+            "Sei un computista edile. L'utente ha annotato una foto di facciata con punti, ognuno con un LIVELLO di degrado 1-9. " +
+            "Per ogni livello è dato il CICLO associato (titolo, fasi, unità, prezzo). Genera gli interventi così: " +
+            "1) Per ogni punto con livello da 1 a 6: una voce con il ciclo associato a quel livello; stima la QUANTITÀ guardando la foto, coerente con l'unità del ciclo; usa il prezzo del ciclo. " +
+            "2) Se ALMENO UN punto ha livello >= 7: genera UNA SOLA voce di pitturazione totale dell'intera superficie usando il ciclo associato al livello >=7; stima i mq totali della facciata dalla foto (1 fila di finestre ~ 1 piano ~3 m, finestra larga 1-1,20 m); NON generare voci singole per i punti >=7. " +
             "Le quantità sono stime modificabili." +
+            "\n\nMAPPA LIVELLO->CICLO:\n" + JSON.stringify(mappa ?? {}) +
             "\n\nLIBRERIA CICLI:\n" +
-            (libreria || "(nessun ciclo disponibile)") +
+            (libreria || "(nessuno)") +
             "\n\nLISTINO:\n" +
-            (listino || "(nessun prezzo disponibile)"),
+            (listino || "(nessuno)"),
           cache_control: { type: "ephemeral" },
         },
       ],
@@ -105,7 +106,7 @@ Deno.serve(async (req) => {
               type: "text",
               text:
                 "Annotazioni utente (JSON):\n" +
-                JSON.stringify({ punti: punti ?? [], legenda: legenda ?? {} }) +
+                JSON.stringify({ punti: punti ?? [] }) +
                 "\n\nGenera gli interventi.",
             },
           ],
