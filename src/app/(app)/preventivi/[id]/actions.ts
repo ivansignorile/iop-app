@@ -246,3 +246,42 @@ export async function setPrezzoMercato(
     .eq("id", interventoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }
+
+export async function addCicloPitturazione(
+  preventivoId: string,
+  superficieMq: number | null,
+) {
+  const { org } = await requireContext();
+  const supabase = await createClient();
+
+  // Cerca un ciclo "pitturazione" in libreria (org poi globale)
+  const { data: cicli } = await supabase
+    .from("cicli_lavorazione")
+    .select("*")
+    .ilike("titolo", "%pitturazione%")
+    .order("org_id", { ascending: false, nullsFirst: false })
+    .limit(1);
+  const ciclo = cicli?.[0];
+
+  const { count } = await supabase
+    .from("preventivo_interventi")
+    .select("id", { count: "exact", head: true })
+    .eq("preventivo_id", preventivoId);
+
+  await supabase.from("preventivo_interventi").insert({
+    org_id: org.id,
+    preventivo_id: preventivoId,
+    ordine: count ?? 0,
+    titolo: ciclo?.titolo ?? "Pitturazione totale della superficie",
+    descrizione:
+      ciclo?.descrizione_fasi ??
+      "Ciclo completo di pitturazione della superficie: preparazione del supporto, applicazione fissativo e finitura.",
+    unita: (ciclo?.unita_default ?? "mq") as Unita,
+    quantita: superficieMq ?? 1,
+    prezzo_unitario: ciclo?.prezzo_default ?? 0,
+    ciclo_id: ciclo?.id ?? null,
+  });
+
+  await recomputeTotale(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
