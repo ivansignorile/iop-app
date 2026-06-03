@@ -15,6 +15,7 @@ import {
   deleteIntervento,
   saveAllegato,
   saveAnagrafica,
+  setPrezzoMercato,
   updateIntervento,
   updateStato,
 } from "./actions";
@@ -37,6 +38,12 @@ const UNITA: Array<Tables<"preventivo_interventi">["unita"]> = [
   "kg",
 ];
 const STATI: Stato[] = ["bozza", "inviato", "accettato", "rifiutato"];
+
+const SOGLIA_SCOSTAMENTO = 0.2; // 20%
+function scostamento(ditta: number, mercato: number | null): number | null {
+  if (!mercato || mercato <= 0 || ditta <= 0) return null;
+  return Math.abs(ditta - mercato) / mercato;
+}
 
 export function PreventivoEditor({
   preventivo,
@@ -132,6 +139,7 @@ export function PreventivoEditor({
           preventivoId={preventivo.id}
           interventi={interventi}
           cicli={cicli}
+          edificio={edificio}
           pending={pending}
           start={startTransition}
         />
@@ -279,12 +287,14 @@ function InterventiTab({
   preventivoId,
   interventi,
   cicli,
+  edificio,
   pending,
   start,
 }: {
   preventivoId: string;
   interventi: Intervento[];
   cicli: Ciclo[];
+  edificio: Tables<"edifici"> | null;
   pending: boolean;
   start: (cb: () => void) => void;
 }) {
@@ -342,6 +352,7 @@ function InterventiTab({
               key={i.id}
               intervento={i}
               preventivoId={preventivoId}
+              comune={edificio?.comune ?? null}
               pending={pending}
               start={start}
             />
@@ -565,11 +576,13 @@ function CapitolatoTab({
 function InterventoRow({
   intervento: i,
   preventivoId,
+  comune,
   pending,
   start,
 }: {
   intervento: Intervento;
   preventivoId: string;
+  comune: string | null;
   pending: boolean;
   start: (cb: () => void) => void;
 }) {
@@ -583,6 +596,11 @@ function InterventoRow({
   } | null>(null);
   const [suggError, setSuggError] = useState<string | null>(null);
   const [suggLoading, setSuggLoading] = useState(false);
+  const [mercato, setMercato] = useState<{ prezzo: number; fonte: string } | null>(
+    i.prezzo_mercato != null ? { prezzo: Number(i.prezzo_mercato), fonte: i.fonte_mercato ?? "" } : null,
+  );
+  const [mercatoLoading, setMercatoLoading] = useState(false);
+  const [mercatoError, setMercatoError] = useState<string | null>(null);
 
   async function suggerisci() {
     setSuggLoading(true);
@@ -599,6 +617,25 @@ function InterventoRow({
       setSuggError("Suggerimento non disponibile (verifica la chiave AI).");
     } finally {
       setSuggLoading(false);
+    }
+  }
+
+  async function confrontaMercato() {
+    setMercatoLoading(true);
+    setMercatoError(null);
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.functions.invoke("estimate-prezzo-mercato", {
+        body: { lavorazione: i.titolo, unita: i.unita, comune: comune ?? null },
+      });
+      if (error || data?.error) throw new Error("errore");
+      const stima = data.stima as { prezzo_mercato: number; fonte: string };
+      setMercato({ prezzo: stima.prezzo_mercato, fonte: stima.fonte });
+      await setPrezzoMercato(i.id, preventivoId, stima.prezzo_mercato, stima.fonte);
+    } catch {
+      setMercatoError("Stima non disponibile (verifica la chiave AI).");
+    } finally {
+      setMercatoLoading(false);
     }
   }
 
@@ -707,6 +744,35 @@ function InterventoRow({
             {formatEuro(i.importo)}
           </span>
         </div>
+      </div>
+
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          onClick={confrontaMercato}
+          disabled={mercatoLoading}
+          className="text-link underline underline-offset-2 text-xs"
+        >
+          {mercatoLoading ? "…" : "Confronta col mercato"}
+        </button>
+        {mercato ? (
+          <>
+            <span className="text-xs text-body">
+              Mercato: <span className="tabular-nums">{formatEuro(mercato.prezzo)}</span>
+            </span>
+            {(() => {
+              const s = scostamento(Number(i.prezzo_unitario), mercato.prezzo);
+              return s !== null && s > SOGLIA_SCOSTAMENTO ? (
+                <span className="rounded-full border border-ink px-2 py-0.5 text-xs font-semibold text-ink">
+                  ⚠ Scostamento elevato
+                </span>
+              ) : null;
+            })()}
+          </>
+        ) : null}
+        {mercatoError ? (
+          <span className="text-xs text-body">{mercatoError}</span>
+        ) : null}
       </div>
 
       <div className="mt-3 flex items-center gap-3">
