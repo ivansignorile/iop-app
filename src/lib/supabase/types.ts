@@ -504,12 +504,14 @@ export type Database = {
           ciclo_id: string | null
           created_at: string
           descrizione: string | null
+          fonte_mercato: string | null
           gruppo: string | null
           id: string
           importo: number | null
           ordine: number
           org_id: string
           preventivo_id: string
+          prezzo_mercato: number | null
           prezzo_unitario: number
           quantita: number
           sconto: number
@@ -520,12 +522,14 @@ export type Database = {
           ciclo_id?: string | null
           created_at?: string
           descrizione?: string | null
+          fonte_mercato?: string | null
           gruppo?: string | null
           id?: string
           importo?: number | null
           ordine?: number
           org_id: string
           preventivo_id: string
+          prezzo_mercato?: number | null
           prezzo_unitario?: number
           quantita?: number
           sconto?: number
@@ -536,12 +540,14 @@ export type Database = {
           ciclo_id?: string | null
           created_at?: string
           descrizione?: string | null
+          fonte_mercato?: string | null
           gruppo?: string | null
           id?: string
           importo?: number | null
           ordine?: number
           org_id?: string
           preventivo_id?: string
+          prezzo_mercato?: number | null
           prezzo_unitario?: number
           quantita?: number
           sconto?: number
@@ -644,26 +650,26 @@ export type Database = {
     }
     Functions: {
       create_organization: { Args: { org_name: string }; Returns: string }
-      is_org_admin: { Args: { target_org: string }; Returns: boolean }
-      user_org_ids: { Args: Record<PropertyKey, never>; Returns: string[] }
       invite_member: {
         Args: {
-          target_org: string
           member_email: string
           member_role?: Database["public"]["Enums"]["membership_role"]
+          target_org: string
         }
         Returns: string
       }
+      is_org_admin: { Args: { target_org: string }; Returns: boolean }
       list_org_members: {
         Args: { target_org: string }
         Returns: {
-          user_id: string
           email: string
-          full_name: string | null
-          role: Database["public"]["Enums"]["membership_role"]
+          full_name: string
           joined_at: string
+          role: Database["public"]["Enums"]["membership_role"]
+          user_id: string
         }[]
       }
+      user_org_ids: { Args: never; Returns: string[] }
     }
     Enums: {
       cliente_tipo: "condominio" | "privato" | "azienda"
@@ -678,13 +684,131 @@ export type Database = {
   }
 }
 
-type DefaultSchema = Database["public"]
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
 
-export type Tables<T extends keyof DefaultSchema["Tables"]> =
-  DefaultSchema["Tables"][T]["Row"]
-export type TablesInsert<T extends keyof DefaultSchema["Tables"]> =
-  DefaultSchema["Tables"][T]["Insert"]
-export type TablesUpdate<T extends keyof DefaultSchema["Tables"]> =
-  DefaultSchema["Tables"][T]["Update"]
-export type Enums<T extends keyof DefaultSchema["Enums"]> =
-  DefaultSchema["Enums"][T]
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
+
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
+
+export type Enums<
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+  public: {
+    Enums: {
+      cliente_tipo: ["condominio", "privato", "azienda"],
+      membership_role: ["owner", "admin", "member"],
+      preventivo_modalita: ["capitolato", "manuale"],
+      preventivo_stato: ["bozza", "inviato", "accettato", "rifiutato"],
+      unita_misura: ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"],
+    },
+  },
+} as const
