@@ -23,7 +23,7 @@ export type PreviewData = {
   > | null;
   interventi: Pick<
     Tables<"preventivo_interventi">,
-    "id" | "gruppo" | "titolo" | "descrizione" | "unita" | "quantita" | "prezzo_unitario" | "importo"
+    "id" | "gruppo" | "titolo" | "descrizione" | "unita" | "quantita" | "prezzo_unitario" | "importo" | "prezzo_mercato"
   >[];
   allegati?: PreviewAllegato[];
 };
@@ -137,6 +137,18 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                       {i.descrizione ? (
                         <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-graphite">
                           {i.descrizione}
+                        </p>
+                      ) : null}
+                      {i.prezzo_mercato != null ? (
+                        <p className="mt-1 text-xs text-stone">
+                          Riferimento mercato:{" "}
+                          <span className="tabular-nums">{formatEuro(i.prezzo_mercato)}</span>{" "}
+                          {UNITA_LABEL[i.unita]}
+                          {Math.abs(Number(i.prezzo_unitario) - Number(i.prezzo_mercato)) /
+                            Number(i.prezzo_mercato) >
+                          0.2
+                            ? " — scostamento significativo rispetto al prezzo offerto"
+                            : ""}
                         </p>
                       ) : null}
                     </div>
