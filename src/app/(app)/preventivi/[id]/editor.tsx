@@ -82,7 +82,7 @@ export function PreventivoEditor({
         <div>
           <p className="text-sm text-muted">
             {preventivo.numero_protocollo} ·{" "}
-            {preventivo.modalita === "capitolato" ? "Da capitolato" : "Manuale"}
+            {preventivo.modalita === "capitolato" ? "Da capitolato" : preventivo.modalita === "foto" ? "Da foto" : "Manuale"}
           </p>
           <h1 className="display-md text-ink">
             {preventivo.oggetto || "Preventivo senza titolo"}

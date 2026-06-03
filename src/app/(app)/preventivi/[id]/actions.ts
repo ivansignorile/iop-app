@@ -277,6 +277,11 @@ export async function saveAnnotazioni(
 ) {
   const { org } = await requireContext();
   const supabase = await createClient();
+  await supabase
+    .from("foto_annotazioni")
+    .delete()
+    .eq("preventivo_id", preventivoId)
+    .eq("storage_path", storagePath);
   await supabase.from("foto_annotazioni").insert({
     org_id: org.id,
     preventivo_id: preventivoId,

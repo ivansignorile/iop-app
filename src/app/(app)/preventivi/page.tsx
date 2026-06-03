@@ -20,7 +20,13 @@ export default async function PreventiviPage() {
       <PageHeader
         title="Preventivi"
         description="Tutte le offerte tecnico-economiche della tua impresa."
-        action={<ButtonLink href="/preventivi/nuovo?modalita=manuale">Nuovo preventivo</ButtonLink>}
+        action={
+          <div className="flex flex-wrap gap-2">
+            <ButtonLink href="/preventivi/nuovo?modalita=manuale">Nuovo preventivo</ButtonLink>
+            <ButtonLink href="/preventivi/nuovo?modalita=capitolato" variant="secondary">Da capitolato</ButtonLink>
+            <ButtonLink href="/preventivi/nuovo?modalita=foto" variant="secondary">Da foto</ButtonLink>
+          </div>
+        }
       />
 
       {!preventivi || preventivi.length === 0 ? (

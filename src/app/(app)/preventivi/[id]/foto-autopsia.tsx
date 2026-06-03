@@ -24,6 +24,7 @@ export function FotoAutopsia({
   const imgRef = useRef<HTMLImageElement>(null);
 
   function addPunto(e: React.MouseEvent<HTMLDivElement>) {
+    if (punti.length >= 9) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;

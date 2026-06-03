@@ -62,7 +62,7 @@ export default function Home() {
               preventivo pre-compilato, pronto da rivedere.
             </p>
             <div className="mt-8">
-              <ButtonLink href="/signup?modalita=foto">Prova da foto</ButtonLink>
+              <ButtonLink href="/signup">Prova da foto</ButtonLink>
             </div>
           </article>
         </section>
