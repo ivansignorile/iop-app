@@ -310,9 +310,10 @@ export async function generaInterventiDaFoto(
     .from("preventivo_interventi")
     .select("id", { count: "exact", head: true })
     .eq("preventivo_id", preventivoId);
+  const UNITA_VALIDE: Unita[] = ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"];
   const base = count ?? 0;
   if (interventi.length > 0) {
-    await supabase.from("preventivo_interventi").insert(
+    const { error } = await supabase.from("preventivo_interventi").insert(
       interventi.map((i, idx) => ({
         org_id: org.id,
         preventivo_id: preventivoId,
@@ -320,11 +321,12 @@ export async function generaInterventiDaFoto(
         gruppo: "Da foto",
         titolo: i.titolo,
         descrizione: i.descrizione,
-        unita: i.unita,
+        unita: UNITA_VALIDE.includes(i.unita) ? i.unita : ("corpo" as Unita),
         quantita: i.quantita,
         prezzo_unitario: i.prezzo_unitario,
       })),
     );
+    if (error) throw error;
   }
   await recomputeTotale(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);

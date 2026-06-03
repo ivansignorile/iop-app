@@ -68,12 +68,17 @@ export default async function StampaPreventivoPage({
     annotazioniRows.forEach((a, idx) => {
       const url = signedAnnot?.[idx]?.signedUrl;
       if (url) {
-        const punti = (Array.isArray(a.punti) ? a.punti : []) as {
-          x: number;
-          y: number;
-          numero: number;
-          lavorazione: string;
-        }[];
+        const punti = Array.isArray(a.punti)
+          ? (a.punti as unknown[]).filter(
+              (p): p is { x: number; y: number; numero: number; lavorazione: string } =>
+                !!p &&
+                typeof p === "object" &&
+                typeof (p as Record<string, unknown>).x === "number" &&
+                typeof (p as Record<string, unknown>).y === "number" &&
+                typeof (p as Record<string, unknown>).numero === "number" &&
+                typeof (p as Record<string, unknown>).lavorazione === "string",
+            )
+          : [];
         fotoDescrizioni.push({ url, punti });
       }
     });

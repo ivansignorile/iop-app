@@ -19,8 +19,8 @@ export function FotoAutopsia({
   onSave?: (punti: Punto[], legenda: Record<string, string>) => Promise<void>;
 }) {
   const [punti, setPunti] = useState<Punto[]>(initialPunti);
-  const [next, setNext] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   function addPunto(e: React.MouseEvent<HTMLDivElement>) {
@@ -28,15 +28,13 @@ export function FotoAutopsia({
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
-    const numero = next > 9 ? 9 : next;
-    setPunti((p) => [...p, { x, y, numero, lavorazione: "" }]);
-    setNext((n) => Math.min(n + 1, 9));
+    setPunti((p) => [...p, { x, y, numero: p.length + 1, lavorazione: "" }]);
   }
   function setLavorazione(idx: number, value: string) {
     setPunti((p) => p.map((pt, i) => (i === idx ? { ...pt, lavorazione: value } : pt)));
   }
   function removePunto(idx: number) {
-    setPunti((p) => p.filter((_, i) => i !== idx));
+    setPunti((p) => p.filter((_, i) => i !== idx).map((pt, i) => ({ ...pt, numero: i + 1 })));
   }
   function legendaFrom(pts: Punto[]): Record<string, string> {
     const leg: Record<string, string> = {};
@@ -64,7 +62,7 @@ export function FotoAutopsia({
         {punti.length === 0 ? <li className="text-sm text-stone">Clicca sulla foto per posizionare i punti.</li> : null}
       </ol>
       <div className="flex gap-2">
-        {onSave ? <Button variant="secondary" onClick={() => onSave(punti, legendaFrom(punti))}>Salva annotazioni</Button> : null}
+        {onSave ? <Button variant="secondary" disabled={saving} onClick={async () => { setSaving(true); try { await onSave(punti, legendaFrom(punti)); } finally { setSaving(false); } }}>{saving ? "Salvataggio…" : "Salva annotazioni"}</Button> : null}
         <Button disabled={loading || punti.length === 0} onClick={async () => { setLoading(true); try { await onAvvia(punti, legendaFrom(punti)); } finally { setLoading(false); } }}>{loading ? "Generazione…" : "Avvia"}</Button>
       </div>
     </div>
