@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { requireContext } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
-import type { Database } from "@/lib/supabase/types";
+import type { Database, Json } from "@/lib/supabase/types";
 
 type Unita = Database["public"]["Enums"]["unita_misura"];
 type Stato = Database["public"]["Enums"]["preventivo_stato"];
@@ -266,6 +266,62 @@ export async function saveSuperficie(
       await supabase.from("preventivi").update({ edificio_id: data.id }).eq("id", preventivoId);
     }
   }
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export async function saveAnnotazioni(
+  preventivoId: string,
+  storagePath: string,
+  punti: unknown,
+  legenda: unknown,
+) {
+  const { org } = await requireContext();
+  const supabase = await createClient();
+  await supabase.from("foto_annotazioni").insert({
+    org_id: org.id,
+    preventivo_id: preventivoId,
+    storage_path: storagePath,
+    punti: punti as Json,
+    legenda: legenda as Json,
+  });
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+type InterventoGenerato = {
+  titolo: string;
+  descrizione: string;
+  unita: Unita;
+  quantita: number;
+  prezzo_unitario: number;
+};
+
+export async function generaInterventiDaFoto(
+  preventivoId: string,
+  interventi: InterventoGenerato[],
+) {
+  const { org } = await requireContext();
+  const supabase = await createClient();
+  const { count } = await supabase
+    .from("preventivo_interventi")
+    .select("id", { count: "exact", head: true })
+    .eq("preventivo_id", preventivoId);
+  const base = count ?? 0;
+  if (interventi.length > 0) {
+    await supabase.from("preventivo_interventi").insert(
+      interventi.map((i, idx) => ({
+        org_id: org.id,
+        preventivo_id: preventivoId,
+        ordine: base + idx,
+        gruppo: "Da foto",
+        titolo: i.titolo,
+        descrizione: i.descrizione,
+        unita: i.unita,
+        quantita: i.quantita,
+        prezzo_unitario: i.prezzo_unitario,
+      })),
+    );
+  }
+  await recomputeTotale(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }
 
