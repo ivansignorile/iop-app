@@ -231,3 +231,18 @@ export async function updateStato(preventivoId: string, stato: Stato) {
   await supabase.from("preventivi").update({ stato }).eq("id", preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }
+
+export async function setPrezzoMercato(
+  interventoId: string,
+  preventivoId: string,
+  prezzoMercato: number | null,
+  fonte: string | null,
+) {
+  await requireContext();
+  const supabase = await createClient();
+  await supabase
+    .from("preventivo_interventi")
+    .update({ prezzo_mercato: prezzoMercato, fonte_mercato: fonte })
+    .eq("id", interventoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
