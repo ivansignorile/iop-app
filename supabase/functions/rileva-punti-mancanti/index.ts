@@ -2,8 +2,6 @@
 // Data una foto di facciata + i punti già segnalati, rileva le aree di degrado non coperte.
 // verify_jwt = true.
 
-import { createClient } from "npm:@supabase/supabase-js@2";
-
 const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY")!;
 const MODEL = Deno.env.get("ANTHROPIC_MODEL") ?? "claude-opus-4-7";
 
@@ -39,13 +37,6 @@ const SCHEMA = {
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
-    const authHeader = req.headers.get("Authorization") ?? "";
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
-
     const { image_base64, media_type, image_url, punti } = await req.json();
     if (!image_base64 && !image_url)
       return json({ error: "image_base64 o image_url richiesti" }, 400);
@@ -99,7 +90,8 @@ Deno.serve(async (req) => {
     const aiData = await aiRes.json();
     const textBlock = (aiData.content ?? []).find((b: { type: string }) => b.type === "text");
     if (!textBlock) return json({ error: "Risposta AI non valida" }, 502);
-    return json({ ok: true, sospetti: JSON.parse(textBlock.text).sospetti });
+    const parsed = JSON.parse(textBlock.text);
+    return json({ ok: true, sospetti: parsed.sospetti ?? [] });
   } catch (e) {
     return json({ error: String(e) }, 500);
   }
