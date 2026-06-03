@@ -374,6 +374,7 @@ function FotoTab({
   const [preview, setPreview] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [addingCiclo, setAddingCiclo] = useState(false);
   const [result, setResult] = useState<
     { livello: number; intervento: string; descrizione: string } | null
   >(null);
@@ -480,10 +481,19 @@ function FotoTab({
           </p>
           <button
             type="button"
-            onClick={() => addCicloPitturazione(preventivoId, null)}
-            className="mt-2 text-link underline"
+            disabled={addingCiclo}
+            onClick={async () => {
+              if (addingCiclo) return;
+              setAddingCiclo(true);
+              try {
+                await addCicloPitturazione(preventivoId, null);
+              } finally {
+                setAddingCiclo(false);
+              }
+            }}
+            className="mt-2 text-link underline disabled:opacity-50"
           >
-            Aggiungi ciclo pitturazione totale
+            {addingCiclo ? "Aggiunta in corso…" : "Aggiungi ciclo pitturazione totale"}
           </button>
         </div>
       ) : null}
