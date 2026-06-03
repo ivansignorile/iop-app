@@ -181,6 +181,7 @@ export type Database = {
           piani: number | null
           porzione: string | null
           provincia: string | null
+          superficie_stimata_mq: number | null
           tipo_copertura: string | null
           updated_at: string
         }
@@ -200,6 +201,7 @@ export type Database = {
           piani?: number | null
           porzione?: string | null
           provincia?: string | null
+          superficie_stimata_mq?: number | null
           tipo_copertura?: string | null
           updated_at?: string
         }
@@ -219,6 +221,7 @@ export type Database = {
           piani?: number | null
           porzione?: string | null
           provincia?: string | null
+          superficie_stimata_mq?: number | null
           tipo_copertura?: string | null
           updated_at?: string
         }
