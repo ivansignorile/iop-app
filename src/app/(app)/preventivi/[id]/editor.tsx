@@ -574,26 +574,29 @@ function InterventoRow({
   start: (cb: () => void) => void;
 }) {
   const [descrizione, setDescrizione] = useState(i.descrizione ?? "");
-  const [sugg, setSugg] = useState<string | null>(null);
+  const [sugg, setSugg] = useState<{
+    prodotto: string;
+    marca?: string | null;
+    alternativa?: string | null;
+    motivazione?: string;
+    scheda_tecnica_url?: string;
+  } | null>(null);
+  const [suggError, setSuggError] = useState<string | null>(null);
   const [suggLoading, setSuggLoading] = useState(false);
 
   async function suggerisci() {
     setSuggLoading(true);
     setSugg(null);
+    setSuggError(null);
     try {
       const supabase = createClient();
       const { data, error } = await supabase.functions.invoke("suggest-materiali", {
         body: { lavorazione: i.titolo },
       });
       if (error || data?.error) throw new Error("errore");
-      const s = data.suggerimento;
-      setSugg(
-        `${s.prodotto}${s.marca ? ` (${s.marca})` : ""}${
-          s.alternativa ? ` — alt: ${s.alternativa}` : ""
-        }`,
-      );
+      setSugg(data.suggerimento);
     } catch {
-      setSugg("Suggerimento non disponibile (verifica la chiave AI).");
+      setSuggError("Suggerimento non disponibile (verifica la chiave AI).");
     } finally {
       setSuggLoading(false);
     }
@@ -638,17 +641,38 @@ function InterventoRow({
         </button>
         {sugg ? (
           <>
-            <span className="text-xs text-body">{sugg}</span>
+            <span className="text-xs text-body">
+              {sugg.scheda_tecnica_url ? (
+                <a
+                  href={sugg.scheda_tecnica_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-link underline underline-offset-2"
+                >
+                  {sugg.prodotto}
+                </a>
+              ) : (
+                <span className="text-ink">{sugg.prodotto}</span>
+              )}
+              {sugg.marca ? ` (${sugg.marca})` : ""}
+              {sugg.alternativa ? ` — alt: ${sugg.alternativa}` : ""}
+            </span>
             <button
               type="button"
-              onClick={() =>
-                setDescrizione((d) => `${d}${d ? "\n" : ""}Materiale: ${sugg}`)
-              }
+              onClick={() => {
+                const riga = sugg.scheda_tecnica_url
+                  ? `Materiale consigliato: ${sugg.prodotto}${sugg.marca ? ` (${sugg.marca})` : ""} — scheda: ${sugg.scheda_tecnica_url}`
+                  : `Materiale consigliato: ${sugg.prodotto}${sugg.marca ? ` (${sugg.marca})` : ""}`;
+                setDescrizione((d) => `${d}${d ? "\n" : ""}${riga}`);
+              }}
               className="text-xs text-link"
             >
               + aggiungi
             </button>
           </>
+        ) : null}
+        {suggError ? (
+          <span className="text-xs text-body">{suggError}</span>
         ) : null}
       </div>
 
