@@ -242,6 +242,51 @@ export type Database = {
           },
         ]
       }
+      foto_annotazioni: {
+        Row: {
+          created_at: string
+          id: string
+          legenda: Json
+          org_id: string
+          preventivo_id: string
+          punti: Json
+          storage_path: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          legenda?: Json
+          org_id: string
+          preventivo_id: string
+          punti?: Json
+          storage_path: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          legenda?: Json
+          org_id?: string
+          preventivo_id?: string
+          punti?: Json
+          storage_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "foto_annotazioni_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "foto_annotazioni_preventivo_id_fkey"
+            columns: ["preventivo_id"]
+            isOneToOne: false
+            referencedRelation: "preventivi"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       materiali_prodotti: {
         Row: {
           alternativa: string | null
@@ -677,7 +722,7 @@ export type Database = {
     Enums: {
       cliente_tipo: "condominio" | "privato" | "azienda"
       membership_role: "owner" | "admin" | "member"
-      preventivo_modalita: "capitolato" | "manuale"
+      preventivo_modalita: "capitolato" | "manuale" | "foto"
       preventivo_stato: "bozza" | "inviato" | "accettato" | "rifiutato"
       unita_misura: "corpo" | "mq" | "ml" | "mc" | "giorno" | "cad" | "kg"
     }
@@ -809,7 +854,7 @@ export const Constants = {
     Enums: {
       cliente_tipo: ["condominio", "privato", "azienda"],
       membership_role: ["owner", "admin", "member"],
-      preventivo_modalita: ["capitolato", "manuale"],
+      preventivo_modalita: ["capitolato", "manuale", "foto"],
       preventivo_stato: ["bozza", "inviato", "accettato", "rifiutato"],
       unita_misura: ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"],
     },
