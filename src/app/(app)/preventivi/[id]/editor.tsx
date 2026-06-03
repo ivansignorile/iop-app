@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
@@ -643,6 +643,13 @@ function FotoTab({
   );
 }
 
+type CicloMappa = {
+  titolo: string;
+  descrizione_fasi: string;
+  unita_default: string;
+  prezzo_default: number | null;
+};
+
 function FotoDescrizioneTab({
   preventivoId,
   orgId,
@@ -660,6 +667,40 @@ function FotoDescrizioneTab({
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [genError, setGenError] = useState<string | null>(null);
   const [puntiState, setPuntiState] = useState<Punto[]>([]);
+  const [mappa, setMappa] = useState<Record<number, string>>({});
+  const [mappaCicli, setMappaCicli] = useState<Record<number, CicloMappa>>({});
+
+  // Resolve level→ciclo map on mount
+  useEffect(() => {
+    (async () => {
+      const supabase = createClient();
+      const { data } = await supabase
+        .from("degrado_samples")
+        .select("livello, intervento, org_id, ciclo_id, cicli_lavorazione(titolo, descrizione_fasi, unita_default, prezzo_default)")
+        .order("org_id", { ascending: false, nullsFirst: false });
+
+      const byLiv: Record<number, string> = {};
+      const byCiclo: Record<number, CicloMappa> = {};
+      for (const r of data ?? []) {
+        if (byLiv[r.livello] !== undefined) continue; // first row wins (org before global)
+        // cicli_lavorazione may come as array or object depending on supabase-js version
+        const cicloRaw = r.cicli_lavorazione;
+        const c = Array.isArray(cicloRaw) ? cicloRaw[0] : cicloRaw;
+        const ciclo = c as { titolo?: string; descrizione_fasi?: string; unita_default?: string; prezzo_default?: number | null } | null;
+        byLiv[r.livello] = ciclo?.titolo ?? r.intervento;
+        if (ciclo?.titolo) {
+          byCiclo[r.livello] = {
+            titolo: ciclo.titolo,
+            descrizione_fasi: ciclo.descrizione_fasi ?? "",
+            unita_default: ciclo.unita_default ?? "corpo",
+            prezzo_default: ciclo.prezzo_default ?? null,
+          };
+        }
+      }
+      setMappa(byLiv);
+      setMappaCicli(byCiclo);
+    })();
+  }, []);
 
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0] ?? null;
@@ -694,13 +735,13 @@ function FotoDescrizioneTab({
     }
   }
 
-  async function handleSave(punti: Punto[], legenda: Record<string, string>) {
+  async function handleSave(punti: Punto[]) {
     setPuntiState(punti);
     if (!storagePath) return;
-    await saveAnnotazioni(preventivoId, storagePath, punti, legenda);
+    await saveAnnotazioni(preventivoId, storagePath, punti);
   }
 
-  async function handleAvvia(punti: Punto[], legenda: Record<string, string>) {
+  async function handleAvvia(punti: Punto[]) {
     if (!signedUrl) return;
     setPuntiState(punti);
     setGenError(null);
@@ -710,13 +751,18 @@ function FotoDescrizioneTab({
       const { data, error } = await supabase.functions.invoke("genera-da-foto", {
         body: {
           image_url: signedUrl,
-          punti: punti.map((p) => ({ numero: p.numero, lavorazione: p.lavorazione })),
-          legenda,
+          punti: punti.map((p) => ({ livello: p.livello, nota: p.nota ?? null })),
+          mappa: mappaCicli,
         },
       });
       if (error || data?.error) throw new Error(data?.error ?? "errore");
       await generaInterventiDaFoto(preventivoId, data.risultato.interventi);
-      setSuccessMsg("Preventivo pre-compilato, rivedi nel tab Interventi.");
+      const ha7 = punti.some((p) => p.livello >= 7);
+      setSuccessMsg(
+        ha7
+          ? "Preventivo pre-compilato. Rilevato degrado ≥7: aggiunta pitturazione totale della superficie. Rivedi nel tab Interventi."
+          : "Preventivo pre-compilato. Rivedi nel tab Interventi.",
+      );
       setTimeout(onSuccess, 1500);
     } catch {
       setGenError("Generazione non riuscita (verifica la chiave AI).");
@@ -728,8 +774,8 @@ function FotoDescrizioneTab({
       <div>
         <h2 className="title-sm text-ink">Foto descrizione</h2>
         <p className="mt-1 text-sm text-graphite">
-          Carica una foto della facciata, posiziona i punti sui danni e descrivi
-          ogni lavorazione. L&apos;AI genera gli interventi nel preventivo.
+          Carica una foto della facciata, posiziona i punti sui danni e assegna
+          il livello di degrado. L&apos;AI genera gli interventi nel preventivo.
         </p>
       </div>
 
@@ -748,6 +794,7 @@ function FotoDescrizioneTab({
         <FotoAutopsia
           imageUrl={signedUrl}
           initialPunti={puntiState}
+          mappa={mappa}
           onSave={handleSave}
           onAvvia={handleAvvia}
         />
