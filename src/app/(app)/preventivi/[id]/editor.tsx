@@ -14,13 +14,16 @@ import {
   addInterventoBlank,
   addInterventoFromCiclo,
   deleteIntervento,
+  generaInterventiDaFoto,
   saveAllegato,
   saveAnagrafica,
+  saveAnnotazioni,
   saveSuperficie,
   setPrezzoMercato,
   updateIntervento,
   updateStato,
 } from "./actions";
+import { FotoAutopsia, type Punto } from "./foto-autopsia";
 import { PreventivoPreview, type PreviewData } from "./preview";
 
 type Ciclo = Pick<
@@ -64,9 +67,11 @@ export function PreventivoEditor({
 }) {
   const tabs =
     preventivo.modalita === "capitolato"
-      ? (["Capitolato", "Anagrafica", "Interventi", "Foto", "Anteprima"] as const)
-      : (["Anagrafica", "Interventi", "Foto", "Anteprima"] as const);
-  const [tab, setTab] = useState<string>(tabs[0]);
+      ? (["Capitolato", "Anagrafica", "Interventi", "Foto", "Foto descrizione", "Anteprima"] as const)
+      : (["Anagrafica", "Interventi", "Foto", "Foto descrizione", "Anteprima"] as const);
+  const defaultTab =
+    preventivo.modalita === "foto" ? "Foto descrizione" : tabs[0];
+  const [tab, setTab] = useState<string>(defaultTab);
   const [pending, startTransition] = useTransition();
   const totale = interventi.reduce((a, i) => a + Number(i.importo ?? 0), 0);
 
@@ -125,7 +130,11 @@ export function PreventivoEditor({
       </div>
 
       {tab === "Capitolato" && (
-        <CapitolatoTab preventivo={preventivo} onDone={() => setTab("Interventi")} />
+        <CapitolatoTab
+          preventivo={preventivo}
+          onDone={() => setTab("Interventi")}
+          onFotoDescrizione={() => setTab("Foto descrizione")}
+        />
       )}
 
       {tab === "Anagrafica" && (
@@ -149,6 +158,14 @@ export function PreventivoEditor({
 
       {tab === "Foto" && (
         <FotoTab preventivoId={preventivo.id} orgId={preventivo.org_id} edificio={edificio} />
+      )}
+
+      {tab === "Foto descrizione" && (
+        <FotoDescrizioneTab
+          preventivoId={preventivo.id}
+          orgId={preventivo.org_id}
+          onSuccess={() => setTab("Interventi")}
+        />
       )}
 
       {tab === "Anteprima" && (
@@ -626,12 +643,137 @@ function FotoTab({
   );
 }
 
+function FotoDescrizioneTab({
+  preventivoId,
+  orgId,
+  onSuccess,
+}: {
+  preventivoId: string;
+  orgId: string;
+  onSuccess: () => void;
+}) {
+  const [file, setFile] = useState<File | null>(null);
+  const [signedUrl, setSignedUrl] = useState<string | null>(null);
+  const [storagePath, setStoragePath] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
+  const [genError, setGenError] = useState<string | null>(null);
+  const [puntiState, setPuntiState] = useState<Punto[]>([]);
+
+  async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0] ?? null;
+    setFile(f);
+    setSignedUrl(null);
+    setStoragePath(null);
+    setUploadError(null);
+    setSuccessMsg(null);
+    setGenError(null);
+    setPuntiState([]);
+    if (!f) return;
+
+    setUploading(true);
+    try {
+      const supabase = createClient();
+      const ext = f.name.split(".").pop() ?? "jpg";
+      const path = `${orgId}/${preventivoId}/foto-${Date.now()}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("preventivi")
+        .upload(path, f, { upsert: true });
+      if (upErr) throw upErr;
+      const { data: signed } = await supabase.storage
+        .from("preventivi")
+        .createSignedUrl(path, 3600);
+      if (!signed?.signedUrl) throw new Error("Signed URL non disponibile");
+      setStoragePath(path);
+      setSignedUrl(signed.signedUrl);
+    } catch {
+      setUploadError("Upload non riuscito. Riprova.");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  async function handleSave(punti: Punto[], legenda: Record<string, string>) {
+    setPuntiState(punti);
+    if (!storagePath) return;
+    await saveAnnotazioni(preventivoId, storagePath, punti, legenda);
+  }
+
+  async function handleAvvia(punti: Punto[], legenda: Record<string, string>) {
+    if (!signedUrl) return;
+    setPuntiState(punti);
+    setGenError(null);
+    setSuccessMsg(null);
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.functions.invoke("genera-da-foto", {
+        body: {
+          image_url: signedUrl,
+          punti: punti.map((p) => ({ numero: p.numero, lavorazione: p.lavorazione })),
+          legenda,
+        },
+      });
+      if (error || data?.error) throw new Error(data?.error ?? "errore");
+      await generaInterventiDaFoto(preventivoId, data.risultato.interventi);
+      setSuccessMsg("Preventivo pre-compilato, rivedi nel tab Interventi.");
+      setTimeout(onSuccess, 1500);
+    } catch {
+      setGenError("Generazione non riuscita (verifica la chiave AI).");
+    }
+  }
+
+  return (
+    <div className="max-w-2xl space-y-4">
+      <div>
+        <h2 className="title-sm text-ink">Foto descrizione</h2>
+        <p className="mt-1 text-sm text-graphite">
+          Carica una foto della facciata, posiziona i punti sui danni e descrivi
+          ogni lavorazione. L&apos;AI genera gli interventi nel preventivo.
+        </p>
+      </div>
+
+      <label className="inline-flex cursor-pointer items-center rounded-md border border-hairline px-4 py-2 text-sm text-ink">
+        {uploading ? "Caricamento…" : file ? "Cambia foto" : "Scegli foto"}
+        <input type="file" accept="image/*" className="hidden" onChange={onFile} />
+      </label>
+
+      {uploadError ? (
+        <p className="border border-hairline-soft bg-surface-soft px-3 py-2 text-sm text-ink">
+          {uploadError}
+        </p>
+      ) : null}
+
+      {signedUrl ? (
+        <FotoAutopsia
+          imageUrl={signedUrl}
+          initialPunti={puntiState}
+          onSave={handleSave}
+          onAvvia={handleAvvia}
+        />
+      ) : null}
+
+      {genError ? (
+        <p className="border border-hairline-soft bg-surface-soft px-3 py-2 text-sm text-ink">
+          {genError}
+        </p>
+      ) : null}
+
+      {successMsg ? (
+        <p className="text-sm text-success">{successMsg}</p>
+      ) : null}
+    </div>
+  );
+}
+
 function CapitolatoTab({
   preventivo,
   onDone,
+  onFotoDescrizione,
 }: {
   preventivo: Tables<"preventivi">;
   onDone: () => void;
+  onFotoDescrizione?: () => void;
 }) {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
@@ -697,6 +839,19 @@ function CapitolatoTab({
           modificare.
         </p>
       </div>
+
+      <p className="mb-3 rounded-md border border-hairline bg-surface-soft p-3 text-sm text-graphite">
+        Vuoi segnalare un danno sull&apos;edificio che non è presente o valutato diversamente
+        nel computo? Usa la{" "}
+        <button
+          type="button"
+          onClick={() => onFotoDescrizione?.()}
+          className="text-link underline"
+        >
+          foto descrizione
+        </button>
+        !
+      </p>
 
       <label className="inline-flex cursor-pointer items-center rounded-full border border-ink px-5 py-2 text-sm font-semibold text-ink">
         {file ? "Cambia file" : "Scegli file"}
