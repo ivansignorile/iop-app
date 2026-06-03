@@ -468,6 +468,13 @@ function FotoTab({
           </p>
           <p className="mt-1 text-sm text-body">{result.descrizione}</p>
           {savedMsg ? <p className="mt-2 text-sm text-success">{savedMsg}</p> : null}
+          <a
+            href="/guida-degrado"
+            target="_blank"
+            className="mt-2 block text-xs text-link underline"
+          >
+            Perché questo livello? Apri la guida
+          </a>
         </div>
       ) : null}
 

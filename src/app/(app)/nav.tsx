@@ -12,6 +12,7 @@ const links = [
   { href: "/libreria", label: "Libreria" },
   { href: "/membri", label: "Membri" },
   { href: "/impostazioni", label: "Impostazioni" },
+  { href: "/guida-degrado", label: "Guida degrado" },
 ];
 
 export function AppNav({ orgName }: { orgName: string }) {
