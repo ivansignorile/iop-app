@@ -128,6 +128,7 @@ export type Database = {
       }
       degrado_samples: {
         Row: {
+          ciclo_id: string | null
           created_at: string
           descrizione: string | null
           id: string
@@ -137,6 +138,7 @@ export type Database = {
           org_id: string | null
         }
         Insert: {
+          ciclo_id?: string | null
           created_at?: string
           descrizione?: string | null
           id?: string
@@ -146,6 +148,7 @@ export type Database = {
           org_id?: string | null
         }
         Update: {
+          ciclo_id?: string | null
           created_at?: string
           descrizione?: string | null
           id?: string
@@ -155,6 +158,13 @@ export type Database = {
           org_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "degrado_samples_ciclo_id_fkey"
+            columns: ["ciclo_id"]
+            isOneToOne: false
+            referencedRelation: "cicli_lavorazione"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "degrado_samples_org_id_fkey"
             columns: ["org_id"]
