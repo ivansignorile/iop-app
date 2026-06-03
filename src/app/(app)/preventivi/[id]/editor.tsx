@@ -642,26 +642,30 @@ function InterventoRow({
         {sugg ? (
           <>
             <span className="text-xs text-body">
-              {sugg.scheda_tecnica_url ? (
-                <a
-                  href={sugg.scheda_tecnica_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-link underline underline-offset-2"
-                >
-                  {sugg.prodotto}
-                </a>
-              ) : (
-                <span className="text-ink">{sugg.prodotto}</span>
-              )}
+              {(() => {
+                const schedaUrl = sugg.scheda_tecnica_url && /^https?:\/\//i.test(sugg.scheda_tecnica_url) ? sugg.scheda_tecnica_url : null;
+                return schedaUrl ? (
+                  <a
+                    href={schedaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-link underline underline-offset-2"
+                  >
+                    {sugg.prodotto}
+                  </a>
+                ) : (
+                  <span className="text-ink">{sugg.prodotto}</span>
+                );
+              })()}
               {sugg.marca ? ` (${sugg.marca})` : ""}
               {sugg.alternativa ? ` — alt: ${sugg.alternativa}` : ""}
             </span>
             <button
               type="button"
               onClick={() => {
-                const riga = sugg.scheda_tecnica_url
-                  ? `Materiale consigliato: ${sugg.prodotto}${sugg.marca ? ` (${sugg.marca})` : ""} — scheda: ${sugg.scheda_tecnica_url}`
+                const schedaUrl = sugg.scheda_tecnica_url && /^https?:\/\//i.test(sugg.scheda_tecnica_url) ? sugg.scheda_tecnica_url : null;
+                const riga = schedaUrl
+                  ? `Materiale consigliato: ${sugg.prodotto}${sugg.marca ? ` (${sugg.marca})` : ""} — scheda: ${schedaUrl}`
                   : `Materiale consigliato: ${sugg.prodotto}${sugg.marca ? ` (${sugg.marca})` : ""}`;
                 setDescrizione((d) => `${d}${d ? "\n" : ""}${riga}`);
               }}

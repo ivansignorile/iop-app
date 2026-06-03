@@ -86,6 +86,7 @@ Deno.serve(async (req) => {
     if (!aiRes.ok) return json({ error: "Errore AI", detail: await aiRes.text() }, 502);
     const aiData = await aiRes.json();
     const textBlock = (aiData.content ?? []).find((b: { type: string }) => b.type === "text");
+    if (!textBlock) return json({ error: "Risposta AI non valida" }, 502);
     return json({ ok: true, suggerimento: JSON.parse(textBlock.text) });
   } catch (e) {
     return json({ error: String(e) }, 500);
