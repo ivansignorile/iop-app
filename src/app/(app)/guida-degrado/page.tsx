@@ -71,7 +71,7 @@ export default async function GuidaDegradoPage() {
       <div className="grid gap-4 md:grid-cols-3">
         {levels.map((l) => (
           <LivelloCard
-            key={l.livello}
+            key={`${l.livello}-${l.override?.id ?? "g"}-${l.override?.ciclo_id ?? ""}-${l.override?.descrizione ?? ""}-${l.override?.image_path ?? ""}`}
             livello={l.livello}
             override={l.override}
             globale={l.globale}

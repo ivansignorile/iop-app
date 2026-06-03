@@ -39,9 +39,16 @@ export async function saveLivelloMap(livello: number, formData: FormData) {
     .maybeSingle();
 
   if (existing) {
+    const patch: {
+      ciclo_id: string | null;
+      descrizione: string | null;
+      intervento: string;
+      image_path?: string | null;
+    } = { ciclo_id, descrizione, intervento };
+    if (image_path) patch.image_path = image_path;
     await supabase
       .from("degrado_samples")
-      .update({ ciclo_id, descrizione, image_path, intervento })
+      .update(patch)
       .eq("id", existing.id);
   } else {
     await supabase.from("degrado_samples").insert({
