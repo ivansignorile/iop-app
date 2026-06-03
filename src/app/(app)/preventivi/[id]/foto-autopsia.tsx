@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/field";
@@ -29,7 +29,6 @@ export function FotoAutopsia({
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [sospetti, setSospetti] = useState<Sospetto[]>([]);
   const [modale, setModale] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
 
   function addPunto(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -86,10 +85,10 @@ export function FotoAutopsia({
     <div className="space-y-4">
       <div
         onClick={addPunto}
-        className="relative cursor-crosshair overflow-hidden rounded-md border border-hairline"
+        className="relative cursor-crosshair overflow-visible rounded-md border border-hairline"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img ref={imgRef} src={imageUrl} alt="Facciata" className="w-full select-none" />
+        <img src={imageUrl} alt="Facciata" className="w-full select-none rounded-md" />
 
         {/* marker reali */}
         {punti.map((pt, i) => (
@@ -126,7 +125,7 @@ export function FotoAutopsia({
         {openIdx !== null && punti[openIdx] ? (
           <div
             onClick={(e) => e.stopPropagation()}
-            className="absolute z-10 w-56 -translate-x-1/2 translate-y-2 rounded-md border border-hairline bg-canvas p-3 shadow-lg"
+            className={`absolute z-10 w-56 translate-y-2 rounded-md border border-hairline bg-canvas p-3 shadow-lg ${punti[openIdx].x > 0.6 ? "-translate-x-full" : punti[openIdx].x < 0.15 ? "translate-x-0" : "-translate-x-1/2"}`}
             style={{
               left: `${punti[openIdx].x * 100}%`,
               top: `${punti[openIdx].y * 100}%`,
