@@ -273,7 +273,6 @@ export async function saveAnnotazioni(
   preventivoId: string,
   storagePath: string,
   punti: unknown,
-  legenda: unknown,
 ) {
   const { org } = await requireContext();
   const supabase = await createClient();
@@ -287,7 +286,7 @@ export async function saveAnnotazioni(
     preventivo_id: preventivoId,
     storage_path: storagePath,
     punti: punti as Json,
-    legenda: legenda as Json,
+    legenda: {} as Json,
   });
   revalidatePath(`/preventivi/${preventivoId}`);
 }
