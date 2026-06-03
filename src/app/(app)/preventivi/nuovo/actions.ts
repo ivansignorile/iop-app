@@ -10,7 +10,10 @@ type Modalita = Database["public"]["Enums"]["preventivo_modalita"];
 
 export async function createPreventivoAction(formData: FormData) {
   const { org, userId } = await requireContext();
-  const modalita = (String(formData.get("modalita") ?? "manuale") as Modalita);
+  const rawModalita = String(formData.get("modalita") ?? "manuale");
+  const modalita = (["manuale", "capitolato", "foto"].includes(rawModalita)
+    ? rawModalita
+    : "manuale") as Modalita;
   const oggetto = String(formData.get("oggetto") ?? "").trim() || null;
 
   const supabase = await createClient();

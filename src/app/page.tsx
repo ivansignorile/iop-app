@@ -33,8 +33,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Due flussi */}
-        <section className="grid gap-px overflow-hidden border border-hairline pb-0 md:grid-cols-2">
+        {/* Tre flussi */}
+        <section className="grid gap-px overflow-hidden border border-hairline pb-0 md:grid-cols-3">
           <article className="bg-scrim p-12 text-on-primary">
             <p className="eyebrow mb-4 text-on-primary/60">Dal capitolato</p>
             <h2 className="display-md mb-4">La magia, dal computo all&apos;offerta</h2>
@@ -52,6 +52,18 @@ export default function Home() {
               attingi alla libreria dei cicli e ai prezzi a corpo, mq o ml, e
               costruisci il preventivo nel tuo standard.
             </p>
+          </article>
+          <article className="bg-surface-soft p-12 text-ink">
+            <p className="eyebrow mb-4 text-stone">Da foto</p>
+            <h2 className="display-md mb-4">Scatta, posiziona, avvia</h2>
+            <p className="text-base leading-relaxed text-graphite">
+              Fotografi la facciata, segna i danni con i punti numerati e
+              descrivi ogni lavorazione: l&apos;AI genera automaticamente il
+              preventivo pre-compilato, pronto da rivedere.
+            </p>
+            <div className="mt-8">
+              <ButtonLink href="/signup?modalita=foto">Prova da foto</ButtonLink>
+            </div>
           </article>
         </section>
         <div className="h-[var(--spacing-section)]" />

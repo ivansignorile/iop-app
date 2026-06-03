@@ -12,23 +12,29 @@ export default async function NuovoPreventivoPage({
   await requireContext();
   const { modalita } = await searchParams;
   const isCapitolato = modalita === "capitolato";
+  const isFoto = modalita === "foto";
+
+  const title = isCapitolato
+    ? "Nuovo preventivo dal capitolato"
+    : isFoto
+      ? "Nuovo preventivo da foto"
+      : "Nuovo preventivo";
+  const description = isCapitolato
+    ? "Crea la bozza, poi carica il capitolato per la compilazione assistita."
+    : isFoto
+      ? "Crea la bozza, poi scatta una foto e posiziona i punti per la compilazione assistita."
+      : "Crea la bozza e componi il preventivo passo dopo passo.";
+  const modalitaValue = isCapitolato ? "capitolato" : isFoto ? "foto" : "manuale";
 
   return (
     <div className="mx-auto max-w-xl">
-      <PageHeader
-        title={isCapitolato ? "Nuovo preventivo dal capitolato" : "Nuovo preventivo"}
-        description={
-          isCapitolato
-            ? "Crea la bozza, poi carica il capitolato per la compilazione assistita."
-            : "Crea la bozza e componi il preventivo passo dopo passo."
-        }
-      />
+      <PageHeader title={title} description={description} />
       <Card>
         <form action={createPreventivoAction} className="flex flex-col gap-4">
           <input
             type="hidden"
             name="modalita"
-            value={isCapitolato ? "capitolato" : "manuale"}
+            value={modalitaValue}
           />
           <Field
             label="Oggetto (facoltativo)"
