@@ -144,9 +144,10 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                           Riferimento mercato:{" "}
                           <span className="tabular-nums">{formatEuro(i.prezzo_mercato)}</span>{" "}
                           {UNITA_LABEL[i.unita]}
-                          {Math.abs(Number(i.prezzo_unitario) - Number(i.prezzo_mercato)) /
+                          {Number(i.prezzo_mercato) > 0 &&
+                          Math.abs(Number(i.prezzo_unitario) - Number(i.prezzo_mercato)) /
                             Number(i.prezzo_mercato) >
-                          0.2
+                            0.2
                             ? " — scostamento significativo rispetto al prezzo offerto"
                             : ""}
                         </p>
