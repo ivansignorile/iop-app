@@ -53,4 +53,32 @@ describe("validaRichiesta", () => {
   it("descrizione minima 10 caratteri", () => {
     expect(validaRichiesta({ ...base, descrizione: "corto" }).ok).toBe(false);
   });
+  it("rifiuta voci file malformate (null, size non numerico/mancante/Infinity, nome non stringa)", () => {
+    const err = { ok: false, errore: "File non valido." };
+    expect(validaRichiesta({ ...base, files: [null] })).toEqual(err);
+    expect(validaRichiesta({ ...base, files: [{ nome: "a.jpg", mime: "image/jpeg", size: "abc" }] })).toEqual(err);
+    expect(validaRichiesta({ ...base, files: [{ nome: "a.jpg", mime: "image/jpeg" }] })).toEqual(err);
+    expect(validaRichiesta({ ...base, files: [{ nome: "a.jpg", mime: "image/jpeg", size: Infinity }] })).toEqual(err);
+    expect(validaRichiesta({ ...base, files: [{ nome: 42, mime: "image/jpeg", size: 10 }] })).toEqual(err);
+  });
+  it("files non array viene trattato come lista vuota", () => {
+    expect(validaRichiesta({ ...base, files: "abc" })).toEqual({ ok: false, errore: "Carica almeno una foto." });
+  });
+  it("rimuove le chiavi extra dai file", () => {
+    const r = validaRichiesta({
+      ...base,
+      files: [{ nome: "facciata.jpg", mime: "image/jpeg", size: 10, extra: "x", url: "http://x" }],
+    });
+    expect(r.ok && r.data.files).toEqual([{ nome: "facciata.jpg", mime: "image/jpeg", size: 10 }]);
+  });
+  it("limita la lunghezza di descrizione (5000) e nome (100)", () => {
+    expect(validaRichiesta({ ...base, descrizione: "a".repeat(5001) }).ok).toBe(false);
+    expect(validaRichiesta({ ...base, descrizione: "a".repeat(5000) }).ok).toBe(true);
+    expect(validaRichiesta({ ...base, nome: "a".repeat(101) }).ok).toBe(false);
+    expect(validaRichiesta({ ...base, nome: "a".repeat(100) }).ok).toBe(true);
+  });
+  it("limita telefono (30) e comune (100)", () => {
+    expect(validaRichiesta({ ...base, telefono: "1".repeat(31) }).ok).toBe(false);
+    expect(validaRichiesta({ ...base, comune: "c".repeat(101) }).ok).toBe(false);
+  });
 });
