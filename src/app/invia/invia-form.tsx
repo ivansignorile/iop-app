@@ -32,26 +32,30 @@ export function InviaForm({ tipoIniziale }: { tipoIniziale: "foto_descrizione" |
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setErrore(null);
-    setStato("invio");
-    const fd = new FormData(e.currentTarget);
-    const meta = files.map((f) => ({ nome: f.name, mime: f.type || mimeDaEstensione(f.name), size: f.size }));
-    const prep = await preparaUpload(meta, String(fd.get("honeypot") ?? ""));
-    if (!prep.ok) return fail(prep.errore);
+    try {
+      setErrore(null);
+      setStato("invio");
+      const fd = new FormData(e.currentTarget);
+      const meta = files.map((f) => ({ nome: f.name, mime: f.type || mimeDaEstensione(f.name), size: f.size }));
+      const prep = await preparaUpload(meta, String(fd.get("honeypot") ?? ""));
+      if (!prep.ok) return fail(prep.errore);
 
-    const supabase = createClient();
-    for (const [i, u] of prep.uploads.entries()) {
-      const { error } = await supabase.storage.from("richieste").uploadToSignedUrl(u.path, u.token, files[i], { contentType: meta[i].mime });
-      if (error) return fail(`Caricamento non riuscito: ${files[i].name}`);
+      const supabase = createClient();
+      for (const [i, u] of prep.uploads.entries()) {
+        const { error } = await supabase.storage.from("richieste").uploadToSignedUrl(u.path, u.token, files[i], { contentType: meta[i].mime });
+        if (error) return fail(`Caricamento non riuscito: ${files[i].name}`);
+      }
+      const res = await inviaRichiesta({
+        ...Object.fromEntries(fd),
+        files: meta,
+        cartella: prep.cartella,
+        paths: prep.uploads.map((u) => u.path),
+      });
+      if (!res.ok) return fail(res.errore);
+      setStato("ok");
+    } catch {
+      fail("Invio non riuscito, riprova.");
     }
-    const res = await inviaRichiesta({
-      ...Object.fromEntries(fd),
-      files: meta,
-      cartella: prep.cartella,
-      paths: prep.uploads.map((u) => u.path),
-    });
-    if (!res.ok) return fail(res.errore);
-    setStato("ok");
   }
   function fail(msg: string) {
     setErrore(msg);
