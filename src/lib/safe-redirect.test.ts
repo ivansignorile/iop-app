@@ -5,6 +5,9 @@ import { safeRedirectPath } from "@/lib/safe-redirect";
 describe("safeRedirectPath", () => {
   it.each([
     ["//x"],
+    ["/.//evil.com"],
+    ["/a/..//evil.com"],
+    ["/%2e//evil.com"],
     ["/\\x"],
     ["/\t/x"],
     ["/\n/x"],

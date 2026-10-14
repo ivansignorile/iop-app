@@ -16,5 +16,7 @@ export function safeRedirectPath(value: unknown): string | null {
     return null;
   }
   if (parsed.origin !== base) return null;
-  return parsed.pathname + parsed.search + parsed.hash;
+  const out = parsed.pathname + parsed.search + parsed.hash;
+  if (out.startsWith("//") || out.includes("\\")) return null;
+  return out;
 }
