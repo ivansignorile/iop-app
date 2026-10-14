@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { signOutAction } from "@/app/auth/actions";
 
-const links = [
+const baseLinks = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/preventivi", label: "Preventivi" },
   { href: "/clienti", label: "Clienti" },
@@ -15,8 +15,17 @@ const links = [
   { href: "/guida-degrado", label: "Guida degrado" },
 ];
 
-export function AppNav({ orgName }: { orgName: string }) {
+export function AppNav({
+  orgName,
+  isAdmin = false,
+}: {
+  orgName: string;
+  isAdmin?: boolean;
+}) {
   const pathname = usePathname();
+  const links = isAdmin
+    ? [...baseLinks, { href: "/admin/richieste", label: "Richieste" }]
+    : baseLinks;
 
   return (
     <header className="sticky top-0 z-20 border-b border-hairline bg-canvas">
