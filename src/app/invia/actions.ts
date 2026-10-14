@@ -1,26 +1,18 @@
 "use server";
 
 import { notificaRichiesta } from "@/lib/notifiche/invia";
-import {
-  MAX_FILE_BYTES,
-  MAX_FILES,
-  MAX_RICHIESTE_ORA,
-  MIME_AMMESSI,
-  validaRichiesta,
-  type FileMeta,
-} from "@/lib/richieste/valida";
+import { consentiAzione, TROPPE_RICHIESTE } from "@/lib/richieste/rate-limit";
+import { MAX_FILES, MAX_RICHIESTE_ORA, validaRichiesta, type FileMeta } from "@/lib/richieste/valida";
+import { CARICAMENTO_KO, verificaFileCaricati } from "@/lib/richieste/verifica-file";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 const BUCKET = "richieste";
-const CARTELLA_RE = /^\d{4}-\d{2}-\d{2}\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
-const CARICAMENTO_KO = "Caricamento non valido, riprova.";
 
 const safe = (nome: string) => nome.normalize("NFKD").replace(/[^\w.-]+/g, "_").slice(-80);
 
-export async function preparaUpload(files: FileMeta[]) {
-  if (!Array.isArray(files) || files.length === 0 || files.length > MAX_FILES) {
-    return { ok: false as const, errore: "Carica almeno una foto." };
-  }
+export async function preparaUpload(files: FileMeta[], honeypot = "") {
+  if (!Array.isArray(files) || files.length === 0) return { ok: false as const, errore: "Carica almeno una foto." };
+  if (files.length > MAX_FILES) return { ok: false as const, errore: `Massimo ${MAX_FILES} file.` };
   // Valida solo i file (con dati fittizi per il resto): stessi limiti del submit.
   const check = validaRichiesta({
     nome: "xx",
@@ -28,9 +20,10 @@ export async function preparaUpload(files: FileMeta[]) {
     tipo: "foto_descrizione",
     descrizione: "x".repeat(10),
     files,
-    honeypot: "",
+    honeypot,
   });
   if (!check.ok) return { ok: false as const, errore: check.errore };
+  if (!(await consentiAzione("prepara"))) return { ok: false as const, errore: TROPPE_RICHIESTE };
 
   const supabase = createAdminClient();
   const cartella = `${new Date().toISOString().slice(0, 10)}/${crypto.randomUUID()}`;
@@ -50,36 +43,33 @@ export async function inviaRichiesta(input: Record<string, unknown> & { cartella
   const r = v.data;
 
   const { cartella, paths } = input;
-  if (
-    typeof cartella !== "string" ||
-    !CARTELLA_RE.test(cartella) ||
-    !Array.isArray(paths) ||
-    paths.length !== r.files.length ||
-    new Set(paths).size !== paths.length ||
-    paths.some((p) => typeof p !== "string" || !p.startsWith(`${cartella}/`) || p.slice(cartella.length + 1).includes("/"))
-  ) {
-    return { ok: false as const, errore: "Richiesta non valida." };
-  }
+  if (typeof cartella !== "string" || !Array.isArray(paths)) return { ok: false as const, errore: "Richiesta non valida." };
 
   const supabase = createAdminClient();
 
   // I metadati dichiarati dal client non sono affidabili: uso quelli reali dello storage.
   const { data: stored, error: listError } = await supabase.storage.from(BUCKET).list(cartella, { limit: 100 });
   if (listError || !stored) return { ok: false as const, errore: CARICAMENTO_KO };
-  const byName = new Map(stored.map((o) => [o.name, o]));
-  const files: (FileMeta & { path: string })[] = [];
-  for (const [i, path] of paths.entries()) {
-    const obj = byName.get(path.slice(cartella.length + 1));
-    const size = Number(obj?.metadata?.size);
-    const mime = obj?.metadata?.mimetype;
-    if (!obj || !Number.isFinite(size) || size <= 0 || size > MAX_FILE_BYTES || typeof mime !== "string" || !MIME_AMMESSI.includes(mime)) {
-      return { ok: false as const, errore: CARICAMENTO_KO };
-    }
-    files.push({ nome: r.files[i].nome, mime, size, path });
-  }
+  const verifica = verificaFileCaricati(
+    cartella,
+    paths,
+    r.files,
+    stored.map((o) => ({ name: o.name, size: Number(o.metadata?.size) || null, mimetype: o.metadata?.mimetype ?? null })),
+  );
+  if (!verifica.ok) return verifica;
+  const files = verifica.files;
   // Rivalida con i metadati reali (es. "carica almeno una foto", capitolato).
   const reale = validaRichiesta({ ...input, files: files.map(({ nome, mime, size }) => ({ nome, mime, size })) });
   if (!reale.ok) return reale;
+
+  // Replay: la stessa cartella non puo' generare due richieste.
+  const { count: gia } = await supabase
+    .from("richieste_servizio")
+    .select("id", { count: "exact", head: true })
+    .contains("files", [{ path: files[0].path }]);
+  if ((gia ?? 0) > 0) return { ok: false as const, errore: "Richiesta già inviata." };
+
+  if (!(await consentiAzione("invia"))) return { ok: false as const, errore: TROPPE_RICHIESTE };
 
   const unOraFa = new Date(Date.now() - 3600_000).toISOString();
   const { count } = await supabase
@@ -87,7 +77,7 @@ export async function inviaRichiesta(input: Record<string, unknown> & { cartella
     .select("id", { count: "exact", head: true })
     .eq("email", r.email)
     .gte("created_at", unOraFa);
-  if ((count ?? 0) >= MAX_RICHIESTE_ORA) return { ok: false as const, errore: "Troppe richieste, riprova più tardi." };
+  if ((count ?? 0) >= MAX_RICHIESTE_ORA) return { ok: false as const, errore: TROPPE_RICHIESTE };
 
   const { data, error } = await supabase
     .from("richieste_servizio")

@@ -727,6 +727,27 @@ export type Database = {
           },
         ]
       }
+      richieste_rate_log: {
+        Row: {
+          azione: string
+          created_at: string
+          id: number
+          ip_hash: string
+        }
+        Insert: {
+          azione: string
+          created_at?: string
+          id?: number
+          ip_hash: string
+        }
+        Update: {
+          azione?: string
+          created_at?: string
+          id?: number
+          ip_hash?: string
+        }
+        Relationships: []
+      }
       richieste_servizio: {
         Row: {
           comune: string | null

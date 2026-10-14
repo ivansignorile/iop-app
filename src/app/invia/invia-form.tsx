@@ -8,6 +8,23 @@ import { createClient } from "@/lib/supabase/client";
 
 import { inviaRichiesta, preparaUpload } from "./actions";
 
+const MIME_ESTENSIONI: Record<string, string> = {
+  heic: "image/heic",
+  heif: "image/heif",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  png: "image/png",
+  webp: "image/webp",
+  pdf: "application/pdf",
+  doc: "application/msword",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  txt: "text/plain",
+};
+
+function mimeDaEstensione(nome: string) {
+  return MIME_ESTENSIONI[nome.split(".").pop()?.toLowerCase() ?? ""] ?? "";
+}
+
 export function InviaForm({ tipoIniziale }: { tipoIniziale: "foto_descrizione" | "foto_capitolato" }) {
   const [files, setFiles] = useState<File[]>([]);
   const [stato, setStato] = useState<"idle" | "invio" | "ok">("idle");
@@ -18,13 +35,13 @@ export function InviaForm({ tipoIniziale }: { tipoIniziale: "foto_descrizione" |
     setErrore(null);
     setStato("invio");
     const fd = new FormData(e.currentTarget);
-    const meta = files.map((f) => ({ nome: f.name, mime: f.type, size: f.size }));
-    const prep = await preparaUpload(meta);
+    const meta = files.map((f) => ({ nome: f.name, mime: f.type || mimeDaEstensione(f.name), size: f.size }));
+    const prep = await preparaUpload(meta, String(fd.get("honeypot") ?? ""));
     if (!prep.ok) return fail(prep.errore);
 
     const supabase = createClient();
     for (const [i, u] of prep.uploads.entries()) {
-      const { error } = await supabase.storage.from("richieste").uploadToSignedUrl(u.path, u.token, files[i]);
+      const { error } = await supabase.storage.from("richieste").uploadToSignedUrl(u.path, u.token, files[i], { contentType: meta[i].mime });
       if (error) return fail(`Caricamento non riuscito: ${files[i].name}`);
     }
     const res = await inviaRichiesta({
