@@ -750,6 +750,7 @@ export type Database = {
       }
       richieste_servizio: {
         Row: {
+          cartella: string | null
           comune: string | null
           created_at: string
           descrizione: string
@@ -765,6 +766,7 @@ export type Database = {
           tipo: Database["public"]["Enums"]["richiesta_tipo"]
         }
         Insert: {
+          cartella?: string | null
           comune?: string | null
           created_at?: string
           descrizione: string
@@ -780,6 +782,7 @@ export type Database = {
           tipo: Database["public"]["Enums"]["richiesta_tipo"]
         }
         Update: {
+          cartella?: string | null
           comune?: string | null
           created_at?: string
           descrizione?: string

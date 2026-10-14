@@ -1,6 +1,7 @@
 "use server";
 
 import { notificaRichiesta } from "@/lib/notifiche/invia";
+import { erroreInserimento } from "@/lib/richieste/esito-insert";
 import { consentiAzione, TROPPE_RICHIESTE } from "@/lib/richieste/rate-limit";
 import { MAX_FILES, MAX_RICHIESTE_ORA, validaRichiesta, type FileMeta } from "@/lib/richieste/valida";
 import { CARICAMENTO_KO, verificaFileCaricati } from "@/lib/richieste/verifica-file";
@@ -62,11 +63,11 @@ export async function inviaRichiesta(input: Record<string, unknown> & { cartella
   const reale = validaRichiesta({ ...input, files: files.map(({ nome, mime, size }) => ({ nome, mime, size })) });
   if (!reale.ok) return reale;
 
-  // Replay: la stessa cartella non puo' generare due richieste.
+  // Replay: uscita rapida (senza consumare quota). La garanzia atomica e' l'indice unico su `cartella`.
   const { count: gia } = await supabase
     .from("richieste_servizio")
     .select("id", { count: "exact", head: true })
-    .contains("files", [{ path: files[0].path }]);
+    .eq("cartella", cartella);
   if ((gia ?? 0) > 0) return { ok: false as const, errore: "Richiesta già inviata." };
 
   if (!(await consentiAzione("invia"))) return { ok: false as const, errore: TROPPE_RICHIESTE };
@@ -81,10 +82,11 @@ export async function inviaRichiesta(input: Record<string, unknown> & { cartella
 
   const { data, error } = await supabase
     .from("richieste_servizio")
-    .insert({ nome: r.nome, email: r.email, telefono: r.telefono, tipo: r.tipo, descrizione: r.descrizione, comune: r.comune, files })
+    .insert({ nome: r.nome, email: r.email, telefono: r.telefono, tipo: r.tipo, descrizione: r.descrizione, comune: r.comune, files, cartella })
     .select("id")
     .single();
-  if (error || !data) return { ok: false as const, errore: "Invio non riuscito, riprova." };
+  // 23505: replay concorrente/riordinato, nessuna notifica.
+  if (error || !data) return { ok: false as const, errore: erroreInserimento(error) };
 
   // Prima salvo, poi notifico: una notifica fallita non perde la richiesta.
   const esito = await notificaRichiesta({ ...r, files, id: data.id });
