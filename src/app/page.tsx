@@ -64,12 +64,12 @@ export default function Home() {
             <ButtonLink href="/invia" className="px-10 py-4 text-base">
               Invia file
             </ButtonLink>
-            <span className="text-sm text-muted">
-              Nessuna registrazione. Ci pensiamo noi.{" "}
-              <Link href="/invia?tipo=capitolato" className="text-link">
-                Hai un capitolato? Invialo qui
-              </Link>
-            </span>
+            <p className="text-sm text-muted">
+              Nessuna registrazione. Ci pensiamo noi.
+            </p>
+            <Link href="/invia?tipo=capitolato" className="block text-sm text-link">
+              Hai un capitolato? Invialo qui
+            </Link>
           </div>
         </section>
 
