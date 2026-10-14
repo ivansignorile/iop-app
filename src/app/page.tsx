@@ -1,4 +1,39 @@
+import Link from "next/link";
+
 import { ButtonLink } from "@/components/ui/button";
+
+const MODALITA = [
+  {
+    eyebrow: "Componi",
+    titolo: "Componi il tuo preventivo",
+    testo:
+      "Scegli le voci dal prezzario regionale o dalla tua libreria prezzi, quantità e misure: il preventivo si compone da sé.",
+    href: "/preventivi/nuovo?modalita=manuale",
+    cta: "Componi",
+    cls: "bg-canvas text-ink",
+    dark: false,
+  },
+  {
+    eyebrow: "Da foto",
+    titolo: "Genera da foto",
+    testo:
+      "Fotografa la facciata, segna i danni con i punti numerati: l'AI genera le voci con descrizioni e prezzi.",
+    href: "/preventivi/nuovo?modalita=foto",
+    cta: "Genera da foto",
+    cls: "bg-surface-soft text-ink",
+    dark: false,
+  },
+  {
+    eyebrow: "Da capitolato",
+    titolo: "Genera da capitolato",
+    testo:
+      "Carica capitolato o computo metrico: IOP riconosce le voci e le abbina al prezzario e ai tuoi prezzi.",
+    href: "/preventivi/nuovo?modalita=capitolato",
+    cta: "Genera da capitolato",
+    cls: "bg-scrim text-on-primary",
+    dark: true,
+  },
+];
 
 export default function Home() {
   return (
@@ -17,56 +52,48 @@ export default function Home() {
         {/* Hero */}
         <section className="py-[var(--spacing-section)]">
           <p className="eyebrow mb-4 text-stone">Io Preventivo</p>
-          <h1 className="display-xl max-w-3xl text-ink md:text-[64px] md:leading-[0.98]">
-            Il preventivo di ristrutturazione, pronto in minuti.
+          <h1 className="display-xl max-w-4xl text-ink md:text-[64px] md:leading-[0.98]">
+            Il tuo preventivo in un click.
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-graphite">
-            Carica il capitolato e lascia che l&apos;AI compili l&apos;offerta
-            tecnico-economica. Oppure parti da zero: dati, lavorazioni e prezzi,
-            con un template professionale sempre pronto all&apos;export.
+          <p className="mt-6 max-w-2xl text-xl leading-snug text-graphite">
+            Oppure inviaci foto + descrizione o foto + capitolato e il tuo
+            preventivo arriva in{" "}
+            <strong className="font-semibold text-ink">24 ore, garantito</strong>.
           </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/signup">Crea il tuo primo preventivo</ButtonLink>
-            <ButtonLink href="/login" variant="secondary">
-              Accedi
+          <div className="mt-10 flex flex-col items-start gap-3">
+            <ButtonLink href="/invia" className="px-10 py-4 text-base">
+              Invia file
             </ButtonLink>
+            <span className="text-sm text-muted">
+              Nessuna registrazione. Ci pensiamo noi.{" "}
+              <Link href="/invia?tipo=capitolato" className="text-link">
+                Hai un capitolato? Invialo qui
+              </Link>
+            </span>
           </div>
         </section>
 
-        {/* Tre flussi */}
-        <section className="grid gap-px overflow-hidden border border-hairline pb-0 md:grid-cols-3">
-          <article className="bg-scrim p-12 text-on-primary">
-            <p className="eyebrow mb-4 text-on-primary/60">Dal capitolato</p>
-            <h2 className="display-md mb-4">La magia, dal computo all&apos;offerta</h2>
-            <p className="text-base leading-relaxed text-on-primary/80">
-              Hai un computo metrico o un capitolato? Caricalo: IOP riconosce le
-              voci, le traduce in interventi e prezzi e ti restituisce
-              l&apos;offerta già compilata e modificabile.
-            </p>
-          </article>
-          <article className="bg-canvas p-12 text-ink">
-            <p className="eyebrow mb-4 text-stone">Da zero</p>
-            <h2 className="display-md mb-4">Componi passo dopo passo</h2>
-            <p className="text-base leading-relaxed text-graphite">
-              Nessun capitolato? Inserisci committente, edificio e lavorazioni:
-              attingi alla libreria dei cicli e ai prezzi a corpo, mq o ml, e
-              costruisci il preventivo nel tuo standard.
-            </p>
-          </article>
-          <article className="bg-surface-soft p-12 text-ink">
-            <p className="eyebrow mb-4 text-stone">Da foto</p>
-            <h2 className="display-md mb-4">Scatta, posiziona, avvia</h2>
-            <p className="text-base leading-relaxed text-graphite">
-              Fotografi la facciata, segna i danni con i punti numerati e
-              descrivi ogni lavorazione: l&apos;AI genera automaticamente il
-              preventivo pre-compilato, pronto da rivedere.
-            </p>
-            <div className="mt-8">
-              <ButtonLink href="/signup">Prova da foto</ButtonLink>
-            </div>
-          </article>
+        {/* Fai da te */}
+        <section className="pb-[var(--spacing-section)]">
+          <p className="eyebrow mb-4 text-stone">Fai da te</p>
+          <h2 className="display-md mb-10 max-w-2xl text-ink">
+            Preferisci farlo tu? Tre modi, pronti in minuti.
+          </h2>
+          <div className="grid gap-px overflow-hidden border border-hairline md:grid-cols-3">
+            {MODALITA.map((m) => (
+              <article key={m.eyebrow} className={`flex flex-col p-8 md:p-12 ${m.cls}`}>
+                <p className="eyebrow mb-4 opacity-60">{m.eyebrow}</p>
+                <h3 className="display-md mb-4">{m.titolo}</h3>
+                <p className="flex-1 text-base leading-relaxed opacity-80">{m.testo}</p>
+                <div className="mt-8">
+                  <ButtonLink href={m.href} variant={m.dark ? "secondary" : "primary"}>
+                    {m.cta}
+                  </ButtonLink>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
-        <div className="h-[var(--spacing-section)]" />
       </main>
 
       <footer className="bg-footer px-6 py-12 text-sm text-on-primary md:px-12">

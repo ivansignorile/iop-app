@@ -6,6 +6,13 @@ import { createClient } from "@/lib/supabase/server";
 
 export type AuthState = { error?: string; message?: string };
 
+/** Accetta solo path interni (no open redirect): "/x" sì, "//x" e "/\\x" no. */
+function safeRedirectPath(value: FormDataEntryValue | null): string | null {
+  const v = typeof value === "string" ? value : "";
+  if (!v.startsWith("/") || v.startsWith("//") || v.startsWith("/\\")) return null;
+  return v;
+}
+
 export async function signInAction(
   _prev: AuthState,
   formData: FormData,
@@ -17,7 +24,7 @@ export async function signInAction(
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) return { error: "Credenziali non valide. Riprova." };
 
-  redirect("/dashboard");
+  redirect(safeRedirectPath(formData.get("redirect")) ?? "/dashboard");
 }
 
 export async function signUpAction(
