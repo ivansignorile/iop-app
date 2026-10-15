@@ -82,6 +82,7 @@ export default async function PreventivoPage({
         interventi={interventi ?? []}
         cicli={cicli ?? []}
         preview={preview}
+        regione={org.regione}
       />
     </div>
   );

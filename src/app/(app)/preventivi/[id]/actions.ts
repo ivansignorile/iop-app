@@ -6,6 +6,9 @@ import { requireContext } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import type { Database, Json } from "@/lib/supabase/types";
 
+import { risolviVoce } from "../../../../../supabase/functions/_shared/risolvi-voce";
+import { unitaDaVoci } from "../../../../../supabase/functions/_shared/unita-voce";
+
 type Unita = Database["public"]["Enums"]["unita_misura"];
 type Stato = Database["public"]["Enums"]["preventivo_stato"];
 type FontePrezzi = Database["public"]["Enums"]["fonte_prezzi"];
@@ -390,7 +393,7 @@ export async function addCicloPitturazione(
 }
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const FONTI_PREZZI = ["prezzario", "propri", "entrambi"];
+const FONTI_PREZZI: string[] = ["prezzario", "propri", "entrambi"];
 
 /** Cambia la fonte prezzi del preventivo (vale per i prossimi abbinamenti). */
 export async function setFontePrezzi(preventivoId: string, fonte: string) {
@@ -402,5 +405,158 @@ export async function setFontePrezzi(preventivoId: string, fonte: string) {
     .update({ fonte_prezzi: fonte as FontePrezzi })
     .eq("id", preventivoId)
     .eq("org_id", org.id);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export type VocePrezzario = {
+  id: string;
+  codice: string;
+  descrizione: string;
+  unita: Unita;
+  unita_testo: string;
+  prezzo: number;
+  prezzario: string;
+};
+export type VocePropria = {
+  id: string;
+  titolo: string;
+  descrizione: string;
+  unita: Unita;
+  prezzo: number;
+};
+
+const MIN_RICERCA = 2;
+const MAX_RICERCA = 200;
+const LIMITE_RISULTATI = 10;
+
+/** Cerca nel prezzario della regione dell'org e/o nella libreria personale, secondo la fonte prezzi. */
+export async function cercaVoci(
+  q: string,
+  fonte: FontePrezzi,
+): Promise<{ prezzario: VocePrezzario[]; proprie: VocePropria[] }> {
+  const { org } = await requireContext();
+  const testo = typeof q === "string" ? q.trim().slice(0, MAX_RICERCA) : "";
+  if (testo.length < MIN_RICERCA || !FONTI_PREZZI.includes(fonte)) {
+    return { prezzario: [], proprie: [] };
+  }
+  const supabase = await createClient();
+  const [p, m] = await Promise.all([
+    fonte !== "propri"
+      ? supabase.rpc("cerca_prezzario", { q: testo, p_regione: org.regione, p_limit: LIMITE_RISULTATI })
+      : Promise.resolve({ data: [], error: null }),
+    fonte !== "prezzario"
+      ? supabase.rpc("cerca_voci_proprie", { q: testo, p_org: org.id, p_limit: LIMITE_RISULTATI })
+      : Promise.resolve({ data: [], error: null }),
+  ]);
+  if (p.error || m.error) throw new Error("Ricerca voci non riuscita.");
+  return {
+    prezzario: (p.data ?? []).map((v) => ({
+      id: v.id,
+      codice: v.codice,
+      descrizione: v.descrizione,
+      unita: v.unita,
+      unita_testo: v.unita_testo,
+      prezzo: Number(v.prezzo),
+      prezzario: v.prezzario,
+    })),
+    proprie: (m.data ?? []).map((v) => ({
+      id: v.id,
+      titolo: v.titolo,
+      descrizione: v.descrizione,
+      unita: v.unita,
+      prezzo: Number(v.prezzo),
+    })),
+  };
+}
+
+function titoloDa(descrizione: string) {
+  const t = descrizione.trim().replace(/\s+/g, " ");
+  if (t.length <= 80) return t;
+  const taglio = t.slice(0, 80);
+  const spazio = taglio.lastIndexOf(" ");
+  return `${(spazio > 40 ? taglio.slice(0, spazio) : taglio).trimEnd()}…`;
+}
+
+/** Aggiunge un intervento da una voce di prezzario e/o della libreria (doppia descrizione). */
+export async function addInterventoDaVoce(
+  preventivoId: string,
+  sel: { prezzarioVoceId: string | null; vocePropriaId: string | null },
+): Promise<void> {
+  const { org } = await requireContext();
+  const prezzarioVoceId = sel?.prezzarioVoceId ?? null;
+  let vocePropriaId = sel?.vocePropriaId ?? null;
+  if (
+    !UUID_RE.test(preventivoId) ||
+    (prezzarioVoceId !== null && !UUID_RE.test(prezzarioVoceId)) ||
+    (vocePropriaId !== null && !UUID_RE.test(vocePropriaId))
+  ) {
+    throw new Error("Richiesta non valida.");
+  }
+
+  const supabase = await createClient();
+  const { data: prev } = await supabase
+    .from("preventivi")
+    .select("id, fonte_prezzi")
+    .eq("id", preventivoId)
+    .eq("org_id", org.id)
+    .maybeSingle();
+  if (!prev) throw new Error("Preventivo non trovato.");
+
+  // Con fonte 'prezzario' la libreria non entra in gioco.
+  if (prev.fonte_prezzi === "prezzario") vocePropriaId = null;
+  if (!prezzarioVoceId && !vocePropriaId) throw new Error("Seleziona almeno una voce.");
+
+  const [{ data: pv }, { data: vp }, { count }] = await Promise.all([
+    prezzarioVoceId
+      ? supabase
+          .from("prezzario_voci")
+          .select("id, codice, descrizione, unita, unita_testo, prezzo")
+          .eq("id", prezzarioVoceId)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
+    vocePropriaId
+      ? supabase
+          .from("voci_proprie")
+          .select("id, titolo, descrizione, unita, prezzo")
+          .eq("id", vocePropriaId)
+          .eq("org_id", org.id)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
+    supabase
+      .from("preventivo_interventi")
+      .select("id", { count: "exact", head: true })
+      .eq("preventivo_id", preventivoId),
+  ]);
+  if ((prezzarioVoceId && !pv) || (vocePropriaId && !vp)) throw new Error("Voce non trovata.");
+
+  const r = risolviVoce(
+    prev.fonte_prezzi,
+    pv ? { descrizione: pv.descrizione, prezzo: Number(pv.prezzo) } : null,
+    vp ? { descrizione: vp.descrizione, prezzo: Number(vp.prezzo) } : null,
+  );
+  const u = unitaDaVoci(pv, vp);
+
+  const { error } = await supabase.from("preventivo_interventi").insert({
+    org_id: org.id,
+    preventivo_id: preventivoId,
+    ordine: count ?? 0,
+    titolo: vp?.titolo ?? (pv ? titoloDa(pv.descrizione) : "Intervento"),
+    unita: u.unita,
+    quantita: 1,
+    descrizione: r.descrizione,
+    prezzo_unitario: r.prezzo ?? 0,
+    fonte_scelta: r.scelta,
+    abbinamento_avviso: u.avviso ?? r.avviso,
+    prezzario_voce_id: pv?.id ?? null,
+    codice_prezzario: pv?.codice ?? null,
+    descrizione_prezzario: pv?.descrizione ?? null,
+    prezzo_prezzario: pv ? Number(pv.prezzo) : null,
+    voce_propria_id: vp?.id ?? null,
+    descrizione_propria: vp?.descrizione ?? null,
+    prezzo_proprio: vp ? Number(vp.prezzo) : null,
+  });
+  if (error) throw new Error("Aggiunta della voce non riuscita.");
+
+  await recomputeTotale(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
 }

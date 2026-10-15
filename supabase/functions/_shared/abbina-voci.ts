@@ -1,6 +1,7 @@
 // supabase/functions/_shared/abbina-voci.ts
 // Logica pura dell'abbinamento voci (validazione output modello, compatibilità unità, patch riga).
 import { type FontePrezzi, risolviVoce } from "./risolvi-voce.ts";
+import { eACorpo } from "./unita-voce.ts";
 
 export const MAX_INTERVENTI = 100;
 
@@ -46,12 +47,10 @@ const UNITA_LABEL: Record<Unita, string> = {
   kg: "kg",
 };
 
-const TESTI_A_CORPO = new Set(["a corpo", "corpo", "a.c.", "ac"]);
-
 /** Unità reale di una voce prezzario: le voci mappate su 'corpo' con testo diverso (h, %, t…) sono un'altra unità. */
 export function unitaPrezzarioCompatibile(unitaIntervento: Unita, cand: Pick<CandPrezzario, "unita" | "unita_testo">) {
   if (cand.unita !== unitaIntervento) return false;
-  if (cand.unita === "corpo" && !TESTI_A_CORPO.has(cand.unita_testo.trim().toLowerCase())) return false;
+  if (cand.unita === "corpo" && !eACorpo(cand.unita_testo)) return false;
   return true;
 }
 

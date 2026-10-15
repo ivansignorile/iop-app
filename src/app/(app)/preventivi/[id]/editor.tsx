@@ -24,6 +24,7 @@ import {
   updateIntervento,
   updateStato,
 } from "./actions";
+import { CercaVoce } from "./cerca-voce";
 import { FotoAutopsia, type Punto, type Sospetto } from "./foto-autopsia";
 import { PreventivoPreview, type PreviewData } from "./preview";
 
@@ -115,6 +116,7 @@ export function PreventivoEditor({
   interventi,
   cicli,
   preview,
+  regione,
 }: {
   preventivo: Tables<"preventivi">;
   cliente: Tables<"clienti"> | null;
@@ -122,6 +124,7 @@ export function PreventivoEditor({
   interventi: Intervento[];
   cicli: Ciclo[];
   preview: PreviewData;
+  regione: string;
 }) {
   const tabs =
     preventivo.modalita === "capitolato"
@@ -218,6 +221,8 @@ export function PreventivoEditor({
       {tab === "Interventi" && (
         <InterventiTab
           preventivoId={preventivo.id}
+          fontePrezzi={preventivo.fonte_prezzi}
+          regione={regione}
           interventi={interventi}
           cicli={cicli}
           edificio={edificio}
@@ -374,6 +379,8 @@ function AnagraficaTab({
 
 function InterventiTab({
   preventivoId,
+  fontePrezzi,
+  regione,
   interventi,
   cicli,
   edificio,
@@ -381,6 +388,8 @@ function InterventiTab({
   start,
 }: {
   preventivoId: string;
+  fontePrezzi: Tables<"preventivi">["fonte_prezzi"];
+  regione: string;
   interventi: Intervento[];
   cicli: Ciclo[];
   edificio: Tables<"edifici"> | null;
@@ -409,6 +418,8 @@ function InterventiTab({
 
   return (
     <div className="space-y-6">
+      <CercaVoce preventivoId={preventivoId} fontePrezzi={fontePrezzi} regione={regione} />
+
       <div className="flex flex-wrap items-end gap-3 rounded-md border border-hairline bg-surface-soft p-4">
         <div className="flex-1 min-w-[240px]">
           <label className="mb-1.5 block text-sm font-medium text-ink">
