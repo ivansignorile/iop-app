@@ -9,9 +9,11 @@ import {
   PrezzoRow,
 } from "./forms";
 import { ImportListino } from "./import-listino";
+import { ImportPreventivi } from "./import-preventivi";
+import { DocumentiLibreria, VociProprie } from "./voci-proprie";
 
 export default async function LibreriaPage() {
-  const { org } = await requireContext();
+  const { org, userId } = await requireContext();
   const supabase = await createClient();
 
   const [
@@ -19,6 +21,8 @@ export default async function LibreriaPage() {
     { data: prezziGlob },
     { data: cicliOrg },
     { data: cicliGlob },
+    { data: vociProprie },
+    { data: documenti },
   ] = await Promise.all([
     supabase
       .from("prezzi_unitari")
@@ -40,6 +44,17 @@ export default async function LibreriaPage() {
       .select("id, titolo, categoria, unita_default, prezzo_default")
       .is("org_id", null)
       .order("categoria"),
+    supabase
+      .from("voci_proprie")
+      .select("id, titolo, descrizione, unita, prezzo, categoria, documento_id")
+      .eq("org_id", org.id)
+      .order("titolo")
+      .limit(5000),
+    supabase
+      .from("documenti_libreria")
+      .select("id, nome_file, stato, voci_estratte, errore, created_at")
+      .eq("org_id", org.id)
+      .order("created_at", { ascending: false }),
   ]);
 
   return (
@@ -49,6 +64,10 @@ export default async function LibreriaPage() {
         title="Libreria prezzi e cicli"
         description="I prezzi e i cicli della tua impresa hanno priorità e vengono usati dall'AI per generare i preventivi. Quelli globali restano come riferimento."
       />
+
+      <ImportPreventivi orgId={org.id} userId={userId} />
+      <VociProprie voci={vociProprie ?? []} documenti={documenti ?? []} />
+      <DocumentiLibreria documenti={documenti ?? []} />
 
       <ImportListino />
 
