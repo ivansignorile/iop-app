@@ -19,6 +19,15 @@ export async function saveOrgAction(formData: FormData) {
     ? Number(String(formData.get("costo_giornaliero")).replace(",", "."))
     : null;
 
+  const { data: prezzari } = await supabase
+    .from("prezzari")
+    .select("regione")
+    .eq("attivo", true);
+  const richiesta = String(formData.get("regione") ?? "");
+  const regione = (prezzari ?? []).some((p) => p.regione === richiesta)
+    ? richiesta
+    : org.regione;
+
   await supabase
     .from("organizations")
     .update({
@@ -34,6 +43,7 @@ export async function saveOrgAction(formData: FormData) {
       default_iva: Number.isFinite(iva) ? iva : 10,
       costo_giornaliero: costo,
       logo_url: s(formData.get("logo_url")),
+      regione,
     })
     .eq("id", org.id);
 
