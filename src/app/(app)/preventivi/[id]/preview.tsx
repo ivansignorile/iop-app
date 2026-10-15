@@ -1,4 +1,5 @@
 import { UNITA_LABEL, formatDate, formatEuro } from "@/lib/format";
+import { riferimentoPrezzario } from "@/lib/scelta-fonte";
 import type { Tables } from "@/lib/supabase/types";
 
 export type PreviewAllegato = {
@@ -28,7 +29,17 @@ export type PreviewData = {
   > | null;
   interventi: Pick<
     Tables<"preventivo_interventi">,
-    "id" | "gruppo" | "titolo" | "descrizione" | "unita" | "quantita" | "prezzo_unitario" | "importo" | "prezzo_mercato"
+    | "id"
+    | "gruppo"
+    | "titolo"
+    | "descrizione"
+    | "unita"
+    | "quantita"
+    | "prezzo_unitario"
+    | "importo"
+    | "prezzo_mercato"
+    | "fonte_scelta"
+    | "codice_prezzario"
   >[];
   allegati?: PreviewAllegato[];
   fotoDescrizioni?: PreviewFotoDescrizione[];
@@ -145,6 +156,11 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                           {i.descrizione}
                         </p>
                       ) : null}
+                      {(() => {
+                        // Solo la descrizione effettiva; se viene dal prezzario se ne cita il codice.
+                        const rif = riferimentoPrezzario(i.fonte_scelta, i.codice_prezzario, org.regione);
+                        return rif ? <p className="mt-1 text-xs text-stone">{rif}</p> : null;
+                      })()}
                       {i.prezzo_mercato != null ? (
                         <p className="mt-1 text-xs text-stone">
                           Riferimento mercato:{" "}

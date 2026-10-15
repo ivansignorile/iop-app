@@ -19,12 +19,14 @@ import {
   saveAnagrafica,
   saveAnnotazioni,
   saveSuperficie,
+  scegliFonteTutti,
   setFontePrezzi,
   setPrezzoMercato,
   updateIntervento,
   updateStato,
 } from "./actions";
 import { CercaVoce } from "./cerca-voce";
+import { DoppiaDescrizione } from "./doppia-descrizione";
 import { FotoAutopsia, type Punto, type Sospetto } from "./foto-autopsia";
 import { PreventivoPreview, type PreviewData } from "./preview";
 
@@ -92,6 +94,23 @@ async function abbinaVoci(preventivoId: string, soloNuovi: boolean): Promise<Esi
   };
 }
 
+function testoEsitoSceltaTutti(
+  e: { aggiornati: number; saltati: number; senzaFonte: number; giaImpostati: number; errori: number },
+  scelta: "prezzario" | "propria",
+): string {
+  const parti = [`${e.aggiornati} ${e.aggiornati === 1 ? "aggiornata" : "aggiornate"}`];
+  if (e.saltati > 0) {
+    parti.push(`${e.saltati} ${e.saltati === 1 ? "modificata a mano lasciata invariata" : "modificate a mano lasciate invariate"}`);
+  }
+  if (e.senzaFonte > 0) {
+    parti.push(`${e.senzaFonte} senza ${scelta === "prezzario" ? "voce del prezzario" : "voce della tua libreria"}`);
+  }
+  if (e.giaImpostati > 0) parti.push(`${e.giaImpostati} già ${e.giaImpostati === 1 ? "impostata" : "impostate"}`);
+  let s = `${parti.join(", ")}.`;
+  if (e.errori > 0) s += ` ${e.errori === 1 ? "1 voce non aggiornata" : `${e.errori} voci non aggiornate`}: riprova.`;
+  return s;
+}
+
 function testoEsitoAbbinamento(e: EsitoAbbinamento): string {
   const voci = (n: number) => (n === 1 ? "1 voce" : `${n} voci`);
   const parti = [
@@ -134,6 +153,7 @@ export function PreventivoEditor({
     preventivo.modalita === "foto" ? "Foto descrizione" : tabs[0];
   const [tab, setTab] = useState<string>(defaultTab);
   const [pending, startTransition] = useTransition();
+  const [fonteReset, setFonteReset] = useState(0);
   const totale = interventi.reduce((a, i) => a + Number(i.importo ?? 0), 0);
 
   return (
@@ -151,11 +171,19 @@ export function PreventivoEditor({
         </div>
         <div className="flex items-center gap-3">
           <Select
+            key={`${preventivo.fonte_prezzi}-${fonteReset}`}
             aria-label="Fonte prezzi"
             defaultValue={preventivo.fonte_prezzi}
             className="w-52"
             onChange={(e) =>
-              startTransition(() => setFontePrezzi(preventivo.id, e.target.value))
+              startTransition(async () => {
+                try {
+                  await setFontePrezzi(preventivo.id, e.target.value);
+                } catch {
+                  // Salvataggio fallito: rimonta la select sul valore salvato.
+                  setFonteReset((n) => n + 1);
+                }
+              })
             }
           >
             <option value="entrambi">Prezzi: Entrambi</option>
@@ -401,6 +429,20 @@ function InterventiTab({
   const [abbinando, setAbbinando] = useState(false);
   const [esito, setEsito] = useState<string | null>(null);
   const [abbinaError, setAbbinaError] = useState<string | null>(null);
+  const [sceltaTutti, setSceltaTutti] = useState<{ ok: boolean; testo: string } | null>(null);
+  const [sceltaPending, startScelta] = useTransition();
+  const conDoppia = interventi.some((i) => i.descrizione_prezzario && i.descrizione_propria);
+
+  function usaPerTutti(scelta: "prezzario" | "propria") {
+    setSceltaTutti(null);
+    startScelta(async () => {
+      try {
+        setSceltaTutti({ ok: true, testo: testoEsitoSceltaTutti(await scegliFonteTutti(preventivoId, scelta), scelta) });
+      } catch {
+        setSceltaTutti({ ok: false, testo: "Cambio descrizioni non riuscito. Riprova." });
+      }
+    });
+  }
 
   async function abbina() {
     setAbbinando(true);
@@ -471,6 +513,35 @@ function InterventiTab({
         </p>
       ) : null}
       {esito ? <p className="text-sm text-success">{esito}</p> : null}
+
+      {conDoppia ? (
+        <div className="flex flex-wrap items-center gap-3 border-y border-hairline py-3">
+          <span className="text-sm font-medium text-ink">Per tutte le voci usa:</span>
+          <div className="flex gap-2" role="group" aria-label="Descrizione per tutte le voci">
+            <Button
+              type="button"
+              variant="secondary"
+              className="h-9 px-4"
+              disabled={pending || sceltaPending}
+              onClick={() => usaPerTutti("prezzario")}
+            >
+              Prezzario
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              className="h-9 px-4"
+              disabled={pending || sceltaPending}
+              onClick={() => usaPerTutti("propria")}
+            >
+              Le mie
+            </Button>
+          </div>
+          <p aria-live="polite" className={`text-sm ${sceltaTutti?.ok === false ? "text-ink" : "text-muted"}`}>
+            {sceltaPending ? "Aggiornamento in corso…" : (sceltaTutti?.testo ?? "")}
+          </p>
+        </div>
+      ) : null}
 
       {interventi.length === 0 ? (
         <p className="text-sm text-muted">
@@ -1096,6 +1167,13 @@ function InterventoRow({
   start: (cb: () => void) => void;
 }) {
   const [descrizione, setDescrizione] = useState(i.descrizione ?? "");
+  // Dopo un cambio di fonte (scegliFonte) la descrizione effettiva arriva dal server:
+  // si riallinea lo state durante il render (niente setState in un effect, regola react-hooks).
+  const [descServer, setDescServer] = useState(i.descrizione);
+  if (descServer !== i.descrizione) {
+    setDescServer(i.descrizione);
+    setDescrizione(i.descrizione ?? "");
+  }
   const [sugg, setSugg] = useState<{
     prodotto: string;
     marca?: string | null;
@@ -1166,6 +1244,8 @@ function InterventoRow({
           />
         </Field>
       </div>
+
+      <DoppiaDescrizione intervento={i} preventivoId={preventivoId} />
 
       <Field label="Descrizione (ciclo di lavorazione)" htmlFor={`d-${i.id}`}>
         <Textarea
@@ -1240,7 +1320,7 @@ function InterventoRow({
           <Input id={`q-${i.id}`} name="quantita" type="number" step="0.001" defaultValue={i.quantita} />
         </Field>
         <Field label="Prezzo unit." htmlFor={`p-${i.id}`}>
-          <Input id={`p-${i.id}`} name="prezzo_unitario" type="number" step="0.01" defaultValue={i.prezzo_unitario} />
+          <Input key={String(i.prezzo_unitario)} id={`p-${i.id}`} name="prezzo_unitario" type="number" step="0.01" defaultValue={i.prezzo_unitario} />
         </Field>
         <Field label="Sconto" htmlFor={`s-${i.id}`}>
           <Input id={`s-${i.id}`} name="sconto" type="number" step="0.01" defaultValue={i.sconto} />

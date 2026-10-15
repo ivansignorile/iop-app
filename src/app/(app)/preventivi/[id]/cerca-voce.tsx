@@ -5,6 +5,7 @@ import { useEffect, useId, useRef, useState, useTransition, type KeyboardEvent, 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/field";
 import { formatEuro } from "@/lib/format";
+import { etichettaRegione } from "@/lib/scelta-fonte";
 import type { FontePrezzi } from "../../../../../supabase/functions/_shared/risolvi-voce";
 import { unitaDaVoci } from "../../../../../supabase/functions/_shared/unita-voce";
 import { addInterventoDaVoce, cercaVoci, type VocePrezzario, type VocePropria } from "./actions";
@@ -14,11 +15,6 @@ const DEBOUNCE_MS = 300;
 
 type Risultati = { prezzario: VocePrezzario[]; proprie: VocePropria[] };
 type Stato = "idle" | "loading" | "ok" | "error";
-
-function etichettaRegione(regione: string) {
-  const t = regione.replace(/[-_]+/g, " ").trim();
-  return t ? t.charAt(0).toUpperCase() + t.slice(1) : "";
-}
 
 function norm(s: string) {
   return s.toLowerCase().replace(/\s+/g, " ").trim();
