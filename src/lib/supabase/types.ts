@@ -549,6 +549,7 @@ export type Database = {
           created_by: string | null
           data: string
           edificio_id: string | null
+          fonte_prezzi: Database["public"]["Enums"]["fonte_prezzi"]
           id: string
           iva: number
           modalita: Database["public"]["Enums"]["preventivo_modalita"]
@@ -567,6 +568,7 @@ export type Database = {
           created_by?: string | null
           data?: string
           edificio_id?: string | null
+          fonte_prezzi?: Database["public"]["Enums"]["fonte_prezzi"]
           id?: string
           iva?: number
           modalita?: Database["public"]["Enums"]["preventivo_modalita"]
@@ -585,6 +587,7 @@ export type Database = {
           created_by?: string | null
           data?: string
           edificio_id?: string | null
+          fonte_prezzi?: Database["public"]["Enums"]["fonte_prezzi"]
           id?: string
           iva?: number
           modalita?: Database["public"]["Enums"]["preventivo_modalita"]
@@ -670,58 +673,85 @@ export type Database = {
       }
       preventivo_interventi: {
         Row: {
+          abbinamento_avviso: string | null
           ciclo_id: string | null
+          codice_prezzario: string | null
           created_at: string
           descrizione: string | null
+          descrizione_prezzario: string | null
+          descrizione_propria: string | null
           fonte_mercato: string | null
+          fonte_scelta: Database["public"]["Enums"]["fonte_scelta"] | null
           gruppo: string | null
           id: string
           importo: number | null
           ordine: number
           org_id: string
           preventivo_id: string
+          prezzario_voce_id: string | null
           prezzo_mercato: number | null
+          prezzo_prezzario: number | null
+          prezzo_proprio: number | null
           prezzo_unitario: number
           quantita: number
           sconto: number
           titolo: string
           unita: Database["public"]["Enums"]["unita_misura"]
+          voce_propria_id: string | null
         }
         Insert: {
+          abbinamento_avviso?: string | null
           ciclo_id?: string | null
+          codice_prezzario?: string | null
           created_at?: string
           descrizione?: string | null
+          descrizione_prezzario?: string | null
+          descrizione_propria?: string | null
           fonte_mercato?: string | null
+          fonte_scelta?: Database["public"]["Enums"]["fonte_scelta"] | null
           gruppo?: string | null
           id?: string
           importo?: number | null
           ordine?: number
           org_id: string
           preventivo_id: string
+          prezzario_voce_id?: string | null
           prezzo_mercato?: number | null
+          prezzo_prezzario?: number | null
+          prezzo_proprio?: number | null
           prezzo_unitario?: number
           quantita?: number
           sconto?: number
           titolo: string
           unita?: Database["public"]["Enums"]["unita_misura"]
+          voce_propria_id?: string | null
         }
         Update: {
+          abbinamento_avviso?: string | null
           ciclo_id?: string | null
+          codice_prezzario?: string | null
           created_at?: string
           descrizione?: string | null
+          descrizione_prezzario?: string | null
+          descrizione_propria?: string | null
           fonte_mercato?: string | null
+          fonte_scelta?: Database["public"]["Enums"]["fonte_scelta"] | null
           gruppo?: string | null
           id?: string
           importo?: number | null
           ordine?: number
           org_id?: string
           preventivo_id?: string
+          prezzario_voce_id?: string | null
           prezzo_mercato?: number | null
+          prezzo_prezzario?: number | null
+          prezzo_proprio?: number | null
           prezzo_unitario?: number
           quantita?: number
           sconto?: number
           titolo?: string
           unita?: Database["public"]["Enums"]["unita_misura"]
+          voce_propria_id?: string | null
         }
         Relationships: [
           {
@@ -736,6 +766,20 @@ export type Database = {
             columns: ["preventivo_id"]
             isOneToOne: false
             referencedRelation: "preventivi"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "preventivo_interventi_prezzario_voce_id_fkey"
+            columns: ["prezzario_voce_id"]
+            isOneToOne: false
+            referencedRelation: "prezzario_voci"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "preventivo_interventi_voce_propria_id_fkey"
+            columns: ["voce_propria_id"]
+            isOneToOne: false
+            referencedRelation: "voci_proprie"
             referencedColumns: ["id"]
           },
         ]
@@ -1085,6 +1129,8 @@ export type Database = {
     Enums: {
       cliente_tipo: "condominio" | "privato" | "azienda"
       documento_stato: "caricato" | "in_elaborazione" | "elaborato" | "errore"
+      fonte_prezzi: "prezzario" | "propri" | "entrambi"
+      fonte_scelta: "prezzario" | "propria" | "manuale"
       membership_role: "owner" | "admin" | "member"
       preventivo_modalita: "capitolato" | "manuale" | "foto"
       preventivo_stato: "bozza" | "inviato" | "accettato" | "rifiutato"
@@ -1223,6 +1269,8 @@ export const Constants = {
     Enums: {
       cliente_tipo: ["condominio", "privato", "azienda"],
       documento_stato: ["caricato", "in_elaborazione", "elaborato", "errore"],
+      fonte_prezzi: ["prezzario", "propri", "entrambi"],
+      fonte_scelta: ["prezzario", "propria", "manuale"],
       membership_role: ["owner", "admin", "member"],
       preventivo_modalita: ["capitolato", "manuale", "foto"],
       preventivo_stato: ["bozza", "inviato", "accettato", "rifiutato"],

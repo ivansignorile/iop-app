@@ -6,8 +6,23 @@ import { requireContext } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import type { Database, Json } from "@/lib/supabase/types";
 
+import { applicaScelta, risolviVoce } from "../../../../../supabase/functions/_shared/risolvi-voce";
+import { unitaDaVoci } from "../../../../../supabase/functions/_shared/unita-voce";
+import {
+  aBlocchi,
+  avvisoDaTenere,
+  decidiSceltaMassiva,
+  diventaManuale,
+  isSceltaFonte,
+  modificataSenzaFonte,
+  normalizzaFineRiga,
+  prezzoDiverso,
+  type SceltaFonte,
+} from "@/lib/scelta-fonte";
+
 type Unita = Database["public"]["Enums"]["unita_misura"];
 type Stato = Database["public"]["Enums"]["preventivo_stato"];
+type FontePrezzi = Database["public"]["Enums"]["fonte_prezzi"];
 type ClienteTipo = Database["public"]["Enums"]["cliente_tipo"];
 
 function n(v: FormDataEntryValue | null): number {
@@ -178,15 +193,54 @@ export async function updateIntervento(
   await requireContext();
   const supabase = await createClient();
 
+  const { data: cur, error: curError } = await supabase
+    .from("preventivo_interventi")
+    .select(
+      "descrizione, prezzo_unitario, descrizione_prezzario, descrizione_propria, prezzo_prezzario, prezzo_proprio, fonte_scelta, abbinamento_avviso",
+    )
+    .eq("id", interventoId)
+    .maybeSingle();
+  // Le textarea inviate via FormData usano \r\n: si salva sempre con \n.
+  const nuovaDesc = normalizzaFineRiga(s(formData.get("descrizione")));
+  const nuovoPrezzo = n(formData.get("prezzo_unitario"));
+  // Se la riga corrente non è leggibile non tocchiamo fonte_scelta.
+  const fontePatch: { fonte_scelta?: "manuale"; abbinamento_avviso?: string | null } = {};
+  if (!curError && cur) {
+    const descFonte =
+      cur.fonte_scelta === "prezzario"
+        ? cur.descrizione_prezzario
+        : cur.fonte_scelta === "propria"
+          ? cur.descrizione_propria
+          : null;
+    const prezzoFonte =
+      cur.fonte_scelta === "prezzario"
+        ? cur.prezzo_prezzario
+        : cur.fonte_scelta === "propria"
+          ? cur.prezzo_proprio
+          : null;
+    // Descrizione o prezzo ritoccati a mano → la riga non segue più la fonte.
+    // Vale anche per le righe senza fonte: così un abbinamento successivo non le sovrascrive.
+    if (
+      diventaManuale(cur.fonte_scelta, descFonte, nuovaDesc) ||
+      prezzoDiverso(cur.fonte_scelta, prezzoFonte, nuovoPrezzo) ||
+      modificataSenzaFonte(cur.fonte_scelta, cur.descrizione, cur.prezzo_unitario, nuovaDesc, nuovoPrezzo)
+    ) {
+      fontePatch.fonte_scelta = "manuale";
+      // Resta solo l'avviso di unità: gli altri non riguardano più la riga.
+      fontePatch.abbinamento_avviso = avvisoDaTenere(cur.abbinamento_avviso);
+    }
+  }
+
   await supabase
     .from("preventivo_interventi")
     .update({
+      ...fontePatch,
       titolo: s(formData.get("titolo")) ?? "Intervento",
       gruppo: s(formData.get("gruppo")),
-      descrizione: s(formData.get("descrizione")),
+      descrizione: nuovaDesc,
       unita: (s(formData.get("unita")) ?? "corpo") as Unita,
       quantita: n(formData.get("quantita")),
-      prezzo_unitario: n(formData.get("prezzo_unitario")),
+      prezzo_unitario: nuovoPrezzo,
       sconto: n(formData.get("sconto")),
     })
     .eq("id", interventoId);
@@ -302,7 +356,7 @@ type InterventoGenerato = {
 export async function generaInterventiDaFoto(
   preventivoId: string,
   interventi: InterventoGenerato[],
-) {
+): Promise<string[]> {
   const { org } = await requireContext();
   const supabase = await createClient();
   const { count } = await supabase
@@ -311,8 +365,9 @@ export async function generaInterventiDaFoto(
     .eq("preventivo_id", preventivoId);
   const UNITA_VALIDE: Unita[] = ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"];
   const base = count ?? 0;
+  let ids: string[] = [];
   if (interventi.length > 0) {
-    const { error } = await supabase.from("preventivo_interventi").insert(
+    const { data, error } = await supabase.from("preventivo_interventi").insert(
       interventi.map((i, idx) => ({
         org_id: org.id,
         preventivo_id: preventivoId,
@@ -324,11 +379,14 @@ export async function generaInterventiDaFoto(
         quantita: i.quantita,
         prezzo_unitario: i.prezzo_unitario,
       })),
-    );
+    ).select("id");
     if (error) throw error;
+    ids = (data ?? []).map((r) => r.id);
   }
   await recomputeTotale(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
+  // Id delle righe appena inserite: l'abbinamento che segue tocca solo queste.
+  return ids;
 }
 
 export async function addCicloPitturazione(
@@ -368,4 +426,289 @@ export async function addCicloPitturazione(
 
   await recomputeTotale(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const FONTI_PREZZI: string[] = ["prezzario", "propri", "entrambi"];
+
+/** Cambia la fonte prezzi del preventivo (vale per i prossimi abbinamenti). */
+export async function setFontePrezzi(preventivoId: string, fonte: string) {
+  const { org } = await requireContext();
+  if (!UUID_RE.test(preventivoId) || !FONTI_PREZZI.includes(fonte)) return;
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("preventivi")
+    .update({ fonte_prezzi: fonte as FontePrezzi })
+    .eq("id", preventivoId)
+    .eq("org_id", org.id);
+  if (error) throw new Error("Salvataggio della fonte prezzi non riuscito.");
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+export type VocePrezzario = {
+  id: string;
+  codice: string;
+  descrizione: string;
+  unita: Unita;
+  unita_testo: string;
+  prezzo: number;
+  prezzario: string;
+};
+export type VocePropria = {
+  id: string;
+  titolo: string;
+  descrizione: string;
+  unita: Unita;
+  prezzo: number;
+};
+
+const MIN_RICERCA = 2;
+const MAX_RICERCA = 200;
+const LIMITE_RISULTATI = 10;
+
+/** Cerca nel prezzario della regione dell'org e/o nella libreria personale, secondo la fonte prezzi. */
+export async function cercaVoci(
+  q: string,
+  fonte: FontePrezzi,
+): Promise<{ prezzario: VocePrezzario[]; proprie: VocePropria[] }> {
+  const { org } = await requireContext();
+  const testo = typeof q === "string" ? q.trim().slice(0, MAX_RICERCA) : "";
+  if (testo.length < MIN_RICERCA || !FONTI_PREZZI.includes(fonte)) {
+    return { prezzario: [], proprie: [] };
+  }
+  const supabase = await createClient();
+  const [p, m] = await Promise.all([
+    fonte !== "propri"
+      ? supabase.rpc("cerca_prezzario", { q: testo, p_regione: org.regione, p_limit: LIMITE_RISULTATI })
+      : Promise.resolve({ data: [], error: null }),
+    fonte !== "prezzario"
+      ? supabase.rpc("cerca_voci_proprie", { q: testo, p_org: org.id, p_limit: LIMITE_RISULTATI })
+      : Promise.resolve({ data: [], error: null }),
+  ]);
+  if (p.error || m.error) throw new Error("Ricerca voci non riuscita.");
+  return {
+    prezzario: (p.data ?? []).map((v) => ({
+      id: v.id,
+      codice: v.codice,
+      descrizione: v.descrizione,
+      unita: v.unita,
+      unita_testo: v.unita_testo,
+      prezzo: Number(v.prezzo),
+      prezzario: v.prezzario,
+    })),
+    proprie: (m.data ?? []).map((v) => ({
+      id: v.id,
+      titolo: v.titolo,
+      descrizione: v.descrizione,
+      unita: v.unita,
+      prezzo: Number(v.prezzo),
+    })),
+  };
+}
+
+function titoloDa(descrizione: string) {
+  const t = descrizione.trim().replace(/\s+/g, " ");
+  if (t.length <= 80) return t;
+  const taglio = t.slice(0, 80);
+  const spazio = taglio.lastIndexOf(" ");
+  return `${(spazio > 40 ? taglio.slice(0, spazio) : taglio).trimEnd()}…`;
+}
+
+/** Aggiunge un intervento da una voce di prezzario e/o della libreria (doppia descrizione). */
+export async function addInterventoDaVoce(
+  preventivoId: string,
+  sel: { prezzarioVoceId: string | null; vocePropriaId: string | null },
+): Promise<void> {
+  const { org } = await requireContext();
+  const prezzarioVoceId = sel?.prezzarioVoceId ?? null;
+  let vocePropriaId = sel?.vocePropriaId ?? null;
+  if (
+    !UUID_RE.test(preventivoId) ||
+    (prezzarioVoceId !== null && !UUID_RE.test(prezzarioVoceId)) ||
+    (vocePropriaId !== null && !UUID_RE.test(vocePropriaId))
+  ) {
+    throw new Error("Richiesta non valida.");
+  }
+
+  const supabase = await createClient();
+  const { data: prev } = await supabase
+    .from("preventivi")
+    .select("id, fonte_prezzi")
+    .eq("id", preventivoId)
+    .eq("org_id", org.id)
+    .maybeSingle();
+  if (!prev) throw new Error("Preventivo non trovato.");
+
+  // Con fonte 'prezzario' la libreria non entra in gioco.
+  if (prev.fonte_prezzi === "prezzario") vocePropriaId = null;
+  if (!prezzarioVoceId && !vocePropriaId) throw new Error("Seleziona almeno una voce.");
+
+  const [{ data: pv }, { data: vp }, { count }] = await Promise.all([
+    prezzarioVoceId
+      ? supabase
+          .from("prezzario_voci")
+          .select("id, codice, descrizione, unita, unita_testo, prezzo")
+          .eq("id", prezzarioVoceId)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
+    vocePropriaId
+      ? supabase
+          .from("voci_proprie")
+          .select("id, titolo, descrizione, unita, prezzo")
+          .eq("id", vocePropriaId)
+          .eq("org_id", org.id)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
+    supabase
+      .from("preventivo_interventi")
+      .select("id", { count: "exact", head: true })
+      .eq("preventivo_id", preventivoId),
+  ]);
+  if ((prezzarioVoceId && !pv) || (vocePropriaId && !vp)) throw new Error("Voce non trovata.");
+
+  const r = risolviVoce(
+    prev.fonte_prezzi,
+    pv ? { descrizione: pv.descrizione, prezzo: Number(pv.prezzo) } : null,
+    vp ? { descrizione: vp.descrizione, prezzo: Number(vp.prezzo) } : null,
+  );
+  const u = unitaDaVoci(pv, vp);
+
+  const { error } = await supabase.from("preventivo_interventi").insert({
+    org_id: org.id,
+    preventivo_id: preventivoId,
+    ordine: count ?? 0,
+    titolo: vp?.titolo ?? (pv ? titoloDa(pv.descrizione) : "Intervento"),
+    unita: u.unita,
+    quantita: 1,
+    descrizione: r.descrizione,
+    prezzo_unitario: r.prezzo ?? 0,
+    fonte_scelta: r.scelta,
+    abbinamento_avviso: u.avviso ?? r.avviso,
+    prezzario_voce_id: pv?.id ?? null,
+    codice_prezzario: pv?.codice ?? null,
+    descrizione_prezzario: pv?.descrizione ?? null,
+    prezzo_prezzario: pv ? Number(pv.prezzo) : null,
+    voce_propria_id: vp?.id ?? null,
+    descrizione_propria: vp?.descrizione ?? null,
+    prezzo_proprio: vp ? Number(vp.prezzo) : null,
+  });
+  if (error) throw new Error("Aggiunta della voce non riuscita.");
+
+  await recomputeTotale(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+/** Sceglie per una voce la descrizione (e il prezzo) del prezzario o della libreria personale. */
+export async function scegliFonte(
+  interventoId: string,
+  preventivoId: string,
+  scelta: SceltaFonte,
+): Promise<void> {
+  await requireContext();
+  if (!UUID_RE.test(interventoId) || !UUID_RE.test(preventivoId) || !isSceltaFonte(scelta)) {
+    throw new Error("Richiesta non valida.");
+  }
+  const supabase = await createClient();
+  const { data: row, error } = await supabase
+    .from("preventivo_interventi")
+    .select("descrizione_prezzario, prezzo_prezzario, descrizione_propria, prezzo_proprio, abbinamento_avviso")
+    .eq("id", interventoId)
+    .eq("preventivo_id", preventivoId)
+    .maybeSingle();
+  if (error) throw new Error("Cambio descrizione non riuscito.");
+  if (!row) throw new Error("Voce non trovata.");
+  // Copia solo descrizione e prezzo: l'unità resta quella della riga.
+  const scelto = applicaScelta(scelta, row);
+  if (!scelto) throw new Error("Questa descrizione non è disponibile per la voce.");
+  // L'avviso di unità resta (va verificato a mano); gli altri non valgono più.
+  const patch = { ...scelto, abbinamento_avviso: avvisoDaTenere(row.abbinamento_avviso) };
+  const { error: updError } = await supabase
+    .from("preventivo_interventi")
+    .update(patch)
+    .eq("id", interventoId)
+    .eq("preventivo_id", preventivoId);
+  if (updError) throw new Error("Cambio descrizione non riuscito.");
+  await recomputeTotale(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+const BLOCCO_AGGIORNAMENTI = 20;
+
+export type EsitoSceltaTutti = {
+  aggiornati: number;
+  /** Voci modificate a mano, lasciate invariate. */
+  saltati: number;
+  /** Voci senza la descrizione richiesta. */
+  senzaFonte: number;
+  /** Voci già sulla fonte richiesta. */
+  giaImpostati: number;
+  /** Voci con unità diversa: da verificare a mano, lasciate invariate. */
+  daVerificare: number;
+  errori: number;
+};
+
+/** Applica la stessa fonte a tutte le voci del preventivo (mai a quelle modificate a mano). */
+export async function scegliFonteTutti(
+  preventivoId: string,
+  scelta: SceltaFonte,
+): Promise<EsitoSceltaTutti> {
+  const { org } = await requireContext();
+  if (!UUID_RE.test(preventivoId) || !isSceltaFonte(scelta)) throw new Error("Richiesta non valida.");
+  const supabase = await createClient();
+  const { data: prev } = await supabase
+    .from("preventivi")
+    .select("id")
+    .eq("id", preventivoId)
+    .eq("org_id", org.id)
+    .maybeSingle();
+  if (!prev) throw new Error("Preventivo non trovato.");
+
+  const { data: rows, error } = await supabase
+    .from("preventivo_interventi")
+    .select("id, descrizione_prezzario, prezzo_prezzario, descrizione_propria, prezzo_proprio, fonte_scelta, abbinamento_avviso")
+    .eq("preventivo_id", preventivoId);
+  if (error) throw new Error("Lettura delle voci non riuscita.");
+
+  const esito: EsitoSceltaTutti = {
+    aggiornati: 0,
+    saltati: 0,
+    senzaFonte: 0,
+    giaImpostati: 0,
+    daVerificare: 0,
+    errori: 0,
+  };
+  const daAggiornare: { id: string; patch: Extract<ReturnType<typeof decidiSceltaMassiva>, { esito: "aggiorna" }>["patch"] }[] = [];
+  for (const r of rows ?? []) {
+    const d = decidiSceltaMassiva(scelta, r);
+    if (d.esito === "aggiorna") daAggiornare.push({ id: r.id, patch: d.patch });
+    else if (d.esito === "manuale") esito.saltati++;
+    else if (d.esito === "senza_fonte") esito.senzaFonte++;
+    else if (d.esito === "da_verificare") esito.daVerificare++;
+    else esito.giaImpostati++;
+  }
+
+  for (const blocco of aBlocchi(daAggiornare, BLOCCO_AGGIORNAMENTI)) {
+    const risultati = await Promise.all(
+      blocco.map(({ id, patch }) =>
+        supabase
+          .from("preventivo_interventi")
+          .update(patch)
+          .eq("id", id)
+          .eq("preventivo_id", preventivoId)
+          // Non sovrascrive una voce diventata manuale nel frattempo.
+          .or("fonte_scelta.is.null,fonte_scelta.neq.manuale")
+          .select("id"),
+      ),
+    );
+    for (const r of risultati) {
+      if (r.error) esito.errori++;
+      // 0 righe restituite: voce diventata manuale nel frattempo oppure update negato dalla RLS.
+      else if ((r.data ?? []).length > 0) esito.aggiornati++;
+      else esito.saltati++;
+    }
+  }
+
+  if (esito.aggiornati > 0) await recomputeTotale(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+  return esito;
 }

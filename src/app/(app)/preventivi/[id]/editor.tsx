@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { StatoBadge } from "@/components/ui/misc";
 import { UNITA_LABEL, formatEuro } from "@/lib/format";
+import { aBlocchi } from "@/lib/scelta-fonte";
 import { createClient } from "@/lib/supabase/client";
 import type { Tables } from "@/lib/supabase/types";
 import {
@@ -19,10 +20,14 @@ import {
   saveAnagrafica,
   saveAnnotazioni,
   saveSuperficie,
+  scegliFonteTutti,
+  setFontePrezzi,
   setPrezzoMercato,
   updateIntervento,
   updateStato,
 } from "./actions";
+import { CercaVoce } from "./cerca-voce";
+import { DoppiaDescrizione } from "./doppia-descrizione";
 import { FotoAutopsia, type Punto, type Sospetto } from "./foto-autopsia";
 import { PreventivoPreview, type PreviewData } from "./preview";
 
@@ -50,6 +55,97 @@ function scostamento(ditta: number, mercato: number | null): number | null {
   return Math.abs(ditta - mercato) / mercato;
 }
 
+type EsitoAbbinamento = {
+  abbinati: number;
+  senza_corrispondenza: number;
+  unita_diversa: number;
+  non_elaborati: number;
+  errori: number;
+};
+
+/**
+ * Abbina le voci al prezzario/libreria. Lancia un Error con messaggio in italiano.
+ * Con `interventoIds` tocca solo quelle righe (max 100), altrimenti tutte (o solo le nuove).
+ */
+async function abbinaVoci(
+  preventivoId: string,
+  soloNuovi: boolean,
+  interventoIds?: string[],
+): Promise<EsitoAbbinamento> {
+  const supabase = createClient();
+  type Risposta = Partial<Omit<EsitoAbbinamento, "errori">> & { error?: string; errori?: string[] };
+  let res: Awaited<ReturnType<typeof supabase.functions.invoke<Risposta>>>;
+  try {
+    res = await supabase.functions.invoke<Risposta>("abbina-voci", {
+      body: interventoIds
+        ? { preventivo_id: preventivoId, intervento_ids: interventoIds }
+        : { preventivo_id: preventivoId, solo_nuovi: soloNuovi },
+    });
+  } catch {
+    throw new Error("Abbinamento al prezzario non riuscito: controlla la connessione e riprova.");
+  }
+  const { data, error } = res;
+  if (error || !data || data.error) {
+    const status = (error as { context?: Response } | null)?.context?.status;
+    throw new Error(
+      status === 404
+        ? "Abbinamento al prezzario non riuscito: preventivo non trovato."
+        : status === 400
+          ? "Abbinamento al prezzario non riuscito: imposta la regione del prezzario nelle Impostazioni."
+          : "Abbinamento al prezzario non riuscito. Riprova tra qualche istante.",
+    );
+  }
+  return {
+    abbinati: Number(data.abbinati ?? 0),
+    senza_corrispondenza: Number(data.senza_corrispondenza ?? 0),
+    unita_diversa: Number(data.unita_diversa ?? 0),
+    non_elaborati: Number(data.non_elaborati ?? 0),
+    errori: Array.isArray(data.errori) ? data.errori.length : 0,
+  };
+}
+
+function testoEsitoSceltaTutti(
+  e: {
+    aggiornati: number;
+    saltati: number;
+    senzaFonte: number;
+    giaImpostati: number;
+    daVerificare: number;
+    errori: number;
+  },
+  scelta: "prezzario" | "propria",
+): string {
+  const parti = [`${e.aggiornati} ${e.aggiornati === 1 ? "aggiornata" : "aggiornate"}`];
+  if (e.saltati > 0) {
+    parti.push(`${e.saltati} ${e.saltati === 1 ? "modificata a mano lasciata invariata" : "modificate a mano lasciate invariate"}`);
+  }
+  if (e.senzaFonte > 0) {
+    parti.push(`${e.senzaFonte} senza ${scelta === "prezzario" ? "voce del prezzario" : "voce della tua libreria"}`);
+  }
+  if (e.giaImpostati > 0) parti.push(`${e.giaImpostati} già ${e.giaImpostati === 1 ? "impostata" : "impostate"}`);
+  if (e.daVerificare > 0) parti.push(`${e.daVerificare} con unità diversa da verificare a mano`);
+  let s = `${parti.join(", ")}.`;
+  if (e.errori > 0) s += ` ${e.errori === 1 ? "1 voce non aggiornata" : `${e.errori} voci non aggiornate`}: riprova.`;
+  return s;
+}
+
+function testoEsitoAbbinamento(e: EsitoAbbinamento): string {
+  const voci = (n: number) => (n === 1 ? "1 voce" : `${n} voci`);
+  const parti = [
+    `${voci(e.abbinati)} ${e.abbinati === 1 ? "abbinata" : "abbinate"}`,
+    `${e.senza_corrispondenza} senza corrispondenza`,
+  ];
+  if (e.unita_diversa > 0) parti.push(`${e.unita_diversa} con unità diversa`);
+  let s = `${parti.join(", ")}.`;
+  if (e.non_elaborati > 0) {
+    s += ` ${e.non_elaborati} non ${e.non_elaborati === 1 ? "elaborata" : "elaborate"}: premi di nuovo "Abbina al prezzario".`;
+  }
+  if (e.errori > 0) {
+    s += ` ${e.errori === 1 ? "Si è verificato 1 errore" : `Si sono verificati ${e.errori} errori`}: riprova.`;
+  }
+  return s;
+}
+
 export function PreventivoEditor({
   preventivo,
   cliente,
@@ -57,6 +153,7 @@ export function PreventivoEditor({
   interventi,
   cicli,
   preview,
+  regione,
 }: {
   preventivo: Tables<"preventivi">;
   cliente: Tables<"clienti"> | null;
@@ -64,6 +161,7 @@ export function PreventivoEditor({
   interventi: Intervento[];
   cicli: Ciclo[];
   preview: PreviewData;
+  regione: string;
 }) {
   const tabs =
     preventivo.modalita === "capitolato"
@@ -73,6 +171,7 @@ export function PreventivoEditor({
     preventivo.modalita === "foto" ? "Foto descrizione" : tabs[0];
   const [tab, setTab] = useState<string>(defaultTab);
   const [pending, startTransition] = useTransition();
+  const [fonteReset, setFonteReset] = useState(0);
   const totale = interventi.reduce((a, i) => a + Number(i.importo ?? 0), 0);
 
   return (
@@ -89,6 +188,26 @@ export function PreventivoEditor({
           </h1>
         </div>
         <div className="flex items-center gap-3">
+          <Select
+            key={`${preventivo.fonte_prezzi}-${fonteReset}`}
+            aria-label="Fonte prezzi"
+            defaultValue={preventivo.fonte_prezzi}
+            className="w-52"
+            onChange={(e) =>
+              startTransition(async () => {
+                try {
+                  await setFontePrezzi(preventivo.id, e.target.value);
+                } catch {
+                  // Salvataggio fallito: rimonta la select sul valore salvato.
+                  setFonteReset((n) => n + 1);
+                }
+              })
+            }
+          >
+            <option value="entrambi">Prezzi: Entrambi</option>
+            <option value="prezzario">Prezzi: Solo prezzario</option>
+            <option value="propri">Prezzi: Solo miei prezzi</option>
+          </Select>
           <StatoBadge stato={preventivo.stato} />
           <Select
             defaultValue={preventivo.stato}
@@ -148,6 +267,8 @@ export function PreventivoEditor({
       {tab === "Interventi" && (
         <InterventiTab
           preventivoId={preventivo.id}
+          fontePrezzi={preventivo.fonte_prezzi}
+          regione={regione}
           interventi={interventi}
           cicli={cicli}
           edificio={edificio}
@@ -304,6 +425,8 @@ function AnagraficaTab({
 
 function InterventiTab({
   preventivoId,
+  fontePrezzi,
+  regione,
   interventi,
   cicli,
   edificio,
@@ -311,16 +434,52 @@ function InterventiTab({
   start,
 }: {
   preventivoId: string;
+  fontePrezzi: Tables<"preventivi">["fonte_prezzi"];
+  regione: string;
   interventi: Intervento[];
   cicli: Ciclo[];
   edificio: Tables<"edifici"> | null;
   pending: boolean;
   start: (cb: () => void) => void;
 }) {
+  const router = useRouter();
   const [cicloId, setCicloId] = useState("");
+  const [abbinando, setAbbinando] = useState(false);
+  const [esito, setEsito] = useState<string | null>(null);
+  const [abbinaError, setAbbinaError] = useState<string | null>(null);
+  const [sceltaTutti, setSceltaTutti] = useState<{ ok: boolean; testo: string } | null>(null);
+  const [sceltaPending, startScelta] = useTransition();
+  const conDoppia = interventi.some((i) => i.descrizione_prezzario && i.descrizione_propria);
+
+  function usaPerTutti(scelta: "prezzario" | "propria") {
+    setSceltaTutti(null);
+    startScelta(async () => {
+      try {
+        setSceltaTutti({ ok: true, testo: testoEsitoSceltaTutti(await scegliFonteTutti(preventivoId, scelta), scelta) });
+      } catch {
+        setSceltaTutti({ ok: false, testo: "Cambio descrizioni non riuscito. Riprova." });
+      }
+    });
+  }
+
+  async function abbina() {
+    setAbbinando(true);
+    setEsito(null);
+    setAbbinaError(null);
+    try {
+      setEsito(testoEsitoAbbinamento(await abbinaVoci(preventivoId, true)));
+      router.refresh();
+    } catch (e) {
+      setAbbinaError(e instanceof Error ? e.message : "Abbinamento al prezzario non riuscito.");
+    } finally {
+      setAbbinando(false);
+    }
+  }
 
   return (
     <div className="space-y-6">
+      <CercaVoce preventivoId={preventivoId} fontePrezzi={fontePrezzi} regione={regione} />
+
       <div className="flex flex-wrap items-end gap-3 rounded-md border border-hairline bg-surface-soft p-4">
         <div className="flex-1 min-w-[240px]">
           <label className="mb-1.5 block text-sm font-medium text-ink">
@@ -357,7 +516,50 @@ function InterventiTab({
         >
           + Intervento vuoto
         </Button>
+        <Button
+          variant="secondary"
+          disabled={pending || abbinando || interventi.length === 0}
+          onClick={abbina}
+        >
+          {abbinando ? "Abbinamento in corso…" : "Abbina al prezzario"}
+        </Button>
       </div>
+
+      {abbinaError ? (
+        <p className="border border-hairline-soft bg-surface-soft px-3 py-2 text-sm text-ink">
+          {abbinaError}
+        </p>
+      ) : null}
+      {esito ? <p className="text-sm text-success">{esito}</p> : null}
+
+      {conDoppia ? (
+        <div className="flex flex-wrap items-center gap-3 border-y border-hairline py-3">
+          <span className="text-sm font-medium text-ink">Per tutte le voci usa:</span>
+          <div className="flex gap-2" role="group" aria-label="Descrizione per tutte le voci">
+            <Button
+              type="button"
+              variant="secondary"
+              className="h-9 px-4"
+              disabled={pending || sceltaPending}
+              onClick={() => usaPerTutti("prezzario")}
+            >
+              Prezzario
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              className="h-9 px-4"
+              disabled={pending || sceltaPending}
+              onClick={() => usaPerTutti("propria")}
+            >
+              Le mie
+            </Button>
+          </div>
+          <p aria-live="polite" className={`text-sm ${sceltaTutti?.ok === false ? "text-ink" : "text-muted"}`}>
+            {sceltaPending ? "Aggiornamento in corso…" : (sceltaTutti?.testo ?? "")}
+          </p>
+        </div>
+      ) : null}
 
       {interventi.length === 0 ? (
         <p className="text-sm text-muted">
@@ -763,6 +965,7 @@ function FotoDescrizioneTab({
 
   async function handleAvvia(punti: Punto[]) {
     if (!signedUrl) return;
+    let nuoviIds: string[] = [];
     setPuntiState(punti);
     setGenError(null);
     setSuccessMsg(null);
@@ -776,17 +979,29 @@ function FotoDescrizioneTab({
         },
       });
       if (error || data?.error) throw new Error(data?.error ?? "errore");
-      await generaInterventiDaFoto(preventivoId, data.risultato.interventi);
-      const ha7 = punti.some((p) => p.livello >= 7);
-      setSuccessMsg(
-        ha7
-          ? "Preventivo pre-compilato. Rilevato degrado ≥7: aggiunta pitturazione totale della superficie. Rivedi nel tab Interventi."
-          : "Preventivo pre-compilato. Rivedi nel tab Interventi.",
-      );
-      setTimeout(onSuccess, 1500);
+      nuoviIds = await generaInterventiDaFoto(preventivoId, data.risultato.interventi);
     } catch {
       setGenError("Generazione non riuscita (verifica la chiave AI).");
+      return;
     }
+    const ha7 = punti.some((p) => p.livello >= 7);
+    const nota7 = ha7
+      ? " Rilevato degrado ≥7: aggiunta pitturazione totale della superficie."
+      : "";
+    try {
+      // Solo le righe appena generate: le altre senza fonte restano come sono.
+      for (const ids of aBlocchi(nuoviIds, 100)) await abbinaVoci(preventivoId, true, ids);
+      setSuccessMsg(
+        `Preventivo pre-compilato e abbinato al prezzario.${nota7} Rivedi nel tab Interventi.`,
+      );
+    } catch {
+      setSuccessMsg(`Preventivo pre-compilato.${nota7} Rivedi nel tab Interventi.`);
+      setGenError(
+        "Abbinamento al prezzario non riuscito: usa \"Abbina al prezzario\" nel tab Interventi.",
+      );
+      return;
+    }
+    setTimeout(onSuccess, 1500);
   }
 
   return (
@@ -883,9 +1098,17 @@ function CapitolatoTab({
       const { data, error } = await supabase.functions.invoke("parse-capitolato", { body });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
-      setDone(`Generati ${data.interventi_creati} interventi.`);
+      try {
+        const esito = await abbinaVoci(preventivo.id, false);
+        setDone(`Generati ${data.interventi_creati} interventi. ${testoEsitoAbbinamento(esito)}`);
+        setTimeout(onDone, 1500);
+      } catch (e) {
+        setDone(`Generati ${data.interventi_creati} interventi.`);
+        setError(
+          `${e instanceof Error ? e.message : "Abbinamento al prezzario non riuscito."} Puoi riprovare con "Abbina al prezzario" nel tab Interventi.`,
+        );
+      }
       router.refresh();
-      setTimeout(onDone, 1000);
     } catch (e) {
       setError(
         e instanceof Error
@@ -964,6 +1187,13 @@ function InterventoRow({
   start: (cb: () => void) => void;
 }) {
   const [descrizione, setDescrizione] = useState(i.descrizione ?? "");
+  // Dopo un cambio di fonte (scegliFonte) la descrizione effettiva arriva dal server:
+  // si riallinea lo state durante il render (niente setState in un effect, regola react-hooks).
+  const [descServer, setDescServer] = useState(i.descrizione);
+  if (descServer !== i.descrizione) {
+    setDescServer(i.descrizione);
+    setDescrizione(i.descrizione ?? "");
+  }
   const [sugg, setSugg] = useState<{
     prodotto: string;
     marca?: string | null;
@@ -1034,6 +1264,8 @@ function InterventoRow({
           />
         </Field>
       </div>
+
+      <DoppiaDescrizione intervento={i} preventivoId={preventivoId} />
 
       <Field label="Descrizione (ciclo di lavorazione)" htmlFor={`d-${i.id}`}>
         <Textarea
@@ -1108,7 +1340,7 @@ function InterventoRow({
           <Input id={`q-${i.id}`} name="quantita" type="number" step="0.001" defaultValue={i.quantita} />
         </Field>
         <Field label="Prezzo unit." htmlFor={`p-${i.id}`}>
-          <Input id={`p-${i.id}`} name="prezzo_unitario" type="number" step="0.01" defaultValue={i.prezzo_unitario} />
+          <Input key={String(i.prezzo_unitario)} id={`p-${i.id}`} name="prezzo_unitario" type="number" step="0.01" defaultValue={i.prezzo_unitario} />
         </Field>
         <Field label="Sconto" htmlFor={`s-${i.id}`}>
           <Input id={`s-${i.id}`} name="sconto" type="number" step="0.01" defaultValue={i.sconto} />
