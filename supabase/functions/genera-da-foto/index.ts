@@ -88,7 +88,8 @@ Deno.serve(async (req) => {
             "Per ogni livello è dato il CICLO associato (titolo, fasi, unità, prezzo). REGOLE: " +
             "1) Genera UNA voce per OGNI punto (anche se più punti hanno lo stesso livello: voci separate, NON accorpare). Usa il ciclo associato al livello del punto; stima la QUANTITÀ guardando la foto, coerente con l'unità del ciclo; usa il prezzo del ciclo. " +
             "2) Se ALMENO UN punto ha livello >= 7: aggiungi UNA SOLA voce ulteriore di 'pitturazione intera superficie' (ciclo associato al livello >=7, quantità = mq totali stimati della facciata: 1 fila di finestre ~ 1 piano ~3 m, finestra larga 1-1,20 m). Questa voce è AGGIUNTIVA: i punti >=7 mantengono comunque la loro voce di porzione. " +
-            "Le quantità sono stime modificabili." +
+            "Le quantità sono stime modificabili. " +
+            "Usa titoli che nominano chiaramente lavorazione e materiale (es. 'Intonaco civile per esterni', 'Ponteggio tubolare'): servono per l'abbinamento automatico al prezzario regionale. Descrizioni e prezzi definitivi arrivano poi dall'abbinamento al prezzario e alla libreria dell'impresa." +
             "\n\nMAPPA LIVELLO->CICLO:\n" + JSON.stringify(mappa ?? {}) +
             "\n\nLIBRERIA CICLI:\n" +
             (libreria || "(nessuno)") +

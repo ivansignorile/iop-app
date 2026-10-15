@@ -124,6 +124,7 @@ Deno.serve(async (req) => {
           "- Raggruppa le lavorazioni in interventi sensati (allestimento cantiere e sicurezza, ripristini, impermeabilizzazioni, balconi, facciate, ferro, ecc.).\n" +
           "- Per OGNI intervento scrivi una descrizione ESTESA e professionale: elenca tutte le fasi del ciclo di lavorazione, i materiali con marca tipica (Kerakoll, Mapei, Boero…) e relative alternative, le finiture, le norme applicabili e lo smaltimento. NON limitarti a una riga: arricchisci con il dettaglio tecnico tipico di un capitolato (più frasi per intervento), attingendo alla libreria cicli qui sotto.\n" +
           "- Scegli unità di misura coerenti (corpo, mq, ml, cad, giorno) e quantità ricavate dal computo; se un prezzo non è ricavabile, stimalo dai riferimenti della libreria, altrimenti 0.\n" +
+          "- Usa titoli che nominano chiaramente lavorazione e materiale (es. 'Intonaco civile per esterni', 'Ponteggio tubolare'): servono per l'abbinamento automatico al prezzario regionale. Descrizioni e prezzi definitivi possono poi essere sostituiti dall'abbinamento al prezzario e alla libreria dell'impresa.\n" +
           "- Inserisci sempre un intervento di 'Allestimento cantiere e apprestamenti di sicurezza' se non presente.\n" +
           "- Scrivi una 'relazione' introduttiva di 3-5 frasi che descrive il contesto e gli obiettivi dell'intervento.\n" +
           "- Estrai committente, oggetto e dati edificio se presenti.\n\n" +
