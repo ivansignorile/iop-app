@@ -8,7 +8,14 @@ import type { Database, Json } from "@/lib/supabase/types";
 
 import { applicaScelta, risolviVoce } from "../../../../../supabase/functions/_shared/risolvi-voce";
 import { unitaDaVoci } from "../../../../../supabase/functions/_shared/unita-voce";
-import { aBlocchi, decidiSceltaMassiva, diventaManuale, isSceltaFonte, type SceltaFonte } from "@/lib/scelta-fonte";
+import {
+  aBlocchi,
+  decidiSceltaMassiva,
+  diventaManuale,
+  isSceltaFonte,
+  prezzoDiverso,
+  type SceltaFonte,
+} from "@/lib/scelta-fonte";
 
 type Unita = Database["public"]["Enums"]["unita_misura"];
 type Stato = Database["public"]["Enums"]["preventivo_stato"];
@@ -185,10 +192,11 @@ export async function updateIntervento(
 
   const { data: cur, error: curError } = await supabase
     .from("preventivo_interventi")
-    .select("descrizione_prezzario, descrizione_propria, fonte_scelta")
+    .select("descrizione_prezzario, descrizione_propria, prezzo_prezzario, prezzo_proprio, fonte_scelta")
     .eq("id", interventoId)
     .maybeSingle();
   const nuovaDesc = s(formData.get("descrizione"));
+  const nuovoPrezzo = n(formData.get("prezzo_unitario"));
   // Se la riga corrente non è leggibile non tocchiamo fonte_scelta.
   const fontePatch: { fonte_scelta?: "manuale" } = {};
   if (!curError && cur) {
@@ -198,7 +206,19 @@ export async function updateIntervento(
         : cur.fonte_scelta === "propria"
           ? cur.descrizione_propria
           : null;
-    if (diventaManuale(cur.fonte_scelta, descFonte, nuovaDesc)) fontePatch.fonte_scelta = "manuale";
+    const prezzoFonte =
+      cur.fonte_scelta === "prezzario"
+        ? cur.prezzo_prezzario
+        : cur.fonte_scelta === "propria"
+          ? cur.prezzo_proprio
+          : null;
+    // Descrizione o prezzo ritoccati a mano → la riga non segue più la fonte.
+    if (
+      diventaManuale(cur.fonte_scelta, descFonte, nuovaDesc) ||
+      prezzoDiverso(cur.fonte_scelta, prezzoFonte, nuovoPrezzo)
+    ) {
+      fontePatch.fonte_scelta = "manuale";
+    }
   }
 
   await supabase
@@ -210,7 +230,7 @@ export async function updateIntervento(
       descrizione: nuovaDesc,
       unita: (s(formData.get("unita")) ?? "corpo") as Unita,
       quantita: n(formData.get("quantita")),
-      prezzo_unitario: n(formData.get("prezzo_unitario")),
+      prezzo_unitario: nuovoPrezzo,
       sconto: n(formData.get("sconto")),
     })
     .eq("id", interventoId);
@@ -564,7 +584,6 @@ export async function addInterventoDaVoce(
   revalidatePath(`/preventivi/${preventivoId}`);
 }
 
-
 /** Sceglie per una voce la descrizione (e il prezzo) del prezzario o della libreria personale. */
 export async function scegliFonte(
   interventoId: string,
@@ -657,6 +676,7 @@ export async function scegliFonteTutti(
     );
     for (const r of risultati) {
       if (r.error) esito.errori++;
+      // 0 righe restituite: voce diventata manuale nel frattempo oppure update negato dalla RLS.
       else if ((r.data ?? []).length > 0) esito.aggiornati++;
       else esito.saltati++;
     }

@@ -6,6 +6,7 @@ import {
   diventaManuale,
   etichettaRegione,
   isSceltaFonte,
+  prezzoDiverso,
   riferimentoPrezzario,
 } from "./scelta-fonte";
 
@@ -52,6 +53,23 @@ describe("diventaManuale", () => {
     expect(diventaManuale("manuale", "a", "b")).toBe(false);
     expect(diventaManuale(null, "a", "b")).toBe(false);
     expect(diventaManuale(undefined, "a", "b")).toBe(false);
+  });
+});
+
+describe("prezzoDiverso", () => {
+  it("rileva un prezzo ritoccato", () => {
+    expect(prezzoDiverso("prezzario", 10, 11)).toBe(true);
+    expect(prezzoDiverso("propria", "12.50", 12.4)).toBe(true);
+  });
+  it("tollera differenze sotto il mezzo centesimo", () => {
+    expect(prezzoDiverso("prezzario", 10, 10.004)).toBe(false);
+    expect(prezzoDiverso("propria", "12.50", 12.5)).toBe(false);
+  });
+  it("non cambia righe manuali, senza fonte o senza prezzo di fonte", () => {
+    expect(prezzoDiverso("manuale", 10, 20)).toBe(false);
+    expect(prezzoDiverso(null, 10, 20)).toBe(false);
+    expect(prezzoDiverso(undefined, 10, 20)).toBe(false);
+    expect(prezzoDiverso("prezzario", null, 20)).toBe(false);
   });
 });
 

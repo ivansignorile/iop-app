@@ -145,7 +145,10 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                   </p>
                 ) : null}
                 <div className="space-y-4">
-                  {items.map((i) => (
+                  {items.map((i) => {
+                    // Solo la descrizione effettiva; se viene dal prezzario se ne cita il codice.
+                    const rif = riferimentoPrezzario(i.fonte_scelta, i.codice_prezzario, org.regione);
+                    return (
                     <div key={i.id} className="border-b border-hairline pb-3 last:border-b-0">
                       <div className="flex items-start justify-between gap-4">
                         <p className="font-semibold text-ink">{i.titolo}</p>
@@ -156,11 +159,7 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                           {i.descrizione}
                         </p>
                       ) : null}
-                      {(() => {
-                        // Solo la descrizione effettiva; se viene dal prezzario se ne cita il codice.
-                        const rif = riferimentoPrezzario(i.fonte_scelta, i.codice_prezzario, org.regione);
-                        return rif ? <p className="mt-1 text-xs text-stone">{rif}</p> : null;
-                      })()}
+                      {rif ? <p className="mt-1 text-xs text-stone">{rif}</p> : null}
                       {i.prezzo_mercato != null ? (
                         <p className="mt-1 text-xs text-stone">
                           Riferimento mercato:{" "}
@@ -175,7 +174,8 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                         </p>
                       ) : null}
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ))}

@@ -44,6 +44,21 @@ export function diventaManuale(
   return (descrizioneFonte ?? "").trim() !== (nuovaDescrizione ?? "").trim();
 }
 
+const TOLLERANZA_PREZZO = 0.005;
+
+/** True se il nuovo prezzo si discosta da quello della fonte scelta (oltre mezzo centesimo). */
+export function prezzoDiverso(
+  fonte: RigaScelta["fonte_scelta"] | undefined,
+  prezzoFonte: number | string | null | undefined,
+  nuovoPrezzo: number,
+): boolean {
+  if (fonte !== "prezzario" && fonte !== "propria") return false;
+  if (prezzoFonte == null) return false;
+  const p = Number(prezzoFonte);
+  if (!Number.isFinite(p) || !Number.isFinite(nuovoPrezzo)) return false;
+  return Math.abs(p - nuovoPrezzo) > TOLLERANZA_PREZZO;
+}
+
 /** Spezza un array in blocchi di dimensione fissa. */
 export function aBlocchi<T>(items: readonly T[], dimensione: number): T[][] {
   const out: T[][] = [];

@@ -46,8 +46,8 @@ export function DoppiaDescrizione({
     startTransition(async () => {
       try {
         await scegliFonte(i.id, preventivoId, scelta);
-      } catch {
-        setErrore("Cambio descrizione non riuscito. Riprova.");
+      } catch (e) {
+        setErrore(e instanceof Error && e.message ? e.message : "Cambio descrizione non riuscito. Riprova.");
       }
     });
   }
@@ -152,7 +152,10 @@ function CardFonte({
       }`}
     >
       <header className="mb-2 flex items-start justify-between gap-3">
-        <p className="eyebrow min-w-0 break-words text-stone">{titolo}</p>
+        <p className="eyebrow min-w-0 break-words text-stone">
+          {titolo}
+          {scelta ? <span className="sr-only"> (scelta attuale)</span> : null}
+        </p>
         {scelta ? (
           <span className="shrink-0 rounded-full bg-primary px-2.5 py-0.5 text-xs font-medium text-on-primary">
             Nel preventivo
