@@ -6,6 +6,7 @@ import { requireContext } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/types";
 
+type FontePrezzi = Database["public"]["Enums"]["fonte_prezzi"];
 type Modalita = Database["public"]["Enums"]["preventivo_modalita"];
 
 export async function createPreventivoAction(formData: FormData) {
@@ -14,6 +15,10 @@ export async function createPreventivoAction(formData: FormData) {
   const modalita = (["manuale", "capitolato", "foto"].includes(rawModalita)
     ? rawModalita
     : "manuale") as Modalita;
+  const rawFonte = String(formData.get("fonte_prezzi") ?? "entrambi");
+  const fonte_prezzi = (["prezzario", "propri", "entrambi"].includes(rawFonte)
+    ? rawFonte
+    : "entrambi") as FontePrezzi;
   const oggetto = String(formData.get("oggetto") ?? "").trim() || null;
 
   const supabase = await createClient();
@@ -33,6 +38,7 @@ export async function createPreventivoAction(formData: FormData) {
       org_id: org.id,
       modalita,
       oggetto,
+      fonte_prezzi,
       numero_protocollo: protocollo,
       iva: org.default_iva,
       created_by: userId,

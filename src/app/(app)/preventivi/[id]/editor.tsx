@@ -19,6 +19,7 @@ import {
   saveAnagrafica,
   saveAnnotazioni,
   saveSuperficie,
+  setFontePrezzi,
   setPrezzoMercato,
   updateIntervento,
   updateStato,
@@ -89,6 +90,18 @@ export function PreventivoEditor({
           </h1>
         </div>
         <div className="flex items-center gap-3">
+          <Select
+            aria-label="Fonte prezzi"
+            defaultValue={preventivo.fonte_prezzi}
+            className="w-52"
+            onChange={(e) =>
+              startTransition(() => setFontePrezzi(preventivo.id, e.target.value))
+            }
+          >
+            <option value="entrambi">Prezzi: Entrambi</option>
+            <option value="prezzario">Prezzi: Solo prezzario</option>
+            <option value="propri">Prezzi: Solo miei prezzi</option>
+          </Select>
           <StatoBadge stato={preventivo.stato} />
           <Select
             defaultValue={preventivo.stato}

@@ -8,6 +8,7 @@ import type { Database, Json } from "@/lib/supabase/types";
 
 type Unita = Database["public"]["Enums"]["unita_misura"];
 type Stato = Database["public"]["Enums"]["preventivo_stato"];
+type FontePrezzi = Database["public"]["Enums"]["fonte_prezzi"];
 type ClienteTipo = Database["public"]["Enums"]["cliente_tipo"];
 
 function n(v: FormDataEntryValue | null): number {
@@ -178,9 +179,27 @@ export async function updateIntervento(
   await requireContext();
   const supabase = await createClient();
 
+  const { data: cur } = await supabase
+    .from("preventivo_interventi")
+    .select("descrizione_prezzario, descrizione_propria, fonte_scelta")
+    .eq("id", interventoId)
+    .single();
+  const nuovaDesc = s(formData.get("descrizione"));
+  const descFonte =
+    cur?.fonte_scelta === "prezzario"
+      ? cur.descrizione_prezzario
+      : cur?.fonte_scelta === "propria"
+        ? cur.descrizione_propria
+        : null;
+  const fonte_scelta =
+    cur?.fonte_scelta && cur.fonte_scelta !== "manuale" && nuovaDesc !== descFonte
+      ? "manuale"
+      : (cur?.fonte_scelta ?? null);
+
   await supabase
     .from("preventivo_interventi")
     .update({
+      fonte_scelta,
       titolo: s(formData.get("titolo")) ?? "Intervento",
       gruppo: s(formData.get("gruppo")),
       descrizione: s(formData.get("descrizione")),
@@ -367,5 +386,21 @@ export async function addCicloPitturazione(
   });
 
   await recomputeTotale(preventivoId);
+  revalidatePath(`/preventivi/${preventivoId}`);
+}
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const FONTI_PREZZI = ["prezzario", "propri", "entrambi"];
+
+/** Cambia la fonte prezzi del preventivo (vale per i prossimi abbinamenti). */
+export async function setFontePrezzi(preventivoId: string, fonte: string) {
+  const { org } = await requireContext();
+  if (!UUID_RE.test(preventivoId) || !FONTI_PREZZI.includes(fonte)) return;
+  const supabase = await createClient();
+  await supabase
+    .from("preventivi")
+    .update({ fonte_prezzi: fonte as FontePrezzi })
+    .eq("id", preventivoId)
+    .eq("org_id", org.id);
   revalidatePath(`/preventivi/${preventivoId}`);
 }
