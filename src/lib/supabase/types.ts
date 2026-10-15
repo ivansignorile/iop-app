@@ -413,6 +413,7 @@ export type Database = {
           partita_iva: string | null
           provincia: string | null
           ragione_sociale: string | null
+          regione: string
           slug: string | null
           telefono: string | null
           updated_at: string
@@ -431,6 +432,7 @@ export type Database = {
           partita_iva?: string | null
           provincia?: string | null
           ragione_sociale?: string | null
+          regione?: string
           slug?: string | null
           telefono?: string | null
           updated_at?: string
@@ -449,6 +451,7 @@ export type Database = {
           partita_iva?: string | null
           provincia?: string | null
           ragione_sociale?: string | null
+          regione?: string
           slug?: string | null
           telefono?: string | null
           updated_at?: string
@@ -654,6 +657,77 @@ export type Database = {
           },
         ]
       }
+      prezzari: {
+        Row: {
+          anno: number
+          attivo: boolean
+          created_at: string
+          id: string
+          regione: string
+          titolo: string
+        }
+        Insert: {
+          anno: number
+          attivo?: boolean
+          created_at?: string
+          id?: string
+          regione: string
+          titolo: string
+        }
+        Update: {
+          anno?: number
+          attivo?: boolean
+          created_at?: string
+          id?: string
+          regione?: string
+          titolo?: string
+        }
+        Relationships: []
+      }
+      prezzario_voci: {
+        Row: {
+          capitolo: string | null
+          codice: string
+          descrizione: string
+          id: string
+          prezzario_id: string
+          prezzo: number
+          search: unknown
+          unita: Database["public"]["Enums"]["unita_misura"]
+          unita_testo: string
+        }
+        Insert: {
+          capitolo?: string | null
+          codice: string
+          descrizione: string
+          id?: string
+          prezzario_id: string
+          prezzo: number
+          search?: unknown
+          unita: Database["public"]["Enums"]["unita_misura"]
+          unita_testo: string
+        }
+        Update: {
+          capitolo?: string | null
+          codice?: string
+          descrizione?: string
+          id?: string
+          prezzario_id?: string
+          prezzo?: number
+          search?: unknown
+          unita?: Database["public"]["Enums"]["unita_misura"]
+          unita_testo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prezzario_voci_prezzario_id_fkey"
+            columns: ["prezzario_id"]
+            isOneToOne: false
+            referencedRelation: "prezzari"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       prezzi_unitari: {
         Row: {
           categoria: string | null
@@ -804,6 +878,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      cerca_prezzario: {
+        Args: { p_limit?: number; p_regione: string; q: string }
+        Returns: {
+          codice: string
+          descrizione: string
+          id: string
+          prezzario: string
+          prezzo: number
+          rank: number
+          unita: Database["public"]["Enums"]["unita_misura"]
+          unita_testo: string
+        }[]
+      }
       create_organization: { Args: { org_name: string }; Returns: string }
       invite_member: {
         Args: {
