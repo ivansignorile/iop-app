@@ -29,14 +29,15 @@ export function formatDate(value: string | Date | null | undefined): string {
   return dateFmt.format(d);
 }
 
+// Usate sempre dopo un importo già formattato con "€" (es. "26,63 € al mq"): niente "€" qui.
 export const UNITA_LABEL: Record<string, string> = {
   corpo: "a corpo",
-  mq: "€/mq",
-  ml: "€/ml",
-  mc: "€/mc",
-  giorno: "€/giorno",
+  mq: "al mq",
+  ml: "al ml",
+  mc: "al mc",
+  giorno: "al giorno",
   cad: "cad.",
-  kg: "€/kg",
+  kg: "al kg",
 };
 
 export const STATO_LABEL: Record<string, string> = {
