@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { requireContext } from "@/lib/auth";
+import { elaborazioneBloccata, isUuid, validaVoce } from "@/lib/libreria/voce";
 import { createClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/types";
 
@@ -95,4 +96,72 @@ export async function deleteCiclo(formData: FormData) {
   const supabase = await createClient();
   await supabase.from("cicli_lavorazione").delete().eq("id", String(formData.get("id")));
   revalidatePath("/libreria");
+}
+
+/* ---------------- Libreria personale (voci proprie) ---------------- */
+
+export type EsitoAzione = { ok: true } | { ok: false; errore: string };
+
+export async function updateVocePropria(id: string, formData: FormData): Promise<EsitoAzione> {
+  const { org } = await requireContext();
+  if (!isUuid(id)) return { ok: false, errore: "Voce non valida." };
+  const v = validaVoce(Object.fromEntries(formData));
+  if (!v.ok) return v;
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("voci_proprie")
+    .update(v.value)
+    .eq("id", id)
+    .eq("org_id", org.id)
+    .select("id");
+  if (error) return { ok: false, errore: "Salvataggio non riuscito." };
+  if (!data?.length) return { ok: false, errore: "Voce non trovata." };
+  revalidatePath("/libreria");
+  return { ok: true };
+}
+
+export async function deleteVocePropria(id: string): Promise<EsitoAzione> {
+  const { org } = await requireContext();
+  if (!isUuid(id)) return { ok: false, errore: "Voce non valida." };
+  const supabase = await createClient();
+  const { error } = await supabase.from("voci_proprie").delete().eq("id", id).eq("org_id", org.id);
+  if (error) return { ok: false, errore: "Eliminazione non riuscita." };
+  revalidatePath("/libreria");
+  return { ok: true };
+}
+
+/** Elimina il documento caricato e il suo file. Le voci estratte restano in libreria. */
+export async function deleteDocumentoLibreria(id: string): Promise<EsitoAzione> {
+  const { org } = await requireContext();
+  if (!isUuid(id)) return { ok: false, errore: "Documento non valido." };
+  const supabase = await createClient();
+  const { data: doc } = await supabase
+    .from("documenti_libreria")
+    .select("id, stato, elaborazione_at")
+    .eq("id", id)
+    .eq("org_id", org.id)
+    .maybeSingle();
+  if (!doc) return { ok: false, errore: "Documento non trovato." };
+  if (doc.stato === "in_elaborazione" && !elaborazioneBloccata(doc.elaborazione_at)) {
+    return { ok: false, errore: "Elaborazione in corso: riprova tra qualche minuto." };
+  }
+
+  // Prima la riga, poi il file: un file orfano è innocuo, una riga senza file no.
+  const { data: rimossi, error } = await supabase
+    .from("documenti_libreria")
+    .delete()
+    .eq("id", id)
+    .eq("org_id", org.id)
+    .select("storage_path");
+  if (error || !rimossi?.length) return { ok: false, errore: "Eliminazione non riuscita." };
+
+  const path = rimossi[0].storage_path;
+  if (path.startsWith(`${org.id}/libreria/`)) {
+    const { data: files, error: stErr } = await supabase.storage.from("preventivi").remove([path]);
+    if (stErr || files?.length !== 1) {
+      console.error("deleteDocumentoLibreria: file non rimosso", path, stErr ?? files);
+    }
+  }
+  revalidatePath("/libreria");
+  return { ok: true };
 }

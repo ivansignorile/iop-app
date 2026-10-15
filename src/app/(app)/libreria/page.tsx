@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/ui/misc";
 import { requireContext } from "@/lib/auth";
 import { UNITA_LABEL, formatEuro } from "@/lib/format";
+import { paroleRicerca } from "@/lib/libreria/voce";
 import { createClient } from "@/lib/supabase/server";
 import {
   AddCicloForm,
@@ -9,16 +10,43 @@ import {
   PrezzoRow,
 } from "./forms";
 import { ImportListino } from "./import-listino";
+import { ImportPreventivi } from "./import-preventivi";
+import { DocumentiLibreria, VociProprie } from "./voci-proprie";
 
-export default async function LibreriaPage() {
-  const { org } = await requireContext();
+const VOCI_PER_PAGINA = 50;
+
+export default async function LibreriaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string | string[]; pagina?: string | string[] }>;
+}) {
+  const { org, userId } = await requireContext();
   const supabase = await createClient();
+
+  const sp = await searchParams;
+  const q = (Array.isArray(sp.q) ? sp.q[0] : sp.q ?? "").slice(0, 200);
+  const paginaRichiesta = Number(Array.isArray(sp.pagina) ? sp.pagina[0] : sp.pagina);
+  const pagina = Number.isInteger(paginaRichiesta) && paginaRichiesta > 0 ? paginaRichiesta : 1;
+  const da = (pagina - 1) * VOCI_PER_PAGINA;
+
+  let vociQuery = supabase
+    .from("voci_proprie")
+    .select("id, titolo, descrizione, unita, prezzo, categoria, documento_id", { count: "exact" })
+    .eq("org_id", org.id);
+  for (const w of paroleRicerca(q)) {
+    vociQuery = vociQuery.or(
+      `titolo.ilike.*${w}*,descrizione.ilike.*${w}*,categoria.ilike.*${w}*`,
+    );
+  }
 
   const [
     { data: prezziOrg },
     { data: prezziGlob },
     { data: cicliOrg },
     { data: cicliGlob },
+    { data: vociProprie, count: vociFiltrate },
+    { count: vociTotali },
+    { data: documenti },
   ] = await Promise.all([
     supabase
       .from("prezzi_unitari")
@@ -40,6 +68,19 @@ export default async function LibreriaPage() {
       .select("id, titolo, categoria, unita_default, prezzo_default")
       .is("org_id", null)
       .order("categoria"),
+    vociQuery
+      .order("titolo")
+      .order("id")
+      .range(da, da + VOCI_PER_PAGINA - 1),
+    supabase
+      .from("voci_proprie")
+      .select("id", { count: "exact", head: true })
+      .eq("org_id", org.id),
+    supabase
+      .from("documenti_libreria")
+      .select("id, nome_file, stato, voci_estratte, errore, created_at, elaborazione_at")
+      .eq("org_id", org.id)
+      .order("created_at", { ascending: false }),
   ]);
 
   return (
@@ -47,8 +88,33 @@ export default async function LibreriaPage() {
       <PageHeader
         eyebrow="Listino"
         title="Libreria prezzi e cicli"
-        description="I prezzi e i cicli della tua impresa hanno priorità e vengono usati dall'AI per generare i preventivi. Quelli globali restano come riferimento."
+        description="I prezzi e i cicli della tua impresa hanno priorità sui riferimenti globali. Le voci dei tuoi vecchi preventivi diventano la tua libreria personale."
       />
+
+      <dl className="-mt-4 mb-10 grid gap-x-8 gap-y-3 text-sm md:grid-cols-2">
+        <div className="border-l border-hairline pl-4">
+          <dt className="font-semibold text-ink">Vecchi preventivi</dt>
+          <dd className="text-graphite">
+            Descrizioni e prezzi presi dai preventivi che hai già scritto.
+          </dd>
+        </div>
+        <div className="border-l border-hairline pl-4">
+          <dt className="font-semibold text-ink">Listino prezzi</dt>
+          <dd className="text-graphite">Il tuo listino di prezzi unitari, voce per voce.</dd>
+        </div>
+      </dl>
+
+      <ImportPreventivi orgId={org.id} userId={userId} />
+      <VociProprie
+        voci={vociProprie ?? []}
+        documenti={documenti ?? []}
+        q={q}
+        pagina={pagina}
+        perPagina={VOCI_PER_PAGINA}
+        totaleFiltrate={vociFiltrate ?? 0}
+        totaleLibreria={vociTotali ?? 0}
+      />
+      <DocumentiLibreria documenti={documenti ?? []} />
 
       <ImportListino />
 
