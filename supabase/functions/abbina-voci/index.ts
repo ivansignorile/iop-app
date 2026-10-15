@@ -160,7 +160,7 @@ Deno.serve(async (req) => {
     const conteggi = { abbinati: 0, senza_corrispondenza: 0, unita_diversa: 0 };
     const errori: string[] = [];
     if (righe.length === 0) {
-      return json({ ...conteggi, errori, non_elaborati: nonElaborati });
+      return json({ ...conteggi, errori: [], non_elaborati: nonElaborati });
     }
 
     // 3. Candidati per ogni intervento (ricerca full-text, client utente)
@@ -243,7 +243,15 @@ Deno.serve(async (req) => {
       }
     }
 
-    return json({ ...conteggi, errori, non_elaborati: nonElaborati, totale_imponibile: totale, usage });
+    // Dettagli solo nei log: al client arriva solo il numero di errori.
+    if (errori.length > 0) console.error("abbina-voci errori:", errori);
+    return json({
+      ...conteggi,
+      errori: errori.map(() => "Elaborazione non riuscita"),
+      non_elaborati: nonElaborati,
+      totale_imponibile: totale,
+      usage,
+    });
   } catch (e) {
     console.error("abbina-voci", e);
     return json({ error: "Errore interno durante l'abbinamento" }, 500);
