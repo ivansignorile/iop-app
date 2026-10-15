@@ -77,7 +77,9 @@ async function abbinaVoci(preventivoId: string, soloNuovi: boolean): Promise<Esi
     throw new Error(
       status === 404
         ? "Abbinamento al prezzario non riuscito: preventivo non trovato."
-        : "Abbinamento al prezzario non riuscito. Riprova tra qualche istante.",
+        : status === 400
+          ? "Abbinamento al prezzario non riuscito: imposta la regione del prezzario nelle Impostazioni."
+          : "Abbinamento al prezzario non riuscito. Riprova tra qualche istante.",
     );
   }
   return {

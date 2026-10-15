@@ -32,7 +32,7 @@ const LIMITE_PREZZARIO = 8;
 const LIMITE_PROPRIE = 5;
 const MAX_DESC_CANDIDATO = 200;
 const LOTTO = 25;
-const LOTTI_PARALLELI = 3;
+const LOTTI_PARALLELI = 4; // max 100 righe = 4 lotti: un solo giro, resta sotto il limite di tempo della funzione
 const TIMEOUT_AI_MS = 90_000;
 
 const SCHEMA = {
