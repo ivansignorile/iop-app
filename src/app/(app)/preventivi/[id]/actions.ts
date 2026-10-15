@@ -10,9 +10,12 @@ import { applicaScelta, risolviVoce } from "../../../../../supabase/functions/_s
 import { unitaDaVoci } from "../../../../../supabase/functions/_shared/unita-voce";
 import {
   aBlocchi,
+  avvisoDaTenere,
   decidiSceltaMassiva,
   diventaManuale,
   isSceltaFonte,
+  modificataSenzaFonte,
+  normalizzaFineRiga,
   prezzoDiverso,
   type SceltaFonte,
 } from "@/lib/scelta-fonte";
@@ -192,13 +195,16 @@ export async function updateIntervento(
 
   const { data: cur, error: curError } = await supabase
     .from("preventivo_interventi")
-    .select("descrizione_prezzario, descrizione_propria, prezzo_prezzario, prezzo_proprio, fonte_scelta")
+    .select(
+      "descrizione, prezzo_unitario, descrizione_prezzario, descrizione_propria, prezzo_prezzario, prezzo_proprio, fonte_scelta, abbinamento_avviso",
+    )
     .eq("id", interventoId)
     .maybeSingle();
-  const nuovaDesc = s(formData.get("descrizione"));
+  // Le textarea inviate via FormData usano \r\n: si salva sempre con \n.
+  const nuovaDesc = normalizzaFineRiga(s(formData.get("descrizione")));
   const nuovoPrezzo = n(formData.get("prezzo_unitario"));
   // Se la riga corrente non è leggibile non tocchiamo fonte_scelta.
-  const fontePatch: { fonte_scelta?: "manuale" } = {};
+  const fontePatch: { fonte_scelta?: "manuale"; abbinamento_avviso?: string | null } = {};
   if (!curError && cur) {
     const descFonte =
       cur.fonte_scelta === "prezzario"
@@ -213,11 +219,15 @@ export async function updateIntervento(
           ? cur.prezzo_proprio
           : null;
     // Descrizione o prezzo ritoccati a mano → la riga non segue più la fonte.
+    // Vale anche per le righe senza fonte: così un abbinamento successivo non le sovrascrive.
     if (
       diventaManuale(cur.fonte_scelta, descFonte, nuovaDesc) ||
-      prezzoDiverso(cur.fonte_scelta, prezzoFonte, nuovoPrezzo)
+      prezzoDiverso(cur.fonte_scelta, prezzoFonte, nuovoPrezzo) ||
+      modificataSenzaFonte(cur.fonte_scelta, cur.descrizione, cur.prezzo_unitario, nuovaDesc, nuovoPrezzo)
     ) {
       fontePatch.fonte_scelta = "manuale";
+      // Resta solo l'avviso di unità: gli altri non riguardano più la riga.
+      fontePatch.abbinamento_avviso = avvisoDaTenere(cur.abbinamento_avviso);
     }
   }
 
@@ -346,7 +356,7 @@ type InterventoGenerato = {
 export async function generaInterventiDaFoto(
   preventivoId: string,
   interventi: InterventoGenerato[],
-) {
+): Promise<string[]> {
   const { org } = await requireContext();
   const supabase = await createClient();
   const { count } = await supabase
@@ -355,8 +365,9 @@ export async function generaInterventiDaFoto(
     .eq("preventivo_id", preventivoId);
   const UNITA_VALIDE: Unita[] = ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"];
   const base = count ?? 0;
+  let ids: string[] = [];
   if (interventi.length > 0) {
-    const { error } = await supabase.from("preventivo_interventi").insert(
+    const { data, error } = await supabase.from("preventivo_interventi").insert(
       interventi.map((i, idx) => ({
         org_id: org.id,
         preventivo_id: preventivoId,
@@ -368,11 +379,14 @@ export async function generaInterventiDaFoto(
         quantita: i.quantita,
         prezzo_unitario: i.prezzo_unitario,
       })),
-    );
+    ).select("id");
     if (error) throw error;
+    ids = (data ?? []).map((r) => r.id);
   }
   await recomputeTotale(preventivoId);
   revalidatePath(`/preventivi/${preventivoId}`);
+  // Id delle righe appena inserite: l'abbinamento che segue tocca solo queste.
+  return ids;
 }
 
 export async function addCicloPitturazione(
@@ -597,15 +611,17 @@ export async function scegliFonte(
   const supabase = await createClient();
   const { data: row, error } = await supabase
     .from("preventivo_interventi")
-    .select("descrizione_prezzario, prezzo_prezzario, descrizione_propria, prezzo_proprio")
+    .select("descrizione_prezzario, prezzo_prezzario, descrizione_propria, prezzo_proprio, abbinamento_avviso")
     .eq("id", interventoId)
     .eq("preventivo_id", preventivoId)
     .maybeSingle();
   if (error) throw new Error("Cambio descrizione non riuscito.");
   if (!row) throw new Error("Voce non trovata.");
   // Copia solo descrizione e prezzo: l'unità resta quella della riga.
-  const patch = applicaScelta(scelta, row);
-  if (!patch) throw new Error("Questa descrizione non è disponibile per la voce.");
+  const scelto = applicaScelta(scelta, row);
+  if (!scelto) throw new Error("Questa descrizione non è disponibile per la voce.");
+  // L'avviso di unità resta (va verificato a mano); gli altri non valgono più.
+  const patch = { ...scelto, abbinamento_avviso: avvisoDaTenere(row.abbinamento_avviso) };
   const { error: updError } = await supabase
     .from("preventivo_interventi")
     .update(patch)
@@ -626,6 +642,8 @@ export type EsitoSceltaTutti = {
   senzaFonte: number;
   /** Voci già sulla fonte richiesta. */
   giaImpostati: number;
+  /** Voci con unità diversa: da verificare a mano, lasciate invariate. */
+  daVerificare: number;
   errori: number;
 };
 
@@ -647,17 +665,25 @@ export async function scegliFonteTutti(
 
   const { data: rows, error } = await supabase
     .from("preventivo_interventi")
-    .select("id, descrizione_prezzario, prezzo_prezzario, descrizione_propria, prezzo_proprio, fonte_scelta")
+    .select("id, descrizione_prezzario, prezzo_prezzario, descrizione_propria, prezzo_proprio, fonte_scelta, abbinamento_avviso")
     .eq("preventivo_id", preventivoId);
   if (error) throw new Error("Lettura delle voci non riuscita.");
 
-  const esito: EsitoSceltaTutti = { aggiornati: 0, saltati: 0, senzaFonte: 0, giaImpostati: 0, errori: 0 };
-  const daAggiornare: { id: string; patch: NonNullable<ReturnType<typeof applicaScelta>> }[] = [];
+  const esito: EsitoSceltaTutti = {
+    aggiornati: 0,
+    saltati: 0,
+    senzaFonte: 0,
+    giaImpostati: 0,
+    daVerificare: 0,
+    errori: 0,
+  };
+  const daAggiornare: { id: string; patch: Extract<ReturnType<typeof decidiSceltaMassiva>, { esito: "aggiorna" }>["patch"] }[] = [];
   for (const r of rows ?? []) {
     const d = decidiSceltaMassiva(scelta, r);
     if (d.esito === "aggiorna") daAggiornare.push({ id: r.id, patch: d.patch });
     else if (d.esito === "manuale") esito.saltati++;
     else if (d.esito === "senza_fonte") esito.senzaFonte++;
+    else if (d.esito === "da_verificare") esito.daVerificare++;
     else esito.giaImpostati++;
   }
 

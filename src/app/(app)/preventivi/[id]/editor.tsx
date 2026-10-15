@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { StatoBadge } from "@/components/ui/misc";
 import { UNITA_LABEL, formatEuro } from "@/lib/format";
+import { aBlocchi } from "@/lib/scelta-fonte";
 import { createClient } from "@/lib/supabase/client";
 import type { Tables } from "@/lib/supabase/types";
 import {
@@ -62,14 +63,23 @@ type EsitoAbbinamento = {
   errori: number;
 };
 
-/** Abbina le voci al prezzario/libreria. Lancia un Error con messaggio in italiano. */
-async function abbinaVoci(preventivoId: string, soloNuovi: boolean): Promise<EsitoAbbinamento> {
+/**
+ * Abbina le voci al prezzario/libreria. Lancia un Error con messaggio in italiano.
+ * Con `interventoIds` tocca solo quelle righe (max 100), altrimenti tutte (o solo le nuove).
+ */
+async function abbinaVoci(
+  preventivoId: string,
+  soloNuovi: boolean,
+  interventoIds?: string[],
+): Promise<EsitoAbbinamento> {
   const supabase = createClient();
   type Risposta = Partial<Omit<EsitoAbbinamento, "errori">> & { error?: string; errori?: string[] };
   let res: Awaited<ReturnType<typeof supabase.functions.invoke<Risposta>>>;
   try {
     res = await supabase.functions.invoke<Risposta>("abbina-voci", {
-      body: { preventivo_id: preventivoId, solo_nuovi: soloNuovi },
+      body: interventoIds
+        ? { preventivo_id: preventivoId, intervento_ids: interventoIds }
+        : { preventivo_id: preventivoId, solo_nuovi: soloNuovi },
     });
   } catch {
     throw new Error("Abbinamento al prezzario non riuscito: controlla la connessione e riprova.");
@@ -95,7 +105,14 @@ async function abbinaVoci(preventivoId: string, soloNuovi: boolean): Promise<Esi
 }
 
 function testoEsitoSceltaTutti(
-  e: { aggiornati: number; saltati: number; senzaFonte: number; giaImpostati: number; errori: number },
+  e: {
+    aggiornati: number;
+    saltati: number;
+    senzaFonte: number;
+    giaImpostati: number;
+    daVerificare: number;
+    errori: number;
+  },
   scelta: "prezzario" | "propria",
 ): string {
   const parti = [`${e.aggiornati} ${e.aggiornati === 1 ? "aggiornata" : "aggiornate"}`];
@@ -106,6 +123,7 @@ function testoEsitoSceltaTutti(
     parti.push(`${e.senzaFonte} senza ${scelta === "prezzario" ? "voce del prezzario" : "voce della tua libreria"}`);
   }
   if (e.giaImpostati > 0) parti.push(`${e.giaImpostati} già ${e.giaImpostati === 1 ? "impostata" : "impostate"}`);
+  if (e.daVerificare > 0) parti.push(`${e.daVerificare} con unità diversa da verificare a mano`);
   let s = `${parti.join(", ")}.`;
   if (e.errori > 0) s += ` ${e.errori === 1 ? "1 voce non aggiornata" : `${e.errori} voci non aggiornate`}: riprova.`;
   return s;
@@ -947,6 +965,7 @@ function FotoDescrizioneTab({
 
   async function handleAvvia(punti: Punto[]) {
     if (!signedUrl) return;
+    let nuoviIds: string[] = [];
     setPuntiState(punti);
     setGenError(null);
     setSuccessMsg(null);
@@ -960,7 +979,7 @@ function FotoDescrizioneTab({
         },
       });
       if (error || data?.error) throw new Error(data?.error ?? "errore");
-      await generaInterventiDaFoto(preventivoId, data.risultato.interventi);
+      nuoviIds = await generaInterventiDaFoto(preventivoId, data.risultato.interventi);
     } catch {
       setGenError("Generazione non riuscita (verifica la chiave AI).");
       return;
@@ -970,7 +989,8 @@ function FotoDescrizioneTab({
       ? " Rilevato degrado ≥7: aggiunta pitturazione totale della superficie."
       : "";
     try {
-      await abbinaVoci(preventivoId, true);
+      // Solo le righe appena generate: le altre senza fonte restano come sono.
+      for (const ids of aBlocchi(nuoviIds, 100)) await abbinaVoci(preventivoId, true, ids);
       setSuccessMsg(
         `Preventivo pre-compilato e abbinato al prezzario.${nota7} Rivedi nel tab Interventi.`,
       );

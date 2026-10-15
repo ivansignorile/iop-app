@@ -12,9 +12,9 @@ import {
   inLotti,
   type InterventoDaAbbinare,
   MAX_INTERVENTI,
-  type Unita,
   validaAbbinamenti,
 } from "../_shared/abbina-voci.ts";
+import type { UnitaVoce as Unita } from "../_shared/unita-voce.ts";
 import type { FontePrezzi } from "../_shared/risolvi-voce.ts";
 
 const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY")!;
@@ -98,7 +98,19 @@ Deno.serve(async (req) => {
     if (typeof preventivo_id !== "string" || !UUID_RE.test(preventivo_id)) {
       return json({ error: "preventivo_id non valido" }, 400);
     }
-
+    // intervento_ids (opzionale): solo queste righe, es. quelle appena generate da foto.
+    const rawIds = body?.intervento_ids;
+    let intervento_ids: string[] | null = null;
+    if (rawIds !== undefined && rawIds !== null) {
+      if (
+        !Array.isArray(rawIds) ||
+        rawIds.length > MAX_INTERVENTI ||
+        !rawIds.every((id: unknown) => typeof id === "string" && UUID_RE.test(id))
+      ) {
+        return json({ error: "intervento_ids non valido" }, 400);
+      }
+      intervento_ids = [...new Set(rawIds as string[])];
+    }
 
     // 1. Preventivo (RLS) + regione dell'organizzazione
     const { data: prev, error: prevErr } = await supabase
@@ -118,7 +130,8 @@ Deno.serve(async (req) => {
     const regione = typeof org.regione === "string" ? org.regione.trim() : "";
     if (!regione) return json({ error: "Regione non impostata nelle impostazioni" }, 400);
 
-    // 2. Interventi: mai le righe 'manuale'. Con solo_nuovi solo quelle senza scelta
+    // 2. Interventi: mai le righe 'manuale'. Con intervento_ids solo quelle righe (sempre del preventivo).
+    //    Con solo_nuovi solo quelle senza scelta
     //    (anche quelle con avviso "Nessuna voce…" o "Unità diversa…", che vengono ritentate).
     //    Ordine: prima le righe mai elaborate (avviso null), poi per 'ordine': così il limite
     //    di MAX_INTERVENTI avanza a ogni rilancio.
@@ -128,9 +141,16 @@ Deno.serve(async (req) => {
       .eq("preventivo_id", preventivo_id)
       .order("ordine", { ascending: true })
       .order("created_at", { ascending: true });
+    if (intervento_ids) {
+      if (intervento_ids.length === 0) return json({ abbinati: 0, senza_corrispondenza: 0, unita_diversa: 0, errori: [], non_elaborati: 0 });
+      q = q.in("id", intervento_ids);
+    }
     q = solo_nuovi ? q.is("fonte_scelta", null) : q.or("fonte_scelta.is.null,fonte_scelta.neq.manuale");
     const { data: righeAll, error: righeErr } = await q;
-    if (righeErr) return json({ error: "Errore lettura interventi", detail: righeErr.message }, 500);
+    if (righeErr) {
+      console.error("abbina-voci lettura interventi", righeErr);
+      return json({ error: "Errore nella lettura degli interventi" }, 500);
+    }
 
     const tutte = ((righeAll ?? []) as Riga[])
       .filter((r) => r.fonte_scelta !== "manuale")
@@ -225,7 +245,8 @@ Deno.serve(async (req) => {
 
     return json({ ...conteggi, errori, non_elaborati: nonElaborati, totale_imponibile: totale, usage });
   } catch (e) {
-    return json({ error: String(e) }, 500);
+    console.error("abbina-voci", e);
+    return json({ error: "Errore interno durante l'abbinamento" }, 500);
   }
 });
 

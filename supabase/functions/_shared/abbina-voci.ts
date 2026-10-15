@@ -1,11 +1,12 @@
 // supabase/functions/_shared/abbina-voci.ts
 // Logica pura dell'abbinamento voci (validazione output modello, compatibilità unità, patch riga).
 import { type FontePrezzi, risolviVoce } from "./risolvi-voce.ts";
-import { eACorpo } from "./unita-voce.ts";
+import { eACorpo, type UnitaVoce } from "./unita-voce.ts";
 
 export const MAX_INTERVENTI = 100;
 
-export type Unita = "corpo" | "mq" | "ml" | "mc" | "giorno" | "cad" | "kg";
+/** Unità di misura: un solo tipo, dichiarato in unita-voce.ts. */
+export type Unita = UnitaVoce;
 
 export type CandPrezzario = {
   id: string;

@@ -35,7 +35,17 @@ export function DoppiaDescrizione({
   const [pending, startTransition] = useTransition();
   const [errore, setErrore] = useState<string | null>(null);
 
-  if (!i.descrizione_prezzario && !i.descrizione_propria) return null;
+  const avviso = i.abbinamento_avviso ? (
+    <p role="note" className="rounded-sm border-l-2 border-ink bg-surface-soft px-3 py-2 text-sm text-ink">
+      <span className="font-semibold">Attenzione: </span>
+      {i.abbinamento_avviso}
+    </p>
+  ) : null;
+
+  // Nessuna descrizione da scegliere: resta comunque visibile l'avviso (es. "Nessuna voce equivalente…").
+  if (!i.descrizione_prezzario && !i.descrizione_propria) {
+    return avviso ? <div className="mt-3">{avviso}</div> : null;
+  }
 
   const haPrezzario = disponibile(i.descrizione_prezzario, i.prezzo_prezzario);
   const haPropria = disponibile(i.descrizione_propria, i.prezzo_proprio);
@@ -54,12 +64,7 @@ export function DoppiaDescrizione({
 
   return (
     <section aria-label="Descrizioni disponibili" className="mt-3 space-y-3" aria-busy={pending}>
-      {i.abbinamento_avviso ? (
-        <p role="note" className="rounded-sm border-l-2 border-ink bg-surface-soft px-3 py-2 text-sm text-ink">
-          <span className="font-semibold">Attenzione: </span>
-          {i.abbinamento_avviso}
-        </p>
-      ) : null}
+      {avviso}
 
       {manuale ? (
         <div className="flex flex-wrap items-center gap-2 text-sm">
