@@ -199,6 +199,50 @@ export type Database = {
           },
         ]
       }
+      documenti_libreria: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          errore: string | null
+          id: string
+          nome_file: string
+          org_id: string
+          stato: Database["public"]["Enums"]["documento_stato"]
+          storage_path: string
+          voci_estratte: number
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          errore?: string | null
+          id?: string
+          nome_file: string
+          org_id: string
+          stato?: Database["public"]["Enums"]["documento_stato"]
+          storage_path: string
+          voci_estratte?: number
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          errore?: string | null
+          id?: string
+          nome_file?: string
+          org_id?: string
+          stato?: Database["public"]["Enums"]["documento_stato"]
+          storage_path?: string
+          voci_estratte?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "documenti_libreria_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       edifici: {
         Row: {
           balconi: number | null
@@ -873,6 +917,60 @@ export type Database = {
         }
         Relationships: []
       }
+      voci_proprie: {
+        Row: {
+          categoria: string | null
+          created_at: string
+          descrizione: string
+          documento_id: string | null
+          id: string
+          org_id: string
+          prezzo: number
+          search: unknown
+          titolo: string
+          unita: Database["public"]["Enums"]["unita_misura"]
+        }
+        Insert: {
+          categoria?: string | null
+          created_at?: string
+          descrizione: string
+          documento_id?: string | null
+          id?: string
+          org_id: string
+          prezzo: number
+          search?: unknown
+          titolo: string
+          unita?: Database["public"]["Enums"]["unita_misura"]
+        }
+        Update: {
+          categoria?: string | null
+          created_at?: string
+          descrizione?: string
+          documento_id?: string | null
+          id?: string
+          org_id?: string
+          prezzo?: number
+          search?: unknown
+          titolo?: string
+          unita?: Database["public"]["Enums"]["unita_misura"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "voci_proprie_documento_id_fkey"
+            columns: ["documento_id"]
+            isOneToOne: false
+            referencedRelation: "documenti_libreria"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "voci_proprie_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -889,6 +987,17 @@ export type Database = {
           rank: number
           unita: Database["public"]["Enums"]["unita_misura"]
           unita_testo: string
+        }[]
+      }
+      cerca_voci_proprie: {
+        Args: { p_limit?: number; p_org: string; q: string }
+        Returns: {
+          descrizione: string
+          id: string
+          prezzo: number
+          rank: number
+          titolo: string
+          unita: Database["public"]["Enums"]["unita_misura"]
         }[]
       }
       create_organization: { Args: { org_name: string }; Returns: string }
@@ -915,6 +1024,7 @@ export type Database = {
     }
     Enums: {
       cliente_tipo: "condominio" | "privato" | "azienda"
+      documento_stato: "caricato" | "in_elaborazione" | "elaborato" | "errore"
       membership_role: "owner" | "admin" | "member"
       preventivo_modalita: "capitolato" | "manuale" | "foto"
       preventivo_stato: "bozza" | "inviato" | "accettato" | "rifiutato"
@@ -1052,6 +1162,7 @@ export const Constants = {
   public: {
     Enums: {
       cliente_tipo: ["condominio", "privato", "azienda"],
+      documento_stato: ["caricato", "in_elaborazione", "elaborato", "errore"],
       membership_role: ["owner", "admin", "member"],
       preventivo_modalita: ["capitolato", "manuale", "foto"],
       preventivo_stato: ["bozza", "inviato", "accettato", "rifiutato"],
