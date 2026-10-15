@@ -4,22 +4,24 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  MAX_PREVENTIVO_BYTES,
-  MIME_PREVENTIVI,
-  nomeFileStorage,
-} from "@/lib/libreria/voce";
+import { controllaPreventivo, nomeFileStorage } from "@/lib/libreria/voce";
 import { createClient } from "@/lib/supabase/client";
 
 type Esito =
   | { stato: "attesa" }
   | { stato: "lavoro"; fase: string }
   | { stato: "ok"; voci: number }
+  | { stato: "lento" }
   | { stato: "errore"; messaggio: string };
 
-type Riga = { file: File; esito: Esito };
+/** scartato: rifiutato prima dell'upload, fuori dal conteggio dell'avanzamento. */
+type Riga = { file: File; esito: Esito; scartato: boolean };
 
 const MAX_FILE_PER_VOLTA = 10;
+const POLL_MS = 3000;
+const POLL_TIMEOUT_MS = 6 * 60 * 1000;
+
+const attendi = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function tipoFile(f: File): string {
   if (f.type) return f.type;
@@ -29,13 +31,6 @@ function tipoFile(f: File): string {
   if (ext === "png") return "image/png";
   if (ext === "webp") return "image/webp";
   return "";
-}
-
-function controllaFile(f: File): string | null {
-  if (!MIME_PREVENTIVI.includes(tipoFile(f))) return "Formato non supportato (PDF, JPG, PNG, WEBP)";
-  if (f.size > MAX_PREVENTIVO_BYTES) return "File oltre i 20 MB";
-  if (f.size === 0) return "File vuoto";
-  return null;
 }
 
 async function messaggioErrore(error: unknown): Promise<string> {
@@ -51,14 +46,36 @@ async function messaggioErrore(error: unknown): Promise<string> {
   return "Estrazione non riuscita";
 }
 
+type Client = ReturnType<typeof createClient>;
+
+/** Interroga documenti_libreria finché il documento non è elaborato o in errore. */
+async function segui(supabase: Client, id: string): Promise<Esito> {
+  const fine = Date.now() + POLL_TIMEOUT_MS;
+  while (Date.now() < fine) {
+    await attendi(POLL_MS);
+    const { data } = await supabase
+      .from("documenti_libreria")
+      .select("stato, voci_estratte, errore")
+      .eq("id", id)
+      .maybeSingle();
+    if (!data) return { stato: "errore", messaggio: "Documento non trovato" };
+    if (data.stato === "elaborato") return { stato: "ok", voci: data.voci_estratte };
+    if (data.stato === "errore") {
+      return { stato: "errore", messaggio: data.errore ?? "Elaborazione non riuscita" };
+    }
+  }
+  return { stato: "lento" };
+}
+
 export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: string }) {
   const router = useRouter();
   const [righe, setRighe] = useState<Riga[]>([]);
   const [inCorso, setInCorso] = useState(false);
   const [trascina, setTrascina] = useState(false);
 
-  const fatti = righe.filter((r) => r.esito.stato === "ok" || r.esito.stato === "errore").length;
-  const vociTotali = righe.reduce((n, r) => n + (r.esito.stato === "ok" ? r.esito.voci : 0), 0);
+  const valide = righe.filter((r) => !r.scartato);
+  const fatti = valide.filter((r) => ["ok", "errore", "lento"].includes(r.esito.stato)).length;
+  const vociTotali = valide.reduce((n, r) => n + (r.esito.stato === "ok" ? r.esito.voci : 0), 0);
   const daElaborare = righe.filter((r) => r.esito.stato === "attesa").length;
 
   function scegli(lista: FileList | null) {
@@ -66,8 +83,10 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
     const nuovi = Array.from(lista)
       .slice(0, MAX_FILE_PER_VOLTA)
       .map<Riga>((file) => {
-        const err = controllaFile(file);
-        return { file, esito: err ? { stato: "errore", messaggio: err } : { stato: "attesa" } };
+        const err = controllaPreventivo(tipoFile(file), file.size);
+        return err
+          ? { file, esito: { stato: "errore", messaggio: err }, scartato: true }
+          : { file, esito: { stato: "attesa" }, scartato: false };
       });
     setRighe(nuovi);
   }
@@ -89,7 +108,8 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
         const path = `${orgId}/libreria/${crypto.randomUUID()}-${nomeFileStorage(file.name)}`;
         const { error: upErr } = await supabase.storage
           .from("preventivi")
-          .upload(path, file, { contentType: tipoFile(file), upsert: false });
+          // Blob con tipo esplicito: storage-js usa il tipo del Blob, non contentType.
+          .upload(path, new Blob([file], { type: tipoFile(file) }), { upsert: false });
         if (upErr) throw new Error("Caricamento del file non riuscito");
 
         const { data: doc, error: insErr } = await supabase
@@ -108,13 +128,14 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
         }
 
         aggiorna(i, { stato: "lavoro", fase: "Lettura delle voci" });
-        const { data, error } = await supabase.functions.invoke<{ voci: number; error?: string }>(
-          "importa-preventivi",
-          { body: { documento_id: doc.id } },
-        );
-        if (error) throw new Error(await messaggioErrore(error));
-        if (!data || data.error) throw new Error(data?.error ?? "Estrazione non riuscita");
-        aggiorna(i, { stato: "ok", voci: data.voci });
+        const { error } = await supabase.functions.invoke("importa-preventivi", {
+          body: { documento_id: doc.id },
+        });
+        // 409 = già in elaborazione: si segue comunque l'avanzamento.
+        const status = (error as { context?: Response } | null)?.context?.status;
+        if (error && status !== 409) throw new Error(await messaggioErrore(error));
+
+        aggiorna(i, await segui(supabase, doc.id));
       } catch (e) {
         aggiorna(i, {
           stato: "errore",
@@ -126,7 +147,7 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
     setInCorso(false);
   }
 
-  const totale = righe.length;
+  const totale = valide.length;
   const progresso = totale ? fatti / totale : 0;
 
   return (
@@ -139,8 +160,8 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
           libreria personale.
         </p>
         <p className="mt-4 text-sm text-stone">
-          PDF o foto (JPG, PNG, WEBP), fino a 20 MB l&apos;uno. Le descrizioni restano scritte come
-          le hai scritte tu.
+          Ogni documento viene letto in sequenza: può servire un minuto o due. Le descrizioni restano
+          scritte come le hai scritte tu.
         </p>
       </div>
 
@@ -161,9 +182,10 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
           } ${inCorso ? "pointer-events-none opacity-50" : ""}`}
         >
           <span className="text-sm font-semibold text-ink">
-            {totale ? `${totale} file selezionati` : "Trascina qui i preventivi"}
+            {righe.length ? `${righe.length} file selezionati` : "Trascina qui i preventivi"}
           </span>
           <span className="text-sm text-slate">oppure clicca per sceglierli dal computer</span>
+          <span className="mt-2 text-xs text-stone">PDF fino a 20 MB · JPG, PNG, WEBP fino a 5 MB</span>
           <input
             type="file"
             accept=".pdf,application/pdf,image/jpeg,image/png,image/webp"
@@ -177,11 +199,13 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
           />
         </label>
 
-        {totale > 0 ? (
+        {righe.length > 0 ? (
           <div className="mt-6">
             <div className="mb-2 flex items-baseline justify-between gap-4 text-sm">
               <span className="font-semibold text-ink tabular-nums" aria-live="polite">
-                {fatti}/{totale} — {vociTotali} {vociTotali === 1 ? "voce estratta" : "voci estratte"}
+                {totale > 0
+                  ? `${fatti}/${totale} — ${vociTotali} ${vociTotali === 1 ? "voce estratta" : "voci estratte"}`
+                  : "Nessun file importabile"}
               </span>
               {!inCorso && daElaborare === 0 ? (
                 <button
@@ -241,6 +265,12 @@ function EsitoLabel({ esito }: { esito: Esito }) {
       return (
         <span className="shrink-0 font-medium text-ink tabular-nums">
           {esito.voci} {esito.voci === 1 ? "voce" : "voci"}
+        </span>
+      );
+    case "lento":
+      return (
+        <span className="max-w-[60%] shrink-0 text-right text-graphite">
+          Ancora in elaborazione, ricarica più tardi
         </span>
       );
     case "errore":

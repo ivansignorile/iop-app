@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/ui/misc";
 import { requireContext } from "@/lib/auth";
 import { UNITA_LABEL, formatEuro } from "@/lib/format";
+import { paroleRicerca } from "@/lib/libreria/voce";
 import { createClient } from "@/lib/supabase/server";
 import {
   AddCicloForm,
@@ -12,16 +13,39 @@ import { ImportListino } from "./import-listino";
 import { ImportPreventivi } from "./import-preventivi";
 import { DocumentiLibreria, VociProprie } from "./voci-proprie";
 
-export default async function LibreriaPage() {
+const VOCI_PER_PAGINA = 50;
+
+export default async function LibreriaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string | string[]; pagina?: string | string[] }>;
+}) {
   const { org, userId } = await requireContext();
   const supabase = await createClient();
+
+  const sp = await searchParams;
+  const q = (Array.isArray(sp.q) ? sp.q[0] : sp.q ?? "").slice(0, 200);
+  const paginaRichiesta = Number(Array.isArray(sp.pagina) ? sp.pagina[0] : sp.pagina);
+  const pagina = Number.isInteger(paginaRichiesta) && paginaRichiesta > 0 ? paginaRichiesta : 1;
+  const da = (pagina - 1) * VOCI_PER_PAGINA;
+
+  let vociQuery = supabase
+    .from("voci_proprie")
+    .select("id, titolo, descrizione, unita, prezzo, categoria, documento_id", { count: "exact" })
+    .eq("org_id", org.id);
+  for (const w of paroleRicerca(q)) {
+    vociQuery = vociQuery.or(
+      `titolo.ilike.*${w}*,descrizione.ilike.*${w}*,categoria.ilike.*${w}*`,
+    );
+  }
 
   const [
     { data: prezziOrg },
     { data: prezziGlob },
     { data: cicliOrg },
     { data: cicliGlob },
-    { data: vociProprie },
+    { data: vociProprie, count: vociFiltrate },
+    { count: vociTotali },
     { data: documenti },
   ] = await Promise.all([
     supabase
@@ -44,15 +68,17 @@ export default async function LibreriaPage() {
       .select("id, titolo, categoria, unita_default, prezzo_default")
       .is("org_id", null)
       .order("categoria"),
+    vociQuery
+      .order("titolo")
+      .order("id")
+      .range(da, da + VOCI_PER_PAGINA - 1),
     supabase
       .from("voci_proprie")
-      .select("id, titolo, descrizione, unita, prezzo, categoria, documento_id")
-      .eq("org_id", org.id)
-      .order("titolo")
-      .limit(5000),
+      .select("id", { count: "exact", head: true })
+      .eq("org_id", org.id),
     supabase
       .from("documenti_libreria")
-      .select("id, nome_file, stato, voci_estratte, errore, created_at")
+      .select("id, nome_file, stato, voci_estratte, errore, created_at, elaborazione_at")
       .eq("org_id", org.id)
       .order("created_at", { ascending: false }),
   ]);
@@ -66,7 +92,15 @@ export default async function LibreriaPage() {
       />
 
       <ImportPreventivi orgId={org.id} userId={userId} />
-      <VociProprie voci={vociProprie ?? []} documenti={documenti ?? []} />
+      <VociProprie
+        voci={vociProprie ?? []}
+        documenti={documenti ?? []}
+        q={q}
+        pagina={pagina}
+        perPagina={VOCI_PER_PAGINA}
+        totaleFiltrate={vociFiltrate ?? 0}
+        totaleLibreria={vociTotali ?? 0}
+      />
       <DocumentiLibreria documenti={documenti ?? []} />
 
       <ImportListino />

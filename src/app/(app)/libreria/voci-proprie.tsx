@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { FormError, Input, Select, Textarea } from "@/components/ui/field";
 import { UNITA_LABEL, formatDate, formatEuro } from "@/lib/format";
-import { UNITA } from "@/lib/libreria/voce";
+import { UNITA, elaborazioneBloccata } from "@/lib/libreria/voce";
 import type { Tables } from "@/lib/supabase/types";
 import {
   deleteDocumentoLibreria,
@@ -19,50 +21,72 @@ export type VocePropria = Pick<
 >;
 export type DocumentoLibreria = Pick<
   Tables<"documenti_libreria">,
-  "id" | "nome_file" | "stato" | "voci_estratte" | "errore" | "created_at"
+  "id" | "nome_file" | "stato" | "voci_estratte" | "errore" | "created_at" | "elaborazione_at"
 >;
 
-const PAGINA = 100;
-
-function normalizza(s: string) {
-  return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-}
-
 /* ---------------- Voci ---------------- */
+
+function hrefLibreria(q: string, pagina: number) {
+  const p = new URLSearchParams();
+  if (q) p.set("q", q);
+  if (pagina > 1) p.set("pagina", String(pagina));
+  const qs = p.toString();
+  return qs ? `/libreria?${qs}` : "/libreria";
+}
 
 export function VociProprie({
   voci,
   documenti,
+  q,
+  pagina,
+  perPagina,
+  totaleFiltrate,
+  totaleLibreria,
 }: {
   voci: VocePropria[];
   documenti: DocumentoLibreria[];
+  q: string;
+  pagina: number;
+  perPagina: number;
+  totaleFiltrate: number;
+  totaleLibreria: number;
 }) {
-  const [q, setQ] = useState("");
-  const [limite, setLimite] = useState(PAGINA);
+  const router = useRouter();
+  const [testo, setTesto] = useState(q);
+  const [cercando, startCerca] = useTransition();
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const nomiDoc = useMemo(
     () => new Map(documenti.map((d) => [d.id, d.nome_file])),
     [documenti],
   );
 
-  const filtrate = useMemo(() => {
-    const parole = normalizza(q).split(/\s+/).filter(Boolean);
-    if (!parole.length) return voci;
-    return voci.filter((v) => {
-      const testo = normalizza(`${v.titolo} ${v.descrizione} ${v.categoria ?? ""}`);
-      return parole.every((p) => testo.includes(p));
-    });
-  }, [voci, q]);
+  useEffect(() => () => {
+    if (timer.current) clearTimeout(timer.current);
+  }, []);
+
+  function cerca(valore: string) {
+    setTesto(valore);
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      startCerca(() => router.replace(hrefLibreria(valore.trim(), 1), { scroll: false }));
+    }, 300);
+  }
+
+  const pagine = Math.max(1, Math.ceil(totaleFiltrate / perPagina));
+  const primo = totaleFiltrate ? (pagina - 1) * perPagina + 1 : 0;
+  const ultimo = Math.min(pagina * perPagina, totaleFiltrate);
 
   return (
-    <section className="mb-12">
+    <section id="voci" className="mb-12">
       <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="title-sm text-ink">Le tue voci</h2>
           <p className="mt-1 text-sm text-slate tabular-nums">
-            {voci.length} {voci.length === 1 ? "voce" : "voci"} in libreria
+            {totaleLibreria} {totaleLibreria === 1 ? "voce" : "voci"} in libreria
+            {q ? ` · ${totaleFiltrate} per “${q}”` : ""}
           </p>
         </div>
-        {voci.length > 0 ? (
+        {totaleLibreria > 0 ? (
           <div className="w-full sm:w-72">
             <label htmlFor="cerca-voci" className="sr-only">
               Cerca nelle tue voci
@@ -71,17 +95,15 @@ export function VociProprie({
               id="cerca-voci"
               type="search"
               placeholder="Cerca: intonaco, frontalini…"
-              value={q}
-              onChange={(e) => {
-                setQ(e.target.value);
-                setLimite(PAGINA);
-              }}
+              value={testo}
+              onChange={(e) => cerca(e.target.value)}
+              aria-busy={cercando}
             />
           </div>
         ) : null}
       </div>
 
-      {voci.length === 0 ? (
+      {totaleLibreria === 0 ? (
         <div className="border border-hairline px-6 py-14">
           <p className="title-sm text-ink">Nessuna voce ancora.</p>
           <p className="mt-1 max-w-md text-sm text-graphite">
@@ -89,12 +111,17 @@ export function VociProprie({
             unitario compariranno in questa tabella, pronte da modificare.
           </p>
         </div>
-      ) : filtrate.length === 0 ? (
+      ) : voci.length === 0 ? (
         <p className="border-t border-hairline py-6 text-sm text-stone">
-          Nessuna voce corrisponde a &ldquo;{q}&rdquo;.
+          {q ? <>Nessuna voce corrisponde a &ldquo;{q}&rdquo;.</> : "Nessuna voce in questa pagina."}{" "}
+          {pagina > 1 ? (
+            <Link href={hrefLibreria(q, 1)} scroll={false} className="text-ink underline underline-offset-2">
+              Torna alla prima pagina
+            </Link>
+          ) : null}
         </p>
       ) : (
-        <>
+        <div className={`transition-opacity ${cercando ? "opacity-50" : ""}`}>
           <div className="hidden grid-cols-[minmax(0,3fr)_minmax(0,5fr)_7rem_8rem] gap-4 border-b border-ink pb-2 text-xs uppercase tracking-wide text-stone md:grid">
             <span>Voce</span>
             <span>Descrizione</span>
@@ -102,7 +129,7 @@ export function VociProprie({
             <span className="text-right">Azioni</span>
           </div>
           <ul className="divide-y divide-hairline">
-            {filtrate.slice(0, limite).map((v) => (
+            {voci.map((v) => (
               <VoceRow
                 key={v.id}
                 voce={v}
@@ -110,14 +137,29 @@ export function VociProprie({
               />
             ))}
           </ul>
-          {filtrate.length > limite ? (
-            <div className="mt-4">
-              <Button variant="secondary" type="button" onClick={() => setLimite((l) => l + PAGINA)}>
-                Mostra altre {Math.min(PAGINA, filtrate.length - limite)}
-              </Button>
-            </div>
+          {pagine > 1 ? (
+            <nav
+              aria-label="Pagine delle voci"
+              className="mt-4 flex flex-wrap items-center justify-between gap-4 text-sm"
+            >
+              <span className="tabular-nums text-slate">
+                {primo}–{ultimo} di {totaleFiltrate}
+              </span>
+              <div className="flex gap-3">
+                {pagina > 1 ? (
+                  <ButtonLink variant="secondary" href={hrefLibreria(q, pagina - 1)} scroll={false}>
+                    Precedenti
+                  </ButtonLink>
+                ) : null}
+                {pagina < pagine ? (
+                  <ButtonLink variant="secondary" href={hrefLibreria(q, pagina + 1)} scroll={false}>
+                    Successive
+                  </ButtonLink>
+                ) : null}
+              </div>
+            </nav>
           ) : null}
-        </>
+        </div>
       )}
     </section>
   );
@@ -284,6 +326,9 @@ export function DocumentiLibreria({ documenti }: { documenti: DocumentoLibreria[
 function DocumentoRow({ doc }: { doc: DocumentoLibreria }) {
   const [pending, startTransition] = useTransition();
   const stato = STATO_DOC[doc.stato];
+  // Mentre gira l'estrazione il documento non si elimina (salvo elaborazione bloccata).
+  const [ora] = useState(() => Date.now());
+  const occupato = doc.stato === "in_elaborazione" && !elaborazioneBloccata(doc.elaborazione_at, ora);
   return (
     <li
       className={`grid gap-2 py-3 text-sm transition-opacity md:grid-cols-[minmax(0,1fr)_9rem_7rem_5rem] md:items-center md:gap-4 ${
@@ -307,7 +352,8 @@ function DocumentoRow({ doc }: { doc: DocumentoLibreria }) {
       </span>
       <button
         type="button"
-        disabled={pending}
+        disabled={pending || occupato}
+        title={occupato ? "Elaborazione in corso" : undefined}
         onClick={() => {
           if (!confirm(`Eliminare "${doc.nome_file}"? Il file viene cancellato, le voci estratte restano in libreria.`)) return;
           startTransition(async () => {
@@ -315,7 +361,7 @@ function DocumentoRow({ doc }: { doc: DocumentoLibreria }) {
             if (!r.ok) alert(r.errore);
           });
         }}
-        className="text-left text-ink underline underline-offset-2 md:text-right"
+        className="text-left text-ink underline underline-offset-2 disabled:text-stone disabled:no-underline md:text-right"
       >
         Elimina
       </button>

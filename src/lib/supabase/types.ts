@@ -203,6 +203,7 @@ export type Database = {
         Row: {
           created_at: string
           created_by: string | null
+          elaborazione_at: string | null
           errore: string | null
           id: string
           nome_file: string
@@ -214,6 +215,7 @@ export type Database = {
         Insert: {
           created_at?: string
           created_by?: string | null
+          elaborazione_at?: string | null
           errore?: string | null
           id?: string
           nome_file: string
@@ -225,6 +227,7 @@ export type Database = {
         Update: {
           created_at?: string
           created_by?: string | null
+          elaborazione_at?: string | null
           errore?: string | null
           id?: string
           nome_file?: string

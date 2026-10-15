@@ -6,9 +6,21 @@ export const MAX_DESCRIZIONE = 10000;
 export const MAX_CATEGORIA = 100;
 export const MAX_PREZZO = 10_000_000;
 
-/** Tipi accettati per l'import dei vecchi preventivi (gli stessi che il modello legge). */
-export const MIME_PREVENTIVI = ["application/pdf", "image/jpeg", "image/png", "image/webp", "image/gif"];
+/** Tipi accettati per l'import dei vecchi preventivi. Limiti duplicati in
+ * supabase/functions/importa-preventivi/index.ts: tenerli allineati. */
+export const MIME_PREVENTIVI = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
 export const MAX_PREVENTIVO_BYTES = 20 * 1024 * 1024;
+/** Le immagini passano al modello così come sono: limite dell'API a 5 MB. */
+export const MAX_IMMAGINE_BYTES = 5 * 1024 * 1024;
+
+/** Motivo per cui un file non può essere importato, o null se va bene. */
+export function controllaPreventivo(mime: string, size: number): string | null {
+  if (!MIME_PREVENTIVI.includes(mime)) return "Formato non supportato (PDF, JPG, PNG, WEBP)";
+  if (size === 0) return "File vuoto";
+  if (size > MAX_PREVENTIVO_BYTES) return "File oltre i 20 MB";
+  if (mime !== "application/pdf" && size > MAX_IMMAGINE_BYTES) return "Immagine oltre i 5 MB";
+  return null;
+}
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -60,4 +72,25 @@ export function nomeFileStorage(nome: string): string {
     .replace(/^[._]+/, "")
     .slice(-120);
   return pulito || "file";
+}
+
+/** Dopo questo tempo un documento ancora 'in_elaborazione' è considerato bloccato
+ * (stesso valore di STALE_MS nella edge function importa-preventivi). */
+export const ELABORAZIONE_STALE_MS = 10 * 60 * 1000;
+
+export function elaborazioneBloccata(avviata: string | null, ora = Date.now()): boolean {
+  if (!avviata) return true;
+  const t = Date.parse(avviata);
+  return !Number.isFinite(t) || ora - t > ELABORAZIONE_STALE_MS;
+}
+
+/** Parole di ricerca sicure per i filtri PostgREST (.or/ilike): solo lettere e cifre,
+ * massimo 6 parole da 40 caratteri. */
+export function paroleRicerca(q: string): string[] {
+  return q
+    .normalize("NFC")
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter((w) => w.length > 1)
+    .map((w) => w.slice(0, 40))
+    .slice(0, 6);
 }

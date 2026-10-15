@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { requireContext } from "@/lib/auth";
-import { isUuid, validaVoce } from "@/lib/libreria/voce";
+import { elaborazioneBloccata, isUuid, validaVoce } from "@/lib/libreria/voce";
 import { createClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/types";
 
@@ -137,22 +137,31 @@ export async function deleteDocumentoLibreria(id: string): Promise<EsitoAzione> 
   const supabase = await createClient();
   const { data: doc } = await supabase
     .from("documenti_libreria")
-    .select("id, storage_path")
+    .select("id, stato, elaborazione_at")
     .eq("id", id)
     .eq("org_id", org.id)
     .maybeSingle();
   if (!doc) return { ok: false, errore: "Documento non trovato." };
-
-  if (doc.storage_path.startsWith(`${org.id}/libreria/`)) {
-    const { error: stErr } = await supabase.storage.from("preventivi").remove([doc.storage_path]);
-    if (stErr) return { ok: false, errore: "Impossibile eliminare il file." };
+  if (doc.stato === "in_elaborazione" && !elaborazioneBloccata(doc.elaborazione_at)) {
+    return { ok: false, errore: "Elaborazione in corso: riprova tra qualche minuto." };
   }
-  const { error } = await supabase
+
+  // Prima la riga, poi il file: un file orfano è innocuo, una riga senza file no.
+  const { data: rimossi, error } = await supabase
     .from("documenti_libreria")
     .delete()
     .eq("id", id)
-    .eq("org_id", org.id);
-  if (error) return { ok: false, errore: "Eliminazione non riuscita." };
+    .eq("org_id", org.id)
+    .select("storage_path");
+  if (error || !rimossi?.length) return { ok: false, errore: "Eliminazione non riuscita." };
+
+  const path = rimossi[0].storage_path;
+  if (path.startsWith(`${org.id}/libreria/`)) {
+    const { data: files, error: stErr } = await supabase.storage.from("preventivi").remove([path]);
+    if (stErr || files?.length !== 1) {
+      console.error("deleteDocumentoLibreria: file non rimosso", path, stErr ?? files);
+    }
+  }
   revalidatePath("/libreria");
   return { ok: true };
 }
