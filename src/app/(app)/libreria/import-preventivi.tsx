@@ -6,22 +6,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { controllaPreventivo, nomeFileStorage } from "@/lib/libreria/voce";
 import { createClient } from "@/lib/supabase/client";
+import { avviaESegui, type EsitoElaborazione } from "./elaborazione";
 
 type Esito =
   | { stato: "attesa" }
   | { stato: "lavoro"; fase: string }
-  | { stato: "ok"; voci: number }
-  | { stato: "lento" }
-  | { stato: "errore"; messaggio: string };
+  | EsitoElaborazione;
 
 /** scartato: rifiutato prima dell'upload, fuori dal conteggio dell'avanzamento. */
 type Riga = { file: File; esito: Esito; scartato: boolean };
 
 const MAX_FILE_PER_VOLTA = 10;
-const POLL_MS = 3000;
-const POLL_TIMEOUT_MS = 6 * 60 * 1000;
-
-const attendi = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function tipoFile(f: File): string {
   if (f.type) return f.type;
@@ -31,40 +26,6 @@ function tipoFile(f: File): string {
   if (ext === "png") return "image/png";
   if (ext === "webp") return "image/webp";
   return "";
-}
-
-async function messaggioErrore(error: unknown): Promise<string> {
-  const ctx = (error as { context?: Response })?.context;
-  if (ctx && typeof ctx.json === "function") {
-    try {
-      const body = await ctx.json();
-      if (body?.error) return String(body.error);
-    } catch {
-      /* risposta non JSON */
-    }
-  }
-  return "Estrazione non riuscita";
-}
-
-type Client = ReturnType<typeof createClient>;
-
-/** Interroga documenti_libreria finché il documento non è elaborato o in errore. */
-async function segui(supabase: Client, id: string): Promise<Esito> {
-  const fine = Date.now() + POLL_TIMEOUT_MS;
-  while (Date.now() < fine) {
-    await attendi(POLL_MS);
-    const { data } = await supabase
-      .from("documenti_libreria")
-      .select("stato, voci_estratte, errore")
-      .eq("id", id)
-      .maybeSingle();
-    if (!data) return { stato: "errore", messaggio: "Documento non trovato" };
-    if (data.stato === "elaborato") return { stato: "ok", voci: data.voci_estratte };
-    if (data.stato === "errore") {
-      return { stato: "errore", messaggio: data.errore ?? "Elaborazione non riuscita" };
-    }
-  }
-  return { stato: "lento" };
 }
 
 export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: string }) {
@@ -128,14 +89,7 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
         }
 
         aggiorna(i, { stato: "lavoro", fase: "Lettura delle voci" });
-        const { error } = await supabase.functions.invoke("importa-preventivi", {
-          body: { documento_id: doc.id },
-        });
-        // 409 = già in elaborazione: si segue comunque l'avanzamento.
-        const status = (error as { context?: Response } | null)?.context?.status;
-        if (error && status !== 409) throw new Error(await messaggioErrore(error));
-
-        aggiorna(i, await segui(supabase, doc.id));
+        aggiorna(i, await avviaESegui(supabase, doc.id));
       } catch (e) {
         aggiorna(i, {
           stato: "errore",
@@ -156,7 +110,7 @@ export function ImportPreventivi({ orgId, userId }: { orgId: string; userId: str
         <p className="eyebrow mb-3 text-stone">Libreria personale</p>
         <h2 className="title-lg mb-3 text-ink">I tuoi vecchi preventivi diventano il tuo prezzario.</h2>
         <p className="max-w-[52ch] text-base leading-relaxed text-graphite">
-          Carica i tuoi vecchi preventivi: IOP ne estrae descrizioni e prezzi e li usa come tua
+          Carica i tuoi vecchi preventivi: IOP ne estrae descrizioni e prezzi, che diventano la tua
           libreria personale.
         </p>
         <p className="mt-4 text-sm text-stone">

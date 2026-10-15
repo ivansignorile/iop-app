@@ -88,8 +88,21 @@ export default async function LibreriaPage({
       <PageHeader
         eyebrow="Listino"
         title="Libreria prezzi e cicli"
-        description="I prezzi e i cicli della tua impresa hanno priorità e vengono usati dall'AI per generare i preventivi. Quelli globali restano come riferimento."
+        description="I prezzi e i cicli della tua impresa hanno priorità sui riferimenti globali. Le voci dei tuoi vecchi preventivi diventano la tua libreria personale."
       />
+
+      <dl className="-mt-4 mb-10 grid gap-x-8 gap-y-3 text-sm md:grid-cols-2">
+        <div className="border-l border-hairline pl-4">
+          <dt className="font-semibold text-ink">Vecchi preventivi</dt>
+          <dd className="text-graphite">
+            Descrizioni e prezzi presi dai preventivi che hai già scritto.
+          </dd>
+        </div>
+        <div className="border-l border-hairline pl-4">
+          <dt className="font-semibold text-ink">Listino prezzi</dt>
+          <dd className="text-graphite">Il tuo listino di prezzi unitari, voce per voce.</dd>
+        </div>
+      </dl>
 
       <ImportPreventivi orgId={org.id} userId={userId} />
       <VociProprie

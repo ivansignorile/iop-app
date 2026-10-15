@@ -84,6 +84,29 @@ export function elaborazioneBloccata(avviata: string | null, ora = Date.now()): 
   return !Number.isFinite(t) || ora - t > ELABORAZIONE_STALE_MS;
 }
 
+/** Dopo quanto un documento rimasto 'caricato' (avvio mai partito) si può riprovare. */
+export const RIPROVA_CARICATO_MS = 60 * 1000;
+
+/** Se il documento si può rielaborare a mano: in errore, caricato da più di un minuto
+ * (l'avvio non è mai partito) o in elaborazione ma bloccato. Mai se elaborato. */
+export function puoRiprovare(
+  doc: { stato: string; created_at: string; elaborazione_at: string | null },
+  ora = Date.now(),
+): boolean {
+  switch (doc.stato) {
+    case "errore":
+      return true;
+    case "caricato": {
+      const t = Date.parse(doc.created_at);
+      return !Number.isFinite(t) || ora - t > RIPROVA_CARICATO_MS;
+    }
+    case "in_elaborazione":
+      return elaborazioneBloccata(doc.elaborazione_at, ora);
+    default:
+      return false;
+  }
+}
+
 /** Parole di ricerca sicure per i filtri PostgREST (.or/ilike): solo lettere e cifre,
  * massimo 6 parole da 40 caratteri. */
 export function paroleRicerca(q: string): string[] {

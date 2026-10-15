@@ -1,6 +1,14 @@
 import { describe, expect, it } from "vitest";
 
-import { controllaPreventivo, elaborazioneBloccata, paroleRicerca, isUuid, nomeFileStorage, validaVoce } from "./voce";
+import {
+  controllaPreventivo,
+  elaborazioneBloccata,
+  isUuid,
+  nomeFileStorage,
+  paroleRicerca,
+  puoRiprovare,
+  validaVoce,
+} from "./voce";
 
 const base = {
   titolo: "Ripristino frontalini",
@@ -79,5 +87,25 @@ describe("paroleRicerca", () => {
   it("toglie i caratteri speciali di PostgREST e le parole di una lettera", () => {
     expect(paroleRicerca("intonaco, (civile)* a %50 già")).toEqual(["intonaco", "civile", "50", "già"]);
     expect(paroleRicerca("  ")).toEqual([]);
+  });
+});
+
+describe("puoRiprovare", () => {
+  const ora = Date.parse("2026-10-15T12:00:00Z");
+  const fa = (s: number) => new Date(ora - s * 1000).toISOString();
+
+  it("sempre per i documenti in errore", () => {
+    expect(puoRiprovare({ stato: "errore", created_at: fa(5), elaborazione_at: null }, ora)).toBe(true);
+  });
+  it("per i caricati solo dopo circa un minuto", () => {
+    expect(puoRiprovare({ stato: "caricato", created_at: fa(30), elaborazione_at: null }, ora)).toBe(false);
+    expect(puoRiprovare({ stato: "caricato", created_at: fa(61), elaborazione_at: null }, ora)).toBe(true);
+  });
+  it("mai per gli elaborati", () => {
+    expect(puoRiprovare({ stato: "elaborato", created_at: fa(9999), elaborazione_at: fa(9000) }, ora)).toBe(false);
+  });
+  it("per gli in elaborazione solo se bloccati", () => {
+    expect(puoRiprovare({ stato: "in_elaborazione", created_at: fa(700), elaborazione_at: fa(60) }, ora)).toBe(false);
+    expect(puoRiprovare({ stato: "in_elaborazione", created_at: fa(900), elaborazione_at: fa(660) }, ora)).toBe(true);
   });
 });

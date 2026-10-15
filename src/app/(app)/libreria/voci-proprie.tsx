@@ -7,13 +7,15 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { FormError, Input, Select, Textarea } from "@/components/ui/field";
 import { UNITA_LABEL, formatDate, formatEuro } from "@/lib/format";
-import { UNITA, elaborazioneBloccata } from "@/lib/libreria/voce";
+import { RIPROVA_CARICATO_MS, UNITA, elaborazioneBloccata, puoRiprovare } from "@/lib/libreria/voce";
+import { createClient } from "@/lib/supabase/client";
 import type { Tables } from "@/lib/supabase/types";
 import {
   deleteDocumentoLibreria,
   deleteVocePropria,
   updateVocePropria,
 } from "./actions";
+import { avviaESegui, type EsitoElaborazione } from "./elaborazione";
 
 export type VocePropria = Pick<
   Tables<"voci_proprie">,
@@ -323,48 +325,102 @@ export function DocumentiLibreria({ documenti }: { documenti: DocumentoLibreria[
   );
 }
 
+type Riprova = { stato: "lavoro" } | EsitoElaborazione | null;
+
 function DocumentoRow({ doc }: { doc: DocumentoLibreria }) {
+  const router = useRouter();
   const [pending, startTransition] = useTransition();
-  const stato = STATO_DOC[doc.stato];
+  const [riprova, setRiprova] = useState<Riprova>(null);
+  const [ora, setOra] = useState(() => Date.now());
+
+  // Un documento 'caricato' diventa riprovabile dopo un minuto: aggiorna l'ora a scadenza.
+  useEffect(() => {
+    if (doc.stato !== "caricato") return;
+    const resta = Date.parse(doc.created_at) + RIPROVA_CARICATO_MS + 500 - Date.now();
+    if (resta <= 0) return;
+    const t = setTimeout(() => setOra(Date.now()), resta);
+    return () => clearTimeout(t);
+  }, [doc.stato, doc.created_at]);
+
+  const lavora = riprova?.stato === "lavoro";
+  const stato = STATO_DOC[lavora ? "in_elaborazione" : doc.stato];
   // Mentre gira l'estrazione il documento non si elimina (salvo elaborazione bloccata).
-  const [ora] = useState(() => Date.now());
-  const occupato = doc.stato === "in_elaborazione" && !elaborazioneBloccata(doc.elaborazione_at, ora);
+  const occupato =
+    lavora || (doc.stato === "in_elaborazione" && !elaborazioneBloccata(doc.elaborazione_at, ora));
+  const riprovabile = !lavora && puoRiprovare(doc, ora);
+  const errore =
+    riprova?.stato === "errore"
+      ? riprova.messaggio
+      : doc.stato === "errore" && !lavora
+        ? doc.errore
+        : null;
+
+  async function rielabora() {
+    setRiprova({ stato: "lavoro" });
+    const esito = await avviaESegui(createClient(), doc.id);
+    setRiprova(esito);
+    router.refresh();
+  }
+
   return (
     <li
-      className={`grid gap-2 py-3 text-sm transition-opacity md:grid-cols-[minmax(0,1fr)_9rem_7rem_5rem] md:items-center md:gap-4 ${
+      className={`grid gap-2 py-3 text-sm transition-opacity md:grid-cols-[minmax(0,1fr)_9rem_7rem_9rem] md:items-center md:gap-4 ${
         pending ? "opacity-40" : ""
       }`}
     >
       <div className="min-w-0">
         <p className="truncate text-ink">{doc.nome_file}</p>
-        <p className="text-xs text-stone">
-          {formatDate(doc.created_at)}
-          {doc.stato === "errore" && doc.errore ? ` · ${doc.errore}` : ""}
-        </p>
+        <p className="text-xs text-stone">{formatDate(doc.created_at)}</p>
+        {errore ? (
+          <p className="mt-1 text-xs text-graphite" role="alert">
+            <span className="font-semibold text-ink">Errore.</span> {errore}
+          </p>
+        ) : null}
+        {riprova?.stato === "lento" ? (
+          <p className="mt-1 text-xs text-graphite" aria-live="polite">
+            Ancora in elaborazione, ricarica più tardi.
+          </p>
+        ) : null}
       </div>
       <span>
-        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${stato.tone}`}>
+        <span
+          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ${stato.tone}`}
+        >
+          {lavora ? <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ink" aria-hidden /> : null}
           {stato.label}
         </span>
       </span>
       <span className="tabular-nums text-graphite md:text-right">
-        {doc.voci_estratte} {doc.voci_estratte === 1 ? "voce" : "voci"}
+        {riprova?.stato === "ok" ? riprova.voci : doc.voci_estratte}{" "}
+        {(riprova?.stato === "ok" ? riprova.voci : doc.voci_estratte) === 1 ? "voce" : "voci"}
       </span>
-      <button
-        type="button"
-        disabled={pending || occupato}
-        title={occupato ? "Elaborazione in corso" : undefined}
-        onClick={() => {
-          if (!confirm(`Eliminare "${doc.nome_file}"? Il file viene cancellato, le voci estratte restano in libreria.`)) return;
-          startTransition(async () => {
-            const r = await deleteDocumentoLibreria(doc.id);
-            if (!r.ok) alert(r.errore);
-          });
-        }}
-        className="text-left text-ink underline underline-offset-2 disabled:text-stone disabled:no-underline md:text-right"
-      >
-        Elimina
-      </button>
+      <span className="flex gap-4 md:justify-end">
+        {riprovabile ? (
+          <button
+            type="button"
+            disabled={pending}
+            onClick={rielabora}
+            className="text-ink underline underline-offset-2 transition-transform active:scale-[0.98] disabled:text-stone disabled:no-underline"
+          >
+            Riprova
+          </button>
+        ) : null}
+        <button
+          type="button"
+          disabled={pending || occupato}
+          title={occupato ? "Elaborazione in corso" : undefined}
+          onClick={() => {
+            if (!confirm(`Eliminare "${doc.nome_file}"? Il file viene cancellato, le voci estratte restano in libreria.`)) return;
+            startTransition(async () => {
+              const r = await deleteDocumentoLibreria(doc.id);
+              if (!r.ok) alert(r.errore);
+            });
+          }}
+          className="text-ink underline underline-offset-2 disabled:text-stone disabled:no-underline"
+        >
+          Elimina
+        </button>
+      </span>
     </li>
   );
 }
