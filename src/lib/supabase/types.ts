@@ -369,6 +369,42 @@ export type Database = {
           },
         ]
       }
+      libreria_elaborazioni_log: {
+        Row: {
+          created_at: string
+          documento_id: string | null
+          id: string
+          org_id: string
+        }
+        Insert: {
+          created_at?: string
+          documento_id?: string | null
+          id?: string
+          org_id: string
+        }
+        Update: {
+          created_at?: string
+          documento_id?: string | null
+          id?: string
+          org_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "libreria_elaborazioni_log_documento_id_fkey"
+            columns: ["documento_id"]
+            isOneToOne: false
+            referencedRelation: "documenti_libreria"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "libreria_elaborazioni_log_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       materiali_prodotti: {
         Row: {
           alternativa: string | null
@@ -979,6 +1015,27 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      avvia_elaborazione_documento: {
+        Args: { p_doc: string }
+        Returns: {
+          created_at: string
+          created_by: string | null
+          elaborazione_at: string | null
+          errore: string | null
+          id: string
+          nome_file: string
+          org_id: string
+          stato: Database["public"]["Enums"]["documento_stato"]
+          storage_path: string
+          voci_estratte: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "documenti_libreria"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       cerca_prezzario: {
         Args: { p_limit?: number; p_regione: string; q: string }
         Returns: {

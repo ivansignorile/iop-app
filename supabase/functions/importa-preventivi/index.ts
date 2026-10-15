@@ -1,11 +1,15 @@
 // Edge function: importa-preventivi
 // Legge un vecchio preventivo (PDF o immagine) caricato in Storage, ne estrae le
 // voci di lavorazione con prezzo unitario e le salva nella libreria personale
-// dell'org (voci_proprie). Tutto passa dal client con il JWT dell'utente: RLS
-// su documenti_libreria, voci_proprie e storage.objects. verify_jwt=true.
+// dell'org (voci_proprie). verify_jwt=true.
 //
-// Flusso: claim atomico del documento (stato -> in_elaborazione) e risposta 202;
-// download, estrazione e scrittura girano in background (EdgeRuntime.waitUntil).
+// Flusso:
+// 1. Autorizzazione con il JWT dell'utente: l'RPC avvia_elaborazione_documento
+//    verifica l'org, rifiuta documenti già elaborati o in corso, applica la quota
+//    giornaliera e fa il claim atomico (stato -> in_elaborazione). Risposta 202.
+// 2. Download, estrazione e scritture girano in background (EdgeRuntime.waitUntil)
+//    con un client service role: il JWT dell'utente può scadere a metà lavoro.
+//    Org e path vengono SOLO dal documento restituito dall'RPC, mai dal body.
 // Il client segue l'avanzamento leggendo documenti_libreria.
 
 import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@2";
@@ -23,9 +27,8 @@ const MAX_TITOLO = 300;
 const MAX_DESCRIZIONE = 10000;
 const MAX_CATEGORIA = 100;
 const MAX_PREZZO = 10_000_000;
-// Un documento 'in_elaborazione' da più di così è considerato bloccato e si può riprendere.
-const STALE_MS = 10 * 60 * 1000;
 const PAGE = 1000; // = max_rows di PostgREST
+const DELETE_CHUNK = 200; // id per richiesta di delete (lunghezza URL)
 const GENERIC_ERROR = "Elaborazione non riuscita";
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -97,14 +100,14 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   const authHeader = req.headers.get("Authorization") ?? "";
-  const supabase = createClient(
+  const userClient = createClient(
     Deno.env.get("SUPABASE_URL")!,
     Deno.env.get("SUPABASE_ANON_KEY")!,
     { global: { headers: { Authorization: authHeader } } },
   );
 
   try {
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user } } = await userClient.auth.getUser();
     if (!user) return json({ error: "Non autenticato" }, 401);
 
     let body: { documento_id?: unknown };
@@ -116,39 +119,39 @@ Deno.serve(async (req) => {
     const id = typeof body?.documento_id === "string" ? body.documento_id : "";
     if (!UUID_RE.test(id)) return json({ error: "documento_id non valido" }, 400);
 
-    // Claim atomico (RLS): passa solo se non è già in elaborazione, o se lo è da
-    // troppo tempo (worker interrotto).
-    const staleBefore = new Date(Date.now() - STALE_MS).toISOString();
-    const { data: claimed, error: claimErr } = await supabase
-      .from("documenti_libreria")
-      .update({
-        stato: "in_elaborazione",
-        errore: null,
-        elaborazione_at: new Date().toISOString(),
-      })
-      .eq("id", id)
-      .or(`stato.neq.in_elaborazione,elaborazione_at.is.null,elaborazione_at.lt.${staleBefore}`)
-      .select("id, org_id, storage_path");
-    if (claimErr) throw claimErr;
-
-    if (!claimed?.length) {
-      const { data: exists } = await supabase
-        .from("documenti_libreria")
-        .select("id")
-        .eq("id", id)
-        .maybeSingle();
-      return exists
-        ? json({ error: "Elaborazione già in corso" }, 409)
-        : json({ error: "Documento non trovato" }, 404);
+    // Autorizzazione + quota + claim atomico, tutto nell'RPC (con il JWT dell'utente).
+    const { data: doc, error: rpcErr } = await userClient
+      .rpc("avvia_elaborazione_documento", { p_doc: id })
+      .single();
+    if (rpcErr) {
+      const mapped = ERRORI_AVVIO[rpcErr.message];
+      if (mapped) return json({ error: mapped.messaggio }, mapped.status);
+      throw rpcErr;
     }
+    if (!doc) return json({ error: "Documento non trovato" }, 404);
 
-    EdgeRuntime.waitUntil(elabora(supabase, claimed[0] as Doc));
+    const admin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+    const d = doc as Doc;
+    EdgeRuntime.waitUntil(elabora(admin, { id: d.id, org_id: d.org_id, storage_path: d.storage_path }));
     return json({ avviato: true }, 202);
   } catch (e) {
     console.error("importa-preventivi", e);
     return json({ error: GENERIC_ERROR }, 500);
   }
 });
+
+/** Errori dell'RPC avvia_elaborazione_documento -> risposta HTTP. */
+const ERRORI_AVVIO: Record<string, { status: number; messaggio: string }> = {
+  NON_AUTENTICATO: { status: 401, messaggio: "Non autenticato" },
+  DOC_NON_TROVATO: { status: 404, messaggio: "Documento non trovato" },
+  DOC_GIA_ELABORATO: { status: 409, messaggio: "Documento già elaborato" },
+  DOC_IN_CORSO: { status: 409, messaggio: "Elaborazione già in corso" },
+  QUOTA_SUPERATA: { status: 429, messaggio: "Limite giornaliero raggiunto" },
+};
 
 async function elabora(supabase: SupabaseClient, doc: Doc) {
   try {
@@ -210,24 +213,24 @@ async function elabora(supabase: SupabaseClient, doc: Doc) {
     const parsed = JSON.parse(textBlock.text) as { voci?: unknown[] };
     const voci = normalizza(parsed.voci ?? []);
 
-    // Rielaborazione: le voci nate da questo documento vengono sostituite.
-    const { error: delErr } = await supabase
-      .from("voci_proprie")
-      .delete()
-      .eq("documento_id", doc.id);
-    if (delErr) throw delErr;
-
-    // Dedup con le altre voci dell'org per lower(titolo)+unita. Paginato: max_rows=1000.
+    // Voci dell'org, paginate (max_rows=1000). Quelle nate da questo documento
+    // (rielaborazione) vengono sostituite: si cancellano solo DOPO aver inserito le
+    // nuove, così un insert fallito non fa perdere nulla. Le altre servono al dedup
+    // per lower(titolo)+unita.
+    const vecchie: string[] = [];
     const mappa = new Map<string, { id: string; titolo: string; unita: Unita; prezzo: number; descrizione: string }>();
     for (let from = 0; ; from += PAGE) {
       const { data, error } = await supabase
         .from("voci_proprie")
-        .select("id, titolo, unita, prezzo, descrizione")
+        .select("id, titolo, unita, prezzo, descrizione, documento_id")
         .eq("org_id", doc.org_id)
         .order("id")
         .range(from, from + PAGE - 1);
       if (error) throw error;
-      for (const v of data ?? []) mappa.set(chiave(v.titolo, v.unita), v);
+      for (const v of data ?? []) {
+        if (v.documento_id === doc.id) vecchie.push(v.id);
+        else mappa.set(chiave(v.titolo, v.unita), v);
+      }
       if (!data || data.length < PAGE) break;
     }
 
@@ -262,9 +265,18 @@ async function elabora(supabase: SupabaseClient, doc: Doc) {
         .upsert(daAggiornare, { onConflict: "id" });
       if (error) throw error;
     }
+    for (let i = 0; i < vecchie.length; i += DELETE_CHUNK) {
+      const { error } = await supabase
+        .from("voci_proprie")
+        .delete()
+        .eq("org_id", doc.org_id)
+        .eq("documento_id", doc.id)
+        .in("id", vecchie.slice(i, i + DELETE_CHUNK));
+      if (error) throw error;
+    }
 
     const n = daInserire.length + daAggiornare.length;
-    await setStato(supabase, doc.id, { stato: "elaborato", voci_estratte: n, errore: null });
+    await setStato(supabase, doc, { stato: "elaborato", voci_estratte: n, errore: null });
     console.log("importa-preventivi ok", doc.id, {
       inserite: daInserire.length,
       aggiornate: daAggiornare.length,
@@ -273,13 +285,17 @@ async function elabora(supabase: SupabaseClient, doc: Doc) {
   } catch (e) {
     const msg = e instanceof UserError ? e.message : GENERIC_ERROR;
     if (!(e instanceof UserError)) console.error("importa-preventivi", doc.id, e);
-    await setStato(supabase, doc.id, { stato: "errore", errore: msg })
+    await setStato(supabase, doc, { stato: "errore", errore: msg })
       .catch((err) => console.error("set errore", doc.id, err));
   }
 }
 
-async function setStato(supabase: SupabaseClient, id: string, patch: Record<string, unknown>) {
-  const { error } = await supabase.from("documenti_libreria").update(patch).eq("id", id);
+async function setStato(supabase: SupabaseClient, doc: Doc, patch: Record<string, unknown>) {
+  const { error } = await supabase
+    .from("documenti_libreria")
+    .update(patch)
+    .eq("id", doc.id)
+    .eq("org_id", doc.org_id);
   if (error) throw error;
 }
 
