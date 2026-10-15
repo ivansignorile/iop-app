@@ -4,12 +4,21 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Field, Input } from "@/components/ui/field";
+import { Field, Input, Select } from "@/components/ui/field";
 import { createClient } from "@/lib/supabase/client";
 import type { Tables } from "@/lib/supabase/types";
 import { saveOrgAction } from "./actions";
 
-export function SettingsForm({ org }: { org: Tables<"organizations"> }) {
+export function SettingsForm({
+  org,
+  regioni,
+}: {
+  org: Tables<"organizations">;
+  regioni: { regione: string; titolo: string }[];
+}) {
+  const opzioni = regioni.some((r) => r.regione === org.regione)
+    ? regioni
+    : [{ regione: org.regione, titolo: org.regione }, ...regioni];
   const [logoUrl, setLogoUrl] = useState(org.logo_url ?? "");
   const [uploading, setUploading] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -115,6 +124,19 @@ export function SettingsForm({ org }: { org: Tables<"organizations"> }) {
           />
         </Field>
       </div>
+      <Field
+        label="Prezzario regionale"
+        htmlFor="regione"
+        hint="Base per descrizioni e prezzi delle voci"
+      >
+        <Select id="regione" name="regione" defaultValue={org.regione}>
+          {opzioni.map((r) => (
+            <option key={r.regione} value={r.regione}>
+              {r.titolo}
+            </option>
+          ))}
+        </Select>
+      </Field>
 
       <div className="flex items-center gap-3">
         <Button type="submit">Salva impostazioni</Button>

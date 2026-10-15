@@ -35,3 +35,6 @@ next-env.d.ts
 !.env.example
 supabase/.branches/
 supabase/.temp/
+
+# prezzari raw data
+scripts/prezzario/data/
