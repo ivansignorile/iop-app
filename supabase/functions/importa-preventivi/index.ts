@@ -156,7 +156,11 @@ const ERRORI_AVVIO: Record<string, { status: number; messaggio: string }> = {
 async function elabora(supabase: SupabaseClient, doc: Doc) {
   try {
     // Il path deve stare nella cartella dell'org del documento.
-    if (!doc.storage_path.startsWith(`${doc.org_id}/libreria/`)) {
+    // Stesso formato stretto del trigger DB: niente %, \, // o "..".
+    const formato = new RegExp(
+      `^${doc.org_id}/libreria/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[A-Za-z0-9_-][A-Za-z0-9._-]{0,119}$`,
+    );
+    if (!formato.test(doc.storage_path) || doc.storage_path.includes("..")) {
       throw new UserError("Percorso del file non valido");
     }
 

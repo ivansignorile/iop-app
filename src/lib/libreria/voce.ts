@@ -69,8 +69,9 @@ export function nomeFileStorage(nome: string): string {
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
     .replace(/[^a-zA-Z0-9._-]+/g, "_")
-    .replace(/^[._]+/, "")
-    .slice(-120);
+    .replace(/\.{2,}/g, ".")
+    .slice(-120)
+    .replace(/^[._]+/, "");
   return pulito || "file";
 }
 

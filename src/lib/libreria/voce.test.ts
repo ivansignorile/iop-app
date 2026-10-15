@@ -57,6 +57,14 @@ describe("nomeFileStorage", () => {
     expect(nomeFileStorage("../Preventivo Città 2024.pdf")).toBe("Preventivo_Citta_2024.pdf");
     expect(nomeFileStorage("///")).toBe("file");
   });
+  it("produce solo nomi accettati dal trigger DB (niente '..', niente punto iniziale)", () => {
+    const formato = /^[A-Za-z0-9_-][A-Za-z0-9._-]{0,119}$/;
+    for (const nome of ["a..b.pdf", "%2e%2e%2fx.pdf", "..\\..\\x.pdf", `${"x".repeat(130)}.pdf`, `.${"y".repeat(119)}`]) {
+      const out = nomeFileStorage(nome);
+      expect(out).toMatch(formato);
+      expect(out).not.toContain("..");
+    }
+  });
 });
 
 describe("controllaPreventivo", () => {

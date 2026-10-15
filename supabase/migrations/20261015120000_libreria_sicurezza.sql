@@ -23,8 +23,10 @@ language plpgsql
 set search_path = public
 as $$
 begin
+  -- Formato esatto generato dal client: {org_id}/libreria/{uuid}-{nome con soli [A-Za-z0-9._-]}.
+  -- Whitelist stretta: niente %, \, // o segmenti extra che lo storage potrebbe interpretare diversamente.
   if new.storage_path is null
-     or left(new.storage_path, length(new.org_id::text || '/libreria/')) <> new.org_id::text || '/libreria/'
+     or new.storage_path !~ ('^' || new.org_id::text || '/libreria/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[A-Za-z0-9_-][A-Za-z0-9._-]{0,119}$')
      or position('..' in new.storage_path) > 0 then
     raise exception 'storage_path non valido' using errcode = '22023';
   end if;
