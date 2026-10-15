@@ -11,7 +11,13 @@ import {
   type AuthState,
 } from "@/app/auth/actions";
 
-export function AuthForm({ mode }: { mode: "login" | "signup" }) {
+export function AuthForm({
+  mode,
+  redirectTo,
+}: {
+  mode: "login" | "signup";
+  redirectTo?: string;
+}) {
   const action = mode === "login" ? signInAction : signUpAction;
   const [state, formAction, pending] = useActionState<AuthState, FormData>(
     action,
@@ -20,6 +26,10 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
+      {mode === "login" && redirectTo ? (
+        <input type="hidden" name="redirect" value={redirectTo} />
+      ) : null}
+
       {state.message ? (
         <p className="rounded-sm border border-success-border/40 bg-success/5 px-3 py-2 text-sm text-success">
           {state.message}

@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 
+import { safeRedirectPath } from "@/lib/safe-redirect";
 import { createClient } from "@/lib/supabase/server";
 
 export type AuthState = { error?: string; message?: string };
@@ -17,7 +18,7 @@ export async function signInAction(
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) return { error: "Credenziali non valide. Riprova." };
 
-  redirect("/dashboard");
+  redirect(safeRedirectPath(formData.get("redirect")) ?? "/dashboard");
 }
 
 export async function signUpAction(

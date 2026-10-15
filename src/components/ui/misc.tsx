@@ -45,6 +45,10 @@ const statoTone: Record<string, string> = {
   bozza: "bg-surface-strong text-ink",
   inviato: "border border-ink text-ink",
   accettato: "bg-primary text-on-primary",
+  nuova: "bg-primary text-on-primary",
+  in_lavorazione: "border border-ink text-ink",
+  evasa: "bg-surface-strong text-ink",
+  scartata: "border border-hairline-soft text-stone line-through",
   rifiutato: "border border-hairline-soft text-stone line-through",
 };
 
@@ -56,7 +60,7 @@ export function StatoBadge({ stato }: { stato: string }) {
         statoTone[stato] ?? "bg-surface-soft text-body",
       )}
     >
-      {stato.charAt(0).toUpperCase() + stato.slice(1)}
+      {(stato.charAt(0).toUpperCase() + stato.slice(1)).replace("_", " ")}
     </span>
   );
 }

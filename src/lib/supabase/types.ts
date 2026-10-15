@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       cicli_lavorazione: {
@@ -702,6 +727,78 @@ export type Database = {
           },
         ]
       }
+      richieste_rate_log: {
+        Row: {
+          azione: string
+          created_at: string
+          id: number
+          ip_hash: string
+        }
+        Insert: {
+          azione: string
+          created_at?: string
+          id?: number
+          ip_hash: string
+        }
+        Update: {
+          azione?: string
+          created_at?: string
+          id?: number
+          ip_hash?: string
+        }
+        Relationships: []
+      }
+      richieste_servizio: {
+        Row: {
+          cartella: string | null
+          comune: string | null
+          created_at: string
+          descrizione: string
+          email: string
+          files: Json
+          id: string
+          nome: string
+          note_interne: string | null
+          notifica_email_ok: boolean | null
+          notifica_whatsapp_ok: boolean | null
+          stato: Database["public"]["Enums"]["richiesta_stato"]
+          telefono: string | null
+          tipo: Database["public"]["Enums"]["richiesta_tipo"]
+        }
+        Insert: {
+          cartella?: string | null
+          comune?: string | null
+          created_at?: string
+          descrizione: string
+          email: string
+          files?: Json
+          id?: string
+          nome: string
+          note_interne?: string | null
+          notifica_email_ok?: boolean | null
+          notifica_whatsapp_ok?: boolean | null
+          stato?: Database["public"]["Enums"]["richiesta_stato"]
+          telefono?: string | null
+          tipo: Database["public"]["Enums"]["richiesta_tipo"]
+        }
+        Update: {
+          cartella?: string | null
+          comune?: string | null
+          created_at?: string
+          descrizione?: string
+          email?: string
+          files?: Json
+          id?: string
+          nome?: string
+          note_interne?: string | null
+          notifica_email_ok?: boolean | null
+          notifica_whatsapp_ok?: boolean | null
+          stato?: Database["public"]["Enums"]["richiesta_stato"]
+          telefono?: string | null
+          tipo?: Database["public"]["Enums"]["richiesta_tipo"]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -734,6 +831,8 @@ export type Database = {
       membership_role: "owner" | "admin" | "member"
       preventivo_modalita: "capitolato" | "manuale" | "foto"
       preventivo_stato: "bozza" | "inviato" | "accettato" | "rifiutato"
+      richiesta_stato: "nuova" | "in_lavorazione" | "evasa" | "scartata"
+      richiesta_tipo: "foto_descrizione" | "foto_capitolato"
       unita_misura: "corpo" | "mq" | "ml" | "mc" | "giorno" | "cad" | "kg"
     }
     CompositeTypes: {
@@ -750,12 +849,12 @@ export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -779,11 +878,11 @@ export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -804,11 +903,11 @@ export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -829,11 +928,11 @@ export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
     | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaEnumNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -846,11 +945,11 @@ export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
     | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
+    : never) = never,
 > = PublicCompositeTypeNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -860,12 +959,17 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       cliente_tipo: ["condominio", "privato", "azienda"],
       membership_role: ["owner", "admin", "member"],
       preventivo_modalita: ["capitolato", "manuale", "foto"],
       preventivo_stato: ["bozza", "inviato", "accettato", "rifiutato"],
+      richiesta_stato: ["nuova", "in_lavorazione", "evasa", "scartata"],
+      richiesta_tipo: ["foto_descrizione", "foto_capitolato"],
       unita_misura: ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"],
     },
   },
