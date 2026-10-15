@@ -54,13 +54,15 @@ function scostamento(ditta: number, mercato: number | null): number | null {
 type EsitoAbbinamento = {
   abbinati: number;
   senza_corrispondenza: number;
+  unita_diversa: number;
   non_elaborati: number;
+  errori: number;
 };
 
 /** Abbina le voci al prezzario/libreria. Lancia un Error con messaggio in italiano. */
 async function abbinaVoci(preventivoId: string, soloNuovi: boolean): Promise<EsitoAbbinamento> {
   const supabase = createClient();
-  type Risposta = Partial<EsitoAbbinamento> & { error?: string };
+  type Risposta = Partial<Omit<EsitoAbbinamento, "errori">> & { error?: string; errori?: string[] };
   let res: Awaited<ReturnType<typeof supabase.functions.invoke<Risposta>>>;
   try {
     res = await supabase.functions.invoke<Risposta>("abbina-voci", {
@@ -81,15 +83,25 @@ async function abbinaVoci(preventivoId: string, soloNuovi: boolean): Promise<Esi
   return {
     abbinati: Number(data.abbinati ?? 0),
     senza_corrispondenza: Number(data.senza_corrispondenza ?? 0),
+    unita_diversa: Number(data.unita_diversa ?? 0),
     non_elaborati: Number(data.non_elaborati ?? 0),
+    errori: Array.isArray(data.errori) ? data.errori.length : 0,
   };
 }
 
 function testoEsitoAbbinamento(e: EsitoAbbinamento): string {
   const voci = (n: number) => (n === 1 ? "1 voce" : `${n} voci`);
-  let s = `${voci(e.abbinati)} ${e.abbinati === 1 ? "abbinata" : "abbinate"}, ${e.senza_corrispondenza} senza corrispondenza.`;
+  const parti = [
+    `${voci(e.abbinati)} ${e.abbinati === 1 ? "abbinata" : "abbinate"}`,
+    `${e.senza_corrispondenza} senza corrispondenza`,
+  ];
+  if (e.unita_diversa > 0) parti.push(`${e.unita_diversa} con unità diversa`);
+  let s = `${parti.join(", ")}.`;
   if (e.non_elaborati > 0) {
-    s += ` ${voci(e.non_elaborati)} oltre il limite di 100: premi di nuovo "Abbina al prezzario" per completarle.`;
+    s += ` ${e.non_elaborati} non ${e.non_elaborati === 1 ? "elaborata" : "elaborate"}: premi di nuovo "Abbina al prezzario".`;
+  }
+  if (e.errori > 0) {
+    s += ` ${e.errori === 1 ? "Si è verificato 1 errore" : `Si sono verificati ${e.errori} errori`}: riprova.`;
   }
   return s;
 }

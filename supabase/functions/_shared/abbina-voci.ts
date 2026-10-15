@@ -93,6 +93,15 @@ export function validaAbbinamenti(output: unknown, interventi: InterventoDaAbbin
   return risultato;
 }
 
+export type EsitoRiga = "abbinato" | "senza" | "unita_diversa";
+
+/** Divide in lotti di dimensione fissa (l'ultimo può essere più corto). */
+export function inLotti<T>(items: T[], size: number): T[][] {
+  const out: T[][] = [];
+  for (let i = 0; i < items.length; i += size) out.push(items.slice(i, i + size));
+  return out;
+}
+
 export type PatchIntervento = {
   prezzario_voce_id: string | null;
   codice_prezzario: string | null;
@@ -116,7 +125,7 @@ export function costruisciPatch(
   unitaIntervento: Unita,
   prezzario: CandPrezzario | null,
   propria: CandPropria | null,
-): { patch: PatchIntervento; abbinato: boolean } {
+): { patch: PatchIntervento; esito: EsitoRiga } {
   // Con fonte 'prezzario' la libreria non entra in gioco.
   const prop = fonte === "prezzario" ? null : propria;
   const base = {
@@ -130,7 +139,7 @@ export function costruisciPatch(
   };
 
   if (!prezzario && !prop) {
-    return { patch: { ...base, abbinamento_avviso: AVVISO_NESSUNA, fonte_scelta: null }, abbinato: false };
+    return { patch: { ...base, abbinamento_avviso: AVVISO_NESSUNA, fonte_scelta: null }, esito: "senza" };
   }
 
   const prezOk = prezzario && unitaPrezzarioCompatibile(unitaIntervento, prezzario) ? prezzario : null;
@@ -156,13 +165,13 @@ export function costruisciPatch(
         descrizione: compatibile.descrizione,
         prezzo_unitario: compatibile.prezzo,
       },
-      abbinato: true,
+      esito: "abbinato",
     };
   }
 
   // Solo candidati con unità diversa: si salvano i riferimenti, prezzo e descrizione della riga restano.
   return {
     patch: { ...base, abbinamento_avviso: avvisoUnita ?? AVVISO_NESSUNA, fonte_scelta: null },
-    abbinato: true,
+    esito: "unita_diversa",
   };
 }

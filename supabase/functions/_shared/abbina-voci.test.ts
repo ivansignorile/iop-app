@@ -6,6 +6,7 @@ import {
   type CandPrezzario,
   type CandPropria,
   costruisciPatch,
+  inLotti,
   type InterventoDaAbbinare,
   unitaPrezzarioCompatibile,
   validaAbbinamenti,
@@ -83,8 +84,8 @@ describe("validaAbbinamenti", () => {
 
 describe("costruisciPatch", () => {
   it("entrambi: preferisce la voce propria compatibile", () => {
-    const { patch, abbinato } = costruisciPatch("entrambi", "mq", prez(), prop());
-    expect(abbinato).toBe(true);
+    const { patch, esito } = costruisciPatch("entrambi", "mq", prez(), prop());
+    expect(esito).toBe("abbinato");
     expect(patch).toMatchObject({
       fonte_scelta: "propria",
       descrizione: "Intonaco nostro",
@@ -101,16 +102,16 @@ describe("costruisciPatch", () => {
   });
 
   it("nessun candidato → avviso e nessun prezzo", () => {
-    const { patch, abbinato } = costruisciPatch("entrambi", "mq", null, null);
-    expect(abbinato).toBe(false);
+    const { patch, esito } = costruisciPatch("entrambi", "mq", null, null);
+    expect(esito).toBe("senza");
     expect(patch.abbinamento_avviso).toBe(AVVISO_NESSUNA);
     expect(patch.prezzo_unitario).toBeUndefined();
     expect(patch.fonte_scelta).toBeNull();
   });
 
   it("unità diversa nel prezzario: salva descrizioni, non tocca il prezzo", () => {
-    const { patch, abbinato } = costruisciPatch("prezzario", "corpo", prez({ unita: "corpo", unita_testo: "h" }), null);
-    expect(abbinato).toBe(true);
+    const { patch, esito } = costruisciPatch("prezzario", "corpo", prez({ unita: "corpo", unita_testo: "h" }), null);
+    expect(esito).toBe("unita_diversa");
     expect(patch.prezzo_unitario).toBeUndefined();
     expect(patch.descrizione).toBeUndefined();
     expect(patch.descrizione_prezzario).toBe("Intonaco civile");
@@ -119,7 +120,8 @@ describe("costruisciPatch", () => {
   });
 
   it("propria con unità diversa: ripiega sul prezzario compatibile con avviso", () => {
-    const { patch } = costruisciPatch("entrambi", "mq", prez(), prop({ unita: "ml" }));
+    const { patch, esito } = costruisciPatch("entrambi", "mq", prez(), prop({ unita: "ml" }));
+    expect(esito).toBe("abbinato");
     expect(patch).toMatchObject({
       fonte_scelta: "prezzario",
       prezzo_unitario: 20,
@@ -132,5 +134,13 @@ describe("costruisciPatch", () => {
     const { patch } = costruisciPatch("propri", "mq", prez(), null);
     expect(patch.fonte_scelta).toBe("prezzario");
     expect(patch.abbinamento_avviso).toMatch(/Nessuna voce nella tua libreria/);
+  });
+});
+
+describe("inLotti", () => {
+  it("divide in lotti da 25", () => {
+    const xs = Array.from({ length: 60 }, (_, i) => i);
+    expect(inLotti(xs, 25).map((l) => l.length)).toEqual([25, 25, 10]);
+    expect(inLotti([], 25)).toEqual([]);
   });
 });
