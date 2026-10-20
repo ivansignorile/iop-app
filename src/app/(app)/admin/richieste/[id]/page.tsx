@@ -6,11 +6,13 @@ import { Field, Select, Textarea } from "@/components/ui/field";
 import { Card, PageHeader, StatoBadge } from "@/components/ui/misc";
 import { requirePlatformAdmin } from "@/lib/admin";
 import { formatDate } from "@/lib/format";
+import { FORMATO_LABEL, raggruppaFile, RUOLO_LABEL } from "@/lib/richieste/etichette";
+import { RUOLI_FILE } from "@/lib/richieste/valida";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 import { setStatoRichiesta } from "../actions";
 
-type FileInfo = { nome: string; mime: string; size: number; path: string };
+type FileInfo = { nome: string; mime: string; size: number; path: string; ruolo?: string };
 
 const statoLabel = {
   nuova: "Nuova",
@@ -51,6 +53,7 @@ export default async function RichiestaDettaglioPage({
     }
   }
 
+  const gruppi = raggruppaFile(files);
   const action = setStatoRichiesta.bind(null, r.id);
 
   return (
@@ -86,6 +89,14 @@ export default async function RichiestaDettaglioPage({
               </dd>
               <dt className="text-muted">Tipo</dt>
               <dd className="text-ink">{r.tipo === "foto_capitolato" ? "Foto + capitolato" : "Foto + descrizione"}</dd>
+              <dt className="text-muted">Formato</dt>
+              <dd className="text-ink">{r.formato_output ? FORMATO_LABEL[r.formato_output] : "—"}</dd>
+              <dt className="text-muted">Progetto</dt>
+              <dd className="text-ink">{r.titolo_progetto ?? "—"}</dd>
+              <dt className="text-muted">Privacy</dt>
+              <dd className="text-ink">
+                {r.consenso_privacy_at ? `accettata il ${formatDate(r.consenso_privacy_at)}` : "—"}
+              </dd>
               <dt className="text-muted">Notifiche</dt>
               <dd className="text-ink">
                 email {r.notifica_email_ok === false ? "✗" : r.notifica_email_ok ? "ok" : "—"}
@@ -96,9 +107,9 @@ export default async function RichiestaDettaglioPage({
           </section>
 
           <section>
-            <h2 className="title-sm mb-3 text-ink">Descrizione</h2>
+            <h2 className="title-sm mb-3 text-ink">Note</h2>
             <p className="max-w-[65ch] whitespace-pre-wrap text-base leading-relaxed text-body">
-              {r.descrizione?.trim() || "Nessuna descrizione."}
+              {r.descrizione?.trim() || "Nessuna nota."}
             </p>
           </section>
 
@@ -107,36 +118,48 @@ export default async function RichiestaDettaglioPage({
             {files.length === 0 ? (
               <p className="text-sm text-muted">Nessun file allegato.</p>
             ) : (
-              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {files.map((f) => {
-                  const url = urlByPath.get(f.path);
-                  const isImage = f.mime.startsWith("image/");
+              <div className="space-y-6">
+                {RUOLI_FILE.filter((ruolo) => gruppi[ruolo].length > 0).map((ruolo) => {
+                  const lista = gruppi[ruolo];
                   return (
-                    <li key={f.path} className="border border-hairline">
-                      {url && isImage ? (
-                        <a href={url} target="_blank" rel="noreferrer">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={url}
-                            alt={f.nome}
-                            className="aspect-[4/3] w-full bg-surface-soft object-cover"
-                          />
-                        </a>
-                      ) : null}
-                      <div className="flex items-center justify-between gap-3 px-3 py-2 text-sm">
-                        <span className="truncate text-ink">{f.nome}</span>
-                        {url ? (
-                          <a href={url} target="_blank" rel="noreferrer" className="shrink-0 text-link">
-                            Apri · {formatSize(f.size)}
-                          </a>
-                        ) : (
-                          <span className="shrink-0 text-muted">non disponibile</span>
-                        )}
-                      </div>
-                    </li>
+                    <div key={ruolo}>
+                      <h3 className="mb-2 text-sm font-medium text-muted">
+                        {RUOLO_LABEL[ruolo]} ({lista.length})
+                      </h3>
+                      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        {lista.map((f) => {
+                          const url = urlByPath.get(f.path);
+                          const isImage = f.mime.startsWith("image/");
+                          return (
+                            <li key={f.path} className="border border-hairline">
+                              {url && isImage ? (
+                                <a href={url} target="_blank" rel="noreferrer">
+                                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                                  <img
+                                    src={url}
+                                    alt={f.nome}
+                                    className="aspect-[4/3] w-full bg-surface-soft object-cover"
+                                  />
+                                </a>
+                              ) : null}
+                              <div className="flex items-center justify-between gap-3 px-3 py-2 text-sm">
+                                <span className="truncate text-ink">{f.nome}</span>
+                                {url ? (
+                                  <a href={url} target="_blank" rel="noreferrer" className="shrink-0 text-link">
+                                    Apri · {formatSize(f.size)}
+                                  </a>
+                                ) : (
+                                  <span className="shrink-0 text-muted">non disponibile</span>
+                                )}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
                   );
                 })}
-              </ul>
+              </div>
             )}
           </section>
         </div>
