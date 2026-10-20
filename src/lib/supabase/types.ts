@@ -952,9 +952,12 @@ export type Database = {
       richieste_servizio: {
         Row: {
           cartella: string | null
+          consenso_privacy_at: string | null
+          formato_output: Database["public"]["Enums"]["richiesta_formato"] | null
+          titolo_progetto: string | null
           comune: string | null
           created_at: string
-          descrizione: string
+          descrizione: string | null
           email: string
           files: Json
           id: string
@@ -968,9 +971,12 @@ export type Database = {
         }
         Insert: {
           cartella?: string | null
+          consenso_privacy_at?: string | null
+          formato_output?: Database["public"]["Enums"]["richiesta_formato"] | null
+          titolo_progetto?: string | null
           comune?: string | null
           created_at?: string
-          descrizione: string
+          descrizione?: string | null
           email: string
           files?: Json
           id?: string
@@ -984,9 +990,12 @@ export type Database = {
         }
         Update: {
           cartella?: string | null
+          consenso_privacy_at?: string | null
+          formato_output?: Database["public"]["Enums"]["richiesta_formato"] | null
+          titolo_progetto?: string | null
           comune?: string | null
           created_at?: string
-          descrizione?: string
+          descrizione?: string | null
           email?: string
           files?: Json
           id?: string
@@ -1134,6 +1143,7 @@ export type Database = {
       membership_role: "owner" | "admin" | "member"
       preventivo_modalita: "capitolato" | "manuale" | "foto"
       preventivo_stato: "bozza" | "inviato" | "accettato" | "rifiutato"
+      richiesta_formato: "pdf_protetto" | "word" | "carta_intestata"
       richiesta_stato: "nuova" | "in_lavorazione" | "evasa" | "scartata"
       richiesta_tipo: "foto_descrizione" | "foto_capitolato"
       unita_misura: "corpo" | "mq" | "ml" | "mc" | "giorno" | "cad" | "kg"
@@ -1274,6 +1284,7 @@ export const Constants = {
       membership_role: ["owner", "admin", "member"],
       preventivo_modalita: ["capitolato", "manuale", "foto"],
       preventivo_stato: ["bozza", "inviato", "accettato", "rifiutato"],
+      richiesta_formato: ["pdf_protetto", "word", "carta_intestata"],
       richiesta_stato: ["nuova", "in_lavorazione", "evasa", "scartata"],
       richiesta_tipo: ["foto_descrizione", "foto_capitolato"],
       unita_misura: ["corpo", "mq", "ml", "mc", "giorno", "cad", "kg"],
