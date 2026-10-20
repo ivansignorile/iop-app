@@ -1,4 +1,4 @@
-import { MAX_FILE_BYTES, MIME_AMMESSI, type FileMeta } from "./valida";
+import { MAX_FILE_BYTES, MIME_AMMESSI, MIME_LOGO, type FileMeta } from "./valida";
 
 export const CARTELLA_RE = /^\d{4}-\d{2}-\d{2}\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 export const CARICAMENTO_KO = "Caricamento non valido, riprova.";
@@ -29,7 +29,9 @@ export function verificaFileCaricati(
     if (typeof obj.mimetype !== "string") return KO;
     const mime = normalizzaMime(obj.mimetype);
     if (!MIME_AMMESSI.includes(mime)) return KO;
-    files.push({ nome: dichiarati[i].nome, mime, size: obj.size, path });
+    const { nome: nomeDichiarato, ruolo } = dichiarati[i];
+    if (ruolo === "logo" && !MIME_LOGO.includes(mime)) return KO;
+    files.push({ nome: nomeDichiarato, mime, size: obj.size, path, ruolo });
   }
   return { ok: true, files };
 }
