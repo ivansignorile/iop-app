@@ -3,6 +3,7 @@ import Link from "next/link";
 import { EmptyState, PageHeader, StatoBadge } from "@/components/ui/misc";
 import { requirePlatformAdmin } from "@/lib/admin";
 import { formatDate } from "@/lib/format";
+import { FORMATO_LABEL } from "@/lib/richieste/etichette";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 const tipoLabel: Record<string, string> = {
@@ -41,6 +42,7 @@ export default async function RichiestePage() {
                 <th className="px-4 py-3 font-medium">Nome</th>
                 <th className="px-4 py-3 font-medium">Comune</th>
                 <th className="px-4 py-3 font-medium">Tipo</th>
+                <th className="px-4 py-3 font-medium">Formato</th>
                 <th className="px-4 py-3 text-right font-medium">File</th>
                 <th className="px-4 py-3 font-medium">Stato</th>
                 <th className="px-4 py-3 font-medium">Notifiche</th>
@@ -65,6 +67,7 @@ export default async function RichiestePage() {
                     <td className="px-4 py-3 text-ink">{r.nome}</td>
                     <td className="px-4 py-3 text-body">{r.comune ?? "—"}</td>
                     <td className="px-4 py-3 text-body">{tipoLabel[r.tipo] ?? r.tipo}</td>
+                    <td className="px-4 py-3 text-body">{r.formato_output ? FORMATO_LABEL[r.formato_output] : "—"}</td>
                     <td className="px-4 py-3 text-right tabular-nums text-ink">
                       {Array.isArray(r.files) ? r.files.length : 0}
                     </td>

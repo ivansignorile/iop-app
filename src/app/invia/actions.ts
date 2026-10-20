@@ -3,6 +3,7 @@
 import { notificaRichiesta } from "@/lib/notifiche/invia";
 import { erroreInserimento } from "@/lib/richieste/esito-insert";
 import { consentiAzione, TROPPE_RICHIESTE } from "@/lib/richieste/rate-limit";
+import { rigaRichiesta } from "@/lib/richieste/riga";
 import { MAX_FILES, MAX_RICHIESTE_ORA, validaRichiesta, type FileMeta } from "@/lib/richieste/valida";
 import { CARICAMENTO_KO, verificaFileCaricati } from "@/lib/richieste/verifica-file";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -12,14 +13,14 @@ const BUCKET = "richieste";
 const safe = (nome: string) => nome.normalize("NFKD").replace(/[^\w.-]+/g, "_").slice(-80);
 
 export async function preparaUpload(files: FileMeta[], honeypot = "") {
-  if (!Array.isArray(files) || files.length === 0) return { ok: false as const, errore: "Carica almeno una foto." };
+  if (!Array.isArray(files) || files.length === 0) return { ok: false as const, errore: "Carica almeno un file." };
   if (files.length > MAX_FILES) return { ok: false as const, errore: `Massimo ${MAX_FILES} file.` };
   // Valida solo i file (con dati fittizi per il resto): stessi limiti del submit.
   const check = validaRichiesta({
     nome: "xx",
     email: "a@b.it",
-    tipo: "foto_descrizione",
-    descrizione: "x".repeat(10),
+    formato: "pdf_protetto",
+    privacy: true,
     files,
     honeypot,
   });
@@ -30,7 +31,7 @@ export async function preparaUpload(files: FileMeta[], honeypot = "") {
   const cartella = `${new Date().toISOString().slice(0, 10)}/${crypto.randomUUID()}`;
   const uploads: { path: string; token: string }[] = [];
   for (const [i, f] of files.entries()) {
-    const path = `${cartella}/${i}-${safe(f.nome)}`;
+    const path = `${cartella}/${i}-${f.ruolo}-${safe(f.nome)}`;
     const { data, error } = await supabase.storage.from(BUCKET).createSignedUploadUrl(path);
     if (error || !data) return { ok: false as const, errore: "Upload non disponibile, riprova." };
     uploads.push({ path, token: data.token });
@@ -59,8 +60,8 @@ export async function inviaRichiesta(input: Record<string, unknown> & { cartella
   );
   if (!verifica.ok) return verifica;
   const files = verifica.files;
-  // Rivalida con i metadati reali (es. "carica almeno una foto", capitolato).
-  const reale = validaRichiesta({ ...input, files: files.map(({ nome, mime, size }) => ({ nome, mime, size })) });
+  // Rivalida con i metadati reali (logo, tipo derivato dal capitolato).
+  const reale = validaRichiesta({ ...input, files: files.map(({ nome, mime, size, ruolo }) => ({ nome, mime, size, ruolo })) });
   if (!reale.ok) return reale;
 
   // Replay: uscita rapida (senza consumare quota). La garanzia atomica e' l'indice unico su `cartella`.
@@ -82,14 +83,14 @@ export async function inviaRichiesta(input: Record<string, unknown> & { cartella
 
   const { data, error } = await supabase
     .from("richieste_servizio")
-    .insert({ nome: r.nome, email: r.email, telefono: r.telefono, tipo: r.tipo, descrizione: r.descrizione, comune: r.comune, files, cartella })
+    .insert(rigaRichiesta(reale.data, files, cartella))
     .select("id")
     .single();
   // 23505: replay concorrente/riordinato, nessuna notifica.
   if (error || !data) return { ok: false as const, errore: erroreInserimento(error) };
 
   // Prima salvo, poi notifico: una notifica fallita non perde la richiesta.
-  const esito = await notificaRichiesta({ ...r, files, id: data.id });
+  const esito = await notificaRichiesta({ ...reale.data, files, id: data.id });
   await supabase
     .from("richieste_servizio")
     .update({ notifica_email_ok: esito.email, notifica_whatsapp_ok: esito.whatsapp })

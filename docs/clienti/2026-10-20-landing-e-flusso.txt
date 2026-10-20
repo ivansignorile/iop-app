@@ -1,0 +1,96 @@
+1. Realizzazione della Landing Page
+Occorre creare una Landing Page per presentare e spiegare chiaramente il servizio, offrendo due diverse opzioni di fruizione:
+
+	•	Self istantaneo
+	•	Elaborato dal tecnico (con consegna in 24 ore)
+
+Nota: I moduli da compilare e i campi da inserire devono essere gli stessi per entrambe le opzioni.
+
+2. Flusso e Generazione del Documento (PDF Complete)
+Quando un utente invia la propria richiesta dal sito, il sistema deve generare automaticamente un file PDF completo di ogni dettaglio e inviarlo via e-mail al nostro team.
+
+	•	Integrazione degli Allegati: Se il cliente carica file accessori (ad esempio un computo metrico o documenti con richieste particolari), il PDF ricevuto deve includere e integrare già tutti questi allegati.
+	•	Pronto all'Uso: Il file deve arrivare in un formato già predisposto per essere caricato direttamente nel nostro software gestionale senza ulteriori interventi manuali.
+
+3. Inserimento delle Specifiche e delle Opzioni nel Documento
+Tutte le scelte effettuate dall'utente in fase di compilazione devono essere chiaramente riportate all'interno del documento PDF generato, in modo che il software conosca già l'output finale richiesto.
+
+Tra le specifiche da includere figurano:
+
+	•	Formato Base (PDF non modificabile): Con watermark/filigrana aziendale, protetto da copia e non editabile.
+	•	Formato Editabile (Word): Per consentire al cliente di personalizzare e modificare il testo.
+	•	Formato Personalizzato: Già predisposto su carta intestata del cliente.
+
+4. Automatizzazione del Lavoro Interno
+Grazie a questo flusso, il lavoro operativo da svolgere dietro la scrivania sarà ridotto al minimo:
+
+	•	Reperire dalla posta la richiesta arrivata sotto forma di PDF pre-configurato.
+	•	Inserire il file direttamente nel nostro sistema.
+	•	Il software elaborerà il documento e genererà in automatico il preventivo/risultato finale completo di tutte le opzioni e degli allegati richiesti.
+
+
+
+
+
+
+I moduli da compilare e i campi da inserire devono essere gli stessi per entrambe le opzioni.
+
+Ecco una proposta strutturata di form/modulo di contatto con tutti i campi e le domande necessarie per raccogliere i dati richiesti e far funzionare l'automazione descritta nel documento.
+
+1. Modalità di Erogazione del Servizio
+Seleziona la modalità con cui desideri ricevere l'elaborato:
+
+	•	[ ] Self Istantaneo (Generazione ed elaborazione immediata)
+	•	
+	•	[ ] Elaborato dal Tecnico (Revisionato e consegnato da un nostro esperto entro 24 ore)
+	•	
+2. Dati Anagrafici e di Contatto
+	•	Nome e Cognome / Ragione Sociale: [ Campo di testo ]
+	•	
+	•	Indirizzo E-mail (dove inviare il preventivo/file finale): [ Campo e-mail ]
+	•	
+	•	Recapito Telefonico: [ Campo telefonico ]
+	•	
+3. Selezione del Formato e dell'Output Finale
+In quale formato e modalità desideri ricevere il preventivo finale?
+
+	•	[ ] Preventivo Base (PDF Standard)
+	•	 
+	•	(Formato PDF non editabile, protetto da copia e completo di watermark aziendale)
+	•	
+	•	[ ] Preventivo Editabile (Microsoft Word)
+	•	 
+	•	(Formato .docx personalizzabile e liberamente modificabile)
+	•	
+	•	[ ] Preventivo su Carta Intestata
+	•	 
+	•	(Predisposto direttamente sul layout della tua intestazione aziendale)
+	•	
+4. Dettagli del Progetto e Richieste Particolari
+	•	Titolo / Riferimento del Progetto: [ Campo di testo ]
+	•	
+	•	Note e Indicazioni Particolari:
+	•	 
+	•	[ Area di testo per specificare esigenze particolari, clausole da inserire o note per il sistema/tecnico ]
+	•	
+5. Caricamento Documenti e Allegati
+Carica tutti i documenti necessari per l'elaborazione (es. Computo Metrico, planimetrie, capitolati o il file della tua carta intestata se richiesto al punto 3).
+
+	•	Computo Metrico / Documentazione Tecnica:
+	•	 
+	•	[ Pulsante: Carica File (PDF, Excel, Zip) ]
+	•	
+	•	Carta Intestata / Logo (Obbligatorio solo se hai scelto l'opzione "Carta Intestata"):
+	•	 
+	•	[ Pulsante: Carica Logo/Intestazione (PNG, PDF, JPG) ]
+	•	
+	•	Altri Allegati Accessori:
+	•	 
+	•	[ Pulsante: Carica File Aggiuntivi ]
+	•	
+6. Conferma e Privacy
+	•	[x] Accetto la Privacy Policy e il trattamento dei dati personali.
+	•	
+	•	[ ] Pulsante di invio: INVIA E GENERA RICHIESTA
+
+
