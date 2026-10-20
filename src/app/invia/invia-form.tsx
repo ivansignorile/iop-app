@@ -5,30 +5,11 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Field, FormError, Input, Textarea } from "@/components/ui/field";
+import { conMime, mimeFile } from "@/lib/richieste/mime-file";
 import type { FormatoOutput, RuoloFile } from "@/lib/richieste/valida";
 import { createClient } from "@/lib/supabase/client";
 
 import { inviaRichiesta, preparaUpload } from "./actions";
-
-const MIME_ESTENSIONI: Record<string, string> = {
-  heic: "image/heic",
-  heif: "image/heif",
-  jpg: "image/jpeg",
-  jpeg: "image/jpeg",
-  png: "image/png",
-  webp: "image/webp",
-  pdf: "application/pdf",
-  doc: "application/msword",
-  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  txt: "text/plain",
-  xls: "application/vnd.ms-excel",
-  xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  zip: "application/zip",
-};
-
-function mimeDaEstensione(nome: string) {
-  return MIME_ESTENSIONI[nome.split(".").pop()?.toLowerCase() ?? ""] ?? "";
-}
 
 const FORMATI: { value: FormatoOutput; titolo: string; testo: string }[] = [
   {
@@ -96,7 +77,7 @@ export function InviaForm() {
       const scelti = ZONE.flatMap(({ ruolo }) => (ruolo === "logo" && formato !== "carta_intestata" ? [] : files[ruolo]).map((file) => ({ file, ruolo })));
       const meta = scelti.map(({ file, ruolo }) => ({
         nome: file.name,
-        mime: file.type || mimeDaEstensione(file.name),
+        mime: mimeFile(file),
         size: file.size,
         ruolo,
       }));
@@ -105,7 +86,7 @@ export function InviaForm() {
 
       const supabase = createClient();
       for (const [i, u] of prep.uploads.entries()) {
-        const { error } = await supabase.storage.from("richieste").uploadToSignedUrl(u.path, u.token, scelti[i].file, { contentType: meta[i].mime });
+        const { error } = await supabase.storage.from("richieste").uploadToSignedUrl(u.path, u.token, conMime(scelti[i].file, meta[i].mime), { contentType: meta[i].mime });
         if (error) return fail(`Caricamento non riuscito: ${scelti[i].file.name}`);
       }
       const res = await inviaRichiesta({
