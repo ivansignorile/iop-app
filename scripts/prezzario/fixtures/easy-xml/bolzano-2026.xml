@@ -1,0 +1,989 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EASY:Prezzario xmlns:EASY="https://prezzario.provincia.bz.it/prezzario.xsd">
+    <EASY:intestazione autore="Provincia di Bolzano" versione="0.2">
+        <EASY:dettaglio anno="2026" versione="0" area="Ambito Provinciale"/>
+        <EASY:copyright tipo="CC BY 3.0" descrizione="Creative commons: CC BY"/>
+    </EASY:intestazione>
+    <EASY:Contenuto>
+                <EASY:Articolo cam="0" codice="BOL26_01.01.01.01A.01">
+            <EASY:livello1 descrizionebreve="Prezzi elementari"><![CDATA[Il capitolo 01 comprende i seguenti gruppi:
+01.01 Mano d'opera
+01.02 Noli
+01.03 Trasporti
+01.04 Materiali
+01.05 Semilavorati
+01.10 Diritti di discarica]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Mercedi orarie della mano d'opera"><![CDATA[Prezzi medi orari per prestazioni effettuate durante l'orario normale di lavoro nell'ambito territoriale della Provincia Autonoma di Bolzano - Alto Adige, comprensivi di:
+retribuzione contrattuale; gli oneri di legge, gli oneri aggiuntivi e di fatto gravanti sulla mano d'opera, l'uso della normale dotazione di attrezzi ed utensili di lavoro, il ricarico del 15% ca. per spese generali e utile d'impresa del 10%.
+Per l'esecuzione di "lavori in economia" eseguiti mediante appalto in economia (lavori di lieve entità e di particolare natura e specialità che producono prevalentemente costi di manodopera), le mercedi orarie possono essere aumentate in relazione al grado di difficoltà del manufatto (difficoltà tecnica o architettonica). Il gruppo 01.01 comprende i seguenti sottogruppi: 01.01.01 Settore edile
+/civile
+01.01.02 Settore metallo
+01.01.03 Settore legno
+01.01.04 Settore impianti (elettrotecnici ed idraulici)
+01.01.10 Servizio di assistenza – forfait per spese di andata]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Settore edile/civile"><![CDATA[Settore edile/civile]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Settore edile/civile"><![CDATA[Settore edile/civile]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="Operaio alt. spec. o maestro professionale"><![CDATA[Operaio altamente specializzato o maestro professionale]]></EASY:livello5>
+            <EASY:um><![CDATA[h]]></EASY:um>
+            <EASY:prezzo>46.68</EASY:prezzo>
+            <EASY:prezzosenzasgutil>36.90</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>5.54</EASY:spesegenerali>
+            <EASY:utilidiimpresa>4.24</EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[+5,16%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[+5,16%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_01.02.16.10.A">
+            <EASY:livello1 descrizionebreve="Prezzi elementari"><![CDATA[Il capitolo 01 comprende i seguenti gruppi:
+01.01 Mano d'opera
+01.02 Noli
+01.03 Trasporti
+01.04 Materiali
+01.05 Semilavorati
+01.10 Diritti di discarica]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Noli"><![CDATA[I mezzi locati devono risultare funzionanti in opera e nel prezzo del nolo sono comprese le spese per carburante, grassi e lubrificanti, nonché l'operatore, se non altrimenti stabilito. Il gruppo 01.02 comprende i seguenti sottogruppi: 01.02.01 Mezzi di trasporto
+01.02.02 Pompe
+01.02.03 Macchine per movimento terra
+01.02.04 Betoniere
+01.02.05 Gru edili - Argani di sollevamento
+01.02.06 Compressori
+01.02.07 Macchine utensili
+01.02.08 Ponteggi da costruzione e da manutenzione
+01.02.09 Scivoli per macerie
+01.02.10 Gruppi elettrogeni
+01.02.11 Vani contenitori
+01.02.12 Impianto semaforico da cantiere
+01.02.13 Nolo per sito di produzione
+01.02.14 Macchine per pavimentazione
+01.02.15 Mezzi di costipamento
+01.02.16 Casseri per conglomerati cementizi
+01.02.17 Cassieri per protezione scavi
+01.02.18 Strumenti topografici e di rivelazione
+01.02.19 Macchine speciali
+01.02.20 Macchine per la preparazione del materiale]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Casseri per conglomerati cementizi"><![CDATA[Cassieri per conglomerati cementizi
+I casseri, siano essi di legno o di metallo, devono essere in ottimo stato di conservazione con superficie perfettamente pulita e liscia e giunzioni a tenuta. Nel prezzo è compresa la pulizia dopo l'impiego nonchè, se necessario, l'eventuale applicazione di disarmanti. Se non detto diversamente, il prezzo verrà applicato per ogni giorno naturale di nolo.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Pannelli curvi in un senso"><![CDATA[Pannelli curvi in un senso, con raggio di curvatura reperibile sul mercato]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="pannelli in metallo"><![CDATA[pannelli in metallo]]></EASY:livello5>
+            <EASY:um><![CDATA[m2]]></EASY:um>
+            <EASY:prezzo></EASY:prezzo>
+            <EASY:prezzosenzasgutil> </EASY:prezzosenzasgutil>
+            <EASY:spesegenerali> </EASY:spesegenerali>
+            <EASY:utilidiimpresa> </EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_01.04.09.60.D">
+            <EASY:livello1 descrizionebreve="Prezzi elementari"><![CDATA[Il capitolo 01 comprende i seguenti gruppi:
+01.01 Mano d'opera
+01.02 Noli
+01.03 Trasporti
+01.04 Materiali
+01.05 Semilavorati
+01.10 Diritti di discarica]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Materiali"><![CDATA[Il gruppo 01.04 comprende i seguenti sottogruppi:
+01.04.01 Inerti
+01.04.02 Leganti
+01.04.03 Pietre artificiali (laterizi, blocchi)
+01.04.04 Pietre naturali
+01.04.06 Legname d'opera e tavolame
+01.04.07 Materiali ferrosi
+01.04.08 Canne e tubi
+01.04.09 Materiali impermeabilizzanti
+01.04.10 Materiali coibenti insonorizzanti
+01.04.11 Materiali di copertura
+01.04.12 Manufatti in cemento
+01.04.13 Vetrocemento
+01.04.14 Materiali per opere da giardiniere
+01.04.15 Materiali per opere da pittore
+01.04.16 Materiali per pavimenti e rivestimenti in ceramica
+01.04.17 Materiali per opere in pietra naturale
+01.04.19 Materiali per opere da carpentiere
+01.04.20 Materiali per opere da lattoniere
+01.04 21 Materiali per opere da falegname
+01.04.22 Tessuti per la pavimentazione
+01.04.23 Materiali per i lavori di fabbro
+01.04.24 Materiali per opere da vetraio 01.04.25 Materiali per impianti di riscaldamento
+01.04.27 Materiali per impianti elettrici
+01.04.29 Materiali per impianti elevatori
+01.04.30 Geotessuti
+01.04.31 Acciaio per cemento armato
+01.04.32 Minuteria
+01.04.33 Materiali riciclati
+01.04.34 Materiali riciclati [CAM]
+01.04.35 Elementi statici speciali
+01.04.36 Tubo in polipropilene a tre strati
+01.04.37 Tubo in polipropilene ad uno strato
+01.04.38 Tubi di PVC
+01.04.39 Tubi di Polietilene
+01.04.40 Materiali per fumisti
+01.04.41 Tubi in resina poliestere e fibra di vetro (piv) per fognatura ed acquedotto
+01.04.42 Tubi di acciaio, senza saldatura
+01.04.43 Tubi di acciaio, saldati
+01.04.44 Tubi di acciaio inossidabile
+01.04.45 Tubi di ghisa sferodiale 01.04.46 Tubi di cemento non armato
+01.04.47 Tubi di cemento armato
+01.04.50 Pozzetti prefabbricati
+01.04.51 Chiusini e caditoie
+01.04.52 Maniglioni e scale, accessori per pozzetti
+01.04.53 Acessori per acquedotto
+01.04.54 Acessori per fognatura
+01.04.55 Acessori per opere stradali
+01.04.58 Cordonate in pietra naturale
+01.04.59 Cordonate in calcestruzzo
+01.04.61 Pietra naturale per pavimentazioni
+01.04.62 Pietra artificiale per pavimentazioni
+01.04.71 Colori solventi
+01.02.73 Materiale per la segnaletica orrizzontale
+01.04.76 Energia
+01.04.79 Semenze, piante, concimi
+01.04.80 Materiale per opere di Metanizzazione
+01.04.81 Materiale per settore non edile speciale
+01.04.82 Materiale per consolidamento rocce
+01.04.85 Materiali per lavori di risanamento tubature
+01.04.90 Materiali per fumisti]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Materiali impermeabilizzanti"><![CDATA[Materiali impermeabilizzanti]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Tessuto non tessuto in polipropilene"><![CDATA[Tessuto non tessuto in polipropilene]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="TNT in PP - 500 g/m²"><![CDATA[TNT in PP - 500 g/m²]]></EASY:livello5>
+            <EASY:um><![CDATA[m2]]></EASY:um>
+            <EASY:prezzo>3.01</EASY:prezzo>
+            <EASY:prezzosenzasgutil>2.38</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>0.36</EASY:spesegenerali>
+            <EASY:utilidiimpresa>0.27</EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[-18,77%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-18,87%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="1" codice="BOL26_01.04.10.30.D">
+            <EASY:livello1 descrizionebreve="Prezzi elementari"><![CDATA[Il capitolo 01 comprende i seguenti gruppi:
+01.01 Mano d'opera
+01.02 Noli
+01.03 Trasporti
+01.04 Materiali
+01.05 Semilavorati
+01.10 Diritti di discarica]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Materiali"><![CDATA[Il gruppo 01.04 comprende i seguenti sottogruppi:
+01.04.01 Inerti
+01.04.02 Leganti
+01.04.03 Pietre artificiali (laterizi, blocchi)
+01.04.04 Pietre naturali
+01.04.06 Legname d'opera e tavolame
+01.04.07 Materiali ferrosi
+01.04.08 Canne e tubi
+01.04.09 Materiali impermeabilizzanti
+01.04.10 Materiali coibenti insonorizzanti
+01.04.11 Materiali di copertura
+01.04.12 Manufatti in cemento
+01.04.13 Vetrocemento
+01.04.14 Materiali per opere da giardiniere
+01.04.15 Materiali per opere da pittore
+01.04.16 Materiali per pavimenti e rivestimenti in ceramica
+01.04.17 Materiali per opere in pietra naturale
+01.04.19 Materiali per opere da carpentiere
+01.04.20 Materiali per opere da lattoniere
+01.04 21 Materiali per opere da falegname
+01.04.22 Tessuti per la pavimentazione
+01.04.23 Materiali per i lavori di fabbro
+01.04.24 Materiali per opere da vetraio 01.04.25 Materiali per impianti di riscaldamento
+01.04.27 Materiali per impianti elettrici
+01.04.29 Materiali per impianti elevatori
+01.04.30 Geotessuti
+01.04.31 Acciaio per cemento armato
+01.04.32 Minuteria
+01.04.33 Materiali riciclati
+01.04.34 Materiali riciclati [CAM]
+01.04.35 Elementi statici speciali
+01.04.36 Tubo in polipropilene a tre strati
+01.04.37 Tubo in polipropilene ad uno strato
+01.04.38 Tubi di PVC
+01.04.39 Tubi di Polietilene
+01.04.40 Materiali per fumisti
+01.04.41 Tubi in resina poliestere e fibra di vetro (piv) per fognatura ed acquedotto
+01.04.42 Tubi di acciaio, senza saldatura
+01.04.43 Tubi di acciaio, saldati
+01.04.44 Tubi di acciaio inossidabile
+01.04.45 Tubi di ghisa sferodiale 01.04.46 Tubi di cemento non armato
+01.04.47 Tubi di cemento armato
+01.04.50 Pozzetti prefabbricati
+01.04.51 Chiusini e caditoie
+01.04.52 Maniglioni e scale, accessori per pozzetti
+01.04.53 Acessori per acquedotto
+01.04.54 Acessori per fognatura
+01.04.55 Acessori per opere stradali
+01.04.58 Cordonate in pietra naturale
+01.04.59 Cordonate in calcestruzzo
+01.04.61 Pietra naturale per pavimentazioni
+01.04.62 Pietra artificiale per pavimentazioni
+01.04.71 Colori solventi
+01.02.73 Materiale per la segnaletica orrizzontale
+01.04.76 Energia
+01.04.79 Semenze, piante, concimi
+01.04.80 Materiale per opere di Metanizzazione
+01.04.81 Materiale per settore non edile speciale
+01.04.82 Materiale per consolidamento rocce
+01.04.85 Materiali per lavori di risanamento tubature
+01.04.90 Materiali per fumisti]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Materiali coibenti e insonorizzanti"><![CDATA[Materiali coibenti e insonorizzanti]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Lastre isolanti di lana minerale 035 [CAM]"><![CDATA[Lastre isolanti di lana minerale 035 [CAM: "Criteri ambientali minimi per l'affidamento del servizio di progettazione di interventi edilizi, per l'affidamento dei lavori per interventi edilizi e per l'affidamento congiunto di progettazione e lavori per interventi edilizi", DM 23 giugno 2022, punto 2.5.7]
+% peso del materiale delle parti che a fine vita sono riciclabili o riutilizzabili: min. 97 %.]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="Lastre isolanti di lana minerale 035 6 cm [CAM]"><![CDATA[Lastre isolanti di lana minerale 035 6 cm [CAM]]]></EASY:livello5>
+            <EASY:um><![CDATA[m2]]></EASY:um>
+            <EASY:prezzo>17.38</EASY:prezzo>
+            <EASY:prezzosenzasgutil>13.74</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>2.06</EASY:spesegenerali>
+            <EASY:utilidiimpresa>1.58</EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_01.04.53.08.D">
+            <EASY:livello1 descrizionebreve="Prezzi elementari"><![CDATA[Il capitolo 01 comprende i seguenti gruppi:
+01.01 Mano d'opera
+01.02 Noli
+01.03 Trasporti
+01.04 Materiali
+01.05 Semilavorati
+01.10 Diritti di discarica]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Materiali"><![CDATA[Il gruppo 01.04 comprende i seguenti sottogruppi:
+01.04.01 Inerti
+01.04.02 Leganti
+01.04.03 Pietre artificiali (laterizi, blocchi)
+01.04.04 Pietre naturali
+01.04.06 Legname d'opera e tavolame
+01.04.07 Materiali ferrosi
+01.04.08 Canne e tubi
+01.04.09 Materiali impermeabilizzanti
+01.04.10 Materiali coibenti insonorizzanti
+01.04.11 Materiali di copertura
+01.04.12 Manufatti in cemento
+01.04.13 Vetrocemento
+01.04.14 Materiali per opere da giardiniere
+01.04.15 Materiali per opere da pittore
+01.04.16 Materiali per pavimenti e rivestimenti in ceramica
+01.04.17 Materiali per opere in pietra naturale
+01.04.19 Materiali per opere da carpentiere
+01.04.20 Materiali per opere da lattoniere
+01.04 21 Materiali per opere da falegname
+01.04.22 Tessuti per la pavimentazione
+01.04.23 Materiali per i lavori di fabbro
+01.04.24 Materiali per opere da vetraio 01.04.25 Materiali per impianti di riscaldamento
+01.04.27 Materiali per impianti elettrici
+01.04.29 Materiali per impianti elevatori
+01.04.30 Geotessuti
+01.04.31 Acciaio per cemento armato
+01.04.32 Minuteria
+01.04.33 Materiali riciclati
+01.04.34 Materiali riciclati [CAM]
+01.04.35 Elementi statici speciali
+01.04.36 Tubo in polipropilene a tre strati
+01.04.37 Tubo in polipropilene ad uno strato
+01.04.38 Tubi di PVC
+01.04.39 Tubi di Polietilene
+01.04.40 Materiali per fumisti
+01.04.41 Tubi in resina poliestere e fibra di vetro (piv) per fognatura ed acquedotto
+01.04.42 Tubi di acciaio, senza saldatura
+01.04.43 Tubi di acciaio, saldati
+01.04.44 Tubi di acciaio inossidabile
+01.04.45 Tubi di ghisa sferodiale 01.04.46 Tubi di cemento non armato
+01.04.47 Tubi di cemento armato
+01.04.50 Pozzetti prefabbricati
+01.04.51 Chiusini e caditoie
+01.04.52 Maniglioni e scale, accessori per pozzetti
+01.04.53 Acessori per acquedotto
+01.04.54 Acessori per fognatura
+01.04.55 Acessori per opere stradali
+01.04.58 Cordonate in pietra naturale
+01.04.59 Cordonate in calcestruzzo
+01.04.61 Pietra naturale per pavimentazioni
+01.04.62 Pietra artificiale per pavimentazioni
+01.04.71 Colori solventi
+01.02.73 Materiale per la segnaletica orrizzontale
+01.04.76 Energia
+01.04.79 Semenze, piante, concimi
+01.04.80 Materiale per opere di Metanizzazione
+01.04.81 Materiale per settore non edile speciale
+01.04.82 Materiale per consolidamento rocce
+01.04.85 Materiali per lavori di risanamento tubature
+01.04.90 Materiali per fumisti]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Accessori per acquedotto"><![CDATA[Accessori per acquedotto]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Diramazione a T con combinazione fino a tre saracinesche"><![CDATA[Diramazione a T con combinazione fino a tre saracinesche a corpo piatto in ghisa sferoidale integrate,  con o senza attacco verticale.
+Mandrino in acciaio INOX AISI 304, cuneo in ghisa, rivestito in gomma nitrile vulcanizzata, bulloni ad alta resistenza, passaggio interno rettilineo senza alcuna sede.
+Dove non necessita una saracinesca, il corpo verrà chiuso con apposito coperchio.
+Attacchi flangiati UNI/DIN
+DN/i: DN delle saracinesche
+i:    nr. delle saracinesche montate
+PN 10, PN 16]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="DN/i 100/3"><![CDATA[DN/i 100/3]]></EASY:livello5>
+            <EASY:um><![CDATA[nr]]></EASY:um>
+            <EASY:prezzo>2127.33</EASY:prezzo>
+            <EASY:prezzosenzasgutil>1681.69</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>252.25</EASY:spesegenerali>
+            <EASY:utilidiimpresa>193.39</EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[0,00%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_02.07.01.01.B">
+            <EASY:livello1 descrizionebreve="Opere da impresario - costruttore"><![CDATA[Il capitolo 02 comprende i seguenti gruppi:
+02.04 Opere in conglomerato cementizio armato e non armato, casseforme e prefabbricati
+02.05 Ferro per cemento armato
+02.06 Solai e soffittature
+02.07 Murature in pietra artificiale (blocchi, laterizi)
+02.08 Murature in pietrame
+02.09 Intonaci
+02.10 Vespai e sottofondi
+02.11 Impermeabilizzazioni
+02.12 Isolamenti
+02.13 Canne fumarie e di ventilazione
+02.14 Vetrocemento
+02.17 Opere da giardiniere
+02.18 Assistenze murarie
+02.19 Opere di risanamento
+02.20 Sistemi di misurazione]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Murature in pietra artificiale (blocchi, laterizi)"><![CDATA[Il gruppo 02.07 comprende i seguenti sottogruppi: 02.07.01 Murature 02.07.03 Tramezze, rivestimenti 02.07.04 Cassonetti per avvolgibili 02.07.05 Archi e volte 02.07.06 Elementi per la separazione termica 02.07.07 Elementi per la separazione termica]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Murature"><![CDATA[Murature]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Muratura mattoni pieni UNI:"><![CDATA[Muratura di mattoni pieni UNI, dimensioni 5,5x12x25 cm; spessore muratura da 25 a 38 cm; per pareti, per pilastri isolati ecc., altezza fino a 3,50 m dal piano d'appoggio. Esecuzione conforme disegno. Sono compresi i ponteggi interni fino ad un'altezza di 3,50m, la formazione di vani porta e finestra, di nicchie, mazzette, spigoli di muri, architravi (eseguiti fuori opera con laterizi, ferro d'armatura e malta cementizia) e il trasporto dei materiali a piè d'opera:]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="con malta cl M5"><![CDATA[con malta bastarda della classe M5]]></EASY:livello5>
+            <EASY:um><![CDATA[m3]]></EASY:um>
+            <EASY:prezzo>751.15</EASY:prezzo>
+            <EASY:Analisi>
+                <EASY:vocedettaglio ordine="1"
+                                   cam="0"
+                                   codice="BOL26_01.01.01.01A.01"
+                                   tipo="Manodopera"
+                                   udm="h"
+                                   quantita="1.25"
+                                   prezzo="36.90"
+                                   importo="46.13"
+                                   scostamento="+5,16%">
+                        <EASY:descrizione><![CDATA[Settore edile/civile - Operaio altamente specializzato o maestro professionale]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="2"
+                                   cam="0"
+                                   codice="BOL26_01.01.01.01A.02"
+                                   tipo="Manodopera"
+                                   udm="h"
+                                   quantita="1.25"
+                                   prezzo="34.67"
+                                   importo="43.34"
+                                   scostamento="+3,99%">
+                        <EASY:descrizione><![CDATA[Settore edile/civile - Operaio specializzato]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="3"
+                                   cam="0"
+                                   codice="BOL26_01.01.01.01A.03"
+                                   tipo="Manodopera"
+                                   udm="h"
+                                   quantita="1.25"
+                                   prezzo="31.86"
+                                   importo="39.83"
+                                   scostamento="+4,39%">
+                        <EASY:descrizione><![CDATA[Settore edile/civile - Operaio qualificato]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="4"
+                                   cam="0"
+                                   codice="BOL26_01.01.01.01A.04"
+                                   tipo="Manodopera"
+                                   udm="h"
+                                   quantita="1.25"
+                                   prezzo="28.04"
+                                   importo="35.05"
+                                   scostamento="-0,04%">
+                        <EASY:descrizione><![CDATA[Settore edile/civile - Operaio comune]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="5"
+                                   cam="0"
+                                   codice="BOL26_01.02.05.12.E"
+                                   tipo="Noli"
+                                   udm="h"
+                                   quantita="0.25"
+                                   prezzo="12.00"
+                                   importo="3.00"
+                                   scostamento="+4,53%">
+                        <EASY:descrizione><![CDATA[Solo noleggio di gru a torre automontante ad azionamento elettrico, con rotazione in basso.
+Il prezzo è inteso per ora di noleggio, senza trasporto, montaggio e smontaggio.
+H: altezza sotto gancio
+B: sbraccio utile
+P: portata utile in punta - H: oltre 20,00 fino a 24,00m   B: oltre 30,00 fino a 35,00m   P: fino 1,1t]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="6"
+                                   cam="0"
+                                   codice="BOL26_01.02.07.07A.10"
+                                   tipo="Noli"
+                                   udm="a c"
+                                   quantita="2"
+                                   prezzo="1.00"
+                                   importo="2.00"
+                                   scostamento="0,00%">
+                        <EASY:descrizione><![CDATA[Vari dispositivi e macchine - Utensili/piccole attrezzature
+Questa voce è destinata alla redazione delle analisi prezzi e comprende piccole attrezzature, piccole macchine, strumenti ausiliari e di lavoro che non sono inclusi nel prezziario.]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="7"
+                                   cam="0"
+                                   codice="BOL26_01.04.02.03A.11"
+                                   tipo="Materiali"
+                                   udm="kg"
+                                   quantita="140"
+                                   prezzo="0.12"
+                                   importo="16.80"
+                                   scostamento="-7,69%">
+                        <EASY:descrizione><![CDATA[Leganti - Intonaci premiscelati M5, in sacchi]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="8"
+                                   cam="0"
+                                   codice="BOL26_01.04.03.01A.01"
+                                   tipo="Materiali"
+                                   udm="cad"
+                                   quantita="420"
+                                   prezzo="0.94"
+                                   importo="394.80"
+                                   scostamento="+67,86%">
+                        <EASY:descrizione><![CDATA[Pietre artificiali (laterizi, blocchi, ecc.) - Mattoni pieni, dimensione UNI: 5,5x12x25 cm]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="9"
+                                   cam="0"
+                                   codice="BOL26_01.04.32.01A.01"
+                                   tipo="Materiali"
+                                   udm="a c"
+                                   quantita="11.844"
+                                   prezzo="1.00"
+                                   importo="11.84"
+                                   scostamento="0,00%">
+                        <EASY:descrizione><![CDATA[Minuteria - Minuteria
+Questa voce è destinata alla redazione delle analisi prezzi e comprende materiali di piccole dimensioni che non sono inclusi nel prezziario.]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="10"
+                                   cam="0"
+                                   codice="BOL26_01.04.32.01A.01"
+                                   tipo="Materiali"
+                                   udm="a c"
+                                   quantita="1"
+                                   prezzo="1.00"
+                                   importo="1.00"
+                                   scostamento="0,00%">
+                        <EASY:descrizione><![CDATA[Minuteria - Minuteria
+Questa voce è destinata alla redazione delle analisi prezzi e comprende materiali di piccole dimensioni che non sono inclusi nel prezziario.]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                    <EASY:totaleparziale valore="593.79"/>
+                    <EASY:spesegenerali percentuale="15" valore="89.07" />
+                    <EASY:onerisicurezza percentuale="5.06" valore="4.51" />
+                    <EASY:utileimpresa percentuale="10" valore="68.29"/>
+                    <EASY:prezzo valore="751.15"/>
+                                <EASY:incidenzamanodopera percentuale="21.88" valore="164.35"/>
+                    <EASY:incidenzasicurezza percentuale="0.6"/>
+                </EASY:Analisi>
+            <EASY:scostamento><![CDATA[+30,09%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[+30,10%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_02.11.40.09.C">
+            <EASY:livello1 descrizionebreve="Opere da impresario - costruttore"><![CDATA[Il capitolo 02 comprende i seguenti gruppi:
+02.04 Opere in conglomerato cementizio armato e non armato, casseforme e prefabbricati
+02.05 Ferro per cemento armato
+02.06 Solai e soffittature
+02.07 Murature in pietra artificiale (blocchi, laterizi)
+02.08 Murature in pietrame
+02.09 Intonaci
+02.10 Vespai e sottofondi
+02.11 Impermeabilizzazioni
+02.12 Isolamenti
+02.13 Canne fumarie e di ventilazione
+02.14 Vetrocemento
+02.17 Opere da giardiniere
+02.18 Assistenze murarie
+02.19 Opere di risanamento
+02.20 Sistemi di misurazione]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Impermeabilizzazioni"><![CDATA[Il gruppo 02.11 comprende i seguenti sottogruppi: 02.11.01 Impermeabilizzazione orizzontale di pareti 02.11.02 Impermeabilizzazione verticale di pareti 02.11.04 Strati di scorrimento, strati protettivi 02.11.05 Giunti 02.11.06 Sigillatura di giunti 02.11.07 Gusci di raccordo
+02.11.10 Impermeabilizzazione di sottofondi contro umidità in risalita con guaine bituminose
+02.11.20 Impermeabilizzazione di tetti piano sotto zavorra
+02.11.30 Impermeabilizzazione di tetti a vista
+02.11.40 Lavori d’impermeabilizzazione su terrazze, solette di garage sotterranei e balconi
+02.11.50 Impermeabilizzazione gradini/scale
+02.11.60 Impermeabilizzazione piscine
+02.11.65 Impermeabilizzazione vasche di compenso
+02.11.70 Freni vapore e barriere vapore
+02.11.75 Raccordi, profili e collegamenti
+02.11.80 Inserti di finitura
+02.11.85 Strati di protezione e separazione
+02.11.90 Geocompositi drenanti e protettivi
+02.11.92 Riporti, pavimentazioni
+02.11.95 Sovraprezzi]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Lavori d’impermeabilizzazione su terrazze, solette di garage sotterranei e balconi"><![CDATA[Lavori d’impermeabilizzazione su terrazze, solette di garage sotterranei e balconi]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Impermeabilizzazione con guaine bituminose - carrabili – sotto asfalto – posa in bitume sciolto"><![CDATA[Impermeabilizzazione carrabile, composto da primer bituminoso e guaina bituminosa prefabbricata, resistenza a trazione: 900-800 N/5cm, flessibilità al freddo fino a -20 °C, resistenza al calore: +130 °C, posata in totale aderenza su bitume sciolto sulla superficie trattata precedentemente con primer bituminoso. S'intendono comprese sovrapposizioni sui giunti laterali di almeno 10 cm di testa almeno 15 cm, i collegamenti su rialzi, gli sfridi, nonché ogni altra prestazione accessoria occorrente. Sporgenze e collegamenti con profili o resine liquide, nonché collegamenti su telai delle porte, vengono contabilizzate separatamente. Sovrapprezzo per superfici piccole sec. voce. 02.11.95 (Sovrapprezzi). Viene contabilizzata la superficie orizzontale e verticale impermeabilizzata.]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="guaina bituminosa 4 + 4 mm"><![CDATA[guaina bituminosa 4 + 4 mm]]></EASY:livello5>
+            <EASY:um><![CDATA[m2]]></EASY:um>
+            <EASY:prezzo>85.71</EASY:prezzo>
+            <EASY:scostamento><![CDATA[-4,72%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-4,73%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_08.20.12.02.D">
+            <EASY:livello1 descrizionebreve="Opere da lattoniere"><![CDATA[Lamiera di acciaio zincato (zincato): lamiera di acciaio zincato, spessore: 0,6mm, colore naturale
+Lamiera di acciaio zincato preverniciato (zincato e preverniciato): lamiera di acciaio zincato preverniciato, spessore: 0,6mm, colore: standard come da indicazione produttore e scelta della DL
+Lamiera di rame (rame): lamiera di rame, spessore: 0,6mm, colore naturale 
+Lamiera di zinco al titanio (zinco): lamiera di zinco al titanio, spessore 0,7mm, colore naturale
+Lamiera di alluminio preverniciato (alluminio preverniciato): lamiera di alluminio preverniciato, spessore: 0,7mm, colore: standard come da indicazione produttore e scelta della DL
+Lamiera di acciaio inossidabile (acciaio inossidabile): lamiera di acciaio inossidabile, spessore: 0,5mm, colore naturale: 
+
+Il capitolo 08 comprende i seguenti gruppi:
+
+08.20 Smaltimento acqua 
+08.21 Lamiere di raccordo e copertura
+08.22 Scossaline, rivestimenti e coperture
+08.23 Coperture in metallo e rivestimenti per pareti
+08.30 Copertura di abbaino a una o a due falde
+08.31 Copertura di abbaini semicircolari
+08.40 Sovrapprezzi
+08.50 Accessori di coperture
+08.60 Protezione contro cadute su tetti inclinati]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Smaltimento acqua"><![CDATA[Smaltimento acqua]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Gomiti di tubo"><![CDATA[Gomito ad angolazione standard per tubo fluviale tondo.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="100 mm dm"><![CDATA[100 mm dm]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="zinco"><![CDATA[zinco]]></EASY:livello5>
+            <EASY:um><![CDATA[nr]]></EASY:um>
+            <EASY:prezzo>29.16</EASY:prezzo>
+            <EASY:scostamento><![CDATA[-11,41%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-11,39%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_13.02.08.15.E">
+            <EASY:livello1 descrizionebreve="Impianti di riscaldamento e refrigerazione"><![CDATA[I prezzi delle voci elencate comprendono la fornitura dei materiali, il trasporto in cantiere, il montaggio e la posa in opera. Nel prezzo di tariffa s'intende compresa l'assistenza tecnica durante l'esecuzione dell'impianto. Sono escluse le assistenze murarie ed i ponteggi.
+Tutti i lavori sono da eseguire a regola d'arte con materiali nuovi rispondenti alle vigenti disposizioni di legge. Il capitolo 13 comprende i seguenti gruppi: 13.01 Impianto di produzione energia termica, strumenti ed accessori 13.02 Impianto di combustione e di scarico dei prodotti di combustione ed accessori
+13.03 Pannelli rad. a pav., riscaldamento a muro e soffitto, radiatori, apparecchi di risc. ed acc.
+13.04 Tubazioni ed accessori
+13.05 Isolamento ed accessori
+13.06 Impianto elettrico e di regolazione ed accessori
+13.10 Impianti di refrigerazione
+13.11 Pompe di calore e accessori
+13.12 Ventilazione meccanica controllata
+13.13 Canali di convigliamento dell'aria e accessori
+13.15 Unitá di ventilazione non residenziale
+13.18 Bilanciamento idraulico di impianti esistenti]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Impianto di combustione e di scarico dei prodotti di combustione ed accessori"><![CDATA[Il gruppo 13.02 comprende i seguenti sottogruppi:
+
+13.02.05 Bruciatori a gas
+13.02.06 Accessori bruciatori a gas
+13.02.07 Cisterna pellets
+13.02.08 Tubazioni di scarico per i prodotti di combustione
+13.02.09 Accessori in generale]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Tubazioni di scarico per i prodotti di combustione"><![CDATA[Tubazioni di scarico per i prodotti di combustione]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Tubo di raccordo in acciaio nero"><![CDATA[Tubo di raccordo monoparete in acciaio nero con collegamento ad innesto, saldatura longitudinale WIG a gas inerte, certificato CE, per installazione in vista in alloggi in abbinamento con caminetti.  Superficie trattata con lacca resistente alle alte temperature. Spessore 2,0 mm.
+Sistema completo di tutti i pezzi speciali per garantire l'esecuzione a regola d'arte, come elementi dritti, curve, valvola a farfalla e portina, passamuro e rosone a muro.
+Temperatura di esercizio massima: 600 °C
+Designazione prodotto CE:
+T600 N1 D VM L01200 G400 con protezione di irraggiamento.]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="ø 180 mm"><![CDATA[diametro interno ø 180 mm - spessore parete 0,1 mm - impianto completo]]></EASY:livello5>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>148.23</EASY:prezzo>
+            <EASY:scostamento><![CDATA[-22,65%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-22,65%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_13.90.01.01.20A">
+            <EASY:livello1 descrizionebreve="Impianti di riscaldamento e refrigerazione"><![CDATA[I prezzi delle voci elencate comprendono la fornitura dei materiali, il trasporto in cantiere, il montaggio e la posa in opera. Nel prezzo di tariffa s'intende compresa l'assistenza tecnica durante l'esecuzione dell'impianto. Sono escluse le assistenze murarie ed i ponteggi.
+Tutti i lavori sono da eseguire a regola d'arte con materiali nuovi rispondenti alle vigenti disposizioni di legge. Il capitolo 13 comprende i seguenti gruppi: 13.01 Impianto di produzione energia termica, strumenti ed accessori 13.02 Impianto di combustione e di scarico dei prodotti di combustione ed accessori
+13.03 Pannelli rad. a pav., riscaldamento a muro e soffitto, radiatori, apparecchi di risc. ed acc.
+13.04 Tubazioni ed accessori
+13.05 Isolamento ed accessori
+13.06 Impianto elettrico e di regolazione ed accessori
+13.10 Impianti di refrigerazione
+13.11 Pompe di calore e accessori
+13.12 Ventilazione meccanica controllata
+13.13 Canali di convigliamento dell'aria e accessori
+13.15 Unitá di ventilazione non residenziale
+13.18 Bilanciamento idraulico di impianti esistenti]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Prezzi elementari"><![CDATA[Prezzi elementari]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Impianto di produzione energia termica, strumenti ed accessori"><![CDATA[Impianto di produzione energia termica, strumenti ed accessori]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Caldaie"><![CDATA[**Caldaie**]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="Caldaia a gassificazione di ceppi di legno fino a 20 kW"><![CDATA[Caldaia a gassificazione di ceppi di legno, con regolazione di combustione modulante asservita alla sonda lambda, con adattamento automatico della portata dell´aria primaria e secondaria alla densità energetica del combustibile, limitazione della temperatura di scarico fumi per l´adattamento ai camini, scambiatore di sicurezza integrato per il raffreddamento di emergenza da abbinare ad una valvola di scarico termico (quest’ultima esclusa dalla fornitura), pressione massima di esercizio 3 bar, temperatura massima di esercizio 95 °C, rendimento termico = 89 %, alimentazione elettrica 1x 230 V / 50 Hz. Regolazione automatica a microprocessore per la gestione di: 2 circuiti di riscaldamento miscelati con programma orario settimanale e possibile ampliamento alla regolazione con sonde ambiente, carico bollitore o modulo sanitario, pompa di ricircolo sanitario, accumulo termico, impianto solare, con limitazione di sicurezza della temperatura massima, misurazione dei parametri dei fumi mediante sonda lambda con rilevamento della temperatura dei gas di scarico, della mandata e ritorno caldaia, del bollitore ed accumulo termico (in posizione alta, intermedia, bassa), contatto di scambio libero da potenziale per segnalazione guasti, 2 accumulatori (per riscaldamento o produzione di acqua calda sanitaria), uscita di rete per la telegestione. Caldaia completa di isolamento termico in lana di roccia su tutti i lati con rivestimento in lamiera di acciaio, completamente cablata e corredata di 1 sonda di temperatura esterna, 1 sonda di temperatura di mandata e 3 sonde di temperatura per bollitore. Nel prezzo è compresa la prima messa in esercizio. Potenza nominale fino a 20 Kw]]></EASY:livello5>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>12749.87</EASY:prezzo>
+            <EASY:prezzosenzasgutil>10078.95</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>1511.84</EASY:spesegenerali>
+            <EASY:utilidiimpresa>1159.08</EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_13.90.01.05.02F">
+            <EASY:livello1 descrizionebreve="Impianti di riscaldamento e refrigerazione"><![CDATA[I prezzi delle voci elencate comprendono la fornitura dei materiali, il trasporto in cantiere, il montaggio e la posa in opera. Nel prezzo di tariffa s'intende compresa l'assistenza tecnica durante l'esecuzione dell'impianto. Sono escluse le assistenze murarie ed i ponteggi.
+Tutti i lavori sono da eseguire a regola d'arte con materiali nuovi rispondenti alle vigenti disposizioni di legge. Il capitolo 13 comprende i seguenti gruppi: 13.01 Impianto di produzione energia termica, strumenti ed accessori 13.02 Impianto di combustione e di scarico dei prodotti di combustione ed accessori
+13.03 Pannelli rad. a pav., riscaldamento a muro e soffitto, radiatori, apparecchi di risc. ed acc.
+13.04 Tubazioni ed accessori
+13.05 Isolamento ed accessori
+13.06 Impianto elettrico e di regolazione ed accessori
+13.10 Impianti di refrigerazione
+13.11 Pompe di calore e accessori
+13.12 Ventilazione meccanica controllata
+13.13 Canali di convigliamento dell'aria e accessori
+13.15 Unitá di ventilazione non residenziale
+13.18 Bilanciamento idraulico di impianti esistenti]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Prezzi elementari"><![CDATA[Prezzi elementari]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Impianto di produzione energia termica, strumenti ed accessori"><![CDATA[Impianto di produzione energia termica, strumenti ed accessori]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Organi di intercettazione"><![CDATA[Organi di intercettazione]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="Saracinesca a corpo piatto flangiata: DN 125 - 5&#34;"><![CDATA[Saracinesca a corpo piatto flangiata a vite interna, corpo e coperchio in ghisa, sede e asta in ottone, PN 10, temperatura max. 120 °C, completa di controflange, bulloneria e guarnizioni: DN 125 - 5"]]></EASY:livello5>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>446.95</EASY:prezzo>
+            <EASY:prezzosenzasgutil>353.32</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>53.00</EASY:spesegenerali>
+            <EASY:utilidiimpresa>40.63</EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_14.01.15.13.C">
+            <EASY:livello1 descrizionebreve="Impianti sanitari"><![CDATA[I prezzi delle voci elencate comprendono la fornitura dei materiali, il trasporto in cantiere, il montaggio e la posa in opera. Nel prezzo di tariffa s'intende compresa l'assistenza tecnica durante l'esecuzione dell 'impianto. Sono escluse le assistenze murarie ed i ponteggi.
+Tutti i lavori sono da eseguire a regola d'arte con materiali nuovi rispondenti alle vigenti disposizioni di legge.
+Il gruppo 14.04 comprende i seguenti sottogruppi:
+14.04.01 Tubazioni in acciaio inossidabile
+14.04.02 Tubazioni in acciaio
+14.04.03 Tubazioni in rame
+14.04.04 Tubazioni in plastica per acqua sanitaria
+14.04.05 Tubi in polietilene per condotte di pressione
+14.04.06 Tubazioni in pressione in polipropilene
+14.04.07 Tubazioni di scarico in polietilene PE-HD
+14.04.08 Tubazioni di scarico e tubazioni di ventilazione in polipropilene
+14.04.09 Tubazioni di scarico in PVC
+14.04.10 Tubi di scarico in ghisa
+14.04.11 Accessori per tubazioni
+14.04.12 Tubazioni in polipropilene per fognatura]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Distribuzione dell'acqua potabile ed accessori"><![CDATA[Il gruppo 14.01 comprende i seguenti sottogruppi: 14.01.01 Contatori d'acqua
+14.01.02 Riduttori di pressione
+14.01.03 Filtri d'acqua
+14.01.04 Organi di intercettazione
+14.01.05 Valvole di ritegno
+14.01.06 Valvole miscelatrici per acqua sanitaria
+14.01.07 Pompe per acqua sanitaria
+14.01.08 Disconnettore di rete
+14.01.09 Vasi d'espansione
+14.01.10 Demineralizzatori d'acqua
+14.01.11 Accessori
+14.01.15 Filtri fini per acqua potabile
+14.01.17 Addolcimento per acqua potabile
+14.01.19 Dosaggio acqua sanitaria]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Filtro fine per acqua potabile"><![CDATA[Filtro fine per acqua potabile]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Filtro autopulente comandato dalla pressione differenziale"><![CDATA[Filtro fine autopulente a funzionamento automatico, con frequenza di lavaggio programmabile e comandata dalla pressione differenziale, per la protezione delle tubazioni idriche e degli apparecchi ad esse collegati da malfunzionamenti e corrosioni dovute alla presenza di particelle estranee. Idoneo per installazione in impianti di distribuzione di acqua potabile e ad uso tecnologico.
+Frequenza del lavaggio automatico programmabile.
+Dispositivo a pressione differenziale per lavaggi supplementari con precedenza sulla temporizzazione programmata.
+Sensore di lavaggio e ripetizione automatica del ciclo nel caso di lavaggio incompleto.
+Elemento filtrante lavabile.
+Filtrazione dell'acqua anche durante la fase di lavaggio.
+Attacco di scarico con rompigetto.
+Capacità filtrante 90 -110 µm.
+Alimentazione elettrica 24 V, compreso alimentatore.]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="Attacchi 1.1/4&#34;"><![CDATA[Attacchi 1.1/4", portata nominale (∆p 0,5 bar) 9,0 m³/h, PN16, compresi raccordi filettati]]></EASY:livello5>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>1659.88</EASY:prezzo>
+            <EASY:scostamento><![CDATA[-5,71%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-5,71%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_15.06.52.05.C">
+            <EASY:livello1 descrizionebreve="Impianti elettrici"><![CDATA[I prezzi delle voci elencate comprendono la fornitura e la posa in opera dei materiali descritti, completi di ogni accessorio necessario e la messa in funzione degli impianti descritti. Tutti i lavori sono da eseguire a regola d'arte, conforme le leggi n. 37 del 22 gennaio 2008, nonché secondo le prescrizioni e le norme vigenti. I prezzi non sono comprensivi dell'assistenza muraria. Il capitolo 15 comprende i seguenti gruppi:
+15.01 Cabina di trasformazione MT/BT
+15.03 Sistemi di alimentazione elettrica di emergenza
+15.04 Sistemi di posa 15.05 Linee 15.06 Quadri elettrici e apparecchiature da quadro
+15.07 Impianti di rifasamento
+15.08 Attacchi per impianti di illuminazione
+15.09 Corpi illuminanti [CAM]
+15.10 Impianti forza motrice
+15.11 Impianti particolari - Impianti di predisposizione
+15.12 Domotica e automazione degli edifici KNX
+15.13 Illuminazione di emergenza
+15.14 Impianto di terra
+15.15 Impianti contro le scariche atmosferiche
+15.16 Impianti citofonico e videocitofonico
+15.17 Impianti ricezione
+15.20 Impianto per rete trasmissione dati
+15.23 Impianti di allarme
+15.27 Impianti di segnalazione oraria
+15.29 Riscaldamento elettrico
+15.31 Aspirazione centralizzata
+15.32 Impianti fotovoltaici
+15.34 Stazioni di carica auto elettriche
+15.31 Impianto di aspirazione
+15.45 Impianto rivelazione incendi
+15.50 Illuminazione pubblica
+15.90 Prezzi elementari
+15.91 Prezzi elementari]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Quadri elettrici e apparecchiature da quadro"><![CDATA[Il gruppo 15.06 comprende i seguenti sottogruppi: 15.06.01 Quadri In < 63 A
+15.06.02 Quadri In < 125 A
+15.06.03 Quadri In < 250 A
+15.06.04 Quadri In < 630 A
+15.06.05 Quadri In > 630 A
+15.06.06 Quadri elettrici per utilizzi particolari
+15.06.07 Quadri stradali in vetroresina
+15.06.11 Sezionatori
+15.06.21 Protezioni automatiche modulari 6kA
+15.06.22 Protezioni automatiche modulari 10kA
+15.06.23 Protezioni automatiche modulari 15kA
+15.06.31 Protezioni automatiche magnetotermiche differenziali modulari 6kA tipo A
+15.06.32 Protezioni automatiche magnetotermiche differenziali modulari 10kA tipo A
+15.06.35 Protezioni automatiche magnetotermiche differenziali modulari 6kA tipo AC
+15.06.36 Protezioni automatiche magnetotermiche differenziali modulari 10kA tipo AC
+15.06.41 Protezioni differenziali modulari tipo A
+15.06.42 Protezioni differenziali modulari tipo AC
+15.06.43 Interruttore differenziale tipo B
+15.06.46 Protezioni differenziali modulari selettive tipo A
+15.06.51 Protezioni automatici magnetotermici scatolati 25kA
+15.06.52 Protezioni automatici magnetotermici scatolati 40kA
+15.06.53 Protezioni automatici magnetotermici scatolati 70kA
+15.06.55 Blocco differenziale per interruttori automatici magnetotermici scatolati
+15.06.58 Interruttori sezionatori scatolati
+15.06.61 Fusibili
+15.06.71 Apparecchiature di comando
+15.06.72 Strumenti di misura
+15.06.81 Limitatore di sovratensione / scaricatore di corrente da parafulmine
+15.06.91 Accessori]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Protezioni automatiche magnetotermiche scatolate con poteri di interruzione fino a 36kA"><![CDATA[Protezioni automatiche magnetotermiche scatolate con poteri di interruzione fino a 36kA]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Interruttore magnetotermico 4 poli 36kA - elettronico"><![CDATA[Interruttore automatico componibile scatolato con contatti rotativi ad apertura rapida sostenuti da un sistema di riflesso; scomparto ausiliari a doppio isolamento; sganciatore elettronico di sovracorrente regolabile.
+Tensione nominale: 690V AC
+Potere di interruzione a 400V: Icu 36kA
+Ics = 100% Icu; 
+montaggio fisso; contatti anteriori; 4 poli protetti 
+Comprensivo di bobina di sgancio, contatti ausiliari, rispettivo kit di montaggio, morsettiere per derivazione, etichettatura di linee, apparecchi e morsettiere, canale di cablaggio, fermacavo, la quota di progettazione, prove e test, nonché tutti i materiali di collegamento e fissaggio necessari per un’esecuzione a regola d’arte e pronta all’uso.]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="corrente nominale 4x63-160 A"><![CDATA[corrente nominale 4x63-160 A]]></EASY:livello5>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>1870.51</EASY:prezzo>
+            <EASY:scostamento><![CDATA[-2,82%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-2,82%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_15.90.05.22.B">
+            <EASY:livello1 descrizionebreve="Impianti elettrici"><![CDATA[I prezzi delle voci elencate comprendono la fornitura e la posa in opera dei materiali descritti, completi di ogni accessorio necessario e la messa in funzione degli impianti descritti. Tutti i lavori sono da eseguire a regola d'arte, conforme le leggi n. 37 del 22 gennaio 2008, nonché secondo le prescrizioni e le norme vigenti. I prezzi non sono comprensivi dell'assistenza muraria. Il capitolo 15 comprende i seguenti gruppi:
+15.01 Cabina di trasformazione MT/BT
+15.03 Sistemi di alimentazione elettrica di emergenza
+15.04 Sistemi di posa 15.05 Linee 15.06 Quadri elettrici e apparecchiature da quadro
+15.07 Impianti di rifasamento
+15.08 Attacchi per impianti di illuminazione
+15.09 Corpi illuminanti [CAM]
+15.10 Impianti forza motrice
+15.11 Impianti particolari - Impianti di predisposizione
+15.12 Domotica e automazione degli edifici KNX
+15.13 Illuminazione di emergenza
+15.14 Impianto di terra
+15.15 Impianti contro le scariche atmosferiche
+15.16 Impianti citofonico e videocitofonico
+15.17 Impianti ricezione
+15.20 Impianto per rete trasmissione dati
+15.23 Impianti di allarme
+15.27 Impianti di segnalazione oraria
+15.29 Riscaldamento elettrico
+15.31 Aspirazione centralizzata
+15.32 Impianti fotovoltaici
+15.34 Stazioni di carica auto elettriche
+15.31 Impianto di aspirazione
+15.45 Impianto rivelazione incendi
+15.50 Illuminazione pubblica
+15.90 Prezzi elementari
+15.91 Prezzi elementari]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Prezzi elementari"><![CDATA[Prezzi elementari]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Linee"><![CDATA[Linee]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Cavi tripolari con cavi flessibili in rame"><![CDATA[Cavi tripolari con cavi flessibili in rame]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="FTG18OM16 3G2,5 0,6/1KV CAVO RF CEI 20-45 BOB"><![CDATA[FTG18OM16 3G2,5 0,6/1KV CAVO RF CEI 20-45 BOB]]></EASY:livello5>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>3.64</EASY:prezzo>
+            <EASY:prezzosenzasgutil>2.88</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>0.43</EASY:spesegenerali>
+            <EASY:utilidiimpresa>0.33</EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_52.02.02.23.A">
+            <EASY:livello1 descrizionebreve="Oneri generali e particolari di cantiere"><![CDATA[Oneri generali e particolari di cantiere
+Il capitolo 52. comprende i seguenti sottocapitoli:
+52.01 Oneri generali di cantiere
+52.02 Oneri particolari di cantiere
+52.05 Prove di qualità e monitoraggio di materiali e strutture
+I compensi previsti nel presente capitolo si riferiscono agli oneri descritti nel sottocapitolo 50.35.00.00, per l'installazione, la manutenzione e gestione fino all'ultimazione dei lavori, l'eventuale spostamento (per lavori estesi in lunghezza), lo smontaggio finale e lo sgombero del cantiere.
+Oltre a quanto detto nella 50.35 si precisa quanto segue:
+Agli effetti di un eventuale compenso sono considerati "oneri particolari" esclusivamente quelli per i quali è previsto il relativo compenso. Tutti gli altri ricadono tra quelli "generali".
+Se non detto diversamente in una singola voce, i compensi spettano esclusivamente per la durata contrattuale originale. Durante i periodi di termine suppletivo, concessi per qualsiasi ragione, l'appaltatore deve continuare a fornire tutte le prestazioni e sostenere le relative spese.
+I pagamenti dei compensi "a corpo" e di quelli riferiti a tempo verranno effettuati con i vari stati d'avanzamento in proporzione al tempo contrattuale originale consumato.]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Oneri particolari di cantiere"><![CDATA[Oneri particolari di cantiere]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Installazioni particolari di cantiere"><![CDATA[Installazioni particolari di cantiere
+I prezzi unitari di seguito elencati si riferiscono alla messa a disposizione di attrezzature ufficialmente omologate e di segnalazione per cantieri temporanei costituito da cartelli conformi alle norme stabilite dal Codice della Strada e dal Regolamento di attuazione, con scatolatura perimetrale di rinforzo e attacchi saldati sul retro, a piè d'opera.
+I prezzi unitari comprendono il compenso per trasporto, montaggio e smontaggio.
+La durata della messa a disposizione parte dal momento della piena operosità a piè d'opera. Per le sottovoci, per cui vale “per tutta la durata necessaria”, il prezzo deve essere calcolato tenendo presente la durata approssimativa prevista con le relative voci elementari.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Delimitazione provvisoria di zone di lavoro realizzata mediante transenne modulari"><![CDATA[Delimitazione provvisoria di zone di lavoro realizzata mediante transenne modulari costituite da struttura principale in tubolare di ferro, diametro 33 mm, e barre verticali in tondino, diametro 8 mm, entrambe zincate a caldo, dotate di ganci e attacchi per il collegamento continuo degli elementi senza vincoli di orientamento. Nolo per ogni mese o frazione.]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="Modulo di altezza pari a 1110 mm e lunghezza pari a 2000 mm."><![CDATA[Modulo di altezza pari a 1110 mm e lunghezza pari a 2000 mm.]]></EASY:livello5>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo></EASY:prezzo>
+            <EASY:prezzosenzasgutil> </EASY:prezzosenzasgutil>
+            <EASY:spesegenerali> </EASY:spesegenerali>
+            <EASY:utilidiimpresa> </EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[-100,00%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-100,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_75.80.15.15.A">
+            <EASY:livello1 descrizionebreve="Tubazioni, fornitura e posa in opera"><![CDATA[Tubazioni, fornitura e posa in opera
+Il capitolo 75 comprende i seguenti sottocapitoli:
+75.01 Tubi d'acciaio
+75.03 Tubi di ghisa
+75.10 Tubi di materiale plastico
+75.20 Tubi di cemento
+75.22 Tubi di gres ceramico
+75.25 Tubi di fibrocemento
+75.80 Lavori accessori
+75.90 Sovrapprezzi
+Il capitolo 75 tratta tubazioni esterne agli edifici. Per le tubazioni interne si rimanda agli specifici capitoli. Nel capitolo 75 le tubazioni sono differenziate in base al materiale, indipendentemente dal loro impiego. L'impiego può consistere nel trasporto di liquidi - solitamente acqua potabile, irrigua, di falda, meteorica, di fogna, da riscaldamento ecc. -, nel trasporto di gas, oppure nella creazione di un canale vuoto per la successiva posa di cavi od altri tubi di diametro inferiore. Se di interesse per l'opera, l'impiego speciale di un tubo verrà specificato nella singola voce.
+I compensi di seguito elencati si riferiscono - se non specificato diversamente nella voce - a tubazioni poste in opera prevalentemente in trincea di scavo su letto di materiale granulometricamente assortito, rivestite con lo stesso materiale, e successivamente interrate.
+Nei prezzi unitari sono compresi i seguenti oneri:
+- la fornitura e posa in opera a perfetta regola d'arte di tutti i materiali;
+- l'esecuzione delle giunzioni, compresi i relativi materiali, come anelli elastomerici per le giunzioni elastiche a bicchiere, ecc.;
+- il taglio di tubi e l'eventuale lavorazione delle teste per l'adattamento a situazioni particolari;
+- tutti i lavori di allacciamento a tubazioni esistenti, compresi adattamenti particolari, tagli, saldature, manicotti speciali ecc., escluso solo l'eventuale valvolame;
+- il rilevamento topografico e la fornitura delle relative monografie di tutti gli allacciamenti, diramazioni, ecc. sotterranei eseguiti. Diramazioni non ancora collegate devono essere chiuse con tappo a tenuta e segnalate con una tavola verticale interrata fino a -10 cm sotto il piano campagna;
+- la verifica statica per il tubo posto in opera;
+- l'onere per la posa in opera, ca. 40 cm sotto il piano campagna, di un nastro di avvertimento, che viene compensato separatamente con le voci 75.80.
+Sono esclusi dal compenso unitario tutti i lavori di scavo, demolizione e rinterro.
+Tutti gli elementi sagomati e i pezzi speciali necessari per la realizzazione – indipendentemente dalla loro forma geometrica o complessità tecnica – vengono compensati secondo le vigenti DTC.
+Verranno pure compensati a parte, con le voci 75.80, eventuali blocchi o diaframmi di conglomerato cementizio in corrispondenza di tratti molto pendenti, pezzi speciali ecc., se ordinati dalla DL o previsti in progetto.
+I tubi dovranno essere trasportati e posti in opera con mezzi speciali di sollevamento, che garantiscano la loro integrità.
+Danneggiamenti di un eventuale rivestimento protettivo interno od esterno devono essere riparati immediatamente da personale specializzato, a cura e spese dell'appaltatore, con l'impiego del prodotto originale e l'uso di adeguata attrezzatura speciale.
+La pressione nominale indicata ""PN"" è quella minima richiesta, espressa in bar. Tubi per condotte a pelo libero devono essere a tenuta fino a PN 0,50 bar.
+Le dimensioni indicate sono quelle nominali ""DN"" oppure quelle interne espresse in mm.]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Lavori acessori"><![CDATA[Lavori acessori]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Basamenti e rivestimenti in sabbia e sabbia/ghiaia"><![CDATA[Basamenti e rivestimenti in sabbia e sabbia/ghiaia
+Fornitura e posa in opera di materiale granulometricamente selezionato secondo il fuso prescritto, per la creazione del letto di posa e del rivestimento di tubi posti in opera in trincea di scavo.
+Il prezzo unitario comprende la posa in opera a strati di spessore adeguato ed il costipamento a strati con i mezzi di costipamento più adeguati per il tipo di tubazione, per il materiale di basamento e rivestimento, per il materiale di fondazione, e per l'angolo di posa richiesto.
+Questo prezzo verrà applicato solo se nella voce per la fornitura e posa della tubazione sono espressamente esclusi il letto ed il rivestimento della stessa.
+Verrà contabilizzato e compensato il volume teorico risultante dai disegni tipo.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Letto per tubi in ghiaia riciclata/sabbia certificato CE"><![CDATA[Letto per tubi in ghiaia riciclata/sabbia certificato CE]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="Sabbia riciclata 0-4 mm o ghiaia riciclata 4-32 mm"><![CDATA[Sabbia riciclata 0-4 mm o ghiaia riciclata 4-32 mm]]></EASY:livello5>
+            <EASY:um><![CDATA[m3]]></EASY:um>
+            <EASY:prezzo></EASY:prezzo>
+            <EASY:prezzosenzasgutil> </EASY:prezzosenzasgutil>
+            <EASY:spesegenerali> </EASY:spesegenerali>
+            <EASY:utilidiimpresa> </EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[-100,00%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-100,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_80.01.01.01.A">
+            <EASY:livello1 descrizionebreve="Accessori per acquedotto"><![CDATA[Accessori per acquedotto
+Il capitolo 80 comprende i seguenti sottocapitoli:
+80.01 Valvolame
+80.05 Idranti
+80.10 Giunti
+80.15 Allacciamenti a tubazioni preesistenti
+80.20 Chiusini stradali per acquedotto
+80.25 Equipaggiamento per serbatoi ed opere di captazione di sorgenti
+80.27 Tubazioni all'interno di manufatti
+Le voci del presente capitolo possono essere applicate anche a lavori di fognatura e di altro tipo paragonabile.
+Il compenso unitario comprende i seguenti oneri:
+- fornitura e posa in opera di tutti i materiali, anche quelli ausiliari, di minuteria, di fissaggio, di consumo ed a perdere, nonchè gli sfridi. Si avverte che tutti i materiali di fissaggio come piedistalli, mensole, bulloni ecc., se non richiesti in acciaio INOX AISI 304, devono essere almeno zincati a caldo;
+- la preventiva presentazione, in tempo utile, delle specifiche tecniche dei prodotti che l'appaltatore intende fornire. Se richiesto dalla DL, dovranno essere messi a disposizione campioni. Dove necessitano per una posa in opera a regola d'arte, sono da fornire in tempo utile disegni particolareggiati per eventuali nicchie, aperture, basamenti ecc.;
+- la fornitura e posa in opera delle guarnizioni, delle controflange e dei bulloni nel caso di accessori flangiati;
+- la fornitura e posa in opera degli anelli di tenuta e dei sistemi antisfilamento nel caso di accessori con bicchieri;
+- la posa in opera sia in trincea di scavo che all'interno di manufatti.
+Se non espressamente stabilito diversamente in una voce sono esclusi dal prezzo unitario e vengono compensati separatamente:
+- scavi, demolizioni e lavori di rinterro;
+- la sigillatura di fori o aperture di passaggio attraverso pareti ecc.;
+- le prove di pressione.
+Per zincatura è sempre intesa quella a caldo, con spessore almeno 40 µ.
+Verrà misurato solo il materiale definitivamente posto in opera.]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Valvolame"><![CDATA[Valvolame
+Il sottocapitolo 80.01 comprende le seguenti voci principali:
+80.01.01 Saracinesche
+80.01.02 Valvole a sfera
+80.01.03 Valvole a farfalla
+80.01.08 Valvole a galleggiante
+80.01.10 Valvole di ritegno
+80.01.12 Valvole di riduzione di pressione
+80.01.15 Sfiati
+80.01.20 Contatori
+80.01.25 Manometri
+80.01.30 Filtri]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Saracinesche"><![CDATA[Saracinesche]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Saracinesca a corpo piatto tipo, PN 10/16"><![CDATA[Saracinesca a corpo piatto, in ghisa sferoidale, mandrino in acciaio INOX AISI 304, cuneo in ghisa rivestito in gomma nitrile vulcanizzata, bulloni ad alta resistenza, passaggio interno rettilineo senza alcuna sede.
+PN 10 - PN 16]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="DN 50 - con flange UNI/DIN"><![CDATA[DN 50 - con flange UNI/DIN]]></EASY:livello5>
+            <EASY:um><![CDATA[nr]]></EASY:um>
+            <EASY:prezzo></EASY:prezzo>
+            <EASY:prezzosenzasgutil> </EASY:prezzosenzasgutil>
+            <EASY:spesegenerali> </EASY:spesegenerali>
+            <EASY:utilidiimpresa> </EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[-100,00%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[-100,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_90.15.10.21.L">
+            <EASY:livello1 descrizionebreve="Lavori in sotterraneo"><![CDATA[Lavori in sotterraneo
+Il capitolo 90 comprende i seguenti sottocapitoli:
+90.05 Lavori preliminari, lavori conclusivi
+90.10 Lavori di scavo
+90.12 Aggottamenti
+90.15 Provvedimenti di sostegno
+90.16 Sostegno preliminare, sostegno del fronte di scavo 90.20 Impermeabilizzazioni
+90.25 Lavori in conglomerato cementizio
+90.90 Sovrapprezzi
+Premesse:
+I prezzi unitari di seguito elencati si riferiscono a tutte le prestazioni, forniture ed oneri connessi con esecuzione di vuoti sotterranei come gallerie, caverne, pozzi ecc., indipendentemente dal loro scopo di utilizzo.
+I prezzi unitari per i lavori in sotterraneo comprendono i costi della manodopera in sotterraneo; questi tengono conto del lavoro a turno (lavoro diurno e notturno). Se non è possibile effettuare il lavoro a turno a causa delle circostanze, i costi della manodopera devono essere adeguati.
+Per motivi informatico-gestionali, importanti definizioni e premesse sono state esportate dal presente elenco, esse sono disponibili in forma di testo autonomo, facente parte della fornitura del presente elenco. Tale testo è da inserire nella parte seconda : ""Norme tecniche"" del capitolato speciale d'appalto del singolo progetto che fa uso delle voci del capitolo 90.
+Caratteristica per l'appartenenza a questo capitolo è l'esecuzione in ""sotterraneo"". Le prestazioni connesse con l'attacco del lavoro in sotterraneo (zone dei portali) non sono oggetto del presente capitolo. Le relative prestazioni vengono compensate con le relative voci degli altri capitoli fino al limite di seguito precisato. Questo vale anche per i lavori di perforazione, iniezione ed ancoraggio aventi come unico scopo l'attacco dell'opera, anche se questi ultimi oltrepassano il limite citato.
+Se non precisato diversamente in un sottocapitolo o in una voce, il limite per l'applicazione del presente capitolo è costituito dal punto di intersezione della linea di calotta della sezione teorica di scavo con la superficie naturale del terreno. Quest'ultima può essere stata creata anche artificialmente con uno scavo a cielo aperto.
+Le presenti voci valgono per l'avanzamento mediante uso di esplosivi, con mezzi meccanici e con frese a sezione parziale o totale. La realizzazione di un ""vuoto sotterraneo"" comprende lo scavo, il caricamento, il trasporto entro un raggio fissato, lo scaricamento del materiale di scavo, nonchè i provvedimenti precauzionali di sostegno dello scavo.
+Acqua sotterranea
+Oneri ed aggravi nell'avanzamento causati da venute d'acqua fino a 5 l/s non verranno compensati separatamente. Per portate oltre questo valore sono previsti sovrapprezzi sullo scavo. Eventuale acqua tecnologica non viene misurata.
+Aggottamento
+Oneri in relazione alla raccolta, al trasporto ed allo smaltimento di acqua sotterranea sono compresi parzialmente come prestazioni complementari nei prezzi unitari dell'avanzamento. In parte vengono compensati separatamente. Sia che si tratti di prestazioni compensate separatamente o di prestazioni complementari, devono essere presi tutti i provvedimenti atti a garantire nell'ambito del tecnicamente possibile un piano di lavoro e di trasporto il più possibile asciutto.
+Non vengono compensati separatamente in quanto compresi nel prezzo unitario dell'avanzamento:
+- la presa e la raccolta dell'acqua sotterranea immediatamente alla sua sorgente, il trasporto tramite tubazioni e canali aperti fino al più vicino pozzetto di raccolta;
+- la costruzione, l'esercizio e la manutenzione di tutti i punti necessari di raccolta, dei pozzetti di raccolta, dei pozzetti di adescamento e la loro demolizione o rispettivamente il riempimento con conglomerato cementizio della resistenza adatta, dopo la messa fuori esercizio;
+- il trasporto, senza limitazione in lunghezza, dell'acqua sotterranea in canali aperti non rivestiti, compresi tutti i pozzetti di ispezione, di raccolta e di distribuzione, nonchè la loro demolizione o rispettivamente il loro riempimento con conglomerato cementizio di idonea resistenza dopo la loro messa fuori esercizio;
+- il rivestimento di canali con fondelli, elementi prefabbricati od eseguiti in opera in conglomerato cementizio, fino alla lunghezza dei primi 100 m, posti in opera cronologicamente;
+- i maggiori oneri per tutte le prestazioni connesse con l'esecuzione di nicchie, di sovrasagome, di allargamenti, locali accessori ecc. fino ad un volume teorico di scavo dell'1 % della corrente voce di scavo, a condizione che siano stati ordinati durante lo scavo della sezione standard. Per scavi ordinati successivamente e per scavi superanti l'1 % verrà riconosciuto unicamente un apposito prezzo di scavo. Tutte le altre prestazioni verranno compensate con i prezzi unitari correnti.
+Ostacolamenti e riduzioni del rendimento:
+Non verranno compensati separatamente in quanto compresi nei prezzi unitari come caratteristiche della categoria, ostacolamenti e riduzioni del rendimento causati da:
+- operazioni topografiche, di contabilità e di altre operazioni di controllo in genere;
+- provvedimenti di sostegno dovute dalle caratteristiche della classe di qualità della roccia;
+- studi e misurazioni geotecnici.
+Studi e misurazioni geotecniche
+Controlli geotecnici verranno compensati separatamente soltanto se espressamente previsti nel capitolato di progetto.
+Sovraprofilo causato dalle condizioni geologiche
+La definizione e la delimitazione del sovraprofilo causato dalle condizioni geologiche deve avvenire nel rispettivo capitolato di progetto.
+Tutte le prestazioni effettuate in relazione a questi sovraprofili verranno compensate con i prezzi unitari correnti dell'avanzamento normale, salvo che siano previste delle apposite voci.
+Misure e contabilitá
+Per la contabilità vale il principio che per gli scavi verrà riconosciuta e contabilizzata soltanto la sezione teorica. Per tutti i provvedimenti successivi allo scavo verranno riconosciute e contabilizzate soltanto le quantità poste in opera definitivamente e necessarie come quantitativi teorici, rispettando la sezione di scavo teorica (cioè quantitativi maggiori per esempio dovuti per sovraprofili non geologicamente causati, non verranno compensati). Come sovrascavo non geologico e quindi fisiologico dovuto alla natura della roccia e/o ad una non ottimizzazione della volata, si considera uno strato di 10 cm da intendersi al di sopra della linea teorica dello scavo per cunicoli e gallerie con diametro inferiori ai 12m.
+Per gallerie con diametro superiore ai 12 m e per caverne tale fascia deve intendersi con spessore pari a 20cm. La contabilizzazione deve essere congruente con quanto riportato nelle linee guida DTC per la determinazione della posizione delle fasce qui stabilite.
+La contabilità avviene secondo le linee di contabilizzazione delle Disposizioni tecnico-contrattuali (DTC) per i lavori in sotterraneo con avanzamento ciclico e/o continuo.]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Provvedimenti di sostegno"><![CDATA[Provvedimenti di sostegno
+Per provvedimenti di sostegno sono definiti tutti i provvedimenti posti in opera nel corso dell'avanzamento, sia seguenti che avanzanti, per formare, in collaborazione con la roccia, una volta portante esterna.
+Si tratta in particolare di tiranti, chiodi, Spritzbeton, acciaio d'armatura, centine, preiniezioni, pali preinfilati ecc..
+Con l'inserimento in una classe di avanzamento (VK) gli interventi tipo sono già definiti.
+Durante l'avanzamento vengono continuamente controllate le situazioni locali tramite controlli geotecnici eseguiti in contraddittorio tra appaltatore e committente.
+L'eventuale reinserimento in una classe di qualità della roccia (VK) diversa non si riperquote in nessun modo sui prezzi unitari dei provvedimenti di sostegno stesso, ma si riperquote esclusivamente sull'applicazione del relativo prezzo per lo scavo.
+Inoltre un reinserimento in un altra classe non può essere fonte di alcuna richiesta per un maggiore compenso, ad eccezione dell'applicazione dei prezzi unitari concordati, sulle effettive quantità. Questo vale anche nel caso che in base a controlli geotecnici, in un secondo momento, ma comunque sempre ancora prima della posa in opera della impermeabilizzazione o rispettivamente della volta interna, siano da eseguire ulteriori provvedimenti di sostegno.
+Nel caso di controversie sul tipo ed il quantitativo delle opere di sostegno, dove l'appaltatore deve presentare per iscritto e con la relativa documentazione la sua proposta, decide il committente.
+Verranno comunque compensati solo i provvedimenti riconosciuti dal committente.]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Tiranti e chiodi"><![CDATA[Tiranti e chiodi
+I prezzi unitari di seguito elencati si riferiscono alla fornitura e posa in opera, pronti per l'utilizzo, di chiodi ed in aggiunta la pretensione, anche in diverse riprese, di tiranti.
+I prezzi unitari comprendono le seguenti prestazioni ed oneri.
+- la perforazione del foro
+- la fornitura dei tiranti e dei chiodi, completi con tutti gli accessori come tubi protettivi, sagomati o lisci, piastre di ancoraggio convesse di dimensioni idonee, elementi per la messa in tensione, dadi e rondelle
+- lo sfiato del foro
+- la posa in opera a regola d'arte ed in ogni direzione ed il fissaggio secondo il tipo di tirante e le indicazioni del produttore, compresi tutti i materiali necessari
+- le prove di idoneità e le prove continue di controllo eseguite mediante prove a trazione con redazione dei relativi verbali di prova. Per queste prestazioni verrà compensato il prezzo normale del tirante
+- la messa in tensione a regola d'arte con apparecchiature pneumatiche o idrauliche tarate
+- la sigillatura senza vuoti del vuoto rimanente tra tirante/chiodo e parete del foro
+- la protezione anticorrosione di tiranti e chiodi a lunga durata in acciaio
+- la redazione di verbali di messa in tensione, sigillatura ed iniezione.
+I tiranti sono suddivisi secondo la tipologia, il carico di rottura e le classi di lunghezza. L'appaltatore deve di sua iniziativa ed a suo carico presentare la documentazione e provvedere alle prove di idoneità.
+Potranno essere posti in opera solo tipi di tiranti per i quali il committente ha dato il suo nullaosta, dove per tiranti a lunga durata sono richiesti particolari criteri di qualità relativi ad un efficiente protezione anticorrosione duratura.
+Con "L" è definita la lunghezza del tirante, prima della sua posa in opera.
+Con "P" è definita il carico minimo di rottura richiesto, con "N" è definito il carico di esercizio in kN del tirante posto in opera.
+Con "A/B/S" sono definite le dimensioni espresse in mm della piastra di ancoraggio convessa o troncoconica.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Tirante a barra"><![CDATA[Tirante costituito da barra d'acciaio con filetto trafilato a caldo, protetto contro la corrosione per lunga durata mediante tubo sagomato di PVC e riempimento con malta cementizia ad alta qualità, zona di scorrimento costituita da tubo liscio in PVC, zona di ancoraggio iniettata con malta a resine sintetiche o cementizia ad alta qualità, tratto restante sigillato senza vuoti, piastra d'ancoraggio A/B/S, carico di rottura, P preteso fino a 0,60 P.
+Come alternativa al tratto di ancoraggio può, se geotecnicamente sostenibile, essere proposta una testa di tirante ad espansione.
+Verrà compensata la lunghezza del tirante prima della posa in opera.]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="P = 500 kN, A/B/S = 180/180/8, per lunghezze maggiori di 3,00 m"><![CDATA[P = 500 kN, A/B/S = 180/180/8, per lunghezze maggiori di 3,00 m]]></EASY:livello5>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>96.95</EASY:prezzo>
+            <EASY:scostamento><![CDATA[+0,01%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[+0,02%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="BOL26_ZA.02.90.01.01">
+            <EASY:livello1 descrizionebreve="VOCE NON UFFICIALE – NON USARE"><![CDATA[Le analisi prezzo possono contenere componenti di prezzo individuati con una codifica che inizia con lettere, p.e. AA.xx.xx….., ZA.xx.xx….. ecc..
+Dette posizioni non costituiscono voci e prezzi ufficiali dell’elenco prezzi informativi della Provincia Autonoma di Bolzano e quindi come tali non possono essere singolarmente utilizzati. Trattasi infatti di componenti ausiliarie della singola analisi prezzo ivi riportate utilizzate al solo fine di una completa e appropriata rappresentazione del calcolo del prezzo per la voce di riferimento dell’elenco prezzi informativi.]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="VOCE NON UFFICIALE – NON USARE - ZA.02"><![CDATA[VOCE NON UFFICIALE – NON USARE - ZA.02]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="-"><![CDATA[-]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="-"><![CDATA[-]]></EASY:livello4>
+            <EASY:livello5 descrizionebreve="VOCE NON UFFICIALE – NON USARE - Controlli non distruttivi (saldature acciaio)"><![CDATA[VOCE NON UFFICIALE – NON USARE - Controlli non distruttivi (saldature acciaio)]]></EASY:livello5>
+            <EASY:um><![CDATA[nr]]></EASY:um>
+            <EASY:prezzo>485.73</EASY:prezzo>
+            <EASY:prezzosenzasgutil>383.97</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>57.60</EASY:spesegenerali>
+            <EASY:utilidiimpresa>44.16</EASY:utilidiimpresa>
+            <EASY:scostamento><![CDATA[0,00%]]></EASY:scostamento>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+    </EASY:Contenuto>
+</EASY:Prezzario>

@@ -21,6 +21,10 @@ import { FONTI_CAMPANIA } from "./fonti/campania";
 import { FONTI_EMILIA_ROMAGNA } from "./fonti/emilia-romagna";
 import { FONTI_FRIULI_VENEZIA_GIULIA } from "./fonti/friuli-venezia-giulia";
 import { FONTI_TRENTO } from "./fonti/trento";
+import { FONTI_PIEMONTE } from "./fonti/piemonte";
+import { FONTI_BOLZANO } from "./fonti/bolzano";
+import { FONTI_SARDEGNA } from "./fonti/sardegna";
+import { FONTI_CALABRIA } from "./fonti/calabria";
 import { FONTI_MOLISE } from "./fonti/molise";
 import { FONTI_LAZIO } from "./fonti/lazio";
 import { FONTI_TOSCANA } from "./fonti/toscana";
@@ -48,6 +52,10 @@ export const FONTI: Fonte[] = [
   ...FONTI_EMILIA_ROMAGNA,
   ...FONTI_FRIULI_VENEZIA_GIULIA,
   ...FONTI_TRENTO,
+  ...FONTI_PIEMONTE,
+  ...FONTI_BOLZANO,
+  ...FONTI_SARDEGNA,
+  ...FONTI_CALABRIA,
   ...FONTI_VENETO,
   ...FONTI_BASILICATA,
   ...FONTI_LIGURIA,

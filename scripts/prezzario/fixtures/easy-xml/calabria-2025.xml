@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EASY:Prezzario xmlns:EASY="https://prezzario.calabriallpp.it/prezzario.xsd">
+    <EASY:intestazione autore="Regione Calabria" versione="0.2">
+        <EASY:dettaglio anno="2025" versione="0" area="Ambito Regionale"/>
+        <EASY:copyright tipo="CC BY 3.0" descrizione="Creative commons: CC BY"/>
+    </EASY:intestazione>
+    <EASY:Contenuto>
+                <EASY:Articolo cam="0" codice="CAL25_01.A01.001.001">
+            <EASY:livello1><![CDATA[NUOVE COSTRUZIONI EDILI: I prezzi sono relativi a una nuova costruzione di edilizia civile e si riferiscono a lavori con normali difficoltà di esecuzione.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[BONIFICA DA ORDIGNI BELLICI]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Localizzazione, bonifica e scavi stratigrafici]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Localizzazione e bonifica delle aree mediante ricerca superficiale di eventuali ordigni esplosivi, eseguita da tecnici specializzati fino a profondità di m 1,00, con idonea apparecchiatura cerca metalli munita di avvisatore acustico e con trasmissione dei segnali. Da eseguirsi mediante l'esplorazione su fasce di terreno della larghezza di m1,00 e per tutta la lunghezza dell'area. Compreso l'onere per il trasporto ed impianto delle attrezzature, la segnalazione di eventuali ritrovamenti alle autorità competenti, la sorveglianza, l'assistenza e quant'altro occorre per eseguire l'intervento in sicurezza e nel rispetto delle vigenti normative]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>1.5605</EASY:prezzo>
+            <EASY:Analisi>
+                <EASY:vocedettaglio ordine="1"
+                                   cam="0"
+                                   codice="CAL25_AT.N40.001.001"
+                                   tipo="CAL25_AT"
+                                   udm="ora"
+                                   quantita="0.0132"
+                                   prezzo="35.20000"
+                                   importo="0.46464">
+                        <EASY:descrizione><![CDATA[Rilevazione ordigni bellici - Apparecchiatura per rilevazione superficiale di ordigni bellici]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="2"
+                                   cam="0"
+                                   codice="CAL25_RU.M10.001.002"
+                                   tipo="CAL25_RU"
+                                   udm="ora"
+                                   quantita="0.01342"
+                                   prezzo="31.29000"
+                                   importo="0.41991">
+                        <EASY:descrizione><![CDATA[Operaio edile - Specializzato]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="3"
+                                   cam="0"
+                                   codice="CAL25_RU.M10.001.004"
+                                   tipo="CAL25_RU"
+                                   udm="ora"
+                                   quantita="0.01342"
+                                   prezzo="26.01000"
+                                   importo="0.34905">
+                        <EASY:descrizione><![CDATA[Operaio edile - Comune]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                    <EASY:totaleparziale valore="1.2336"/>
+                    <EASY:spesegenerali percentuale="15" valore="0.18504" />
+                    <EASY:onerisicurezza percentuale="1" valore="0.00185" />
+                    <EASY:utileimpresa percentuale="10" valore="0.14186"/>
+                    <EASY:prezzo valore="1.56050"/>
+                    <EASY:incidenzamanodopera percentuale="49.28" valore="0.76896"/>
+                    <EASY:incidenzasicurezza percentuale="0.12"/>
+                </EASY:Analisi>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_01.E02.005.003">
+            <EASY:livello1><![CDATA[NUOVE COSTRUZIONI EDILI: I prezzi sono relativi a una nuova costruzione di edilizia civile e si riferiscono a lavori con normali difficoltà di esecuzione.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[PAVIMENTI : posa in opera di pavimenti di qualsiasi tipo, compresi i materiali di allettamento o di incollaggio, i tagli e lo sfrido, la formazione di quartaboni, eventuali riprese di mantelline, stuccatura dei giunti e pulizia finale, il tutto per dare il titolo compiuto e finito a regola d'arte. Sono esclusi la fornitura del materiale (salvo diversa indicazione) e la preparazione del fondo di posa.]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Posa in opera di pavimento in cotto , posato a colla su sottofondo precostituito, compreso sigillatura dei giunti, distanziatori (se necessari), pulizia, escluso trattamento e ceratura finale.]]></EASY:livello3>
+            <EASY:livello4><![CDATA[piastrelle rettangolari o quadrate multiformato da comporre tipo mosaico]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>22.41735</EASY:prezzo>
+            <EASY:Analisi>
+                <EASY:vocedettaglio ordine="1"
+                                   cam="0"
+                                   codice="CAL25_PR.P22.030.001"
+                                   tipo="CAL25_PR"
+                                   udm="kg"
+                                   quantita="4"
+                                   prezzo="0.54000"
+                                   importo="2.16000">
+                        <EASY:descrizione><![CDATA[Adesivi per ceramiche e malte - Adesivo per ceramiche e materiali lapidei UNI EN 12004-1:2017, UNI EN 12004-2: 2017 Normale C1]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="2"
+                                   cam="0"
+                                   codice="CAL25_PR.P22.030.005"
+                                   tipo="CAL25_PR"
+                                   udm="kg"
+                                   quantita="0.4"
+                                   prezzo="1.15808"
+                                   importo="0.46323">
+                        <EASY:descrizione><![CDATA[Adesivi per ceramiche e malte - Malta per fughe EN 13888:2009 Migliorata CG 2]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="3"
+                                   cam="0"
+                                   codice="CAL25_PR.P22.060.007"
+                                   tipo="CAL25_PR"
+                                   udm="cad"
+                                   quantita="10"
+                                   prezzo="0.02000"
+                                   importo="0.20000">
+                        <EASY:descrizione><![CDATA[Accessori per la posa - distanziatori a croce o T in plastica per posa pavimenti]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="4"
+                                   cam="0"
+                                   codice="CAL25_RU.M10.001.002"
+                                   tipo="CAL25_RU"
+                                   udm="ora"
+                                   quantita="0.26"
+                                   prezzo="31.29000"
+                                   importo="8.13540">
+                        <EASY:descrizione><![CDATA[Operaio edile - Specializzato]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="5"
+                                   cam="0"
+                                   codice="CAL25_RU.M10.001.004"
+                                   tipo="CAL25_RU"
+                                   udm="ora"
+                                   quantita="0.26"
+                                   prezzo="26.01000"
+                                   importo="6.76260">
+                        <EASY:descrizione><![CDATA[Operaio edile - Comune]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                    <EASY:totaleparziale valore="17.72123"/>
+                    <EASY:spesegenerali percentuale="15" valore="2.65818" />
+                    <EASY:onerisicurezza percentuale="1" valore="0.02658" />
+                    <EASY:utileimpresa percentuale="10" valore="2.03794"/>
+                    <EASY:prezzo valore="22.41735"/>
+                    <EASY:incidenzamanodopera percentuale="66.46" valore="14.898"/>
+                    <EASY:incidenzasicurezza percentuale="0.12"/>
+                </EASY:Analisi>
+        </EASY:Articolo>
+        <EASY:Articolo cam="1" codice="CAL25_01CAM.D01.001.050">
+            <EASY:livello1><![CDATA[NUOVE COSTRUZIONI EDILI CAM I prezzi sono relativi a una nuova costruzione di edilizia civile e si riferiscono a lavori con normali difficoltà di esecuzione, e rispondenti ai decreti del Ministero della Transizione Ecologica (MI.T.E.) e successivi aggiornamenti.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[ISOLAMENTI TERMICI CAM rispondenti ai decreti del Ministero della Transizione Ecologica, su pareti verticali, orizzontali o inclinate da collocare in opera con tutti gli accorgimenti e le indicazioni prescritte dalle ditte produttrici e dalle norme di riferimento. Sono compresi gli oneri per la preparazione dei supporti (se non diversamente esplicitato), il calo ed il sollevamento dei materiali, i ponti di servizio e/o trabattelli a norma con altezza massima m 2,00, anche esterni, mobili o fissi, la formazione dei giunti ed il raccordo agli angoli, il tutto per dare il titolo compiuto e finito a regola d'arte. I prodotti per isolamento devono recare la marcatura CE, essere conformi alla norma UNI 13172 e, se previsto, rispettare i requisiti della norma UNI 13501 in materia di reazione al fuoco (così come esplicata nel D.M. 15/03/2005 e seguenti).]]></EASY:livello2>
+            <EASY:livello3><![CDATA[REALIZZAZIONE DI ISOLAMENTO CON UN "SISTEMA A CAPPOTTO" SU SUPERFICI ESTERNE OPACHE VERTICALI RETTE (se non diversamente esplicitato), denominato ETA004 secondo il riferimento normativo europeo, rispondente ai requisiti CAM e composto da una serie di elementi costruttivi (inclusi nel prezzo), secondo le linee guida ETAG004, quali: il collante per l’ancoraggio, il materiale isolante, i tasselli (in ragione di 6 per mq per spessore isolante uguale o superiore a 100 mm), il rasante, l'armatura (rete in tessuto di fibra di vetro), due mani di primer, strato di intonaco di fondo steso a spatola di almeno 3 mm di finitura (rivestimento con eventuale fondo adatto al sistema) e gli accessori (se non diversamente precisato). La voce si riferisce alla realizzazione di cappotto su qualunque supporto ad esclusione del legno. E’ compresa la verifica del supporto, mentre è da computare a parte, l’eventuale realizzazione del sottofondo tra la parete verticale e lo strato di collante del sistema cappotto.]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Fornitura e posa in opera, per sistemi a cappotto, di profilo in alluminio, completo di gocciolatoio, per la partenza a terra per il supporto dell’isolamento, compreso il fissaggio con viti e tasselli di interasse non oltre cm 50, il tracciamento del piano orizzontale di posa; sono esclusi tutti gli adeguamenti dovuti alle interferenze con il piano di posa dovute all’aumento di spessore della parete. Larghezza profilo 60/80 mm.]]></EASY:livello4>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>10.5014</EASY:prezzo>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_02.E07.005.104">
+            <EASY:livello1><![CDATA[RISTRUTTURAZIONI EDILI: I prezzi sono relativi ad una ristrutturazione di edilizia civile e si riferiscono a lavori con ordinaria difficoltà di esecuzione, compresa manutenzione ordinaria e straordinaria, sia programmabile che non programmabile.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[SOSTITUZIONE DI INFISSO ESTERNO su vano esistente escluso l’ infisso da computare a parte. Sono compresi: il sollevamento e la discesa al piano, la movimentazione del materiale dal sistema di sollevamento al foro muro e viceversa, la pulizia del vano predisposto, i materiali per la posa ed il fissaggio meccanico (viti a fissaggio diretto/turboviti oppure vite e tassello con spessori di distanziamento). E’ inoltre compresa (se non diversamente precisato) la riquadratura finale con appositi profili inclusi nella fornitura dell’infisso, il tutto per dare il lavoro compiuto e finito a regola d'arte. La posa dovrà essere conforme alla UNI 10818 ed ai punti applicabili della UNI 11673-1 con riferimento aI giunto primario e secondario.]]></EASY:livello2>
+            <EASY:livello3><![CDATA[SMONTAGGIO DI QUALUNQUE TIPO DI INFISSO E RIMONTAGGIO DI FINESTRE E PORTEFINESTRE in legno, pvc, alluminio, legnoalluminio e alluminiolegno, ad una o più ante. E’ compresa la rimozione dell'infisso e del telaio esistente, il materiale per la posa e sigillatura/isolamento del giunto secondario su 3 piani funzionali secondo criteri e requisiti 11673-1, l'accatastamento dei materiali riutilizzabili e/o di risulta all’interno del cantiere, ed è esclusa la fornitura e posa del controtelaio e/o monoblocco.]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Per vani PORTAFINESTRA fino a 2,8 mq con apertura scorrevole o ad alzante scorrevole]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>224.94756</EASY:prezzo>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_06.I03.001.005">
+            <EASY:livello1><![CDATA[IMPIANTI TECNOLOGICI: i prezzi sono relativi ai cantieri presenti nella tipologia a cui appartiene il lavoro svolto.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[Fonitura e posa in opera di Autoclavi, Serbatoi e Gruppi di Sollevamento]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Fornitura e posa in opera di serbatoio a pressione atmosferica per liquidi alimentari e fluidi in genere, realizzato da contenitore cilindrico verticale o orizzontale in lamiera di acciaio zincata esternamente ed internamente, idoneo all'erogazione di acqua alimentare. Sono compresi: l'apertura d'ispezione; gli attacchi per il riempimento; il troppo pieno, l'utilizzo e lo scarico. E' inoltre compreso quanto altro occorre per dare l'opera finita a perfetta regola d'arte.]]></EASY:livello3>
+            <EASY:livello4><![CDATA[C = 1500 D x H = 1,10 x 1,72]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>977.77889</EASY:prezzo>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_06.L05.050.014">
+            <EASY:livello1><![CDATA[IMPIANTI TECNOLOGICI: i prezzi sono relativi ai cantieri presenti nella tipologia a cui appartiene il lavoro svolto.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[IMPIANTI ELETTRICI: eseguiti a regola d'arte e conforme al DM 37/08 e ss.mm.ii.,  e alla norma CEI 64-8 , compreso la fornitura dei materiali, il trasporto in cantiere, montaggio e posa in opera, l'appuntatura di tubazioni e scatole negli impianti incassati, la documentazione relativa ai piani di sicurezza e la documentazione associata alle dichiarazioni di conformità, oneri per ponteggi mobili o provvisori con hmax 2 m. Non sono compresi gli oneri relativi a opere murarie quali tracce, sfondi, basamenti, ripresa d'intonaci, ecc., ed oneri di progettazione.]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Cavo unipolare o multipolare con guaina flessibile in rame ricotto isolato in PVC speciali e qualità TI2 e guaina in PVC speciale qualità TM, non propagante l'incendio a norme CEI 20-22 e il marchio IMQ, compreso installazione all' interno di tubazioni e/o canalette, siglatura e connessioni, sigla di designazione FROR,da valere anche per opere di urbanizzazione]]></EASY:livello3>
+            <EASY:livello4><![CDATA[4 x 4 mmq]]></EASY:livello4>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>7.25563</EASY:prezzo>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_AT.N01.001.043">
+            <EASY:livello1><![CDATA[ATTREZZATURE: I prezzi, sono valevoli per noli di attrezzature in perfetta efficienza. In caso di mezzi e macchinari sono esclusi (salvo diversa indicazione), il personale conducente e l'addetto alla manovra e comunque per ottenere il costo totale del nolo occorre aggiungere, per le ore di effettivo funzionamento, il consumo di carburante ed il prezzo della manodopera (operaio specializzato) riportato nel relativo capitolo, ad eccezione dei noli a caldo.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[MACCHINE OPERATRICI: I prezzi sono da intendersi al netto dell'IVA e fanno riferimento a listini di noleggiatori, con l'eventuale sconto applicato, consegnati franco cantiere senza altre maggiorazioni di qualsiasi natura.]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Macchine per movimento terra e accessori]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Escavatore gommato corredato di pala caricatrice anteriore e braccio escavatore posteriore (Terna) motore 90 CV - 2-10 giorni]]></EASY:livello4>
+            <EASY:um><![CDATA[ora]]></EASY:um>
+            <EASY:prezzo>32.1816</EASY:prezzo>
+                <EASY:prezzosenzasgutil>25.44</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>3.816</EASY:spesegenerali>
+                <EASY:utilidiimpresa>2.9256</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P05.031.005">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[MARMI, GRANITI E PIETRE: lastre e cordonati per pavimentazioni esterne; lastre per pavimentazioni interne; lastre per scalini, davanzali, soglie, stipiti, rivestimenti.]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Lastrame in pietra da rivestimento per opera incerta]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Quarzite rosa]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>47.60195</EASY:prezzo>
+                <EASY:prezzosenzasgutil>37.63</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>5.6445</EASY:spesegenerali>
+                <EASY:utilidiimpresa>4.32745</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P15.052.004">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[MATERIALI PLASTICI E COMPOSITI]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Tubo in P.V.C. rigido per scarichi interrati di acque piovane e ventilazione conforme alla norma UNI 10972:2006 con tubo a bicchiere e anello elastomerico di tenuta]]></EASY:livello3>
+            <EASY:livello4><![CDATA[tipo SN4 diam. est. 200 mm spess. 4,2 mm]]></EASY:livello4>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>6.83733</EASY:prezzo>
+                <EASY:prezzosenzasgutil>5.405</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>0.81075</EASY:spesegenerali>
+                <EASY:utilidiimpresa>0.62158</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P15.205.002">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[MATERIALI PLASTICI E COMPOSITI]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Pozzetto di cacciata in polietilene monoblocco]]></EASY:livello3>
+            <EASY:livello4><![CDATA[tipo chiuso h.80 cm]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>502.973</EASY:prezzo>
+                <EASY:prezzosenzasgutil>397.60711</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>59.64107</EASY:spesegenerali>
+                <EASY:utilidiimpresa>45.72482</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P23.003.001">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[MATERIALI PER CONTROSOFFITTI, PARETI E CONTROPARETI]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Pannelli modulari per controsoffitto]]></EASY:livello3>
+            <EASY:livello4><![CDATA[di lana di legno mineralizzata ad alta temperatura con magnesite (WW) o cemento ad alta temperatura dimensioni cm. 60x60 spessore 15 mm Conforme alle norme UNI EN 13168 e UNI EN 13964.]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>26.67885</EASY:prezzo>
+                <EASY:prezzosenzasgutil>21.09</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>3.1635</EASY:spesegenerali>
+                <EASY:utilidiimpresa>2.42535</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P29.085.015">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[TUBAZIONI, ACCESSORI E APPARECCHIATURE PER IMPIANTI IDRICI E ACQUEDOTTI]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Tubazione, manicotti e accessori  in polipropilene  per linee di distribuzione acqua calda e fredda]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Calotta liscia in polipropilene da mm 32]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>0.8602</EASY:prezzo>
+                <EASY:prezzosenzasgutil>0.68</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>0.102</EASY:spesegenerali>
+                <EASY:utilidiimpresa>0.0782</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P30.104.008">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[TUBAZIONI, ACCESSORI E APPARECCHIATURE PER RISCALDAMENTO E CLIMATIZZAZIONE]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Giunto di dilatazione antivibrante in gomma, flangiato PN 10/16:]]></EASY:livello3>
+            <EASY:livello4><![CDATA[diametro 150 mm]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>125.994</EASY:prezzo>
+                <EASY:prezzosenzasgutil>99.6</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>14.94</EASY:spesegenerali>
+                <EASY:utilidiimpresa>11.454</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P31.121.013">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[TUBAZIONI, ACCESSORI E APPARECCHIATURE PER IMPIANTI DI CLIMATIZZAZIONE E VENTILAZIONE]]></EASY:livello2>
+            <EASY:livello3><![CDATA[SERRANDA DI REGOLAZIONE CIRCOLARE IN ACCIAIO DA mm 400]]></EASY:livello3>
+            <EASY:livello4><![CDATA[mm 400 Di diametro mm 450]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>125.0832</EASY:prezzo>
+                <EASY:prezzosenzasgutil>98.88</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>14.832</EASY:spesegenerali>
+                <EASY:utilidiimpresa>11.3712</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P41.002.002">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[INFISSI ESTERNI finestre, portefinestre, finestre da tetto, portoncini, avvolgibili, persiane e scuri in legno, PVC, alluminio, acciaio e legnoalluminio, conformi alla normativa vigente in materia di prestazione, rendimento, certificazione energetica e di prodotto.]]></EASY:livello2>
+            <EASY:livello3><![CDATA[FINESTRE E PORTEFINESTRE IN PVC con profili estrusi in classe A, classificati in base alla zona climatica, classe 1 di reazione al fuoco, oltre alla marcatura CE (UNI EN 14351-1:2016), di qualunque dimensione con rinforzi, compreso di vetrocamera sigillata tramite guarnizioni, profili fermavetro ad incastro, serratura, ferramenta di attacco, sostegno e movimentazione ante, maniglie in alluminio. Trasmittanza termica minima prevista dalla normativa vigente (UNI EN ISO 10077-1). Sono esclusi i controtelai, la posa e l’assistenza muraria. Dimensione minima: mq 1,30]]></EASY:livello3>
+            <EASY:livello4><![CDATA[finestra a 2 ante con apertura oscillobattente e/o vasistas, vetrocamera con lastra antinfortunistica ai sensi della UNI 7697 con marcatura CE, infisso bianco, trasmittanza totale Uw <= 1.75 e <= 1.67 W/mqk per zone climatiche C e D]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>394.174</EASY:prezzo>
+                <EASY:prezzosenzasgutil>311.6</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>46.74</EASY:spesegenerali>
+                <EASY:utilidiimpresa>35.834</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P51.005.011">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[PRODOTTI PER SEGNALETICA STRADALE VERTICALE E ORIZZONTALE: accompagnati dalla certificazione CE secondo la UNI EN 12899-1]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Segnale rettangolare in alluminio, scatolato e rinforzato, sgrassato, fosfatato, verniciato con antiruggine e smalto grigio a fuoco, previa mano di ancorante nella parte posteriore, rivestito nella parte anteriore interamente con pellicola retroriflettente a pezzo unico, completo di attacchi speciali; per tutti i simboli.]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Segnale di direzione - Dimensione 150 x 200 con pellicola retroriflettente cl. 1]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>635.8902</EASY:prezzo>
+                <EASY:prezzosenzasgutil>502.68</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>75.402</EASY:spesegenerali>
+                <EASY:utilidiimpresa>57.8082</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P61.051.005">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[PRODOTTI PER IMPIANTI ELETTRICI - QUADRI ELETTRICI (CARPENTERIE ED APPARECCHIATURE) E CONDOTTI SBARRE]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Interruttori automatici modulari per installazione su guida DIN, curva B potere di interruzione secondo CEI EN 60898 4.5kA (CEI EN 60947-2 6 KA)]]></EASY:livello3>
+            <EASY:livello4><![CDATA[1P+N x 25A]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>26.64913</EASY:prezzo>
+                <EASY:prezzosenzasgutil>21.0665</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>3.15998</EASY:spesegenerali>
+                <EASY:utilidiimpresa>2.42265</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P62.090.011">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[PRODOTTI PER IMPIANTI ELETTRICI E SPECIALI - APPARECCHIATURE PER IMPIANTI DI ILLUMINAZIONE, F.M., SEGNALAZIONE E REGOLAZIONE (APPARECCHI MODULARI DI COMANDO, SEGNALAZIONE E REGOLAZIONE, SCATOLE MODULARI E FINITURE, PRESE E SPINE INDUSTRIALI, APPARECCHI DI ILLUMINAZIONE)]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Pannello luminoso a LED, da soffitto parete o controsoffitto o sospensione conforme alla norma CEI EN 60598-1 - , alimentato a 230V, CLASSE ENERGETICA minima A1, valore UGR compreso tra 10 e 19 massimo, indice CRI maggiore di 80 e angolo di apertura dei LED tra 120° e 150° grado di protezione frontale IP 54 e posteriore IP20 o superiori, telaio in acciaio zincato verniciato e schermo in policarbonato trasparente.]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Controcassa per incasso su cartongesso per pannelli 30x60 cm.]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>31.2455</EASY:prezzo>
+                <EASY:prezzosenzasgutil>24.7</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>3.705</EASY:spesegenerali>
+                <EASY:utilidiimpresa>2.8405</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="CAL25_PR.P73.003.006">
+            <EASY:livello1><![CDATA[PRODOTTI DA COSTRUZIONE: Nel prezzo dei prodotti da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[TECNOLOGIA DELL'INFORMAZIONE]]></EASY:livello2>
+            <EASY:livello3><![CDATA[INFORMATION DISPLAY SYSTEMS]]></EASY:livello3>
+            <EASY:livello4><![CDATA[Display commerciale LCD-TFT per interno taglia 60"-75" risoluzione minima 3840 x 2160pixels, luminosità min 300 cd/m2.]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>2656.5</EASY:prezzo>
+                <EASY:prezzosenzasgutil>2100</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>315</EASY:spesegenerali>
+                <EASY:utilidiimpresa>241.5</EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="1" codice="CAL25_PRCAM.P18.090.006">
+            <EASY:livello1><![CDATA[PRODOTTI C.A.M. DA COSTRUZIONE: I prodotti sono rispondenti ai decreti del Ministero della Transizione Ecologica aventi ad oggetto i criteri ambientali minimi (C.A.M.). Nel prezzo dei prodotti CAM da costruzione sono compresi tutti gli oneri derivanti all'Appaltatore dalla loro fornitura e accantonamento nell'ambito del cantiere. L'accettazione dei materiali e dei componenti è definitiva solo dopo la loro posa in opera. Tutti i materiali devono essere conformi alle norme di qualità e accettazione vigenti oltre al Regolamento Prodotti da Costruzione CPR (UE) n.305/11.]]></EASY:livello1>
+            <EASY:livello2><![CDATA[ISOLANTI C.A.M. TERMICI E ACUSTICI: i prodotti per isolamento devono recare la marcatura CE e dichiarazione di Prestazione (DoP). Gli isolanti termici devono essere conformi alla norma UNI 13172:2012, e rispettare i requisiti della norma UNI13501:2009 in materia di reazione al fuoco (così come esplicata nel D.M. 15/03/2005).]]></EASY:livello2>
+            <EASY:livello3><![CDATA[Materiali isolanti di origine minerale: pannelli in idrati di silicato di calcio, in classe A1 di reazione al fuoco secondo UNI EN 13501-1, rispondente ai CAM (Criteri ambientali minimi per l’affidamento di servizi di progettazione e lavori per la nuova costruzione, ristrutturazione e manutenzione di edifici pubblici).]]></EASY:livello3>
+            <EASY:livello4><![CDATA[densità 95 kg/m3 spessore mm. 160]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>118.657</EASY:prezzo>
+                <EASY:prezzosenzasgutil>93.8</EASY:prezzosenzasgutil>
+                <EASY:spesegenerali>14.07</EASY:spesegenerali>
+                <EASY:utilidiimpresa>10.787</EASY:utilidiimpresa>
+        </EASY:Articolo>
+    </EASY:Contenuto>
+</EASY:Prezzario>
