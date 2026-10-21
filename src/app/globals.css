@@ -59,6 +59,41 @@
   --spacing-section: 96px;
 }
 
+/*
+  Home pubblica: stile ricalcato sulla home fibery.io (riferimento Refero
+  31499fee). Palette inchiostro blu-notte + menta, pannelli pastello, font
+  display grottesco. Usato solo in src/components/home e src/app/page.tsx.
+*/
+@theme inline {
+  --color-home-ink: #262b38;
+  --color-home-text: #3a3f4b;
+  --color-home-muted: #7a7f8a;
+  --color-home-line: #e0e0e1;
+  --color-home-mint: #10ceab;
+  --color-home-mint-btn: #67d3b8;
+  --color-home-mint-soft: #a3e9d8;
+  --color-home-mint-tint: #d9f6ee;
+  --color-home-panel: #f6f8fb;
+  --color-home-rose: #fcf3f4;
+  --color-home-lilac: #f6f5fd;
+  --color-home-sage: #f1f8ec;
+
+  --font-home-display: var(--font-home-display-family), "Helvetica Neue", sans-serif;
+  --font-home-body: var(--font-home-body-family), "Helvetica Neue", sans-serif;
+  --font-home-hand: var(--font-home-hand-family), cursive;
+}
+
+@keyframes comparsa {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 html {
   background: var(--color-canvas);
   color: var(--color-body);
