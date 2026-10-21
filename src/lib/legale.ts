@@ -1,11 +1,11 @@
 // Dati del titolare usati in /privacy e /termini.
-// Fonte: intestazione dei preventivi EDIL PROXIMA SRL in docs/VOCI edilizia corde/ — da confermare con Luigi.
+// Titolare della piattaforma: Barikreativa (conferma di Luigi, WhatsApp 21/10/2026).
 export const TITOLARE = {
-  ragioneSociale: "EDIL PROXIMA SRL",
-  sede: "via Guido Dorso, 75 — 70125 Bari (BA)",
-  partitaIva: "08981210720",
-  rea: "BA-663090",
-  email: "ufficiotecnico@edilproxima.com",
+  ragioneSociale: "Barikreativa S.r.l.",
+  sede: "via Aurelio Carrante 1F — 70124 Bari (BA)",
+  partitaIva: "08528680724",
+  rea: "BA-632795",
+  email: "info@barikreativa.com",
 };
 
-export const AGGIORNATO_AL = "20 ottobre 2026";
+export const AGGIORNATO_AL = "21 ottobre 2026";
