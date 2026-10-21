@@ -1190,6 +1190,13 @@ export type Database = {
           user_id: string
         }[]
       }
+      luogo_cantiere: {
+        Args: { p_comune: string; p_provincia: string; p_regione_fallback: string }
+        Returns: {
+          provincia: string
+          regione: string
+        }[]
+      }
       norm_comune: { Args: { t: string }; Returns: string }
       prezzario_del_preventivo: {
         Args: { p_preventivo: string }
@@ -1202,9 +1209,10 @@ export type Database = {
         }[]
       }
       prezzario_per_comune: {
-        Args: { p_comune: string; p_regione_fallback: string }
+        Args: { p_comune: string; p_provincia?: string; p_regione_fallback: string }
         Returns: string
       }
+      prezzario_ripiego: { Args: { p_regione: string }; Returns: string }
       user_org_ids: { Args: never; Returns: string[] }
     }
     Enums: {

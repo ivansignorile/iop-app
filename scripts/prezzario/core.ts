@@ -96,11 +96,12 @@ export function finalizza(voci: VoceGrezza[]): VoceNormalizzata[] {
   for (const v of voci) {
     const codice = v.codice.trim();
     const descrizione = pulisci(v.descrizione);
-    if (!codice || !descrizione || v.prezzo == null || viste.has(codice)) continue;
+    const testo = pulisci(v.unita_testo);
+    // Maggiorazioni/sovrapprezzi in percentuale: non sono prezzi in euro.
+    if (!codice || !descrizione || v.prezzo == null || testo === "%" || viste.has(codice)) continue;
     const prezzo = Math.round(v.prezzo * 100) / 100;
     if (!(prezzo > 0)) continue;
     viste.add(codice);
-    const testo = pulisci(v.unita_testo);
     out.push({
       codice,
       capitolo: pulisci(v.capitolo) || null,

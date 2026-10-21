@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { requireContext } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { PreventivoPreview, type PreviewData } from "@/app/(app)/preventivi/[id]/preview";
+import { prezzariDelleVoci } from "@/lib/prezzari-voci";
 import { AutoPrint } from "./auto-print";
 
 export default async function StampaPreventivoPage({
@@ -92,6 +93,7 @@ export default async function StampaPreventivoPage({
   const preview: PreviewData = {
     org,
     prezzario: prezzari?.[0] ?? null,
+    prezzariVoci: await prezzariDelleVoci(supabase, interventi ?? []),
     preventivo,
     cliente,
     edificio,

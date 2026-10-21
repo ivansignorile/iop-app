@@ -61,6 +61,17 @@ describe("senzaPrefisso", () => {
   });
 });
 
+describe("finalizza, maggiorazioni", () => {
+  it("scarta le voci in percentuale (non sono prezzi in euro)", () => {
+    const r = finalizza([
+      { codice: "A", descrizione: "Maggiorazione", unita_testo: "%", prezzo: 10 },
+      { codice: "B", descrizione: "Sovrapprezzo", unita_testo: " % ", prezzo: 5 },
+      { codice: "C", descrizione: "Scavo", unita_testo: "m³", prezzo: 5 },
+    ]);
+    expect(r.map((v) => v.codice)).toEqual(["C"]);
+  });
+});
+
 describe("finalizza", () => {
   it("arrotonda, scarta e deduplica", () => {
     const r = finalizza([

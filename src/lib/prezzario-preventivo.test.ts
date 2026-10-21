@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { etichettaPrezzario, nomeEnte } from "./prezzario-preventivo";
+import { etichettaPrezzario, nomeEnte, prezzarioRiga } from "./prezzario-preventivo";
 import { riferimentoPrezzario } from "./scelta-fonte";
 
 describe("nomeEnte", () => {
@@ -46,5 +46,19 @@ describe("riferimentoPrezzario per ente e provincia", () => {
     expect(riferimentoPrezzario("prezzario", "B.02.10", "trento")).toBe(
       "Rif. Prezzario Provincia autonoma di Trento – B.02.10",
     );
+  });
+});
+
+describe("prezzarioRiga", () => {
+  const mappa = { v1: { regione: "campania", ambito: "" } };
+  const preventivo = { regione: "toscana", ambito: "FI" };
+  it("usa il prezzario da cui viene la voce", () => {
+    expect(prezzarioRiga("v1", mappa, preventivo, "lazio")).toEqual({ regione: "campania", ambito: "" });
+  });
+  it("senza voce collegata usa quello del preventivo", () => {
+    expect(prezzarioRiga(null, mappa, preventivo, "lazio")).toEqual(preventivo);
+  });
+  it("senza prezzario usa la regione dell'organizzazione", () => {
+    expect(prezzarioRiga("v9", mappa, null, "lazio")).toEqual({ regione: "lazio", ambito: "" });
   });
 });

@@ -1,4 +1,5 @@
 import { UNITA_LABEL, formatDate, formatEuro } from "@/lib/format";
+import { prezzarioRiga, type RifPrezzario } from "@/lib/prezzario-preventivo";
 import { riferimentoPrezzario } from "@/lib/scelta-fonte";
 import type { Tables } from "@/lib/supabase/types";
 
@@ -16,7 +17,9 @@ export type PreviewFotoDescrizione = {
 export type PreviewData = {
   org: Tables<"organizations">;
   /** Prezzario del preventivo (per il riferimento delle voci); null = regione dell'org. */
-  prezzario: { regione: string; ambito: string } | null;
+  prezzario: RifPrezzario | null;
+  /** Prezzario di provenienza di ogni voce del prezzario usata nelle righe (id voce → prezzario). */
+  prezzariVoci: Record<string, RifPrezzario>;
   preventivo: Pick<
     Tables<"preventivi">,
     "numero_protocollo" | "data" | "oggetto" | "iva" | "note"
@@ -42,6 +45,7 @@ export type PreviewData = {
     | "prezzo_mercato"
     | "fonte_scelta"
     | "codice_prezzario"
+    | "prezzario_voce_id"
   >[];
   allegati?: PreviewAllegato[];
   fotoDescrizioni?: PreviewFotoDescrizione[];
@@ -149,12 +153,8 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                 <div className="space-y-4">
                   {items.map((i) => {
                     // Solo la descrizione effettiva; se viene dal prezzario se ne cita il codice.
-                    const rif = riferimentoPrezzario(
-                      i.fonte_scelta,
-                      i.codice_prezzario,
-                      data.prezzario?.regione ?? org.regione,
-                      data.prezzario?.ambito,
-                    );
+                    const rp = prezzarioRiga(i.prezzario_voce_id, data.prezzariVoci, data.prezzario, org.regione);
+                    const rif = riferimentoPrezzario(i.fonte_scelta, i.codice_prezzario, rp.regione, rp.ambito);
                     return (
                     <div key={i.id} className="border-b border-hairline pb-3 last:border-b-0">
                       <div className="flex items-start justify-between gap-4">

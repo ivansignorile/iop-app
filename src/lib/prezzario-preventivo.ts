@@ -53,3 +53,15 @@ export function etichettaPrezzario(
     avviso: p.fallback ? `Comune non riconosciuto: uso il prezzario di ${nomeRegione(p.regione)}.` : null,
   };
 }
+
+export type RifPrezzario = { regione: string; ambito: string };
+
+/** Prezzario da citare per una riga: quello della voce scelta, poi del preventivo, poi dell'org. */
+export function prezzarioRiga(
+  voceId: string | null | undefined,
+  perVoce: Record<string, RifPrezzario>,
+  preventivo: RifPrezzario | null,
+  regioneOrg: string,
+): RifPrezzario {
+  return (voceId ? perVoce[voceId] : undefined) ?? preventivo ?? { regione: regioneOrg, ambito: "" };
+}
