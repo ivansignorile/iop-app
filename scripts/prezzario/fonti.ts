@@ -16,17 +16,6 @@ export type Fonte = {
   attivo: boolean;
 };
 
-export const FONTI: Fonte[] = [
-  {
-    regione: "campania",
-    ambito: "",
-    anno: 2026,
-    titolo: "Prezzario Regione Campania 2026",
-    formato: "api-llpp",
-    file: "campania/2026.json",
-    url: "https://gestione-prezzario.regione.campania.it/api/apillppv2-price-list",
-    form: { year: "2026", addendum: "0" },
-    licenza: null,
-    attivo: true,
-  },
-];
+import { FONTI_CAMPANIA } from "./fonti/campania";
+
+export const FONTI: Fonte[] = [...FONTI_CAMPANIA];
