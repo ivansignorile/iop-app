@@ -87,8 +87,11 @@ export default async function StampaPreventivoPage({
     });
   }
 
+  const { data: prezzari } = await supabase.rpc("prezzario_del_preventivo", { p_preventivo: id });
+
   const preview: PreviewData = {
     org,
+    prezzario: prezzari?.[0] ?? null,
     preventivo,
     cliente,
     edificio,

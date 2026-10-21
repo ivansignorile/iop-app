@@ -15,6 +15,8 @@ export type PreviewFotoDescrizione = {
 
 export type PreviewData = {
   org: Tables<"organizations">;
+  /** Prezzario del preventivo (per il riferimento delle voci); null = regione dell'org. */
+  prezzario: { regione: string; ambito: string } | null;
   preventivo: Pick<
     Tables<"preventivi">,
     "numero_protocollo" | "data" | "oggetto" | "iva" | "note"
@@ -147,7 +149,12 @@ export function PreventivoPreview({ data }: { data: PreviewData }) {
                 <div className="space-y-4">
                   {items.map((i) => {
                     // Solo la descrizione effettiva; se viene dal prezzario se ne cita il codice.
-                    const rif = riferimentoPrezzario(i.fonte_scelta, i.codice_prezzario, org.regione);
+                    const rif = riferimentoPrezzario(
+                      i.fonte_scelta,
+                      i.codice_prezzario,
+                      data.prezzario?.regione ?? org.regione,
+                      data.prezzario?.ambito,
+                    );
                     return (
                     <div key={i.id} className="border-b border-hairline pb-3 last:border-b-0">
                       <div className="flex items-start justify-between gap-4">

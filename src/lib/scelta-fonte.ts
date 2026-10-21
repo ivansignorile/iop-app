@@ -1,4 +1,5 @@
 import { applicaScelta } from "../../supabase/functions/_shared/risolvi-voce";
+import { NOMI_PROVINCIA, nomeEnte } from "./prezzario-preventivo";
 
 export type SceltaFonte = "prezzario" | "propria";
 export const SCELTE_FONTE: readonly SceltaFonte[] = ["prezzario", "propria"];
@@ -121,8 +122,10 @@ export function riferimentoPrezzario(
   fonte: RigaScelta["fonte_scelta"] | undefined,
   codice: string | null | undefined,
   regione: string | null | undefined,
+  ambito = "",
 ): string | null {
   if (fonte !== "prezzario" || !codice?.trim()) return null;
-  const r = etichettaRegione(regione);
-  return `Rif. Prezzario ${r ? `Regione ${r}` : "regionale"} – ${codice.trim()}`;
+  const ente = nomeEnte(regione);
+  const provincia = ambito ? ` (${NOMI_PROVINCIA[ambito] ?? ambito})` : "";
+  return `Rif. Prezzario ${ente ? `${ente}${provincia}` : "regionale"} – ${codice.trim()}`;
 }

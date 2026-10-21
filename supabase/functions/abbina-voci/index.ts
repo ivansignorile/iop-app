@@ -112,7 +112,7 @@ Deno.serve(async (req) => {
       intervento_ids = [...new Set(rawIds as string[])];
     }
 
-    // 1. Preventivo (RLS) + regione dell'organizzazione
+    // 1. Preventivo (RLS) + prezzario
     const { data: prev, error: prevErr } = await supabase
       .from("preventivi")
       .select("id, org_id, fonte_prezzi")
@@ -121,14 +121,13 @@ Deno.serve(async (req) => {
     if (prevErr || !prev) return json({ error: "Preventivo non trovato" }, 404);
     const fonte = (prev.fonte_prezzi ?? "entrambi") as FontePrezzi;
 
-    const { data: org, error: orgErr } = await supabase
-      .from("organizations")
-      .select("regione")
-      .eq("id", prev.org_id)
-      .maybeSingle();
-    if (orgErr || !org) return json({ error: "Organizzazione non trovata" }, 404);
-    const regione = typeof org.regione === "string" ? org.regione.trim() : "";
-    if (!regione) return json({ error: "Regione non impostata nelle impostazioni" }, 400);
+    // Prezzario del preventivo: fissato, o dal comune del cantiere con fallback sulla regione dell'org.
+    const { data: prezzari, error: prezzErr } = await supabase.rpc("prezzario_del_preventivo", {
+      p_preventivo: preventivo_id,
+    });
+    if (prezzErr) return json({ error: "Prezzario non disponibile" }, 500);
+    const prezzarioId = (prezzari as { id: string }[] | null)?.[0]?.id;
+    if (!prezzarioId) return json({ error: "Nessun prezzario per il comune o la regione impostati" }, 400);
 
     // 2. Interventi: mai le righe 'manuale'. Con intervento_ids solo quelle righe (sempre del preventivo).
     //    Con solo_nuovi solo quelle senza scelta
@@ -167,7 +166,7 @@ Deno.serve(async (req) => {
     const interventi: InterventoDaAbbinare[] = await mapLimit(righe, 8, async (r) => {
       const testo = `${r.titolo} ${r.descrizione ?? ""}`.slice(0, 300);
       const [prez, prop] = await Promise.all([
-        supabase.rpc("cerca_prezzario", { q: testo, p_regione: regione, p_limit: LIMITE_PREZZARIO }),
+        supabase.rpc("cerca_prezzario", { q: testo, p_prezzario: prezzarioId, p_limit: LIMITE_PREZZARIO }),
         fonte !== "prezzario"
           ? supabase.rpc("cerca_voci_proprie", { q: testo, p_org: prev.org_id, p_limit: LIMITE_PROPRIE })
           : Promise.resolve({ data: [], error: null }),

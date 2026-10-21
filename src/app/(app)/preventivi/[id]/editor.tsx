@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { StatoBadge } from "@/components/ui/misc";
 import { UNITA_LABEL, formatEuro } from "@/lib/format";
+import type { EtichettaPrezzario } from "@/lib/prezzario-preventivo";
 import { aBlocchi } from "@/lib/scelta-fonte";
 import { createClient } from "@/lib/supabase/client";
 import type { Tables } from "@/lib/supabase/types";
@@ -91,7 +92,7 @@ async function abbinaVoci(
       status === 404
         ? "Abbinamento al prezzario non riuscito: preventivo non trovato."
         : status === 400
-          ? "Abbinamento al prezzario non riuscito: imposta la regione del prezzario nelle Impostazioni."
+          ? "Abbinamento al prezzario non riuscito: imposta il comune del cantiere o la regione del prezzario nelle Impostazioni."
           : "Abbinamento al prezzario non riuscito. Riprova tra qualche istante.",
     );
   }
@@ -153,7 +154,7 @@ export function PreventivoEditor({
   interventi,
   cicli,
   preview,
-  regione,
+  prezzario,
 }: {
   preventivo: Tables<"preventivi">;
   cliente: Tables<"clienti"> | null;
@@ -161,7 +162,7 @@ export function PreventivoEditor({
   interventi: Intervento[];
   cicli: Ciclo[];
   preview: PreviewData;
-  regione: string;
+  prezzario: EtichettaPrezzario;
 }) {
   const tabs =
     preventivo.modalita === "capitolato"
@@ -268,7 +269,7 @@ export function PreventivoEditor({
         <InterventiTab
           preventivoId={preventivo.id}
           fontePrezzi={preventivo.fonte_prezzi}
-          regione={regione}
+          prezzario={prezzario}
           interventi={interventi}
           cicli={cicli}
           edificio={edificio}
@@ -426,7 +427,7 @@ function AnagraficaTab({
 function InterventiTab({
   preventivoId,
   fontePrezzi,
-  regione,
+  prezzario,
   interventi,
   cicli,
   edificio,
@@ -435,7 +436,7 @@ function InterventiTab({
 }: {
   preventivoId: string;
   fontePrezzi: Tables<"preventivi">["fonte_prezzi"];
-  regione: string;
+  prezzario: EtichettaPrezzario;
   interventi: Intervento[];
   cicli: Ciclo[];
   edificio: Tables<"edifici"> | null;
@@ -478,7 +479,7 @@ function InterventiTab({
 
   return (
     <div className="space-y-6">
-      <CercaVoce preventivoId={preventivoId} fontePrezzi={fontePrezzi} regione={regione} />
+      <CercaVoce preventivoId={preventivoId} fontePrezzi={fontePrezzi} prezzario={prezzario} />
 
       <div className="flex flex-wrap items-end gap-3 rounded-md border border-hairline bg-surface-soft p-4">
         <div className="flex-1 min-w-[240px]">

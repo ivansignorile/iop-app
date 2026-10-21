@@ -1191,6 +1191,16 @@ export type Database = {
         }[]
       }
       norm_comune: { Args: { t: string }; Returns: string }
+      prezzario_del_preventivo: {
+        Args: { p_preventivo: string }
+        Returns: {
+          ambito: string
+          fallback: boolean
+          id: string
+          regione: string
+          titolo: string
+        }[]
+      }
       prezzario_per_comune: {
         Args: { p_comune: string; p_regione_fallback: string }
         Returns: string

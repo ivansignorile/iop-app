@@ -5,7 +5,7 @@ import { useEffect, useId, useRef, useState, useTransition, type KeyboardEvent, 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/field";
 import { formatEuro } from "@/lib/format";
-import { etichettaRegione } from "@/lib/scelta-fonte";
+import type { EtichettaPrezzario } from "@/lib/prezzario-preventivo";
 import type { FontePrezzi } from "../../../../../supabase/functions/_shared/risolvi-voce";
 import { unitaDaVoci } from "../../../../../supabase/functions/_shared/unita-voce";
 import { addInterventoDaVoce, cercaVoci, type VocePrezzario, type VocePropria } from "./actions";
@@ -38,11 +38,11 @@ function navigaConFrecce(e: KeyboardEvent<HTMLUListElement>) {
 export function CercaVoce({
   preventivoId,
   fontePrezzi,
-  regione,
+  prezzario,
 }: {
   preventivoId: string;
   fontePrezzi: FontePrezzi;
-  regione: string;
+  prezzario: EtichettaPrezzario;
 }) {
   const inputId = useId();
   const [q, setQ] = useState("");
@@ -77,7 +77,7 @@ export function CercaVoce({
     const k = `${fontePrezzi}|${testo}`;
     const t = setTimeout(async () => {
       try {
-        const r = await cercaVoci(testo, fontePrezzi);
+        const r = await cercaVoci(preventivoId, testo, fontePrezzi);
         if (id === ultimaRichiesta.current) setRisposta({ chiave: k, ok: true, risultati: r });
       } catch {
         if (id === ultimaRichiesta.current) {
@@ -86,7 +86,7 @@ export function CercaVoce({
       }
     }, DEBOUNCE_MS);
     return () => clearTimeout(t);
-  }, [testo, fontePrezzi]);
+  }, [preventivoId, testo, fontePrezzi]);
 
   // Con fonte 'prezzario' una voce propria già scelta non conta più.
   const propriaEffettiva = mostraLibreria ? selPropria : null;
@@ -137,8 +137,7 @@ export function CercaVoce({
   const usata =
     propriaEffettiva ? "la tua voce" : selPrezzario ? "la voce del prezzario" : null;
 
-  const nomePrezzario =
-    risultati.prezzario[0]?.prezzario || `Prezzario ${etichettaRegione(regione)}`.trim();
+  const nomePrezzario = prezzario.titolo;
 
   // Il prezzario c'è sempre: con 'propri' resta come ripiego.
   const colonnaPrezzario = (
@@ -212,6 +211,7 @@ export function CercaVoce({
               : "Scegli una voce per colonna: la descrizione usata è la tua"}
         </p>
       </div>
+      {prezzario.avviso ? <p className="mt-2 text-xs text-muted">{prezzario.avviso}</p> : null}
 
       <label htmlFor={inputId} className="sr-only">
         Cerca una voce

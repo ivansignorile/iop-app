@@ -54,10 +54,11 @@ export async function saveAnagrafica(preventivoId: string, formData: FormData) {
 
   const { data: prev } = await supabase
     .from("preventivi")
-    .select("id, cliente_id, edificio_id")
+    .select("id, cliente_id, edificio_id, edifici(comune)")
     .eq("id", preventivoId)
     .single();
   if (!prev) return;
+  const comunePrima = prev.edifici?.comune ?? null;
 
   // Committente
   const clientePatch = {
@@ -121,6 +122,8 @@ export async function saveAnagrafica(preventivoId: string, formData: FormData) {
       note: s(formData.get("note")),
       cliente_id: clienteId,
       edificio_id: edificioId,
+      // Comune cambiato: il prezzario si ricalcola alla prossima lettura.
+      ...(edificioPatch.comune !== comunePrima ? { prezzario_id: null } : {}),
     })
     .eq("id", preventivoId);
 
@@ -466,8 +469,9 @@ const MIN_RICERCA = 2;
 const MAX_RICERCA = 200;
 const LIMITE_RISULTATI = 10;
 
-/** Cerca nel prezzario della regione dell'org e/o nella libreria personale, secondo la fonte prezzi. */
+/** Cerca nel prezzario del preventivo e/o nella libreria personale, secondo la fonte prezzi. */
 export async function cercaVoci(
+  preventivoId: string,
   q: string,
   fonte: FontePrezzi,
 ): Promise<{ prezzario: VocePrezzario[]; proprie: VocePropria[] }> {
@@ -477,9 +481,11 @@ export async function cercaVoci(
     return { prezzario: [], proprie: [] };
   }
   const supabase = await createClient();
+  const prezzarioId =
+    fonte !== "propri" ? (await supabase.rpc("prezzario_del_preventivo", { p_preventivo: preventivoId })).data?.[0]?.id : null;
   const [p, m] = await Promise.all([
-    fonte !== "propri"
-      ? supabase.rpc("cerca_prezzario", { q: testo, p_regione: org.regione, p_limit: LIMITE_RISULTATI })
+    prezzarioId
+      ? supabase.rpc("cerca_prezzario", { q: testo, p_prezzario: prezzarioId, p_limit: LIMITE_RISULTATI })
       : Promise.resolve({ data: [], error: null }),
     fonte !== "prezzario"
       ? supabase.rpc("cerca_voci_proprie", { q: testo, p_org: org.id, p_limit: LIMITE_RISULTATI })
