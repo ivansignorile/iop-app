@@ -13,7 +13,7 @@ export default async function AppLayout({
   return (
     <div className="flex min-h-full flex-col">
       <AppNav orgName={org.name} isAdmin={isAdmin} />
-      <main className="mx-auto w-full max-w-[1280px] flex-1 px-6 py-8 md:px-12">
+      <main className="mx-auto w-full max-w-[1280px] flex-1 px-6 py-10 md:px-12 md:py-14">
         {children}
       </main>
     </div>

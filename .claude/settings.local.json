@@ -12,7 +12,8 @@
       "Skill(claude-api)",
       "mcp__claude_ai_Supabase__deploy_edge_function",
       "mcp__claude_ai_Supabase__execute_sql",
-      "mcp__claude_ai_Supabase__get_advisors"
+      "mcp__claude_ai_Supabase__get_advisors",
+      "Bash(pkill -f \"next dev --port 3007\")"
     ]
   }
 }

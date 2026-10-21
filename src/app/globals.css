@@ -1,57 +1,63 @@
 @import "tailwindcss";
 
 /*
-  Design tokens IOP — derivati da DESIGN.md (sistema editoriale monocromatico,
-  ispirato a RunwayML). Inchiostro nero su carta bianca, scala di grigi neutra,
-  nessun colore d'accento, bottoni a pillola neri, angoli netti su input e celle,
-  divisori hairline, niente ombre, tracking negativo sui titoli. Font: Inter
-  (sostituto raccomandato di abcNormal/ABC Diatype).
+  Design tokens IOP — palette della landing (riferimento fibery.io): inchiostro
+  blu-notte, accento menta, verde scuro per link e stati positivi, pannelli
+  grigio chiaro, bottoni squadrati, ombre morbide e tinte. Font: Bricolage
+  Grotesque (titoli), Hanken Grotesk (testo), Caveat (note a mano).
 */
 @theme {
   /* Brand & azione */
-  --color-primary: #000000;
-  --color-primary-active: #1a1a1a;
+  --color-primary: #262b38;
+  --color-primary-active: #1a1e28;
   --color-on-primary: #ffffff;
   --color-on-dark: #ffffff;
+  --color-accent: #10ceab;
+  --color-accent-btn: #67d3b8;
+  --color-accent-soft: #a3e9d8;
+  --color-accent-tint: #d9f6ee;
+  --color-accent-deep: #0a7d68;
 
   /* Scala neutra */
-  --color-ink: #030303;
-  --color-ink-soft: #1a1a1a;
-  --color-body: #404040; /* graphite */
-  --color-graphite: #404040;
-  --color-muted: #6b7280; /* mute */
-  --color-slate: #676f7b;
-  --color-stone: #939393;
-  --color-ash: #999999;
-  --color-hairline: #e7eaf0;
-  --color-hairline-soft: #c9ccd1;
-  --color-border-strong: #c9ccd1;
+  --color-ink: #262b38;
+  --color-ink-soft: #3a3f4b;
+  --color-body: #3a3f4b; /* graphite */
+  --color-graphite: #3a3f4b;
+  --color-muted: #6e7380;
+  --color-slate: #6e7380;
+  --color-stone: #7a7f8a;
+  --color-ash: #a0a4ad;
+  --color-hairline: #e3e5e9;
+  --color-hairline-soft: #c9ccd3;
+  --color-border-strong: #c9ccd3;
 
   /* Superfici */
   --color-canvas: #ffffff;
   --color-canvas-warm: #fefefe;
-  --color-surface-soft: #f7f8fa;
-  --color-surface-strong: #e7eaf0; /* infill "featured" */
-  --color-surface-cool: #d0d4d4;
-  --color-scrim: #1a1a1a;
-  --color-footer: #030303;
+  --color-surface-soft: #f6f8fb;
+  --color-surface-strong: #eceef1; /* infill "featured" */
+  --color-surface-cool: #d0d4d8;
+  --color-surface-grey: #f2f3f5;
+  --color-scrim: #262b38;
+  --color-footer: #0a7d68;
 
-  /* Funzionali (monocromatici per restare on-brand) */
-  --color-link: #030303;
-  --color-link-active: #1a1a1a;
-  --color-info: #030303;
-  --color-info-border: #030303;
-  --color-success: #404040;
+  /* Funzionali */
+  --color-link: #0a7d68;
+  --color-link-active: #086354;
+  --color-info: #3f6a92;
+  --color-info-border: #3f6a92;
+  --color-success: #0a7d68;
+  --color-success-border: #0a7d68;
 
   /* Type */
   --font-sans:
-    var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", sans-serif;
+    var(--font-home-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", sans-serif;
 
-  /* Radii (DESIGN.md RunwayML) */
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 8px;
+  /* Radii */
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
   --radius-lg: 16px;
   --radius-full: 9999px;
 
@@ -116,9 +122,20 @@
   }
 }
 
+.text-link {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-soft);
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+.text-link:hover {
+  text-decoration-color: currentColor;
+}
+
 html {
   background: var(--color-canvas);
   color: var(--color-body);
+  accent-color: var(--color-accent-deep);
 }
 
 body {
@@ -127,34 +144,40 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Titoli: peso 400, tracking negativo (silhouette compressa) */
+/* Titoli: font display della landing, peso 400, tracking negativo */
+.display-xl,
+.display-lg,
+.display-md,
+.title-lg {
+  font-family: var(--font-home-display);
+}
 .display-xl {
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 400;
-  line-height: 1;
-  letter-spacing: -1.4px;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
 }
 .display-lg {
-  font-size: 40px;
+  font-size: 46px;
   font-weight: 400;
-  line-height: 1;
-  letter-spacing: -1px;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
 }
 .display-md {
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 400;
   line-height: 1.05;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.03em;
 }
 .title-lg {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 400;
   line-height: 1.1;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.02em;
 }
 .title-sm {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.2px;
 }

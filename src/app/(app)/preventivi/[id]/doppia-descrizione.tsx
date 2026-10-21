@@ -68,7 +68,7 @@ export function DoppiaDescrizione({
 
       {manuale ? (
         <div className="flex flex-wrap items-center gap-2 text-sm">
-          <span className="inline-flex items-center rounded-full bg-surface-strong px-2.5 py-0.5 text-xs font-medium text-ink">
+          <span className="inline-flex items-center rounded-xs bg-surface-strong px-2.5 py-0.5 text-xs font-medium text-ink">
             Modificata a mano
           </span>
           <span className="text-muted">Nel preventivo va la descrizione del campo qui sotto.</span>
@@ -162,7 +162,7 @@ function CardFonte({
           {scelta ? <span className="sr-only"> (scelta attuale)</span> : null}
         </p>
         {scelta ? (
-          <span className="shrink-0 rounded-full bg-primary px-2.5 py-0.5 text-xs font-medium text-on-primary">
+          <span className="shrink-0 rounded-xs bg-primary px-2.5 py-0.5 text-xs font-medium text-on-primary">
             Nel preventivo
           </span>
         ) : null}

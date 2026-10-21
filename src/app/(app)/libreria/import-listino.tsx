@@ -68,7 +68,7 @@ export function ImportListino() {
       </p>
 
       <div className="flex flex-wrap items-center gap-4">
-        <label className="inline-flex cursor-pointer items-center rounded-full bg-on-primary px-5 py-2.5 text-sm font-semibold text-primary">
+        <label className="inline-flex cursor-pointer items-center rounded-sm bg-on-primary px-5 py-2.5 text-sm font-semibold text-primary">
           {files.length ? `${files.length} file selezionati` : "Scegli i preventivi (PDF)"}
           <input
             type="file"
@@ -86,7 +86,7 @@ export function ImportListino() {
         <button
           onClick={deduci}
           disabled={loading || files.length === 0}
-          className="inline-flex h-10 items-center justify-center rounded-full border border-on-primary px-5 text-sm font-semibold text-on-primary disabled:opacity-40"
+          className="inline-flex h-10 items-center justify-center rounded-sm border-[1.5px] border-on-primary px-5 text-sm font-semibold text-on-primary disabled:opacity-40"
         >
           {loading ? "Lettura in corso…" : "Deduci il mio listino →"}
         </button>

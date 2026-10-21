@@ -4,11 +4,14 @@ function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
 }
 
-// Card piatta, niente ombra: 1px hairline su canvas, angoli netti.
+// Card della landing: bordo leggero e ombra morbida tinta di inchiostro.
 export function Card({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={cx("border border-hairline bg-canvas p-6", className)}
+      className={cx(
+        "rounded-md border border-hairline bg-canvas p-6 shadow-[0_24px_60px_-34px_rgba(38,43,56,0.3)]",
+        className,
+      )}
       {...props}
     />
   );
@@ -26,14 +29,16 @@ export function PageHeader({
   action?: ReactNode;
 }) {
   return (
-    <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-hairline pb-6">
+    <div className="mb-10 flex flex-wrap items-end justify-between gap-4 pb-2">
       <div>
         {eyebrow ? (
-          <p className="eyebrow mb-2 text-stone">{eyebrow}</p>
+          <p className="mb-2 -rotate-1 font-home-hand text-[19px] font-bold uppercase tracking-[0.04em] text-accent-deep">
+            {eyebrow}
+          </p>
         ) : null}
-        <h1 className="display-md text-ink">{title}</h1>
+        <h1 className="display-lg text-ink">{title}</h1>
         {description ? (
-          <p className="mt-2 max-w-2xl text-base text-graphite">{description}</p>
+          <p className="mt-3 max-w-2xl text-[17px] leading-relaxed text-graphite">{description}</p>
         ) : null}
       </div>
       {action}
@@ -41,22 +46,23 @@ export function PageHeader({
   );
 }
 
+// Etichette colorate come i tag della landing.
 const statoTone: Record<string, string> = {
-  bozza: "bg-surface-strong text-ink",
-  inviato: "border border-ink text-ink",
-  accettato: "bg-primary text-on-primary",
-  nuova: "bg-primary text-on-primary",
-  in_lavorazione: "border border-ink text-ink",
-  evasa: "bg-surface-strong text-ink",
-  scartata: "border border-hairline-soft text-stone line-through",
-  rifiutato: "border border-hairline-soft text-stone line-through",
+  bozza: "bg-surface-strong text-ink-soft",
+  inviato: "bg-[#3f6a92] text-white",
+  accettato: "bg-[#5a9e4b] text-white",
+  nuova: "bg-[#d4693f] text-white",
+  in_lavorazione: "bg-[#3f6a92] text-white",
+  evasa: "bg-[#5a9e4b] text-white",
+  scartata: "bg-surface-strong text-stone line-through",
+  rifiutato: "bg-surface-strong text-stone line-through",
 };
 
 export function StatoBadge({ stato }: { stato: string }) {
   return (
     <span
       className={cx(
-        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center rounded-xs px-2 py-[3px] text-[10px] font-semibold uppercase tracking-[0.08em]",
         statoTone[stato] ?? "bg-surface-soft text-body",
       )}
     >
@@ -75,7 +81,7 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="border border-hairline px-6 py-20 text-center">
+    <div className="rounded-2xl bg-surface-soft px-6 py-20 text-center">
       <p className="title-sm text-ink">{title}</p>
       {description ? (
         <p className="mx-auto mt-1 max-w-sm text-sm text-graphite">

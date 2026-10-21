@@ -296,7 +296,7 @@ export function PreventivoEditor({
               href={`/stampa/preventivo/${preventivo.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center rounded-full border border-ink bg-canvas px-5 text-sm font-semibold text-ink"
+              className="inline-flex h-10 items-center justify-center rounded-sm border-[1.5px] border-ink bg-canvas px-5 text-sm font-semibold text-ink"
             >
               Stampa / PDF
             </a>
@@ -1144,7 +1144,7 @@ function CapitolatoTab({
         !
       </p>
 
-      <label className="inline-flex cursor-pointer items-center rounded-full border border-ink px-5 py-2 text-sm font-semibold text-ink">
+      <label className="inline-flex cursor-pointer items-center rounded-sm border-[1.5px] border-ink px-5 py-2 text-sm font-semibold text-ink">
         {file ? "Cambia file" : "Scegli file"}
         <input
           type="file"
@@ -1372,7 +1372,7 @@ function InterventoRow({
             {(() => {
               const s = scostamento(Number(i.prezzo_unitario), mercato.prezzo);
               return s !== null && s > SOGLIA_SCOSTAMENTO ? (
-                <span className="rounded-full border border-ink px-2 py-0.5 text-xs font-semibold text-ink">
+                <span className="rounded-xs border border-ink px-2 py-0.5 text-xs font-semibold text-ink">
                   ⚠ Scostamento elevato
                 </span>
               ) : null;
