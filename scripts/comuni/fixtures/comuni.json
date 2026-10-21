@@ -1,0 +1,253 @@
+[
+ {
+  "nome": "Aosta",
+  "codice": "007003",
+  "zona": {
+   "codice": "1",
+   "nome": "Nord-ovest"
+  },
+  "regione": {
+   "codice": "02",
+   "nome": "Valle d'Aosta/Vallée d'Aoste"
+  },
+  "provincia": {
+   "codice": "007",
+   "nome": "Valle d'Aosta/Vallée d'Aoste"
+  },
+  "sigla": "AO",
+  "codiceCatastale": "A326",
+  "cap": [
+   "11100"
+  ],
+  "popolazione": 34102
+ },
+ {
+  "nome": "Bolzano",
+  "codice": "021008",
+  "zona": {
+   "codice": "2",
+   "nome": "Nord-est"
+  },
+  "regione": {
+   "codice": "04",
+   "nome": "Trentino-Alto Adige/Südtirol"
+  },
+  "provincia": {
+   "codice": "021",
+   "nome": "Bolzano/Bozen"
+  },
+  "sigla": "BZ",
+  "codiceCatastale": "A952",
+  "cap": [
+   "39100"
+  ],
+  "popolazione": 102575
+ },
+ {
+  "nome": "Firenze",
+  "codice": "048017",
+  "zona": {
+   "codice": "3",
+   "nome": "Centro"
+  },
+  "regione": {
+   "codice": "09",
+   "nome": "Toscana"
+  },
+  "provincia": {
+   "codice": "048",
+   "nome": "Firenze"
+  },
+  "sigla": "FI",
+  "codiceCatastale": "D612",
+  "cap": [
+   "50121",
+   "50122",
+   "50123",
+   "50124",
+   "50125",
+   "50126",
+   "50127",
+   "50128",
+   "50129",
+   "50130",
+   "50131",
+   "50132",
+   "50133",
+   "50134",
+   "50135",
+   "50136",
+   "50137",
+   "50138",
+   "50139",
+   "50140",
+   "50141",
+   "50142",
+   "50143",
+   "50144",
+   "50145"
+  ],
+  "popolazione": 358079
+ },
+ {
+  "nome": "Forlì",
+  "codice": "040012",
+  "zona": {
+   "codice": "2",
+   "nome": "Nord-est"
+  },
+  "regione": {
+   "codice": "08",
+   "nome": "Emilia-Romagna"
+  },
+  "provincia": {
+   "codice": "040",
+   "nome": "Forlì-Cesena"
+  },
+  "sigla": "FC",
+  "codiceCatastale": "D704",
+  "cap": [
+   "47121",
+   "47122"
+  ],
+  "popolazione": 116434
+ },
+ {
+  "nome": "Napoli",
+  "codice": "063049",
+  "zona": {
+   "codice": "4",
+   "nome": "Sud"
+  },
+  "regione": {
+   "codice": "15",
+   "nome": "Campania"
+  },
+  "provincia": {
+   "codice": "063",
+   "nome": "Napoli"
+  },
+  "sigla": "NA",
+  "codiceCatastale": "F839",
+  "cap": [
+   "80121",
+   "80122",
+   "80123",
+   "80124",
+   "80125",
+   "80126",
+   "80127",
+   "80128",
+   "80129",
+   "80130",
+   "80131",
+   "80132",
+   "80133",
+   "80134",
+   "80135",
+   "80136",
+   "80137",
+   "80138",
+   "80139",
+   "80140",
+   "80141",
+   "80142",
+   "80143",
+   "80144",
+   "80145",
+   "80146",
+   "80147"
+  ],
+  "popolazione": 962003
+ },
+ {
+  "nome": "Prato",
+  "codice": "100005",
+  "zona": {
+   "codice": "3",
+   "nome": "Centro"
+  },
+  "regione": {
+   "codice": "09",
+   "nome": "Toscana"
+  },
+  "provincia": {
+   "codice": "100",
+   "nome": "Prato"
+  },
+  "sigla": "PO",
+  "codiceCatastale": "G999",
+  "cap": [
+   "59100"
+  ],
+  "popolazione": 185456
+ },
+ {
+  "nome": "Sant'Agata de' Goti",
+  "codice": "062070",
+  "zona": {
+   "codice": "4",
+   "nome": "Sud"
+  },
+  "regione": {
+   "codice": "15",
+   "nome": "Campania"
+  },
+  "provincia": {
+   "codice": "062",
+   "nome": "Benevento"
+  },
+  "sigla": "BN",
+  "codiceCatastale": "I197",
+  "cap": [
+   "82019"
+  ],
+  "popolazione": 11310
+ },
+ {
+  "nome": "Trento",
+  "codice": "022205",
+  "zona": {
+   "codice": "2",
+   "nome": "Nord-est"
+  },
+  "regione": {
+   "codice": "04",
+   "nome": "Trentino-Alto Adige/Südtirol"
+  },
+  "provincia": {
+   "codice": "022",
+   "nome": "Trento"
+  },
+  "sigla": "TN",
+  "codiceCatastale": "L378",
+  "cap": [
+   "38121",
+   "38122",
+   "38123"
+  ],
+  "popolazione": 114198
+ },
+ {
+  "nome": "Udine",
+  "codice": "030129",
+  "zona": {
+   "codice": "2",
+   "nome": "Nord-est"
+  },
+  "regione": {
+   "codice": "06",
+   "nome": "Friuli-Venezia Giulia"
+  },
+  "provincia": {
+   "codice": "030",
+   "nome": "Udine"
+  },
+  "sigla": "UD",
+  "codiceCatastale": "L483",
+  "cap": [
+   "33100"
+  ],
+  "popolazione": 98287
+ }
+]
