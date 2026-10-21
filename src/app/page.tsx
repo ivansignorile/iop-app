@@ -133,10 +133,10 @@ export default function Home() {
       <ParallaxIcone />
 
       {/* Sfondo hero: grigio chiaro con fondo ad arco (radius 100% sugli angoli inferiori) */}
-      <div className="rounded-b-[100%] bg-home-grey">
+      <div className="rounded-b-[50%_56px] md:rounded-b-[100%] bg-home-grey">
         <HomeNav />
 
-        <section className="relative z-[2] mx-auto max-w-[1100px] px-5 pb-48 pt-14 md:px-6 md:pb-56 md:pt-24">
+        <section className="relative z-[2] mx-auto max-w-[1100px] px-5 pb-20 pt-14 md:px-6 md:pb-56 md:pt-24">
           <div className="relative">
             <h1 className="font-home-display text-[44px] font-normal leading-[1.02] tracking-[-0.035em] sm:text-[60px] md:text-[84px]">
               Il preventivo edile

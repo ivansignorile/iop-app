@@ -8,7 +8,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className="relative flex min-h-full flex-col overflow-x-clip">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-[70vh] rounded-b-[100%] bg-surface-grey" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-[70vh] rounded-b-[50%_56px] md:rounded-b-[100%] bg-surface-grey" />
       <header className="relative flex h-[72px] items-center px-6 md:px-12">
         <Link href="/" className="flex items-baseline gap-1.5" aria-label="iop, home">
           <span className="font-home-display text-[28px] font-medium leading-none tracking-[-0.03em] text-ink">iop</span>

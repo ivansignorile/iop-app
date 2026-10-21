@@ -5,7 +5,7 @@ import { HomeNav } from "@/components/home/nav";
 export default function PubblicoLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative flex min-h-full flex-col overflow-x-clip">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-[600px] rounded-b-[100%] bg-surface-grey" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-[600px] rounded-b-[50%_56px] md:rounded-b-[100%] bg-surface-grey" />
       <div className="relative">
         <HomeNav />
       </div>
