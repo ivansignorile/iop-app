@@ -1,0 +1,256 @@
+                                            PREZZARIO OPERE EDILI REGIONE ABRUZZO 2026
+P - OPERE PROVVISIONALI
+
+      CODICE                                                  DESCRIZIONE                                                     U.M.   SIC.€     MAN.%      PREZZO
+
+                     OPERE PROVVISIONALI
+ABR26_P.02
+
+
+
+
+                                                  CERCHIATURE E PUNTELLATURE
+
+ABR26_P.02.10
+
+
+
+ABR26_P.02.10.10     Realizzazione di Puntellatura in legname di strutture in genere da demolire o da restaurare
+                     o pericolanti, eseguita con impiego di legname, costituita da ritti, tavole, fasce, gattelli,
+                     croci e simili, e ogni altro materiale occorrente, compreso il taglio a misura, la chiodatura e
+                     le staffe, l’allestimento della necessaria segnaletica e quanto necessario per garantire la
+                     pubblica incolumità e la sicurezza degli operai, in opera all'interno di fabbricati valutata al
+                     metro cubo di materiale impiegato,
+
+
+
+ABR26_P.02.10.10.a   Fornitura e posa in opera senza recupero del materiale
+                                                                                                                         mc            41,38   39,873 %     1.004,29
+
+ABR26_P.02.10.10.b   Nolo per la durata massima di tre mesi, compreso smontaggio a lavoro finito
+                                                                                                                         mc            17,88   57,472 %      434,04
+
+ABR26_P.02.10.10.c   Per ogni mese o frazione in più, dopo il terzo mese
+                                                                                                                         m³/mese        1,49   57,510 %       36,15
+
+ABR26_P.02.10.20     Realizzazione di Puntellatura in legname di strutture in genere da demolire o da restaurare
+                     o pericolanti, eseguita con impiego di legname, costituita da ritti, tavole, fasce, gattelli,
+                     croci e simili, e ogni altro materiale occorrente, compreso il taglio a misura, la chiodatura e
+                     le staffe, l’allestimento della necessaria segnaletica e quanto necessario per garantire la
+                     pubblica incolumità e la sicurezza degli operai, in opera all'esterno di fabbricati valutata al
+                     metro cubo di materiale impiegato
+
+
+
+
+ABR26_P.02.10.20.a   Fornitura e posa in opera senza recupero del materiale
+                                                                                                                         mc            39,16   37,970 %      950,59
+
+ABR26_P.02.10.20.b   Nolo per la durata massima di tre mesi, compreso smontaggio a lavoro finito
+                                                                                                                         mc            14,92   53,189 %      362,18
+
+ABR26_P.02.10.20.c   Per ogni mese o frazione in più dopo il terzo mese
+                                                                                                                         m³/mese        1,24   53,251 %       30,14
+
+ABR26_P.02.10.30     Fornitura e posa in opera di puntellatura di strutture danneggiate o pericolanti per
+                     consentire le successive operazioni in sicurezza, realizzate al coperto o allo scoperto,
+                     costituita da elementi tubolari e giunti in acciaio, basette fisse e regolabili, spinotti, etc. e
+                     quanto altro occorre per dare l’opera compiuta a perfetta regola d’arte. Esclusa la sola
+                     progettazione.
+
+
+
+ABR26_P.02.10.30.a   Fornitura e posa in opera di puntellatura di strutture danneggiate o pericolanti.
+                                                                                                                         cad            1,23   75,846 %       29,85
+
+ABR26_P.02.10.40     Smontaggio di puntellatura di strutture danneggiate o pericolanti per consentire le
+                     successive operazioni in sicurezza, realizzate al coperto o allo scoperto, costituita da
+                     elementi tubolari e giunti in acciaio, basette fisse e regolabili, spinotti, etc. e quanto altro
+                     occorre per dare l'opera compiuta a perfetta regola d'arte. Esclusa la sola progettazione.
+
+
+
+ABR26_P.02.10.40.a   Smontaggio di puntellatura di elementi tubolari di acciaio
+                                                                                                                         Giunto         0,40   78,542 %        9,60
+
+ABR26_P.02.10.50     Fornitura e posa in opera di cerchiature e puntellature di fabbricati danneggiati o pericolanti
+                     per consentire le successive operazioni in sicurezza, costituite da profilati in acciaio serie
+                     HEA, HEB, IPE, UPN, tubolare e/o scatolare etc., di qualsiasi sezione o forma, da elementi
+                     lignei, compresi i tiranti passanti in piatto o tondo in acciaio di idonea sezione ed i relativi
+                     sistemi di ancoraggio, le necessarie perforazioni delle murature, il tiro in alto, il
+                     posizionamento secondo lo schema di progetto, e quanto altro occorre per dare l'opera
+                     compiuta a perfetta regola d'arte. Esclusa la sola progettazione..
+
+                                                                                      -1-
+                                           PREZZARIO OPERE EDILI REGIONE ABRUZZO 2026
+U - URBANIZZAZIONI
+
+      CODICE                                                DESCRIZIONE                                                U.M.   SIC.€     MAN.%      PREZZO
+                                                                                                                    cad          5,56   21,036 %      191,77
+
+ABR26_U.04.20.20.h   100x100x100 cm
+                                                                                                                    cad          8,24   17,797 %      284,15
+
+ABR26_U.04.20.20.i   120x120x120 cm
+                                                                                                                    cad         11,95   14,606 %      412,17
+
+ABR26_U.04.20.30     Anello di prolunga per pozzetti pedonali realizzato con elementi prefabbricati in cemento
+                     vibrato con impronte laterali per l'immissione di tubi, senza coperchio o griglia, posto in
+                     opera compreso ogni onere e magistero per l'allaccio a tenuta con le tubazioni, incluso il
+                     rinfianco con calcestruzzo cementizio, il rinterro con la sola esclusione degli oneri per lo
+                     scavo. Per ogni dm di altezza dell'anello.
+
+
+
+ABR26_U.04.20.30.a   30x30 cm
+                                                                                                                    x dm di      0,27   50,271 %        9,21
+                                                                                                                    altezza
+
+ABR26_U.04.20.30.b   40x40 cm
+                                                                                                                    x dm di      0,30   46,881 %       10,26
+                                                                                                                    altezza
+
+ABR26_U.04.20.30.c   50x50 cm
+                                                                                                                    x dm di      0,34   40,763 %       11,80
+                                                                                                                    altezza
+
+ABR26_U.04.20.30.d   60x60 cm
+                                                                                                                    x dm di      0,40   36,298 %       13,94
+                                                                                                                    altezza
+
+ABR26_U.04.20.30.e   70x70 cm
+                                                                                                                    x dm di      0,50   29,350 %       17,24
+                                                                                                                    altezza
+
+ABR26_U.04.20.30.f   80x80 cm
+                                                                                                                    x dm di      0,56   27,035 %       19,16
+                                                                                                                    altezza
+
+ABR26_U.04.20.30.g   100x100 cm
+                                                                                                                    x dm di      0,70   22,305 %       24,30
+                                                                                                                    altezza
+
+ABR26_U.04.20.30.h   120x120 cm
+                                                                                                                    x dm di      0,82   19,500 %       28,41
+                                                                                                                    altezza
+
+ABR26_U.04.20.40     Coperchio per pozzetti di tipo leggero realizzati con elementi prefabbricati in cemento
+                     vibrato posti in opera compreso ogni onere e magistero
+
+
+
+ABR26_U.04.20.40.a   Normale 30x30 cm
+                                                                                                                    cad          0,32   26,996 %       11,15
+
+ABR26_U.04.20.40.b   Normale 40x40 cm
+                                                                                                                    cad          0,37   23,682 %       12,71
+
+ABR26_U.04.20.40.c   Normale 50x50 cm
+                                                                                                                    cad          0,45   19,609 %       15,35
+
+ABR26_U.04.20.40.d   Normale 60x60 cm
+                                                                                                                    cad          0,54   16,070 %       18,73
+
+ABR26_U.04.20.40.e   Chiusino 30x30 cm
+                                                                                                                    cad          0,36   23,927 %       12,58
+
+ABR26_U.04.20.40.f   Chiusino 40x40 cm
+                                                                                                                    cad          0,41   21,049 %       14,30
+
+ABR26_U.04.20.40.g   Chiusino 50x50 cm
+                                                                                                                    cad          0,50   17,339 %       17,36
+
+ABR26_U.04.20.40.h   Chiusino 60x60 cm
+                                                                                  - 539 -
+                               PREZZARIO REGIONE ABRUZZO IMPIANTI TECNOLOGICI 2026
+
+        CODICE                                               DESCRIZIONE                                                  U.M.   SIC.€      MAN.%      PREZZO
+
+                                                                                                                        Cad        670,31    8,508 %    26.183,80
+
+ABR26_IM.50.10.60     Accessorio per generatore di aria calda costituito da plenum e bocchette di lancio
+                      disposte su 3 lati per distribuzione dell'aria diretta in ambiente, conteggiato come
+                      aggiunta al prezzo base del generatore d'aria calda.
+
+
+
+ABR26_IM.50.10.60.a   - Per portata d'aria da 1700 a 2600 mc/h
+                                                                                                                        Cad         11,38    8,160 %      444,51
+
+ABR26_IM.50.10.60.b   - Per portata d'aria da 3400 a 4300 mc/h
+                                                                                                                        Cad         12,64    8,923 %      493,57
+
+ABR26_IM.50.10.60.c   - Per portata d'aria da 6500 a 7600 mc/h
+                                                                                                                        Cad         17,38    9,057 %      679,05
+
+ABR26_IM.50.10.60.d   - Per portata d'aria da 9600 a 11400 mc/h
+                                                                                                                        Cad         22,56    8,820 %      881,17
+
+ABR26_IM.50.10.60.e   - Per portata d'aria da 13250 a 15200 mc/h
+                                                                                                                        Cad         25,03    8,743 %      977,67
+
+ABR26_IM.50.10.60.f   - Per portata d'aria da 19000 a 22900 mc/h
+                                                                                                                        Cad         29,97    8,409 %     1.170,61
+
+ABR26_IM.50.10.60.g   - Per portata d'aria da 26900 a 31650 mc/h
+                                                                                                                        Cad         43,91    8,456 %     1.715,40
+
+ABR26_IM.50.10.60.h   - Per portata d'aria da 37700 a 44000 mc/h
+                                                                                                                        Cad         50,93    8,853 %     1.989,63
+
+ABR26_IM.50.10.60.i   - Per portata d'aria da 55000 a 64000 mc/h
+                                                                                                                        Cad         55,30    8,395 %     2.160,20
+
+ABR26_IM.50.10.70     Accessorio per generatore di aria calda costituito da filtro per aria da installare sulla
+                      griglia di aspirazione compresa, conteggiato come aggiunta al prezzo base del
+                      generatore d'aria calda.
+
+
+
+ABR26_IM.50.10.70.a   - Per portata d'aria da 1700 a 2600 mc/h
+                                                                                                                        Cad          5,66    8,442 %      220,92
+
+ABR26_IM.50.10.70.b   - Per portata d'aria da 3400 a 4300 mc/h
+                                                                                                                        Cad          5,66    8,442 %      220,92
+
+ABR26_IM.50.10.70.c   - Per portata d'aria da 6500 a 7600 mc/h
+                                                                                                                        Cad          7,41    8,592 %      289,45
+
+ABR26_IM.50.10.70.d   - Per portata d'aria da 9600 a 11400 mc/h
+                                                                                                                        Cad         14,60    8,512 %      570,37
+
+ABR26_IM.50.10.70.e   - Per portata d'aria da 9600 a 11400 mc/h
+                                                                                                                        Cad         16,53    8,826 %      645,67
+
+ABR26_IM.50.10.70.f   - Per portata d'aria da 19000 a 22900 mc/h
+                                                                                                                        Cad         22,65    8,492 %      884,76
+
+ABR26_IM.50.10.70.g   - Per portata d'aria da 26900 a 31650 mc/h
+                                                                                                                        Cad         30,70    8,553 %     1.199,32
+
+ABR26_IM.50.10.70.h   - Per portata d'aria da 37700 a 44000 mc/h
+                                                                                                                        Cad         35,31    8,527 %     1.379,30
+
+ABR26_IM.50.10.70.i   - Per portata d'aria da 55000 a 64000 mc/h
+                                                                                                                        Cad         40,43    8,530 %     1.579,33
+
+ABR26_IM.50.10.80     Stufa a pellet per produzione di aria calda, con struttura in metallo verniciato, con frontale,
+                      portina, focolare e braciere interamente in ghisa:
+                                                                                                                                     0,00
+
+ABR26_IM.50.10.80.a   Resa calorica massima 5,3 kW minima 2,5 kW, rendimento circa 90%, autonomia fino
+                      a 32 ore, capacità del serbatoio pellet 18 kg, consumo 0,5 ÷ 1,2 kg/h
+                                                                                      - 34 -
+                               PREZZARIO REGIONE ABRUZZO IMPIANTI TECNOLOGICI 2026
+
+       CODICE                                                DESCRIZIONE                                                   U.M.   SIC.€      MAN.%   PREZZO
+
+                                                                                                                         Cad         31,54             1.232,00
+
+ABR26_IM.50.10.80.b   Resa calorica massima 4,6 kW minima 1,6 kW, rendimento circa 92%, autonomia fino
+                      a 32 ore, capacità del serbatoio pellet 16 kg, consumo 0,5 ÷ 1,5 kg/h
+                                                                                                                         Cad         42,29             1.652,00
+
+ABR26_IM.50.10.80.c   Resa calorica massima 5,5 kW minima 1,9 kW, rendimento circa 89%, autonomia fino
+                      a 36 ore, capacità del serbatoio pellet 18 kg, consumo 0,5 ÷ 1,7 kg/h.
+                                                                                                                         Cad         47,49             1.855,00

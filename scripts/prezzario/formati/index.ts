@@ -1,5 +1,6 @@
 import type { VoceNormalizzata } from "../core";
 import * as apiLlpp from "./api-llpp";
+import * as pdfTesto from "./pdf-testo";
 import * as six from "./six";
 import * as venetoXml from "./veneto-xml";
 import * as basilicataXml from "./basilicata-xml";
@@ -9,6 +10,7 @@ import * as lombardiaXml from "./lombardia-xml";
 export const FORMATI = {
   "api-llpp": apiLlpp.parse,
   six: six.parse,
+  "pdf-testo": pdfTesto.parse,
   "veneto-xml": venetoXml.parse,
   "basilicata-xml": basilicataXml.parse,
   "liguria-xml": liguriaXml.parse,
