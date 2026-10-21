@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<Documento xmlns="six.xsd">
+  <intestazione intestazioneId="1" lingua="it" separatore="." separatoreParametri=";" valuta="EUR" autore="Eldasoft S.p.A." versione="1.3.1.1"/>
+  <gruppo vlrStruttura="zzz.zzz" tipo="CATEGORIAELENCOPREZZI" gruppoId="1">
+    <grpDescrizione breve="Categorie di Elenco prezzi"/>
+    <grpValore grpValoreId="2" vlrId="1">
+      <vlrDescrizione breve="A01 - MOVIMENTI DI TERRA"/>
+    </grpValore>
+    <grpValore grpValoreId="3" vlrId="1.1">
+      <vlrDescrizione breve="A01.001 - SCAVI DI SBANCAMENTO"/>
+    </grpValore>
+    <grpValore grpValoreId="4" vlrId="1.2">
+      <vlrDescrizione breve="A01.004 - SCAVI A SEZIONE OBBLIGATA ESEGUITI CON MEZZI MECCANICI"/>
+    </grpValore>
+    <grpValore grpValoreId="9" vlrId="2">
+      <vlrDescrizione breve="A02 - INDAGINI, PROVE, RILIEVI E FONDAZIONI PROFONDE"/>
+    </grpValore>
+    <grpValore grpValoreId="13" vlrId="2.4">
+      <vlrDescrizione breve="A02.010 - STRUMENTAZIONE DI CONTROLLO"/>
+    </grpValore>
+    <grpValore grpValoreId="15" vlrId="2.6">
+      <vlrDescrizione breve="A02.016 - PROVE GEOFISICHE"/>
+    </grpValore>
+  </gruppo>
+  <prezzario prezzarioId="704" przId="52424" categoriaPrezzario="EPU" arrotondamento="0.00001" arrotondamentoImporto="0.01" arrotondamentoPercentuale="0.0000000001">
+    <unitaDiMisura unitaDiMisuraId="705" udmId="m&#179;" simbolo="m&#179;" decimali="3">
+      <udmDescrizione breve="m&#179;"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="706" udmId="h" simbolo="h" decimali="3">
+      <udmDescrizione breve="h"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="707" udmId="m&#179; " simbolo="m&#179; " decimali="0">
+      <udmDescrizione breve="m&#179; "/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="708" udmId="m x" simbolo="m x" decimali="0">
+      <udmDescrizione breve="m x"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="709" udmId="m&#178;" simbolo="m&#178;" decimali="3">
+      <udmDescrizione breve="m&#178;"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="710" udmId="m" simbolo="m" decimali="3">
+      <udmDescrizione breve="m"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="711" udmId="cad" simbolo="cad" decimali="3">
+      <udmDescrizione breve="cad"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="712" udmId="km" simbolo="km" decimali="3">
+      <udmDescrizione breve="km"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="713" udmId="gg" simbolo="gg" decimali="3">
+      <udmDescrizione breve="gg"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="714" udmId="%" simbolo="%" decimali="3">
+      <udmDescrizione breve="%"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="715" udmId="a c" simbolo="a c" decimali="0">
+      <udmDescrizione breve="a c"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="716" udmId="kg" simbolo="kg" decimali="3">
+      <udmDescrizione breve="kg"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="717" udmId="dm&#179;" simbolo="dm&#179;" decimali="3">
+      <udmDescrizione breve="dm&#179;"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="718" udmId="min" simbolo="min" decimali="3">
+      <udmDescrizione breve="min"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="719" udmId="kWp" simbolo="kWp" decimali="3">
+      <udmDescrizione breve="kWp"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="720" udmId="cm" simbolo="cm" decimali="3">
+      <udmDescrizione breve="cm"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="721" udmId="cm&#179;" simbolo="cm&#179;" decimali="3">
+      <udmDescrizione breve="cm&#179;"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="722" udmId="m&#178; " simbolo="m&#178; " decimali="0">
+      <udmDescrizione breve="m&#178; "/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="723" udmId="l" simbolo="l" decimali="3">
+      <udmDescrizione breve="l"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="724" udmId="t" simbolo="t" decimali="3">
+      <udmDescrizione breve="t"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="725" udmId="dm" simbolo="dm" decimali="3">
+      <udmDescrizione breve="dm"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="726" udmId="dm&#178;" simbolo="dm&#178;" decimali="3">
+      <udmDescrizione breve="dm&#178;"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="727" udmId="t x" simbolo="t x" decimali="0">
+      <udmDescrizione breve="t x"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="728" udmId="W" simbolo="W" decimali="3">
+      <udmDescrizione breve="W"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="729" udmId="K" simbolo="K" decimali="3">
+      <udmDescrizione breve="K"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="730" udmId="pai" simbolo="pai" decimali="0">
+      <udmDescrizione breve="pai"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="731" udmId="q" simbolo="q" decimali="3">
+      <udmDescrizione breve="q"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="732" udmId="n." simbolo="n." decimali="3">
+      <udmDescrizione breve="n."/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="733" udmId="100" simbolo="100" decimali="0">
+      <udmDescrizione breve="100"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="734" udmId="ha" simbolo="ha" decimali="3">
+      <udmDescrizione breve="ha"/>
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="735" udmId="mst" simbolo="mst" decimali="3">
+      <udmDescrizione breve="mst"/>
+    </unitaDiMisura>
+    <listaQuotazione listaQuotazioneId="736" lqtId="1">
+      <lqtDescrizione breve="prezzo 1"/>
+    </listaQuotazione>
+    <listaQuotazione listaQuotazioneId="737" lqtId="2">
+      <lqtDescrizione breve="prezzo 2"/>
+    </listaQuotazione>
+    <listaQuotazione listaQuotazioneId="738" lqtId="3">
+      <lqtDescrizione breve="prezzo 3"/>
+    </listaQuotazione>
+    <listaQuotazione listaQuotazioneId="739" lqtId="4">
+      <lqtDescrizione breve="prezzo 4"/>
+    </listaQuotazione>
+    <listaQuotazione listaQuotazioneId="740" lqtId="5">
+      <lqtDescrizione breve="prezzo 5"/>
+    </listaQuotazione>
+    <przDescrizione breve="Elenco regionale prezzi OOPP RER 2026 - correzioni manodopera maggio 2026"/>
+    <przGruppo gruppoId="1"/>
+    <prodotto prodottoId="741" titolo="true">
+      <prdDescrizione breve="ATTENZIONE: nell&#191;utilizzo di queste voci del prezzario, si ricorda di verificare la corrispondenza con la versione pubbl" estesa="ATTENZIONE: nell&#191;utilizzo di queste voci del prezzario, si ricorda di verificare la corrispondenza con la versione pubblicata sul Bollettino ufficiale della Regione Emilia-Romagna e disponibile su https://territorio.regione.emilia-romagna.it/osservatorio/elenco_regionale_prezzi"/>
+      <incidenzaManodopera/>
+    </prodotto>
+    <prodotto prodottoId="742" titolo="true">
+      <prdDescrizione breve="A01 - MOVIMENTI DI TERRA" estesa="MOVIMENTI DI TERRA"/>
+      <incidenzaManodopera>0</incidenzaManodopera>
+      <prdGrpValore grpValoreId="2"/>
+    </prodotto>
+    <prodotto prodottoId="743" titolo="true">
+      <prdDescrizione breve="A01.001 - SCAVI DI SBANCAMENTO" estesa="SCAVI DI SBANCAMENTO"/>
+      <incidenzaManodopera>0</incidenzaManodopera>
+      <prdGrpValore grpValoreId="3"/>
+    </prodotto>
+    <prodotto prodottoId="744" prdId="A01.001.005" voce="true" titolo="true">
+      <prdDescrizione breve="Scavo di sbancamento effettuato con mezzi meccanici a...del cantiere fino ad una distanza massima di 1.500 m:" estesa="Scavo di sbancamento effettuato con mezzi meccanici anche in presenza d'acqua fino ad un battente massimo di 20 cm, compresa la rimozione di arbusti e ceppaie e trovanti di dimensione non superiore a 0,25 mc, la profilatura delle pareti, la regolarizzazione del fondo, il carico sugli automezzi ed il trasporto a rinterro o rilevato nell'ambito del cantiere fino ad una distanza massima di 1.500 m:"/>
+      <incidenzaManodopera/>
+      <prdGrpValore grpValoreId="3"/>
+    </prodotto>
+    <prodotto prodottoId="745" prdId="A01.001.005.a" unitaDiMisuraId="705">
+      <prdDescrizione breve="in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)" estesa="in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)"/>
+      <incidenzaManodopera>35</incidenzaManodopera>
+      <prdGrpValore grpValoreId="3"/>
+      <prdQuotazione valore="5.47" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="746" prdId="A01.001.005.b" unitaDiMisuraId="705">
+      <prdDescrizione breve="in roccia alterata" estesa="in roccia alterata"/>
+      <incidenzaManodopera>34</incidenzaManodopera>
+      <prdGrpValore grpValoreId="3"/>
+      <prdQuotazione valore="11.76" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="747" prdId="A01.001.005.c" unitaDiMisuraId="705">
+      <prdDescrizione breve="in roccia compatta con uso di mine" estesa="in roccia compatta con uso di mine"/>
+      <incidenzaManodopera>36</incidenzaManodopera>
+      <prdGrpValore grpValoreId="3"/>
+      <prdQuotazione valore="31.30" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="748" prdId="A01.001.005.d" unitaDiMisuraId="705">
+      <prdDescrizione breve="in roccia compatta, senza uso di mine, con l'ausilio di mezzi di demolizione meccanica" estesa="in roccia compatta, senza uso di mine, con l'ausilio di mezzi di demolizione meccanica"/>
+      <incidenzaManodopera>25</incidenzaManodopera>
+      <prdGrpValore grpValoreId="3"/>
+      <prdQuotazione valore="46.03" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="749" titolo="true">
+      <prdDescrizione breve="A01.004 - SCAVI A SEZIONE OBBLIGATA ESEGUITI CON MEZZI MECCANICI" estesa="SCAVI A SEZIONE OBBLIGATA ESEGUITI CON MEZZI MECCANICI"/>
+      <incidenzaManodopera>0</incidenzaManodopera>
+      <prdGrpValore grpValoreId="4"/>
+    </prodotto>
+    <prodotto prodottoId="750" prdId="A01.004.005" voce="true" titolo="true">
+      <prdDescrizione breve="Scavo a sezione obbligata, fino alla profondit&#224; di 2 ... del materiale scavato fino ad un massimo di 1.500 m:" estesa="Scavo a sezione obbligata, fino alla profondit&#224; di 2 m, compresa l'estrazione e l'aggotto di eventuali acque nonch&#233; la rimozione di arbusti, ceppaie e trovanti di dimensione non superiore a 0,25 mc, fino ad un battente massimo di 20 cm, il carico su mezzi di trasporto e l'allontanamento del materiale scavato fino ad un massimo di 1.500 m:"/>
+      <incidenzaManodopera/>
+      <prdGrpValore grpValoreId="4"/>
+    </prodotto>
+    <prodotto prodottoId="751" prdId="A01.004.005.a" unitaDiMisuraId="705">
+      <prdDescrizione breve="in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)" estesa="in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)"/>
+      <incidenzaManodopera>34</incidenzaManodopera>
+      <prdGrpValore grpValoreId="4"/>
+      <prdQuotazione valore="6.97" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="752" prdId="A01.004.005.b" unitaDiMisuraId="705">
+      <prdDescrizione breve="in roccia alterata" estesa="in roccia alterata"/>
+      <incidenzaManodopera>34</incidenzaManodopera>
+      <prdGrpValore grpValoreId="4"/>
+      <prdQuotazione valore="13.00" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="753" prdId="A01.004.005.c" unitaDiMisuraId="705">
+      <prdDescrizione breve="in roccia compatta, senza uso di mine, con l'ausilio ...o l'incidenza dello scavo oltre la sezione di calcolo" estesa="in roccia compatta, senza uso di mine, con l'ausilio di mezzi di demolizione meccanica compreso l'incidenza dello scavo oltre la sezione di calcolo"/>
+      <incidenzaManodopera>30</incidenzaManodopera>
+      <prdGrpValore grpValoreId="4"/>
+      <prdQuotazione valore="91.99" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="754" prdId="A01.004.010" voce="true" titolo="true">
+      <prdDescrizione breve="Sovrapprezzo allo scavo a sezione obbligata per ogni ...o frazione di metro di maggiore profondit&#224; oltre 2 m:" estesa="Sovrapprezzo allo scavo a sezione obbligata per ogni metro o frazione di metro di maggiore profondit&#224; oltre 2 m:"/>
+      <incidenzaManodopera/>
+      <prdGrpValore grpValoreId="4"/>
+    </prodotto>
+    <prodotto prodottoId="755" prdId="A01.004.010.a" unitaDiMisuraId="705">
+      <prdDescrizione breve="in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)" estesa="in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)"/>
+      <incidenzaManodopera>34</incidenzaManodopera>
+      <prdGrpValore grpValoreId="4"/>
+      <prdQuotazione valore="0.64" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="756" prdId="A01.004.010.b" unitaDiMisuraId="705">
+      <prdDescrizione breve="in roccia alterata" estesa="in roccia alterata"/>
+      <incidenzaManodopera>34</incidenzaManodopera>
+      <prdGrpValore grpValoreId="4"/>
+      <prdQuotazione valore="1.46" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="903" prdId="A02.010.070" voce="true" titolo="true">
+      <prdDescrizione breve="Fornitura e posa in opera (compresa la cementazione) ...etrici o piezometrici e la cementazione degli stessi:" estesa="Fornitura e posa in opera (compresa la cementazione) di cavo coassiale 50 Ohm per TDR, guaina esterna in PVC in abbinamento a tubo inclinometrico o piezometrico compreso la sigillatura del fondo, l'applicazione del connettore sulla testata e la misura di certificazione alla posa del cavo eseguita con centralina di misura, escluse le perforazioni, la fornitura e posa dei tubi inclinometrici o piezometrici e la cementazione degli stessi:"/>
+      <incidenzaManodopera/>
+      <prdGrpValore grpValoreId="13"/>
+    </prodotto>
+    <prodotto prodottoId="904" prdId="A02.010.070.a" unitaDiMisuraId="710">
+      <prdDescrizione breve="&#216; 0,5&#191;" estesa="&#216; 0,5&#191;"/>
+      <incidenzaManodopera>53</incidenzaManodopera>
+      <prdGrpValore grpValoreId="13"/>
+      <prdQuotazione valore="35.23" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="905" prdId="A02.010.070.b" unitaDiMisuraId="710">
+      <prdDescrizione breve="&#216; 7/8&#191;" estesa="&#216; 7/8&#191;"/>
+      <incidenzaManodopera>53</incidenzaManodopera>
+      <prdGrpValore grpValoreId="13"/>
+      <prdQuotazione valore="43.41" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="906" prdId="A02.010.070.c" unitaDiMisuraId="710">
+      <prdDescrizione breve="&#216; 1+ 5/8&#191;" estesa="&#216; 1+ 5/8&#191;"/>
+      <incidenzaManodopera>53</incidenzaManodopera>
+      <prdGrpValore grpValoreId="13"/>
+      <prdQuotazione valore="70.35" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="907" prdId="A02.010.070.d" unitaDiMisuraId="710">
+      <prdDescrizione breve="tubo in PVC, compreso spurgo per l'inserimento del cavo TDR" estesa="tubo in PVC, compreso spurgo per l'inserimento del cavo TDR"/>
+      <incidenzaManodopera>48</incidenzaManodopera>
+      <prdGrpValore grpValoreId="13"/>
+      <prdQuotazione valore="23.35" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="930" prdId="A02.016.015" voce="true" titolo="true">
+      <prdDescrizione breve="Esecuzione di rilievo &#191;Mise a la mase&#191; con primo elet...ro occorra per dare quanto richiesto a regola d'arte:" estesa="Esecuzione di rilievo &#191;Mise a la mase&#191; con primo elettrodo posto in punto di risorgenza e secondo elettrodo posto all'infinito, compresi interpretazione e restituzione grafica dei dati e quant'altro occorra per dare quanto richiesto a regola d'arte:"/>
+      <incidenzaManodopera/>
+      <prdGrpValore grpValoreId="15"/>
+    </prodotto>
+    <prodotto prodottoId="931" prdId="A02.016.015.a" unitaDiMisuraId="711">
+      <prdDescrizione breve="maglia 5x5 m al punto di misura" estesa="maglia 5x5 m al punto di misura"/>
+      <incidenzaManodopera>41</incidenzaManodopera>
+      <prdGrpValore grpValoreId="15"/>
+      <prdQuotazione valore="20.30" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+    <prodotto prodottoId="932" prdId="A02.016.015.b" unitaDiMisuraId="711">
+      <prdDescrizione breve="maglia 10x10 m al punto di misura" estesa="maglia 10x10 m al punto di misura"/>
+      <incidenzaManodopera>41</incidenzaManodopera>
+      <prdGrpValore grpValoreId="15"/>
+      <prdQuotazione valore="28.39" validita="2025-01-01T00:00:00.0000000+01:00" listaQuotazioneId="736"/>
+    </prodotto>
+  </prezzario>
+  </Documento>
