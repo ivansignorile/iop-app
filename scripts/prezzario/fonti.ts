@@ -20,10 +20,18 @@ import { FONTI_CAMPANIA } from "./fonti/campania";
 import { FONTI_EMILIA_ROMAGNA } from "./fonti/emilia-romagna";
 import { FONTI_FRIULI_VENEZIA_GIULIA } from "./fonti/friuli-venezia-giulia";
 import { FONTI_TRENTO } from "./fonti/trento";
+import { FONTI_VENETO } from "./fonti/veneto";
+import { FONTI_BASILICATA } from "./fonti/basilicata";
+import { FONTI_LIGURIA } from "./fonti/liguria";
+import { FONTI_LOMBARDIA } from "./fonti/lombardia";
 
 export const FONTI: Fonte[] = [
   ...FONTI_CAMPANIA,
   ...FONTI_EMILIA_ROMAGNA,
   ...FONTI_FRIULI_VENEZIA_GIULIA,
   ...FONTI_TRENTO,
+  ...FONTI_VENETO,
+  ...FONTI_BASILICATA,
+  ...FONTI_LIGURIA,
+  ...FONTI_LOMBARDIA,
 ];

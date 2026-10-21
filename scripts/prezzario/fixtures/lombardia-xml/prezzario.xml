@@ -1,0 +1,375 @@
+<report>
+  <voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RM.87.10.15.D0017.0000.-" prezzo_voce="0.00" unita_misura_voce="1 m" importo_senza_sgui_voce="0.00" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA MATERIALE">
+        <declaratoria_voce>Tubo di plastica polivinilcloruro (PVC)</declaratoria_voce>
+        <cod_liv_1>RM</cod_liv_1>
+        <descr_liv_1>RISORSA MATERIALE</descr_liv_1>
+        <cod_liv_2>87</cod_liv_2>
+        <descr_liv_2>IMPIANTI IDRAULICI SMALTIMENTO</descr_liv_2>
+        <cod_liv_3>10</cod_liv_3>
+        <descr_liv_3>PRODOTTI</descr_liv_3>
+        <cod_liv_4>15</cod_liv_4>
+        <descr_liv_4>TUBO</descr_liv_4>
+        <cod_liv_5>D0017</cod_liv_5>
+        <descr_liv_5>PLASTICA POLIVINILCLORURO (PVC)</descr_liv_5>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RM.87.10.15.R0001.0000.-" prezzo_voce="0.00" unita_misura_voce="1 m" importo_senza_sgui_voce="0.00" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA MATERIALE">
+        <declaratoria_voce>Tubo di metallo ferro</declaratoria_voce>
+        <cod_liv_1>RM</cod_liv_1>
+        <descr_liv_1>RISORSA MATERIALE</descr_liv_1>
+        <cod_liv_2>87</cod_liv_2>
+        <descr_liv_2>IMPIANTI IDRAULICI SMALTIMENTO</descr_liv_2>
+        <cod_liv_3>10</cod_liv_3>
+        <descr_liv_3>PRODOTTI</descr_liv_3>
+        <cod_liv_4>15</cod_liv_4>
+        <descr_liv_4>TUBO</descr_liv_4>
+        <cod_liv_5>R0001</cod_liv_5>
+        <descr_liv_5>METALLO FERRO</descr_liv_5>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RM.87.10.15.Za000.0000.-" prezzo_voce="0.00" unita_misura_voce="1 m" importo_senza_sgui_voce="0.00" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA MATERIALE">
+        <declaratoria_voce>Tubo di materiale generico</declaratoria_voce>
+        <cod_liv_1>RM</cod_liv_1>
+        <descr_liv_1>RISORSA MATERIALE</descr_liv_1>
+        <cod_liv_2>87</cod_liv_2>
+        <descr_liv_2>IMPIANTI IDRAULICI SMALTIMENTO</descr_liv_2>
+        <cod_liv_3>10</cod_liv_3>
+        <descr_liv_3>PRODOTTI</descr_liv_3>
+        <cod_liv_4>15</cod_liv_4>
+        <descr_liv_4>TUBO</descr_liv_4>
+        <cod_liv_5>Za000</cod_liv_5>
+        <descr_liv_5>MATERIALE GENERICO</descr_liv_5>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RM.00.10.00.Ba002.0000.0" prezzo_voce="4.03" unita_misura_voce="1 m² * cm" importo_senza_sgui_voce="3.18" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA MATERIALE">
+        <declaratoria_voce>Additivo sintetico di composto chimico ossido di ferro; funzione: colorante agli ossidi rosso; lunghezza granuli [mm] = 2 ÷ 4 | diametro granuli (Ø) [mm] = 2 ÷ 4; densità apparente [g/cm³] = 0,6 ÷ 1,3. Sovrapprezzo</declaratoria_voce>
+        <cod_liv_1>RM</cod_liv_1>
+        <descr_liv_1>RISORSA MATERIALE</descr_liv_1>
+        <cod_liv_2>00</cod_liv_2>
+        <descr_liv_2>IMPASTI</descr_liv_2>
+        <cod_liv_3>10</cod_liv_3>
+        <descr_liv_3>PRODOTTI</descr_liv_3>
+        <cod_liv_4>00</cod_liv_4>
+        <descr_liv_4>ADDITIVO</descr_liv_4>
+        <cod_liv_5>Ba002</cod_liv_5>
+        <descr_liv_5>COMPOSTO CHIMICO OSSIDO DI FERRO</descr_liv_5>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RM.00.10.00.Ba006.0000.-" prezzo_voce="54.32" unita_misura_voce="1 kg" importo_senza_sgui_voce="42.94" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA MATERIALE">
+        <declaratoria_voce>Additivo sintetico di composto chimico inorganico; impiego: pavimenti in terra stabilizzata | percorsi in parchi | percorsi in giardini
+SPECIFICHE TECNICHE: miscela di carbonati di: sodio e potassio, cloruri di sodi, potassio, calcio, magnesio, ferro, alluminio ed altri componenti; prodotto non tossico/nocivo</declaratoria_voce>
+        <cod_liv_1>RM</cod_liv_1>
+        <descr_liv_1>RISORSA MATERIALE</descr_liv_1>
+        <cod_liv_2>00</cod_liv_2>
+        <descr_liv_2>IMPASTI</descr_liv_2>
+        <cod_liv_3>10</cod_liv_3>
+        <descr_liv_3>PRODOTTI</descr_liv_3>
+        <cod_liv_4>00</cod_liv_4>
+        <descr_liv_4>ADDITIVO</descr_liv_4>
+        <cod_liv_5>Ba006</cod_liv_5>
+        <descr_liv_5>COMPOSTO CHIMICO INORGANICO</descr_liv_5>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RM.00.10.05.G0000.0000.-" prezzo_voce="39.00" unita_misura_voce="1 m³" importo_senza_sgui_voce="30.83" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA MATERIALE">
+        <declaratoria_voce>Aggregato graniglia di cemento generico; funzione: termoisolante | fonoisolante; impiego: sottofondi</declaratoria_voce>
+        <cod_liv_1>RM</cod_liv_1>
+        <descr_liv_1>RISORSA MATERIALE</descr_liv_1>
+        <cod_liv_2>00</cod_liv_2>
+        <descr_liv_2>IMPASTI</descr_liv_2>
+        <cod_liv_3>10</cod_liv_3>
+        <descr_liv_3>PRODOTTI</descr_liv_3>
+        <cod_liv_4>05</cod_liv_4>
+        <descr_liv_4>AGGREGATO</descr_liv_4>
+        <cod_liv_5>G0000</cod_liv_5>
+        <descr_liv_5>CEMENTO GENERICO</descr_liv_5>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RM.00.10.05.K0003.0000.-" prezzo_voce="27.78" unita_misura_voce="100 kg" importo_senza_sgui_voce="21.96" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA MATERIALE">
+        <declaratoria_voce>Aggregato bentonite di argilla attivata; impiego: scavi; fornitura: sfuso</declaratoria_voce>
+        <cod_liv_1>RM</cod_liv_1>
+        <descr_liv_1>RISORSA MATERIALE</descr_liv_1>
+        <cod_liv_2>00</cod_liv_2>
+        <descr_liv_2>IMPASTI</descr_liv_2>
+        <cod_liv_3>10</cod_liv_3>
+        <descr_liv_3>PRODOTTI</descr_liv_3>
+        <cod_liv_4>05</cod_liv_4>
+        <descr_liv_4>AGGREGATO</descr_liv_4>
+        <cod_liv_5>K0003</cod_liv_5>
+        <descr_liv_5>ARGILLA ATTIVATA</descr_liv_5>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RM.20.10.10.Za001.0000.-" prezzo_voce="15.18" unita_misura_voce="null cad" importo_senza_sgui_voce="12.00" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA MATERIALE">
+        <declaratoria_voce>Schiuma poliuretanica; funzione: adesivo espandente | incollaggio | sigillatura; impiego: pannelli isolanti | controtelai | blocchi prefabbricati/laterizio; fornitura: bomboletta pressurizzata [ml] = 750; resistenza a compressione [N/cm²] = 4,5 | resistenza a trazione [N/cm²] = 8 | conducibilità termica (20°C) [W/mK] = 0,036 | infiammabilità [classe] = E | allungamento a rottura [%] = 25; massa volumica [kg/m³] = 16 ÷ 18 | tempo di indurimento completo [h] = 1 ÷ 2 | temperatura di esercizio [°C] = -40° ÷ +90°.
+SPECIFICHE TECNICHE: prodotto monocomponente a bassa espansione composto da una miscela di prepolimero poliuretanico, agenti schiumogeni e speciali additivi, totalmente esente da CFC, a rapido indurimento, impermeabile.</declaratoria_voce>
+        <cod_liv_1>RM</cod_liv_1>
+        <descr_liv_1>RISORSA MATERIALE</descr_liv_1>
+        <cod_liv_2>20</cod_liv_2>
+        <descr_liv_2>INCOLLAGGI</descr_liv_2>
+        <cod_liv_3>10</cod_liv_3>
+        <descr_liv_3>PRODOTTI</descr_liv_3>
+        <cod_liv_4>10</cod_liv_4>
+        <descr_liv_4>SCHIUMA</descr_liv_4>
+        <cod_liv_5>Za001</cod_liv_5>
+        <descr_liv_5>MATERIALE GENERICO NON RILEVANTE</descr_liv_5>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RT.03.00.10.0060.a" prezzo_voce="11.07" unita_misura_voce="1 h" importo_senza_sgui_voce="8.75" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA STRUMENTALE TECNOLOGICA">
+        <declaratoria_voce>Compressore endotermico; impiego: perforazione a percussione | rotopercussione; pressione [bar] = 8 ÷ 10 | portata [l/min] &lt; 7000.</declaratoria_voce>
+        <cod_liv_1>RT</cod_liv_1>
+        <descr_liv_1>RISORSA STRUMENTALE TECNOLOGICA</descr_liv_1>
+        <cod_liv_2>03</cod_liv_2>
+        <descr_liv_2>IMPIANTI DI CANTIERE</descr_liv_2>
+        <cod_liv_3>00</cod_liv_3>
+        <descr_liv_3>IMPIANTI DI FORNITURA SERVIZI</descr_liv_3>
+        <cod_liv_4>10</cod_liv_4>
+        <descr_liv_4>IMPIANTO TRASPORTO FLUIDI</descr_liv_4>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.RT.03.00.10.0060.b" prezzo_voce="17.39" unita_misura_voce="1 h" importo_senza_sgui_voce="13.75" rapporto_RU_voce="0.00" tipologia_risorsa="RISORSA STRUMENTALE TECNOLOGICA">
+        <declaratoria_voce>Compressore endotermico; impiego: perforazione a percussione | rotopercussione; pressione [bar] = 8 ÷ 10 | portata [l/min]= 7001 ÷ 13000.</declaratoria_voce>
+        <cod_liv_1>RT</cod_liv_1>
+        <descr_liv_1>RISORSA STRUMENTALE TECNOLOGICA</descr_liv_1>
+        <cod_liv_2>03</cod_liv_2>
+        <descr_liv_2>IMPIANTI DI CANTIERE</descr_liv_2>
+        <cod_liv_3>00</cod_liv_3>
+        <descr_liv_3>IMPIANTI DI FORNITURA SERVIZI</descr_liv_3>
+        <cod_liv_4>10</cod_liv_4>
+        <descr_liv_4>IMPIANTO TRASPORTO FLUIDI</descr_liv_4>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.OC.EEA.Pa01.G0915.Za001.0000.-" prezzo_voce="30.67" unita_misura_voce="0 cad" importo_senza_sgui_voce="24.24" rapporto_RU_voce="16.10" tipologia_risorsa="OPERA COMPIUTA">
+        <declaratoria_voce>OPERA: Potenziometro; impiego: reattore ad alta frequenza.
+LAVORO: Installazione.</declaratoria_voce>
+        <cod_liv_1>OC</cod_liv_1>
+        <descr_liv_1>OPERA COMPIUTA</descr_liv_1>
+        <cod_liv_2>E</cod_liv_2>
+        <descr_liv_2>EDILIZIA</descr_liv_2>
+        <cod_liv_3>E</cod_liv_3>
+        <descr_liv_3>EDIFICI</descr_liv_3>
+        <cod_liv_4>A</cod_liv_4>
+        <descr_liv_4>RESIDENZE</descr_liv_4>
+        <cod_liv_5>P</cod_liv_5>
+        <descr_liv_5>PRODUZIONE</descr_liv_5>
+        <cod_liv_6>a</cod_liv_6>
+        <descr_liv_6>REALIZZAZIONE</descr_liv_6>
+        <cod_liv_7>01</cod_liv_7>
+        <descr_liv_7>INSTALLAZIONE</descr_liv_7>
+        <cod_liv_8>G</cod_liv_8>
+        <descr_liv_8>INGEGNERIA ELETTRICA</descr_liv_8>
+        <cod_liv_9>09</cod_liv_9>
+        <descr_liv_9>SISTEMI DI COMPLETAMENTO</descr_liv_9>
+        <cod_liv_10>15</cod_liv_10>
+        <descr_liv_10>POTENZIOMETRO</descr_liv_10>
+        <cod_liv_11>Za001</cod_liv_11>
+        <descr_liv_11>MATERIALE GENERICO NON RILEVANTE</descr_liv_11>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.OC.EEA.Pa01.M8900.Za001.0000.a" prezzo_voce="32433.40" unita_misura_voce="1 cad" importo_senza_sgui_voce="25639.05" rapporto_RU_voce="24.36" tipologia_risorsa="OPERA COMPIUTA">
+        <declaratoria_voce>OPERA: Impianto ascensore, ad azionamento elettrico; impiego: edificio civile, disabili; corsa utile [m] = 15; fermate [n] = 6 | rapporto di intermittenza [%] = 40; portata [kg] = 525 | portata [persone] = 7 | velocità [m/s] = 0,15 ÷ 0,65.
+LAVORO: Installazione.
+SPECIFICHE TECNICHE: impianto installato in vano proprio, macchinario posto in alto.</declaratoria_voce>
+        <risorse>
+          <risorsaDTOList codifica_risorsa="LOM261.RM.97.00.00.Za001.0000.-" udm_risorsa="1 cad" quantita_risorsa="1.00000" prezzo_risorsa="17739.48" importo_risorsa="17739.48" tipologia_risorsa="RISORSA MATERIALE">
+            <declaratoria_risorsa>Impianto ascensore ad azionamento elettrico; impiego: edificio civile, disabili; corsa utile [m] = 15; fermate [n] = 6 | rapporto di intermittenza [%] = 40; portata [kg] = 525 | portata [persone] = 7 | velocità [m/s] = 0,15 ÷ 0,65. Componenti: cabina, motore elettrico, guide di scorrimento, contrappeso, porte di piano automatiche
+SPECIFICHE TECNICHE: impianto installato in vano proprio, macchinario posto in alto</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RU.00.01.00.0015.-" udm_risorsa="1 h" quantita_risorsa="77.79000" prezzo_risorsa="25.20" importo_risorsa="1960.31" tipologia_risorsa="RISORSA UMANA">
+            <declaratoria_risorsa>Operaio metalmeccanico di livello C2
+SPECIFICHE TECNICHE: idraulici, elettrici, termoidraulici, cogenerazione, teleriscaldamento, antincendio, telecomunicazioni,  sollevamento, videosorveglianza, antintrusione, radiotelevisivi</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RU.00.01.00.0015.-" udm_risorsa="1 h" quantita_risorsa="77.79000" prezzo_risorsa="25.20" importo_risorsa="1960.31" tipologia_risorsa="RISORSA UMANA">
+            <declaratoria_risorsa>Operaio metalmeccanico di livello C2
+SPECIFICHE TECNICHE: idraulici, elettrici, termoidraulici, cogenerazione, teleriscaldamento, antincendio, telecomunicazioni,  sollevamento, videosorveglianza, antintrusione, radiotelevisivi</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RU.00.01.00.0005.-" udm_risorsa="1 h" quantita_risorsa="77.79000" prezzo_risorsa="24.17" importo_risorsa="1880.18" tipologia_risorsa="RISORSA UMANA">
+            <declaratoria_risorsa>Operaio metalmeccanico di livello D2
+SPECIFICHE TECNICHE: idraulici, elettrici, termoidraulici, cogenerazione, teleriscaldamento, antincendio, telecomunicazioni,  sollevamento, videosorveglianza, antintrusione, radiotelevisivi</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RU.00.01.00.0020.-" udm_risorsa="1 h" quantita_risorsa="77.79000" prezzo_risorsa="26.98" importo_risorsa="2098.77" tipologia_risorsa="RISORSA UMANA">
+            <declaratoria_risorsa>Operaio metalmeccanico di livello C3
+SPECIFICHE TECNICHE: idraulici, elettrici, termoidraulici, cogenerazione, teleriscaldamento, antincendio, telecomunicazioni,  sollevamento, videosorveglianza, antintrusione, radiotelevisivi</declaratoria_risorsa>
+          </risorsaDTOList>
+        </risorse>
+        <declaratoria_voce_dettaglio>OP1 Impianto ascensore, ad azionamento elettrico; impiego: edificio civile, disabili; corsa utile [m] = 15; fermate [n] = 6 | rapporto di intermittenza [%] = 40; portata [kg] = 525 | portata [persone] = 7 | velocità [m/s] = 0,15 ÷ 0,65.
+SPECIFICHE TECNICHE: impianto installato in vano proprio, macchinario posto in alto.
+RM2 Impianto ascensore ad azionamento elettrico; impiego: edificio civile, disabili; corsa utile [m] = 15; fermate [n] = 6 | rapporto di intermittenza [%] = 40; portata [kg] = 525 | portata [persone] = 7 | velocità [m/s] = 0,15 ÷ 0,65. Componenti: cabina, motore elettrico, guide di scorrimento, contrappeso, porte di piano automatiche
+SPECIFICHE TECNICHE: impianto installato in vano proprio, macchinario posto in alto
+LV1 Installazione.</declaratoria_voce_dettaglio>
+        <cod_liv_1>OC</cod_liv_1>
+        <descr_liv_1>OPERA COMPIUTA</descr_liv_1>
+        <cod_liv_2>E</cod_liv_2>
+        <descr_liv_2>EDILIZIA</descr_liv_2>
+        <cod_liv_3>E</cod_liv_3>
+        <descr_liv_3>EDIFICI</descr_liv_3>
+        <cod_liv_4>A</cod_liv_4>
+        <descr_liv_4>RESIDENZE</descr_liv_4>
+        <cod_liv_5>P</cod_liv_5>
+        <descr_liv_5>PRODUZIONE</descr_liv_5>
+        <cod_liv_6>a</cod_liv_6>
+        <descr_liv_6>REALIZZAZIONE</descr_liv_6>
+        <cod_liv_7>01</cod_liv_7>
+        <descr_liv_7>INSTALLAZIONE</descr_liv_7>
+        <cod_liv_8>M</cod_liv_8>
+        <descr_liv_8>TRASPORTO</descr_liv_8>
+        <cod_liv_9>89</cod_liv_9>
+        <descr_liv_9>SISTEMI DI SOLLEVAMENTO</descr_liv_9>
+        <cod_liv_10>00</cod_liv_10>
+        <descr_liv_10>IMPIANTO ASCENSORE</descr_liv_10>
+        <cod_liv_11>Za001</cod_liv_11>
+        <descr_liv_11>MATERIALE GENERICO NON RILEVANTE</descr_liv_11>
+      </dettaglio_voce>
+    </voci>
+    <voci>
+      <riferimenti_voce>
+        <autore>LOM</autore>
+        <anno>2026</anno>
+        <edizione>1</edizione>
+      </riferimenti_voce>
+      <dettaglio_voce codice_voce="LOM261.OC.EEA.Pa02.C0100.H0002.0005.-" prezzo_voce="43.14" unita_misura_voce="1 m²" importo_senza_sgui_voce="34.10" rapporto_RU_voce="42.68" tipologia_risorsa="OPERA COMPIUTA">
+        <declaratoria_voce>OPERA: Sistema di muratura, in lastre di gesso rivestito; geometria: una lastra per faccia; funzione: divisorio; impiego: interno | tramezzi. Incluso: armatura (guide e montanti); fissaggi.
+LAVORO: Posa. Incluso: rasatura giunti. Escluso: assistenza muraria.
+SPECIFICHE TECNICHE: spessore singola lastra [cm] = 1,3; interposta armatura in profilati di acciaio zincato; interasse montanti [cm] = 60; guide a pavimento e a soffitto.</declaratoria_voce>
+        <risorse>
+          <risorsaDTOList codifica_risorsa="LOM261.RM.07.10.25.H0002.0010.a" udm_risorsa="1 m²" quantita_risorsa="2.30000" prezzo_risorsa="2.09" importo_risorsa="4.81" tipologia_risorsa="RISORSA MATERIALE">
+            <declaratoria_risorsa>Lastra di gesso rivestito; geometria: bordi assottigliati; impiego: interno | murature | contropareti | tramezzi; larghezza [cm] = 120 | spessore [cm] = 1,3
+SPECIFICHE TECNICHE: rivestita su entrambe le facce con cartone speciale</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RM.07.15.05.Sb004.0250.-" udm_risorsa="1 m" quantita_risorsa="2.00000" prezzo_risorsa="3.48" importo_risorsa="6.96" tipologia_risorsa="RISORSA MATERIALE">
+            <declaratoria_risorsa>Profilo montante di lega ferrosa acciaio zincato Z140; finitura: rivestito; funzione: orditura di sostegno; impiego: murature | tramezzi; spessore [mm] = 0,6 | larghezza [cm] = 7,5
+SPECIFICHE TECNICHE: rivestimento organico privo di cromo</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RM.07.15.05.Sb004.0000.-" udm_risorsa="1 m" quantita_risorsa="0.75000" prezzo_risorsa="2.98" importo_risorsa="2.24" tipologia_risorsa="RISORSA MATERIALE">
+            <declaratoria_risorsa>Profilo guida di lega ferrosa acciaio zincato Z140; finitura: rivestito; funzione: orditura di sostegno; impiego: murature | tramezzi; spessore [mm] = 0,6 | larghezza [cm] = 7,5
+SPECIFICHE TECNICHE: rivestimento organico privo di cromo</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RM.38.15.95.R0000.0000.-" udm_risorsa="100 pz" quantita_risorsa="0.30000" prezzo_risorsa="0.95" importo_risorsa="0.29" tipologia_risorsa="RISORSA MATERIALE">
+            <declaratoria_risorsa>Ferramenta vite di metallo generico; geometria: autoperforante; funzione: fissaggio lastre; impiego: controsoffitti | murature</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RM.00.10.15.Za001.6250.-" udm_risorsa="1 kg" quantita_risorsa="0.50000" prezzo_risorsa="2.51" importo_risorsa="1.26" tipologia_risorsa="RISORSA MATERIALE">
+            <declaratoria_risorsa>Premiscelato stucco sintetico; geometria: pasta; funzione: stuccatura; impiego: interno | superfici in legno | murature; peso specifico [kg/l] = 1,75
+SPECIFICHE TECNICHE: a base di resine in dispersione acquosa</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RM.07.15.00.Oa002.0000.-" udm_risorsa="1 m" quantita_risorsa="1.50000" prezzo_risorsa="0.08" importo_risorsa="0.12" tipologia_risorsa="RISORSA MATERIALE">
+            <declaratoria_risorsa>Nastro di fibra sintetica di vetro; funzione: coprigiunti; impiego: murature | tramezzi | controsoffitti</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RU.00.00.00.0010.a" udm_risorsa="1 h" quantita_risorsa="0.30000" prezzo_risorsa="32.42" importo_risorsa="9.73" tipologia_risorsa="RISORSA UMANA">
+            <declaratoria_risorsa>Operaio edile di livello 2°; qualifica: qualificato
+SPECIFICHE TECNICHE: muratore, carpentiere, impermeabilizzatore, marmista, pavimentazione e rivestimenti, lattoniere, falegname, verniciatore, stuccatore e assimilati</declaratoria_risorsa>
+          </risorsaDTOList>
+          <risorsaDTOList codifica_risorsa="LOM261.RU.00.00.00.0015.a" udm_risorsa="1 h" quantita_risorsa="0.30000" prezzo_risorsa="28.96" importo_risorsa="8.69" tipologia_risorsa="RISORSA UMANA">
+            <declaratoria_risorsa>Operaio edile di livello 1°; qualifica: comune
+SPECIFICHE TECNICHE: muratore, carpentiere, impermeabilizzatore, marmista, pavimentazione e rivestimenti, lattoniere, falegname, verniciatore, stuccatore e assimilati</declaratoria_risorsa>
+          </risorsaDTOList>
+        </risorse>
+        <declaratoria_voce_dettaglio>OP1 Sistema di muratura, in lastre di gesso rivestito; geometria: una lastra per faccia; funzione: divisorio; impiego: interno | tramezzi. Incluso: armatura (guide e montanti); fissaggi.
+SPECIFICHE TECNICHE: spessore singola lastra [cm] = 1,3; interposta armatura in profilati di acciaio zincato; interasse montanti [cm] = 60; guide a pavimento e a soffitto.
+RM2 Lastra di gesso rivestito; geometria: bordi assottigliati; impiego: interno | murature | contropareti | tramezzi; larghezza [cm] = 120 | spessore [cm] = 1,3
+SPECIFICHE TECNICHE: rivestita su entrambe le facce con cartone speciale
+RM2 Profilo montante di lega ferrosa acciaio zincato Z140; finitura: rivestito; funzione: orditura di sostegno; impiego: murature | tramezzi; spessore [mm] = 0,6 | larghezza [cm] = 7,5
+SPECIFICHE TECNICHE: rivestimento organico privo di cromo
+RM2 Profilo guida di lega ferrosa acciaio zincato Z140; finitura: rivestito; funzione: orditura di sostegno; impiego: murature | tramezzi; spessore [mm] = 0,6 | larghezza [cm] = 7,5
+SPECIFICHE TECNICHE: rivestimento organico privo di cromo
+RM2 Ferramenta vite di metallo generico; geometria: autoperforante; funzione: fissaggio lastre; impiego: controsoffitti | murature
+RM2 Premiscelato stucco sintetico; geometria: pasta; funzione: stuccatura; impiego: interno | superfici in legno | murature; peso specifico [kg/l] = 1,75
+SPECIFICHE TECNICHE: a base di resine in dispersione acquosa
+RM2 Nastro di fibra sintetica di vetro; funzione: coprigiunti; impiego: murature | tramezzi | controsoffitti
+LV1 Posa. Incluso: rasatura giunti. Escluso: assistenza muraria.</declaratoria_voce_dettaglio>
+        <cod_liv_1>OC</cod_liv_1>
+        <descr_liv_1>OPERA COMPIUTA</descr_liv_1>
+        <cod_liv_2>E</cod_liv_2>
+        <descr_liv_2>EDILIZIA</descr_liv_2>
+        <cod_liv_3>E</cod_liv_3>
+        <descr_liv_3>EDIFICI</descr_liv_3>
+        <cod_liv_4>A</cod_liv_4>
+        <descr_liv_4>RESIDENZE</descr_liv_4>
+        <cod_liv_5>P</cod_liv_5>
+        <descr_liv_5>PRODUZIONE</descr_liv_5>
+        <cod_liv_6>a</cod_liv_6>
+        <descr_liv_6>REALIZZAZIONE</descr_liv_6>
+        <cod_liv_7>02</cod_liv_7>
+        <descr_liv_7>POSA</descr_liv_7>
+        <cod_liv_8>C</cod_liv_8>
+        <descr_liv_8>ARCHITETTURA</descr_liv_8>
+        <cod_liv_9>01</cod_liv_9>
+        <descr_liv_9>SISTEMI MURARI</descr_liv_9>
+        <cod_liv_10>00</cod_liv_10>
+        <descr_liv_10>SISTEMA DI MURATURA</descr_liv_10>
+        <cod_liv_11>H0002</cod_liv_11>
+        <descr_liv_11>GESSO RIVESTITO</descr_liv_11>
+      </dettaglio_voce>
+    </voci>
+  </voci>
+</report>
