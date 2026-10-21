@@ -74,6 +74,7 @@
   --color-home-mint-soft: #a3e9d8;
   --color-home-mint-tint: #d9f6ee;
   --color-home-panel: #f6f8fb;
+  --color-home-grey: #f2f3f5;
   --color-home-rose: #fcf3f4;
   --color-home-lilac: #f6f5fd;
   --color-home-sage: #f1f8ec;
@@ -91,6 +92,27 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Parallasse delle icone della home: animazione legata allo scroll, solo CSS. */
+.parallax-icona {
+  transform: rotate(var(--r0));
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax-icona {
+      animation: parallasse linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+@keyframes parallasse {
+  from {
+    transform: translate3d(0, calc(var(--v) * 0.35px), 0) rotate(var(--r0));
+  }
+  to {
+    transform: translate3d(0, calc(var(--v) * -1px), 0) rotate(var(--r1));
   }
 }
 
