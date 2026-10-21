@@ -14,9 +14,11 @@ import {
 export function AuthForm({
   mode,
   redirectTo,
+  defaultEmail,
 }: {
   mode: "login" | "signup";
   redirectTo?: string;
+  defaultEmail?: string;
 }) {
   const action = mode === "login" ? signInAction : signUpAction;
   const [state, formAction, pending] = useActionState<AuthState, FormData>(
@@ -50,6 +52,7 @@ export function AuthForm({
           name="email"
           type="email"
           autoComplete="email"
+          defaultValue={defaultEmail}
           required
         />
       </Field>
