@@ -1,5 +1,5 @@
 import * as XLSX from "xlsx";
-import { finalizza, mapUnita, numeroIt, pulisci, unisci, type VoceGrezza, type VoceNormalizzata } from "../core";
+import { finalizza, numeroIt, pulisci, unisci, type VoceGrezza, type VoceNormalizzata } from "../core";
 
 type Cella = string | number | boolean | null;
 
@@ -75,9 +75,7 @@ export function normalizzaIntestazione(s: Cella): string {
 
 /** Testo dell'unità: toglie "€/" e il punto finale quando serve a riconoscerla ("cad." → "cad"). */
 export function testoUnita(u: Cella): string {
-  let t = pulisci(u == null ? "" : String(u)).replace(/^€\s*\/\s*/, "");
-  if (/\.$/.test(t) && mapUnita(t) === "corpo" && mapUnita(t.slice(0, -1)) !== "corpo") t = t.slice(0, -1);
-  return t;
+  return pulisci(u == null ? "" : String(u)).replace(/^€\s*\/\s*/, "");
 }
 
 const CP1252_C1: Record<number, string> = {

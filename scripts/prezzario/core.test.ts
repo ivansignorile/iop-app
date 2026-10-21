@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { finalizza, numeroIt, pulisci, senzaPrefisso, unisci } from "./core";
+import { finalizza, mapUnita, numeroIt, pulisci, senzaPrefisso, unisci } from "./core";
+
+describe("mapUnita, varianti delle fonti", () => {
+  it.each([
+    ["cad.", "cad"], ["Cad", "cad"], ["€/m²", "mq"], ["€/cad", "cad"], ["m³vpp", "mc"], ["mq.", "mq"],
+    ["kg.", "kg"], ["nr", "cad"], ["pz", "cad"], ["h", "corpo"], ["m²/cm", "mq"],
+  ])("%s -> %s", (input, atteso) => {
+    expect(mapUnita(input)).toBe(atteso);
+  });
+});
 
 describe("numeroIt", () => {
   it.each([
@@ -33,8 +42,13 @@ describe("unisci", () => {
   it("scarta parti vuote", () => {
     expect(unisci("Scotico", null, "")).toBe("Scotico");
   });
-  it("scarta la parte già contenuta nella precedente", () => {
-    expect(unisci("Scavo di sbancamento in terreno", "Scavo di sbancamento")).toBe("Scavo di sbancamento in terreno");
+  it("scarta la parte identica alla precedente", () => {
+    expect(unisci("Scavo di sbancamento", "SCAVO DI SBANCAMENTO ")).toBe("Scavo di sbancamento");
+  });
+  it("tiene la sottovoce anche se il suo testo compare nel padre", () => {
+    expect(unisci("Controventature orizzontali e verticali", "Controventature orizzontali")).toBe(
+      "Controventature orizzontali e verticali — Controventature orizzontali",
+    );
   });
 });
 

@@ -27,9 +27,9 @@ describe("xlsx-tabella: struttura sbagliata", () => {
 });
 
 describe("helper", () => {
-  it("testoUnita toglie € / e il punto di cad.", () => {
+  it("testoUnita toglie € / (il punto di cad. lo gestisce mapUnita)", () => {
     expect(testoUnita("€/m")).toBe("m");
-    expect(testoUnita("cad.")).toBe("cad");
+    expect(testoUnita("cad.")).toBe("cad.");
     expect(testoUnita("n.")).toBe("n.");
   });
   it("daCp1252 corregge i controlli C1", () => {

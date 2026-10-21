@@ -22,7 +22,10 @@ export function mapUnita(u: string): UnitaMisura {
     .replace(/\s+/g, "")
     .replace(/²/g, "2")
     .replace(/³/g, "3")
-    .split("/")[0];
+    .replace(/^€\//, "")
+    .split("/")[0]
+    .replace(/\.+$/, "")
+    .replace(/^(m[23])vpp$/, "$1");
   switch (base) {
     case "mq":
     case "m2":
@@ -40,6 +43,7 @@ export function mapUnita(u: string): UnitaMisura {
     case "nr":
     case "nr.":
     case "cp":
+    case "pz":
     case "capo":
       return "cad";
     case "kg":
@@ -69,14 +73,14 @@ export function pulisci(s: string | null | undefined): string {
   return (s ?? "").replace(/_x000D_/gi, " ").replace(/[\s ]+/g, " ").trim();
 }
 
-/** Unisce descrizione del padre e della voce, scartando vuoti e ripetizioni. */
+/** Unisce descrizione del padre e della voce, scartando vuoti e parti identiche alla precedente. */
 export function unisci(...parti: (string | null | undefined)[]): string {
   const out: string[] = [];
   for (const p of parti) {
     const t = pulisci(p);
     if (!t) continue;
     const prec = out[out.length - 1];
-    if (prec && prec.toLowerCase().includes(t.toLowerCase())) continue;
+    if (prec && prec.toLowerCase() === t.toLowerCase()) continue;
     out.push(t);
   }
   return out.join(" — ");
