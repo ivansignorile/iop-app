@@ -24,6 +24,11 @@ import { FONTI_TRENTO } from "./fonti/trento";
 import { FONTI_MOLISE } from "./fonti/molise";
 import { FONTI_LAZIO } from "./fonti/lazio";
 import { FONTI_TOSCANA } from "./fonti/toscana";
+import { FONTI_MARCHE } from "./fonti/marche";
+import { FONTI_PUGLIA } from "./fonti/puglia";
+import { FONTI_UMBRIA } from "./fonti/umbria";
+import { FONTI_SICILIA } from "./fonti/sicilia";
+import { FONTI_VALLE_D_AOSTA } from "./fonti/valle-d-aosta";
 import { FONTI_VENETO } from "./fonti/veneto";
 import { FONTI_BASILICATA } from "./fonti/basilicata";
 import { FONTI_LIGURIA } from "./fonti/liguria";
@@ -35,6 +40,11 @@ export const FONTI: Fonte[] = [
   ...FONTI_MOLISE,
   ...FONTI_LAZIO,
   ...FONTI_TOSCANA,
+  ...FONTI_MARCHE,
+  ...FONTI_PUGLIA,
+  ...FONTI_UMBRIA,
+  ...FONTI_SICILIA,
+  ...FONTI_VALLE_D_AOSTA,
   ...FONTI_EMILIA_ROMAGNA,
   ...FONTI_FRIULI_VENEZIA_GIULIA,
   ...FONTI_TRENTO,
