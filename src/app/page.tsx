@@ -608,7 +608,7 @@ function Footer() {
       {/* Logo enorme a tutta larghezza, tagliato dal bordo inferiore */}
       <p
         aria-hidden
-        className="mt-16 select-none text-center font-home-display text-[44vw] font-semibold leading-[0.74] tracking-normal text-white/20"
+        className="mt-16 select-none text-center font-home-display text-[44vw] font-semibold leading-[0.74] tracking-normal text-white/10"
       >
         iop
       </p>
