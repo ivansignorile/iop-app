@@ -1,6 +1,6 @@
 import { Bricolage_Grotesque, Caveat, Hanken_Grotesk } from "next/font/google";
 
-// Sostituti liberi dei font del riferimento (grottesco display + Graphik + scritta a mano).
+// Font di tutta l'app (stile della landing): grottesco display, testo, scritta a mano.
 const display = Bricolage_Grotesque({
   variable: "--font-home-display-family",
   subsets: ["latin"],
@@ -19,4 +19,4 @@ const hand = Caveat({
   display: "swap",
 });
 
-export const homeFonts = `${display.variable} ${body.variable} ${hand.variable}`;
+export const appFonts = `${display.variable} ${body.variable} ${hand.variable}`;

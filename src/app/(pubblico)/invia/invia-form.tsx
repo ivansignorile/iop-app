@@ -129,11 +129,11 @@ export function InviaForm() {
       </Sezione>
 
       <Sezione numero="02" titolo="Formato del preventivo">
-        <div className="grid gap-px overflow-hidden border border-hairline">
+        <div className="grid gap-3">
           {FORMATI.map((f) => (
             <label
               key={f.value}
-              className="flex cursor-pointer items-start gap-4 bg-canvas p-5 transition-colors has-[:checked]:bg-surface-soft"
+              className="flex cursor-pointer items-start gap-4 rounded-md border-[1.5px] border-hairline bg-canvas p-5 transition-colors hover:border-hairline-soft has-[:checked]:border-accent has-[:checked]:bg-accent-tint/50"
             >
               <input
                 type="radio"
@@ -141,7 +141,7 @@ export function InviaForm() {
                 value={f.value}
                 checked={formato === f.value}
                 onChange={() => setFormato(f.value)}
-                className="mt-1 accent-ink"
+                className="mt-1 accent-accent-deep"
               />
               <span>
                 <span className="block font-medium text-ink">{f.titolo}</span>
@@ -198,7 +198,7 @@ export function InviaForm() {
 
       <div className="flex flex-col gap-5 border-t border-hairline pt-6">
         <label className="flex items-start gap-3 text-sm text-graphite">
-          <input type="checkbox" name="privacy" required className="mt-0.5 accent-ink" />
+          <input type="checkbox" name="privacy" required className="mt-0.5 accent-accent-deep" />
           <span>
             Accetto la{" "}
             <Link href="/privacy" target="_blank" className="text-link">

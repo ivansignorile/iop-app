@@ -4,15 +4,14 @@ function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
 }
 
-// Stile editoriale: nessun box, solo riga inferiore hairline che si scurisce
-// a ink in focus. Angoli netti (rounded-none).
+// Stile della landing: nessun box, riga inferiore che diventa menta in focus.
 const fieldBase =
-  "w-full rounded-none border-0 border-b border-hairline-soft bg-transparent px-0 py-2.5 text-base text-ink outline-none placeholder:text-stone focus:border-ink";
+  "w-full rounded-none border-0 border-b-[1.5px] border-hairline-soft bg-transparent px-0.5 py-2.5 text-base text-ink outline-none transition-colors placeholder:text-stone hover:border-ink-soft focus:border-accent";
 
 export function Label({ className, ...props }: ComponentProps<"label">) {
   return (
     <label
-      className={cx("mb-1 block text-sm font-medium text-ink", className)}
+      className={cx("mb-1 block text-sm font-semibold text-ink", className)}
       {...props}
     />
   );
@@ -60,7 +59,7 @@ export function FormError({ message }: { message?: string | null }) {
   return (
     <p
       role="alert"
-      className="border border-hairline-soft bg-surface-soft px-3 py-2 text-sm text-ink"
+      className="rounded-md bg-[#fcf3f4] px-4 py-3 text-sm text-ink"
     >
       <span className="font-semibold">Errore.</span> {message}
     </p>

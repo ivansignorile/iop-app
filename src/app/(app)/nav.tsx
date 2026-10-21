@@ -28,22 +28,25 @@ export function AppNav({
     : baseLinks;
 
   return (
-    <header className="sticky top-0 z-20 border-b border-hairline bg-canvas">
-      <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-6 md:px-12">
-        <div className="flex items-center gap-6">
-          <Link href="/dashboard" className="text-lg font-medium text-ink">
-            IOP
+    <header className="sticky top-0 z-20 border-b border-hairline bg-canvas/90 backdrop-blur-md">
+      <div className="mx-auto flex h-[68px] max-w-[1280px] items-center justify-between gap-4 px-6 md:px-12">
+        <div className="flex items-center gap-8">
+          <Link href="/dashboard" className="flex items-baseline gap-1.5" aria-label="iop, dashboard">
+            <span className="font-home-display text-[26px] font-medium leading-none tracking-[-0.03em] text-ink">
+              iop
+            </span>
+            <span className="-rotate-6 font-home-hand text-[14px] font-bold leading-none text-accent">+AI dentro!</span>
           </Link>
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             {links.map((l) => {
               const active = pathname.startsWith(l.href);
               return (
                 <Link
                   key={l.href}
                   href={l.href}
-                  className={`rounded-md px-3 py-2 text-sm ${
+                  className={`relative px-3 py-2 text-[15px] transition-colors hover:text-accent-deep ${
                     active
-                      ? "bg-surface-soft font-medium text-ink"
+                      ? "font-semibold text-ink after:absolute after:inset-x-3 after:-bottom-[15px] after:h-[3px] after:rounded-full after:bg-accent"
                       : "text-body"
                   }`}
                 >
@@ -55,11 +58,16 @@ export function AppNav({
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="hidden text-sm text-muted sm:inline">{orgName}</span>
+          <span className="hidden items-center gap-2 text-sm font-medium text-ink sm:flex">
+            <span className="grid size-7 place-items-center rounded-full bg-accent-tint font-home-display text-[13px] text-accent-deep">
+              {orgName.charAt(0).toUpperCase()}
+            </span>
+            {orgName}
+          </span>
           <form action={signOutAction}>
             <button
               type="submit"
-              className="rounded-md border border-hairline px-3 py-2 text-sm text-ink"
+              className="h-[36px] rounded-sm border-[1.5px] border-ink px-4 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-on-primary active:scale-[0.98]"
             >
               Esci
             </button>
@@ -68,15 +76,15 @@ export function AppNav({
       </div>
 
       {/* Nav mobile */}
-      <nav className="flex items-center gap-1 overflow-x-auto border-t border-hairline px-4 py-2 md:hidden">
+      <nav className="flex items-center gap-1 overflow-x-auto border-t border-hairline px-4 py-2 lg:hidden">
         {links.map((l) => {
           const active = pathname.startsWith(l.href);
           return (
             <Link
               key={l.href}
               href={l.href}
-              className={`whitespace-nowrap rounded-md px-3 py-1.5 text-sm ${
-                active ? "bg-surface-soft font-medium text-ink" : "text-body"
+              className={`whitespace-nowrap rounded-sm px-3 py-1.5 text-sm ${
+                active ? "bg-accent-tint font-semibold text-ink" : "text-body"
               }`}
             >
               {l.label}

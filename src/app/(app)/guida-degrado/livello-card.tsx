@@ -95,7 +95,7 @@ export function LivelloCard({ livello, override, globale, signedUrl, cicli }: Pr
         <span className="display-md text-ink">{livello}</span>
         <div className="flex items-center gap-2">
           <span
-            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${badgeClass}`}
+            className={`inline-flex items-center rounded-xs px-2 py-0.5 text-xs font-medium ${badgeClass}`}
           >
             {badge}
           </span>
@@ -126,7 +126,7 @@ export function LivelloCard({ livello, override, globale, signedUrl, cicli }: Pr
           </div>
         )}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-          <span className="rounded-full border border-ink bg-canvas px-3 py-1 text-xs font-medium text-ink shadow-sm">
+          <span className="rounded-xs border border-ink bg-canvas px-3 py-1 text-xs font-medium text-ink shadow-sm">
             Cambia
           </span>
         </div>

@@ -21,9 +21,10 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { Carosello, Evidenzia, type Slide } from "@/components/home/carosello";
-import { homeFonts } from "@/components/home/fonts";
 import { MockPreventivo } from "@/components/home/mock-preventivo";
+import { HomeFooter } from "@/components/home/footer";
 import { HomeNav } from "@/components/home/nav";
+import { ParallaxIcone } from "@/components/home/parallax-icone";
 import { PubblicoTabs } from "@/components/home/pubblico-tabs";
 import { AnteprimaDocumento, SchemaSelf, SchemaTecnico } from "@/components/home/visuals";
 
@@ -128,12 +129,14 @@ const PASSI = [
 
 export default function Home() {
   return (
-    <div className={`${homeFonts} min-h-full overflow-x-clip bg-white font-home-body text-home-ink`}>
-      <HomeNav />
+    <div className={`relative min-h-full overflow-x-clip bg-white font-home-body text-home-ink`}>
+      <ParallaxIcone />
 
-      <main>
-        {/* Hero */}
-        <section className="mx-auto max-w-[1100px] px-5 pb-20 pt-14 md:px-6 md:pb-28 md:pt-24">
+      {/* Sfondo hero: grigio chiaro con fondo ad arco (radius 100% sugli angoli inferiori) */}
+      <div className="rounded-b-[100%] bg-home-grey">
+        <HomeNav />
+
+        <section className="relative z-[2] mx-auto max-w-[1100px] px-5 pb-48 pt-14 md:px-6 md:pb-56 md:pt-24">
           <div className="relative">
             <h1 className="font-home-display text-[44px] font-normal leading-[1.02] tracking-[-0.035em] sm:text-[60px] md:text-[84px]">
               Il preventivo edile
@@ -173,9 +176,13 @@ export default function Home() {
 
             <Cartello />
           </div>
+        </section>
+      </div>
 
-          {/* Riga loghi del riferimento → formati e garanzie del servizio */}
-          <div className="mt-24 md:mt-32">
+      <main className="relative z-[2]">
+        {/* Riga loghi del riferimento → formati e garanzie del servizio */}
+        <section className="mx-auto max-w-[1100px] px-5 pt-16 md:px-6 md:pt-20">
+          <div>
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <p className="text-[17px] text-home-muted">Il tuo preventivo, nel formato che ti serve</p>
               <Link
@@ -390,7 +397,7 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer />
+      <HomeFooter />
     </div>
   );
 }
@@ -524,76 +531,5 @@ function Cartello() {
         <HardHat size={36} weight="duotone" />
       </span>
     </div>
-  );
-}
-
-const FOOTER = [
-  {
-    titolo: "Modalità",
-    voci: [
-      ["Self istantaneo", "#modalita"],
-      ["Elaborato dal tecnico", "/invia"],
-    ],
-  },
-  {
-    titolo: "Per chi",
-    voci: [
-      ["Privati", "#per-chi"],
-      ["Tecnici", "#per-chi"],
-      ["Imprese edili", "#per-chi"],
-    ],
-  },
-  {
-    titolo: "Prodotto",
-    voci: [
-      ["Come funziona", "#come-funziona"],
-      ["Formati", "#formati"],
-      ["Prezzari", "#prezzari"],
-    ],
-  },
-  {
-    titolo: "Account",
-    voci: [
-      ["Accedi", "/login"],
-      ["Registrati", "/signup"],
-    ],
-  },
-] as const;
-
-function Footer() {
-  return (
-    <footer className="mx-auto max-w-[1100px] px-5 pb-10 pt-8 md:px-6">
-      <div className="grid gap-10 border-t border-home-line pt-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr_1fr]">
-        <div>
-          <p className="font-home-display text-[24px] font-medium leading-none tracking-[-0.03em]">iop</p>
-          <p className="mt-4 max-w-[200px] text-[14px] leading-relaxed text-home-text">
-            Preventivi edili sui prezzari regionali ufficiali
-          </p>
-        </div>
-        {FOOTER.map((c) => (
-          <div key={c.titolo}>
-            <p className="text-[14px] font-semibold">{c.titolo}</p>
-            <ul className="mt-5 flex flex-col gap-3.5 text-[14px] text-home-text">
-              {c.voci.map(([t, h]) => (
-                <li key={t}>
-                  <Link href={h} className="hover:text-home-mint">
-                    {t}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div className="mt-20 flex flex-wrap items-center gap-x-8 gap-y-3 text-[13px]">
-        <p className="text-home-ink">© {new Date().getFullYear()} iop</p>
-        <Link href="/termini" className="text-home-muted hover:text-home-ink">
-          Termini di Servizio
-        </Link>
-        <Link href="/privacy" className="text-home-muted hover:text-home-ink">
-          Privacy Policy
-        </Link>
-      </div>
-    </footer>
   );
 }

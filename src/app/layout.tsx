@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { appFonts } from "@/lib/fonts";
 
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "IOP — Io Preventivo",
@@ -21,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" className={`${inter.variable} h-full`}>
+    <html lang="it" className={`${appFonts} h-full`}>
       <body className="min-h-full bg-canvas text-body antialiased">
         {children}
       </body>
