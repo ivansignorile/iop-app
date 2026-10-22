@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Prezzario xmlns="https://appaltiliguria.regione.liguria.it/upload/prezzarioDTS/docs/Prezzario.xsd">
+    <intestazione versione="1" autore="Regione Liguria">
+        <dettaglio area="Regione Liguria" anno="2026" />
+        <copyright tipo="CC BY 3.0" descrizione="Creative commons: CC BY" />
+    </intestazione>
+    <Contenuto>
+        <Articolo codice="05.B10.C10.010">
+            <tipo>Sondaggi - Analisi - Opere propedeutiche</tipo>
+            <capitolo>Sondaggi geognostici</capitolo>
+            <voce>Perforazione ad andamento verticale, eseguito a rotazione a carotaggio continuo del diametro di 101 mm per profondità:</voce>
+            <articolo>fino a 20 m</articolo>
+            <descrizionebreve>Sondaggio con perforazione terreni medi fino a 20m</descrizionebreve>
+            <um>metro lineare (m)</um>
+            <prezzo valore="125.86" />
+            <mo>77.90</mo>
+            <sicurezza>4.64</sicurezza>
+        </Articolo>
+        <Articolo codice="05.B10.C10.020">
+            <tipo>Sondaggi - Analisi - Opere propedeutiche</tipo>
+            <capitolo>Sondaggi geognostici</capitolo>
+            <voce>Perforazione ad andamento verticale, eseguito a rotazione a carotaggio continuo del diametro di 101 mm per profondità:</voce>
+            <articolo>da 21 a 40 m</articolo>
+            <descrizionebreve>Sondaggio con perforazione terreni medi da 21 a 40 m</descrizionebreve>
+            <um>metro lineare (m)</um>
+            <prezzo valore="141.60" />
+            <mo>77.91</mo>
+            <sicurezza>5.22</sicurezza>
+        </Articolo>
+        <Articolo codice="05.B10.C10.030">
+            <tipo>Sondaggi - Analisi - Opere propedeutiche</tipo>
+            <capitolo>Sondaggi geognostici</capitolo>
+            <voce>Perforazione ad andamento verticale, eseguito a rotazione a carotaggio continuo del diametro di 101 mm per profondità:</voce>
+            <articolo>da 41 a 60 m</articolo>
+            <descrizionebreve>Sondaggio con perforazione terreni medi da 41 a 60 m</descrizionebreve>
+            <um>metro lineare (m)</um>
+            <prezzo valore="165.19" />
+            <mo>77.91</mo>
+            <sicurezza>6.08</sicurezza>
+        </Articolo>
+        <Articolo codice="05.B10.C10.040">
+            <tipo>Sondaggi - Analisi - Opere propedeutiche</tipo>
+            <capitolo>Sondaggi geognostici</capitolo>
+            <voce>Perforazione ad andamento verticale, eseguito a rotazione a carotaggio continuo del diametro di 101 mm per profondità:</voce>
+            <articolo>da 61 a 80 m</articolo>
+            <descrizionebreve>Sondaggio con perforazione terreni medi da 61 a 80 m</descrizionebreve>
+            <um>metro lineare (m)</um>
+            <prezzo valore="188.79" />
+            <mo>77.91</mo>
+            <sicurezza>6.94</sicurezza>
+        </Articolo>
+        <Articolo codice="05.B10.F10.010">
+            <tipo>Sondaggi - Analisi - Opere propedeutiche</tipo>
+            <capitolo>Sondaggi geognostici</capitolo>
+            <voce>Esecuzione di prova di permeabilita' del terreno nel corso dei sondaggi:</voce>
+            <articolo>tipo Lugeon in roccia </articolo>
+            <descrizionebreve>Esecuzione prova permerabilità tipo Lugeon in roccia</descrizionebreve>
+            <um>Ora (h)</um>
+            <prezzo valore="167.51" />
+            <mo>97.55</mo>
+            <sicurezza>7.58</sicurezza>
+        </Articolo>
+        <Articolo codice="15.B10.B30.010">
+            <tipo>Scavi - Rinterri</tipo>
+            <capitolo>Rilevati - Rinterri</capitolo>
+            <voce>Esecuzione di riempimento o drenaggio a tergo di strutture di sostegno con mezzo meccanico esclusa la fornitura del materiale,</voce>
+            <articolo>per altezze fino a 3 metri.</articolo>
+            <descrizionebreve>Riempimento o drenaggio muri per altezze fino a 3 m</descrizionebreve>
+            <um>metro cubo (m³)</um>
+            <prezzo valore="10.79" />
+            <mo>70.23</mo>
+            <sicurezza>0.35</sicurezza>
+        </Articolo>
+        <Articolo codice="20.A05.A10.015">
+            <tipo>Opere Edili - Nuove Costruzioni</tipo>
+            <capitolo>Demolizioni e simili</capitolo>
+            <voce>Demolizione completa di fabbricato, eseguita a mano con l'ausilio di martello demolitore e/o con piccolo mezzo meccanico.</voce>
+            <articolo>di tipo civile con struttura portante in mattoni, blocchi prefabbricati in cls o laterizio, pietrame e solai di qualunque specie.</articolo>
+            <descrizionebreve>Demol. fabb. tipo civile strut. muratura eseg. a mano.</descrizionebreve>
+            <um>mcvpp (m³vpp)</um>
+            <prezzo valore="44.22" />
+            <mo>80.22</mo>
+            <sicurezza>1.71</sicurezza>
+        </Articolo>
+        <Articolo codice="20.A05.A10.025">
+            <tipo>Opere Edili - Nuove Costruzioni</tipo>
+            <capitolo>Demolizioni e simili</capitolo>
+            <voce>Demolizione completa di fabbricato, eseguita a mano con l'ausilio di martello demolitore e/o con piccolo mezzo meccanico.</voce>
+            <articolo>di tipo civile con struttura in cemento armato e solai di qualunque specie,</articolo>
+            <descrizionebreve>Demol. fabb. tipo civile strut. ca eseg. a mano.</descrizionebreve>
+            <um>mcvpp (m³vpp)</um>
+            <prezzo valore="65.61" />
+            <mo>78.66</mo>
+            <sicurezza>2.47</sicurezza>
+        </Articolo>
+        <Articolo codice="20.A05.A11.011">
+            <tipo>Opere Edili - Nuove Costruzioni</tipo>
+            <capitolo>Demolizioni e simili</capitolo>
+            <voce>Demolizione completa di fabbricato di tipo civile, con struttura in mattoni, blocchi prefabbricati, pietra, cemento armato e solai di qualunque specie, eseguita con mezzi meccanici.</voce>
+            <articolo>volume oltre 3000 m³  e altezza fino a 20,00 m</articolo>
+            <descrizionebreve>Demol. fabb. tipo civile strut. murat. &gt;=3000 m³ H fino 20 m</descrizionebreve>
+            <um>mcvpp (m³vpp)</um>
+            <prezzo valore="11.54" />
+            <mo>34.75</mo>
+            <sicurezza>0.18</sicurezza>
+        </Articolo>
+        <Articolo codice="20.A05.A11.020">
+            <tipo>Opere Edili - Nuove Costruzioni</tipo>
+            <capitolo>Demolizioni e simili</capitolo>
+            <voce>Demolizione completa di fabbricato di tipo civile, con struttura in mattoni, blocchi prefabbricati, pietra, cemento armato e solai di qualunque specie, eseguita con mezzi meccanici.</voce>
+            <articolo>volume oltre 1000 m³  e altezza fino a 10,00 m</articolo>
+            <descrizionebreve>Demol. fabb. tipo civile strut. &gt;=1000 m³ H fino a 10,00 m</descrizionebreve>
+            <um>mcvpp (m³vpp)</um>
+            <prezzo valore="13.63" />
+            <mo>42.71</mo>
+            <sicurezza>0.27</sicurezza>
+        </Articolo>
+        <Articolo codice="20.A05.A11.050">
+            <tipo>Opere Edili - Nuove Costruzioni</tipo>
+            <capitolo>Demolizioni e simili</capitolo>
+            <voce>Demolizione completa di fabbricato di tipo civile, con struttura in mattoni, blocchi prefabbricati, pietra, cemento armato e solai di qualunque specie, eseguita con mezzi meccanici.</voce>
+            <articolo>volume maggiore di 300 m³ e  inferiore a 1000 m³</articolo>
+            <descrizionebreve>Demol. fabb. tipo civile strut. &lt; 1000 m³ </descrizionebreve>
+            <um>mcvpp (m³vpp)</um>
+            <prezzo valore="15.66" />
+            <mo>46.36</mo>
+            <sicurezza>0.34</sicurezza>
+        </Articolo>
+        <Articolo codice="20.A05.A20.010">
+            <tipo>Opere Edili - Nuove Costruzioni</tipo>
+            <capitolo>Demolizioni e simili</capitolo>
+            <voce>Demolizione di strutture murarie esterne (muri sostegno, muri di confine etc.) di qualsiasi spessore, altezze fino a 3,00 m, misurati fuori terra, compreso l'eventuale intonaco presente</voce>
+            <articolo>di pietrame, mattoni pieni, etc, escluso calcestruzzo semplice e armato, eseguita con mezzi meccanici.</articolo>
+            <descrizionebreve>Demol. strut. murarie ester. pietr. e/o mattoni mezzo mecc.</descrizionebreve>
+            <um>metro cubo (m³)</um>
+            <prezzo valore="24.46" />
+            <mo>77.61</mo>
+            <sicurezza>0.88</sicurezza>
+        </Articolo>
+        <Articolo codice="20.A20.I20.025">
+            <tipo>Opere Edili - Nuove Costruzioni</tipo>
+            <capitolo>Calcestruzzi - Malte</capitolo>
+            <voce>Malta per intonaci a base calce idrata</voce>
+            <articolo>per fondo termoisolante, a base di legante idraulico, inerti di polistirolo fortemente espanso ed additivi specifici. Il coefficiente di conducibilità termica inferiore a 0.09 W/m°K.</articolo>
+            <descrizionebreve>Malta intonaco calce idrata - polistirolo &lt; 0.09 W/m°K.</descrizionebreve>
+            <um>Litri (I,L)</um>
+            <prezzo valore="0.69" />
+            <mo>27.05</mo>
+            <sicurezza>0.01</sicurezza>
+        </Articolo>
+        <Articolo codice="25.A15.G10.011">
+            <tipo>Opere Edili - Manutenzioni</tipo>
+            <capitolo>Trasporti e conferimenti a discarica</capitolo>
+            <voce>Costo di smaltimento presso siti autorizzati di materiali provenienti da scavi, demolizioni, opere a verde, escluso il trasporto</voce>
+            <articolo>codice CER 17.09.04 - per materiali da interno quali tramezze, laterizio, solai in ca, intonachi, piastrelle e simili.</articolo>
+            <descrizionebreve>cod CER 170904 per laterizi, intonaci, piastrelle e simili </descrizionebreve>
+            <um>tonnellata (t)</um>
+            <prezzo valore="35.42" />
+            <mo>0.00</mo>
+            <sicurezza>0.00</sicurezza>
+        </Articolo>
+        <Articolo codice="30.E23.A05.100">
+            <tipo>Impianti Elettrici</tipo>
+            <capitolo>Posa in opera materiali per protezione scariche atmosferiche</capitolo>
+            <voce>Maglie o calate, compreso la sola posa degli appositi supporti su cui vanno poste in opera, nonché la fornitura e posa dei relativi accessori di fissaggio di qualsiasi natura e le necessarie sagomature. Realizzate con</voce>
+            <articolo>Sovraprezzo agli  articoli precedenti in caso di edifici complessi o di particolare pregio architettonico: 30%</articolo>
+            <descrizionebreve>sovrapr articoli precedenti in caso di edifici di pregio 30%</descrizionebreve>
+            <um>percentuale (%)</um>
+            <prezzo valore="0.00" />
+            <mo>0.00</mo>
+            <sicurezza>0.00</sicurezza>
+        </Articolo>
+        <Articolo codice="PR.A01.A00.005">
+            <tipo>Prodotti</tipo>
+            <capitolo>Inerti</capitolo>
+            <voce>Materiali riciclati da frantumazione franco impianto di produzione.</voce>
+            <articolo>pietrisco di recupero da detriti edili 6/15 o 15/30 mm prezzo medio reso franco stabilimento escluso costo di trasporto da calcolare e applicare in base alla distanza dal sito di impiego.</articolo>
+            <descrizionebreve>pietrisco di recupero da detriti edili 6/15 o 15/30 mm</descrizionebreve>
+            <um>tonnellata (t)</um>
+            <prezzo valore="8.86" />
+            <mo>0.00</mo>
+            <sicurezza>0.00</sicurezza>
+        </Articolo>
+        <Articolo codice="PR.C53.A10.020">
+            <tipo>Prodotti</tipo>
+            <capitolo>Corpi scaldanti</capitolo>
+            <voce>Corpi scaldanti in ghisa </voce>
+            <articolo>a colonne in vista tipo a 1-2 colonne, H 701/900 mm</articolo>
+            <descrizionebreve>Corpi scaldanti ghisa 1-2 colonne h 701/900 mm</descrizionebreve>
+            <um>Watt</um>
+            <prezzo valore="0.75" />
+            <mo>0.00</mo>
+            <sicurezza>0.00</sicurezza>
+        </Articolo>
+    </Contenuto>
+</Prezzario>

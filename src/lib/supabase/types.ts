@@ -151,6 +151,30 @@ export type Database = {
           },
         ]
       }
+      comuni: {
+        Row: {
+          codice_istat: string
+          nome: string
+          nome_norm: string | null
+          provincia: string
+          regione: string
+        }
+        Insert: {
+          codice_istat: string
+          nome: string
+          nome_norm?: string | null
+          provincia: string
+          regione: string
+        }
+        Update: {
+          codice_istat?: string
+          nome?: string
+          nome_norm?: string | null
+          provincia?: string
+          regione?: string
+        }
+        Relationships: []
+      }
       degrado_samples: {
         Row: {
           ciclo_id: string | null
@@ -557,6 +581,7 @@ export type Database = {
           numero_protocollo: string | null
           oggetto: string | null
           org_id: string
+          prezzario_id: string | null
           stato: Database["public"]["Enums"]["preventivo_stato"]
           totale_imponibile: number
           updated_at: string
@@ -576,6 +601,7 @@ export type Database = {
           numero_protocollo?: string | null
           oggetto?: string | null
           org_id: string
+          prezzario_id?: string | null
           stato?: Database["public"]["Enums"]["preventivo_stato"]
           totale_imponibile?: number
           updated_at?: string
@@ -595,6 +621,7 @@ export type Database = {
           numero_protocollo?: string | null
           oggetto?: string | null
           org_id?: string
+          prezzario_id?: string | null
           stato?: Database["public"]["Enums"]["preventivo_stato"]
           totale_imponibile?: number
           updated_at?: string
@@ -619,6 +646,13 @@ export type Database = {
             columns: ["org_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "preventivi_prezzario_id_fkey"
+            columns: ["prezzario_id"]
+            isOneToOne: false
+            referencedRelation: "prezzari"
             referencedColumns: ["id"]
           },
         ]
@@ -786,26 +820,35 @@ export type Database = {
       }
       prezzari: {
         Row: {
+          ambito: string
           anno: number
           attivo: boolean
           created_at: string
+          fonte_url: string | null
           id: string
+          licenza: string | null
           regione: string
           titolo: string
         }
         Insert: {
+          ambito?: string
           anno: number
           attivo?: boolean
           created_at?: string
+          fonte_url?: string | null
           id?: string
+          licenza?: string | null
           regione: string
           titolo: string
         }
         Update: {
+          ambito?: string
           anno?: number
           attivo?: boolean
           created_at?: string
+          fonte_url?: string | null
           id?: string
+          licenza?: string | null
           regione?: string
           titolo?: string
         }
@@ -1089,19 +1132,33 @@ export type Database = {
           isSetofReturn: false
         }
       }
-      cerca_prezzario: {
-        Args: { p_limit?: number; p_regione: string; q: string }
-        Returns: {
-          codice: string
-          descrizione: string
-          id: string
-          prezzario: string
-          prezzo: number
-          rank: number
-          unita: Database["public"]["Enums"]["unita_misura"]
-          unita_testo: string
-        }[]
-      }
+      cerca_prezzario:
+        | {
+            Args: { p_limit?: number; p_prezzario: string; q: string }
+            Returns: {
+              codice: string
+              descrizione: string
+              id: string
+              prezzario: string
+              prezzo: number
+              rank: number
+              unita: Database["public"]["Enums"]["unita_misura"]
+              unita_testo: string
+            }[]
+          }
+        | {
+            Args: { p_limit?: number; p_regione: string; q: string }
+            Returns: {
+              codice: string
+              descrizione: string
+              id: string
+              prezzario: string
+              prezzo: number
+              rank: number
+              unita: Database["public"]["Enums"]["unita_misura"]
+              unita_testo: string
+            }[]
+          }
       cerca_voci_proprie: {
         Args: { p_limit?: number; p_org: string; q: string }
         Returns: {
@@ -1133,6 +1190,29 @@ export type Database = {
           user_id: string
         }[]
       }
+      luogo_cantiere: {
+        Args: { p_comune: string; p_provincia: string; p_regione_fallback: string }
+        Returns: {
+          provincia: string
+          regione: string
+        }[]
+      }
+      norm_comune: { Args: { t: string }; Returns: string }
+      prezzario_del_preventivo: {
+        Args: { p_preventivo: string }
+        Returns: {
+          ambito: string
+          fallback: boolean
+          id: string
+          regione: string
+          titolo: string
+        }[]
+      }
+      prezzario_per_comune: {
+        Args: { p_comune: string; p_provincia?: string; p_regione_fallback: string }
+        Returns: string
+      }
+      prezzario_ripiego: { Args: { p_regione: string }; Returns: string }
       user_org_ids: { Args: never; Returns: string[] }
     }
     Enums: {

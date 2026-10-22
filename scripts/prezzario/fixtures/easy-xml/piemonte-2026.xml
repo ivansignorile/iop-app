@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EASY:Prezzario xmlns:EASY="https://prezzario.regione.piemonte.it/prezzario.xsd">
+    <EASY:intestazione autore="Regione Piemonte" versione="0.2">
+        <EASY:dettaglio anno="2026" versione="1" area="Ambito Regionale"/>
+        <EASY:copyright tipo="CC BY 3.0" descrizione="Creative commons: CC BY"/>
+    </EASY:intestazione>
+    <EASY:Contenuto>
+                <EASY:Articolo cam="0" codice="PIE26_01.A01.A05.010">
+            <EASY:livello1 descrizionebreve="Opere civili"><![CDATA[Opere civili]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="SCAVI"><![CDATA[SCAVI]]></EASY:livello2>
+            <EASY:annotazionelivello2><![CDATA[Le eventuali opere provvisionali e di sbadacchiatura degli scavi che si rendessero necessarie per la corretta esecuzione degli stessi fino ad una profondità inferiore o uguale a 1,50 m sono da considerarsi compensati nella quota parte di spese generali (16%). Per profondità maggiori a 1,50 m le opere provvisionali necessarie dovranno essere compensate per l'intero sviluppo totalmente a parte e valutate a metro quadro di superficie di scavo protetta (salvo diversa indicazione della voce specifica).]]></EASY:annotazionelivello2>
+            <EASY:livello3 descrizionebreve="Esecuzione di scotico dello strato superficiale del terreno, con adeguati mezzi meccanici, per profondità fino a 30 cm, compreso l'asportazione di cespugli e sterpaglie esistenti e sistemazione entro l'area del cantiere"><![CDATA[Esecuzione di scotico dello strato superficiale del terreno, con adeguati mezzi meccanici, per profondità fino a 30 cm, compreso l'asportazione di cespugli e sterpaglie esistenti e sistemazione entro l'area del cantiere]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="In assenza di alberi"><![CDATA[In assenza di alberi]]></EASY:livello4>
+            <EASY:um><![CDATA[m³]]></EASY:um>
+            <EASY:prezzo>5.91</EASY:prezzo>
+            <EASY:Analisi>
+                <EASY:vocedettaglio ordine="1"
+                                   cam="0"
+                                   codice="PIE26_AT01.A065.050.005"
+                                   tipo="Noli"
+                                   udm="h"
+                                   quantita="0.005"
+                                   prezzo="63.76"
+                                   importo="0.32">
+                        <EASY:descrizione><![CDATA[Nolo di autocarro ribaltabile compreso autista,  carburante,  lubrificante,  trasporto in loco ed ogni onere connesso per il tempo di effettivo impiego - Della portata oltre q 40 fino a q 120]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="2"
+                                   cam="0"
+                                   codice="PIE26_AT01.P000.025.010"
+                                   tipo="Noli"
+                                   udm="h"
+                                   quantita="0.055"
+                                   prezzo="67.88"
+                                   importo="3.73">
+                        <EASY:descrizione><![CDATA[Nolo di pala meccanica cingolata,  compreso autista, carburante, lubrificante,  trasporto in loco ed ogni onere connesso per il tempo di effettivo impiego - Della potenza oltre 150 HP]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="3"
+                                   cam="0"
+                                   codice="PIE26_RU00.E000.010.000"
+                                   tipo="Mano d'opera"
+                                   udm="h"
+                                   quantita="0.01"
+                                   prezzo="30.64"
+                                   importo="0.31">
+                        <EASY:descrizione><![CDATA[Operaio qualificato - Ore normali]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="4"
+                                   cam="0"
+                                   codice="PIE26_RU00.E000.015.000"
+                                   tipo="Mano d'opera"
+                                   udm="h"
+                                   quantita="0.01"
+                                   prezzo="27.38"
+                                   importo="0.27">
+                        <EASY:descrizione><![CDATA[Operaio comune - Ore normali]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                    <EASY:totaleparziale valore="4.63"/>
+                    <EASY:spesegenerali percentuale="16" valore="0.74" />
+                    <EASY:utileimpresa percentuale="10" valore="0.54"/>
+                    <EASY:prezzo valore="5.91"/>
+                                <EASY:incidenzamanodopera percentuale="55.2" valore="2.56"/>
+                </EASY:Analisi>
+            <EASY:scostamentoconspese><![CDATA[+2,83%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_01.A01.A05.020">
+            <EASY:livello1 descrizionebreve="Opere civili"><![CDATA[Opere civili]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="SCAVI"><![CDATA[SCAVI]]></EASY:livello2>
+            <EASY:annotazionelivello2><![CDATA[Le eventuali opere provvisionali e di sbadacchiatura degli scavi che si rendessero necessarie per la corretta esecuzione degli stessi fino ad una profondità inferiore o uguale a 1,50 m sono da considerarsi compensati nella quota parte di spese generali (16%). Per profondità maggiori a 1,50 m le opere provvisionali necessarie dovranno essere compensate per l'intero sviluppo totalmente a parte e valutate a metro quadro di superficie di scavo protetta (salvo diversa indicazione della voce specifica).]]></EASY:annotazionelivello2>
+            <EASY:livello3 descrizionebreve="Esecuzione di scotico dello strato superficiale del terreno, con adeguati mezzi meccanici, per profondità fino a 30 cm, compreso l'asportazione di cespugli e sterpaglie esistenti e sistemazione entro l'area del cantiere"><![CDATA[Esecuzione di scotico dello strato superficiale del terreno, con adeguati mezzi meccanici, per profondità fino a 30 cm, compreso l'asportazione di cespugli e sterpaglie esistenti e sistemazione entro l'area del cantiere]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Anche in presenza di alberi diradati e con fusto del diametro  massimo di 10 cm"><![CDATA[Anche in presenza di alberi diradati e con fusto del diametro  massimo di 10 cm]]></EASY:livello4>
+            <EASY:um><![CDATA[m³]]></EASY:um>
+            <EASY:prezzo>7.21</EASY:prezzo>
+            <EASY:Analisi>
+                <EASY:vocedettaglio ordine="1"
+                                   cam="0"
+                                   codice="PIE26_AT01.A065.050.005"
+                                   tipo="Noli"
+                                   udm="h"
+                                   quantita="0.005"
+                                   prezzo="63.76"
+                                   importo="0.32">
+                        <EASY:descrizione><![CDATA[Nolo di autocarro ribaltabile compreso autista,  carburante,  lubrificante,  trasporto in loco ed ogni onere connesso per il tempo di effettivo impiego - Della portata oltre q 40 fino a q 120]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="2"
+                                   cam="0"
+                                   codice="PIE26_AT01.M080.000.005"
+                                   tipo="Noli"
+                                   udm="h"
+                                   quantita="0.02"
+                                   prezzo="3.23"
+                                   importo="0.06">
+                        <EASY:descrizione><![CDATA[Nolo di motosega completa di ogni accessorio per il funzionamento incluso il consumo degli attrezzi e del carburante,  escluso il manovratore - A catena con lama non inferiore a cm 45]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="3"
+                                   cam="0"
+                                   codice="PIE26_AT01.P000.025.010"
+                                   tipo="Noli"
+                                   udm="h"
+                                   quantita="0.06"
+                                   prezzo="67.88"
+                                   importo="4.07">
+                        <EASY:descrizione><![CDATA[Nolo di pala meccanica cingolata,  compreso autista, carburante, lubrificante,  trasporto in loco ed ogni onere connesso per il tempo di effettivo impiego - Della potenza oltre 150 HP]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="4"
+                                   cam="0"
+                                   codice="PIE26_RU00.E000.010.000"
+                                   tipo="Mano d'opera"
+                                   udm="h"
+                                   quantita="0.03"
+                                   prezzo="30.64"
+                                   importo="0.92">
+                        <EASY:descrizione><![CDATA[Operaio qualificato - Ore normali]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="5"
+                                   cam="0"
+                                   codice="PIE26_RU00.E000.015.000"
+                                   tipo="Mano d'opera"
+                                   udm="h"
+                                   quantita="0.01"
+                                   prezzo="27.38"
+                                   importo="0.27">
+                        <EASY:descrizione><![CDATA[Operaio comune - Ore normali]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                    <EASY:totaleparziale valore="5.65"/>
+                    <EASY:spesegenerali percentuale="16" valore="0.90" />
+                    <EASY:utileimpresa percentuale="10" valore="0.66"/>
+                    <EASY:prezzo valore="7.21"/>
+                                <EASY:incidenzamanodopera percentuale="59.05" valore="3.34"/>
+                </EASY:Analisi>
+            <EASY:scostamentoconspese><![CDATA[+2,90%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_01.A12.G70.010">
+            <EASY:livello1 descrizionebreve="Opere civili"><![CDATA[Opere civili]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="PAVIMENTI E RIVESTIMENTI"><![CDATA[PAVIMENTI E RIVESTIMENTI]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Solo posa in opera di perlinaggio compreso il materiale necessario per la posa"><![CDATA[Solo posa in opera di perlinaggio compreso il materiale necessario per la posa]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="su soffitto"><![CDATA[su soffitto]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>39.53</EASY:prezzo>
+            <EASY:prezzosenzasgutil>30.98</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>4.96</EASY:spesegenerali>
+            <EASY:utilidiimpresa>3.59</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_04.P84.A12.025">
+            <EASY:livello1 descrizionebreve="Segnaletica stradale"><![CDATA[Segnaletica stradale]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="POSA IN OPERA DEI MATERIALI"><![CDATA[POSA IN OPERA DEI MATERIALI]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Posa segnaletica verticale. Manutenzione segnaletica verticale con diverse tipologie."><![CDATA[Posa segnaletica verticale. Manutenzione segnaletica verticale con diverse tipologie.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Lavaggio segnale o delineatore con detergente"><![CDATA[Lavaggio segnale o delineatore con detergente]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>9.47</EASY:prezzo>
+            <EASY:prezzosenzasgutil>7.43</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>1.19</EASY:spesegenerali>
+            <EASY:utilidiimpresa>0.86</EASY:utilidiimpresa>
+            <EASY:incidenzamanodopera percentuale="93.67" valore="6.96"/>
+            <EASY:scostamentoconspese><![CDATA[+3,91%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_05.P73.H80.005">
+            <EASY:livello1 descrizionebreve="Impianti termici"><![CDATA[Impianti termici]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="VENTILAZIONE - TRATTAMENTO ARIA"><![CDATA[VENTILAZIONE - TRATTAMENTO ARIA]]></EASY:livello2>
+            <EASY:annotazionelivello2><![CDATA[Per le voci di questo capitolo l'incidenza del costo della manodopera presunta, per l'esecuzione dell'opera nel suo complesso, è stata dedotta a partire dai valori di incidenza della manodopera previsti dal  Decreto Ministeriale 11 dicembre 1978, ipotizzando una manodopera fittizia impiegata pari al 30%.
+]]></EASY:annotazionelivello2>
+            <EASY:livello3 descrizionebreve="Provvista e posa in opera di serrande tagliafuoco, con certificazione, classe di resistenza al fuoco REI 120, per installazione sia a canale che a muro, con involucro e parti di comando in lamiera di acciaio zincato 20/10, pala con interposta ceramica amianto, dispositivo portafusibile estraibile dall'esterno, rele' termico con fusibile a 72 °C, leva di ritorno manuale, cuscinetti in bronzo autolubrificanti, fine corsa elettrico, profondità di mm. 30; classe dimensionale fino a:"><![CDATA[Provvista e posa in opera di serrande tagliafuoco, con certificazione, classe di resistenza al fuoco REI 120, per installazione sia a canale che a muro, con involucro e parti di comando in lamiera di acciaio zincato 20/10, pala con interposta ceramica amianto, dispositivo portafusibile estraibile dall'esterno, rele' termico con fusibile a 72 °C, leva di ritorno manuale, cuscinetti in bronzo autolubrificanti, fine corsa elettrico, profondità di mm. 30; classe dimensionale fino a:]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Dmq. 3"><![CDATA[Dmq. 3]]></EASY:livello4>
+            <EASY:um><![CDATA[dm²]]></EASY:um>
+            <EASY:prezzo>47.74</EASY:prezzo>
+            <EASY:prezzosenzasgutil>37.42</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>5.99</EASY:spesegenerali>
+            <EASY:utilidiimpresa>4.34</EASY:utilidiimpresa>
+            <EASY:incidenzamanodopera percentuale="31.4" valore="11.75"/>
+            <EASY:scostamentoconspese><![CDATA[+0,40%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_06.A01.G04.005">
+            <EASY:livello1 descrizionebreve="Impianti elettrici e speciali"><![CDATA[Impianti elettrici e speciali]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="CAVI ENERGIA PER BASSA TENSIONE"><![CDATA[CAVI ENERGIA PER BASSA TENSIONE]]></EASY:livello2>
+            <EASY:annotazionelivello2><![CDATA[Le forniture in opera si intendono comprensive di tutto il necessario per effettuare   i collegamenti elettrici a regola d'arte. Sono compresi gli oneri addizionali quali prelievo, carico e trasporto di materiali, uso di attrezzature, asportazione e  ripristino di isolamenti, bloccaggi, eventuale rimozione dei collegamenti preesistenti, realizzazione di nuovi collegamenti inclusi sfridi,  morsetti, capicorda, etc.]]></EASY:annotazionelivello2>
+            <EASY:livello3 descrizionebreve="F.O.  Fornitura in opera, in tubi o canaline predisposte, di cavo quadripolare  compresi i collegamenti elettrici, morsetti, capicorda ed ogni accessorio per rendere il cavo perfettamente funzionante."><![CDATA[F.O.  Fornitura in opera, in tubi o canaline predisposte, di cavo quadripolare  compresi i collegamenti elettrici, morsetti, capicorda ed ogni accessorio per rendere il cavo perfettamente funzionante.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="F.O. di cavo tipo FG16OM16 0,6/1 kV 4 x   1,5"><![CDATA[F.O. di cavo tipo FG16OM16 0,6/1 kV 4 x   1,5]]></EASY:livello4>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>3.14</EASY:prezzo>
+            <EASY:Analisi>
+                <EASY:vocedettaglio ordine="1"
+                                   cam="0"
+                                   codice="PIE26_PR135.C090.015.000"
+                                   tipo="Forniture"
+                                   udm="m"
+                                   quantita="1"
+                                   prezzo="1.21"
+                                   importo="1.21">
+                        <EASY:descrizione><![CDATA[Cavi in rame rigidi o flessibili, isolati in gomma etilpropilenica ad alto modulo qualità G16, sotto guaina termoplastica di qualità M16, a norme CEI 20-13, per tensione nominale 0,6/1 kV (Tipo U/R/FG16OM16 0,6/1 kV) non propagante l'incendio ed a bassa emissione di fumi opachi e gas tossici e corrosivi secondo le norme CEI 20-22 III; CEI 20-37; CEI 20-38; CPR UE305/11
+quadripolare - cavo tipo FG16OM16 0,6/1 kV 4 x 1,5]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="2"
+                                   cam="0"
+                                   codice="PIE26_PR135.M030.000.000"
+                                   tipo="Forniture"
+                                   udm="cad"
+                                   quantita="0.4"
+                                   prezzo="0.07"
+                                   importo="0.03">
+                        <EASY:descrizione><![CDATA[Morsetti tipo a "cappuccio" per la connessione di cavi elettrici. - Morsetti a cappuccio  4 mm²]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                <EASY:vocedettaglio ordine="3"
+                                   cam="0"
+                                   codice="PIE26_RU00.M000.010.000"
+                                   tipo="Mano d'opera"
+                                   udm="h"
+                                   quantita="0.048"
+                                   prezzo="25.53"
+                                   importo="1.23">
+                        <EASY:descrizione><![CDATA[Operaio Qualificato metalmeccanico-C2 - ...]]></EASY:descrizione>
+                </EASY:vocedettaglio>
+                    <EASY:totaleparziale valore="2.46"/>
+                    <EASY:spesegenerali percentuale="16" valore="0.39" />
+                    <EASY:utileimpresa percentuale="10" valore="0.29"/>
+                    <EASY:prezzo valore="3.14"/>
+                                <EASY:incidenzamanodopera percentuale="49.74" valore="1.23"/>
+                </EASY:Analisi>
+            <EASY:scostamentoconspese><![CDATA[+0,65%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_06.A07.U01.015">
+            <EASY:livello1 descrizionebreve="Impianti elettrici e speciali"><![CDATA[Impianti elettrici e speciali]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="APPARECCHIATURE DI COMANDO E PROTEZIONE &#34;BT&#34; - INTERRUTTORI, DIFFERENZIALI, FUSIBILI"><![CDATA[APPARECCHIATURE DI COMANDO E PROTEZIONE "BT" - INTERRUTTORI, DIFFERENZIALI, FUSIBILI]]></EASY:livello2>
+            <EASY:annotazionelivello2><![CDATA[La fornitura in opera (f.o.) completa si otterra' componendo la fornitura dell'apparecchiatura con la posa in opera. La posa in opera (p.o.) delle apparecchiature b.t. comprende tutto quanto necessario per effettuare il posizionamento dell'apparecchiatura sugli appositi contenitori o supporti, i collegamenti (sia principali che ausiliari) a monte ed a valle, e l'identificazione tramite targhetta in plastica incisa.]]></EASY:annotazionelivello2>
+            <EASY:livello3 descrizionebreve="F.O. Fornitura in opera di comandi e contatti ausiliari"><![CDATA[F.O. Fornitura in opera di comandi e contatti ausiliari]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="F.O. di comando elettrico per  esecuzione estraibile"><![CDATA[F.O. di comando elettrico per  esecuzione estraibile]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>1140.67</EASY:prezzo>
+            <EASY:scostamentoconspese><![CDATA[+0,09%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_06.A23.H01.505">
+            <EASY:livello1 descrizionebreve="Impianti elettrici e speciali"><![CDATA[Impianti elettrici e speciali]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="DIFFUSIONE SONORA"><![CDATA[DIFFUSIONE SONORA]]></EASY:livello2>
+            <EASY:annotazionelivello2><![CDATA[La (P.O.) posa in opera di apparecchi  per  impianti  di diffusione sonora comprende: microfoni completi di supporto, altoparlanti, trombe  esponenziali, unità di riproduzione sonora quali amplificatori, equalizzatori o altre apparecchiature. Inclusi i collegamenti elettrici.]]></EASY:annotazionelivello2>
+            <EASY:livello3 descrizionebreve="P.O.di combinatore telefonico tipo GSM con collegamento elettrico alla centrale antintrusione esistente. E' compresa la programmazione e l'inizializzazione del Combinatore telefonico con la scheda SIM fornita dal Committente.Prove di funzionamento, test di funzionamento, impostazione dei parametri software."><![CDATA[P.O.di combinatore telefonico tipo GSM con collegamento elettrico alla centrale antintrusione esistente. E' compresa la programmazione e l'inizializzazione del Combinatore telefonico con la scheda SIM fornita dal Committente.Prove di funzionamento, test di funzionamento, impostazione dei parametri software.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="P.O.di combinatore telefonico tipo GSM. "><![CDATA[P.O.di combinatore telefonico tipo GSM. ]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>65.15</EASY:prezzo>
+            <EASY:scostamentoconspese><![CDATA[+1,31%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_08.A35.H20.030">
+            <EASY:livello1 descrizionebreve="Reti fognatura"><![CDATA[Reti fognatura]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="OPERE CON MATERIALI POLIMERICI (PVC)"><![CDATA[OPERE CON MATERIALI POLIMERICI (PVC)]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Provvista e posa in opera di curve a 30 gradi in PVC rigido per fognature serie UNI EN 1401; giunto a bicchiere con anello elastomerico toroidale, compreso il carico, lo scarico a pie' d'opera, la loro discesa nella trincea compreso ogni lavoro e provvista per dare l'opera perfettamente ultimata a regola d'arte"><![CDATA[Provvista e posa in opera di curve a 30 gradi in PVC rigido per fognature serie UNI EN 1401; giunto a bicchiere con anello elastomerico toroidale, compreso il carico, lo scarico a pie' d'opera, la loro discesa nella trincea compreso ogni lavoro e provvista per dare l'opera perfettamente ultimata a regola d'arte]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="del diametro esterno di cm 31,5"><![CDATA[del diametro esterno di cm 31,5]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>77.96</EASY:prezzo>
+            <EASY:scostamentoconspese><![CDATA[+1,20%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_12.P06.A05.070">
+            <EASY:livello1 descrizionebreve="Impianti di  teleriscaldamento"><![CDATA[Impianti di  teleriscaldamento]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="FORNITURA E POSA IN OPERA DI FONDELLI, WATER-STOP E ANELLI PASSAMURO"><![CDATA[FORNITURA E POSA IN OPERA DI FONDELLI, WATER-STOP E ANELLI PASSAMURO]]></EASY:livello2>
+            <EASY:annotazionelivello2><![CDATA[Per le voci di questo capitolo l'incidenza del costo della manodopera presunta, per l'esecuzione dell'opera nel suo complesso, è stata dedotta dalla tabella indici di congruità della manodopera come aggiornata dalla Commissione Nazionale Casse Edili (CNCE) con l'accordo collettivo tra le parti sociali sottoscritto nel 2022, in ottemperanza alle previsioni di cui al Decreto del Ministero del Lavoro e delle Politiche sociali n. 143 del 25 giugno 2021.
+]]></EASY:annotazionelivello2>
+            <EASY:livello3 descrizionebreve="Fornitura e posa in opera nelle trincee o nei manufatti di fondelli in acciaio. Compreso: collegamento fili di rilevamento perdite come da specifiche tecniche (filo sensore Ni-Cr), oneri di progettazione (stress-analysis), rilievi, esecuzione di disegni, (as-built rete, as-built sistema ricerca perdite e documenti relativi) immagazzinamento, carico scarico e trasporto da deposito di cantiere allo scavo, rimozione coibentazione, cianfrinatura, accoppiamento terminali per saldatura tubi/accessori, esecuzione della muffolatura compresa la fornitura del kit di montaggio e della schiuma poliuretanica,  esecuzione di prove di tenuta, schiumatura e oneri per la sicurezza:"><![CDATA[Fornitura e posa in opera nelle trincee o nei manufatti di fondelli in acciaio. Compreso: collegamento fili di rilevamento perdite come da specifiche tecniche (filo sensore Ni-Cr), oneri di progettazione (stress-analysis), rilievi, esecuzione di disegni, (as-built rete, as-built sistema ricerca perdite e documenti relativi) immagazzinamento, carico scarico e trasporto da deposito di cantiere allo scavo, rimozione coibentazione, cianfrinatura, accoppiamento terminali per saldatura tubi/accessori, esecuzione della muffolatura compresa la fornitura del kit di montaggio e della schiuma poliuretanica,  esecuzione di prove di tenuta, schiumatura e oneri per la sicurezza:]]></EASY:livello3>
+            <EASY:annotazionelivello3><![CDATA[Incidenza della manodopera presunta: 6%
+]]></EASY:annotazionelivello3>
+            <EASY:livello4 descrizionebreve="per fondelli DN 400"><![CDATA[per fondelli DN 400]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>707.68</EASY:prezzo>
+            <EASY:prezzosenzasgutil>554.61</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>88.74</EASY:spesegenerali>
+            <EASY:utilidiimpresa>64.33</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_17.P09.B20.005">
+            <EASY:livello1 descrizionebreve="Sondaggi, rilievi e indagini geognostiche"><![CDATA[Sondaggi, rilievi e indagini geognostiche]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="ANALISI E PROVE GEOTECNICHE DI LABORATORIO "><![CDATA[ANALISI E PROVE GEOTECNICHE DI LABORATORIO ]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="CARATTERISTICHE FISICHE DEI TERRENI - Determinazione del peso specifico assoluto dei grani"><![CDATA[CARATTERISTICHE FISICHE DEI TERRENI - Determinazione del peso specifico assoluto dei grani]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Per ogni determinazione"><![CDATA[Per ogni determinazione]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>55.00</EASY:prezzo>
+            <EASY:prezzosenzasgutil>43.10</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>6.90</EASY:spesegenerali>
+            <EASY:utilidiimpresa>5.00</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_26.A02.A16.100">
+            <EASY:livello1 descrizionebreve="Lavorazioni tipiche piemontesi"><![CDATA[Lavorazioni tipiche piemontesi]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="MURATURE"><![CDATA[MURATURE]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Muratura in pietra. Fornitura e posa di muratura faccia a vista in pietra naturale mediante la fornitura e la posa di conci di cava in pietra naturale del peso compreso tra i kg 20 e i kg 40, con spessore non inferiore ai cm 20 disposti a conci orizzontali sbozzati a martello. La posa è eseguita con perfetto incastro degli elementi lapidei in modo da creare corsi regolari con conci di altezza uniforme, è prevista l'interposizione di adeguata malta cementizia, dosata al ql 4,00 di cemento tipo 325 per m³ di sabbia, tra i filari (con piano di posa in malta cementizia di adeguato spessore). Sono compresi nel prezzo il carico, il trasporto e lo scarico e il tiro in quota del materiale lapideo, l'onere di ponteggi ed impalcature, nonchè i noli dei macchinari occorrenti."><![CDATA[Muratura in pietra. Fornitura e posa di muratura faccia a vista in pietra naturale mediante la fornitura e la posa di conci di cava in pietra naturale del peso compreso tra i kg 20 e i kg 40, con spessore non inferiore ai cm 20 disposti a conci orizzontali sbozzati a martello. La posa è eseguita con perfetto incastro degli elementi lapidei in modo da creare corsi regolari con conci di altezza uniforme, è prevista l'interposizione di adeguata malta cementizia, dosata al ql 4,00 di cemento tipo 325 per m³ di sabbia, tra i filari (con piano di posa in malta cementizia di adeguato spessore). Sono compresi nel prezzo il carico, il trasporto e lo scarico e il tiro in quota del materiale lapideo, l'onere di ponteggi ed impalcature, nonchè i noli dei macchinari occorrenti.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="In Pietra di Luserna a spacco da cm 4 a cm 6"><![CDATA[In Pietra di Luserna a spacco da cm 4 a cm 6]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>198.05</EASY:prezzo>
+            <EASY:prezzosenzasgutil>155.21</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>24.83</EASY:spesegenerali>
+            <EASY:utilidiimpresa>18.00</EASY:utilidiimpresa>
+            <EASY:incidenzamanodopera percentuale="71.88" valore="111.56"/>
+            <EASY:scostamentoconspese><![CDATA[+3,48%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_27.A05.A05.005">
+            <EASY:livello1 descrizionebreve="Conservazione, restauro dei beni culturali e scavo archeologico"><![CDATA[Conservazione, restauro dei beni culturali e scavo archeologico]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="MANUFATTI LAPIDEI E LITOIDI: DIPINTI MURALI"><![CDATA[MANUFATTI LAPIDEI E LITOIDI: DIPINTI MURALI]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="OPERAZIONI PRELIMINARI - Pronto intervento: esecuzione di operazioni conservative, individuate nel progetto di pronto intervento, che rivestono carattere d'urgenza, allo scopo di evitare, limitare o contenere temporaneamente il progredire del degrado in atto. Esclusi oneri relativi alle opere provvisionali necessarie. Stimato su base giornaliera,  esclusi eventuali costi di trasferta."><![CDATA[OPERAZIONI PRELIMINARI - Pronto intervento: esecuzione di operazioni conservative, individuate nel progetto di pronto intervento, che rivestono carattere d'urgenza, allo scopo di evitare, limitare o contenere temporaneamente il progredire del degrado in atto. Esclusi oneri relativi alle opere provvisionali necessarie. Stimato su base giornaliera,  esclusi eventuali costi di trasferta.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Prezzo unitario non rilevabile - Valutazione a progetto"><![CDATA[Prezzo unitario non rilevabile - Valutazione a progetto]]></EASY:livello4>
+            <EASY:um><![CDATA[d]]></EASY:um>
+            <EASY:prezzo></EASY:prezzo>
+            <EASY:prezzosenzasgutil> </EASY:prezzosenzasgutil>
+            <EASY:spesegenerali> </EASY:spesegenerali>
+            <EASY:utilidiimpresa> </EASY:utilidiimpresa>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_27.A07.A20.015">
+            <EASY:livello1 descrizionebreve="Conservazione, restauro dei beni culturali e scavo archeologico"><![CDATA[Conservazione, restauro dei beni culturali e scavo archeologico]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="MANUFATTI LAPIDEI E LITOIDI: STUCCHI"><![CDATA[MANUFATTI LAPIDEI E LITOIDI: STUCCHI]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="OPERAZIONI PRELIMINARI - Preliminare ristabilimento di adesione e coesione dello strato di finitura superficiale, propedeutico ad altre operazioni di restauro, mediante infiltrazione di idonei adesivi, da valutare sulla superficie effettivamente interessata dal fenomeno"><![CDATA[OPERAZIONI PRELIMINARI - Preliminare ristabilimento di adesione e coesione dello strato di finitura superficiale, propedeutico ad altre operazioni di restauro, mediante infiltrazione di idonei adesivi, da valutare sulla superficie effettivamente interessata dal fenomeno]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="nei casi di sollevamento, su stucchi policromi e/o dorati"><![CDATA[nei casi di sollevamento, su stucchi policromi e/o dorati]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>69.08</EASY:prezzo>
+            <EASY:prezzosenzasgutil>54.14</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>8.66</EASY:spesegenerali>
+            <EASY:utilidiimpresa>6.28</EASY:utilidiimpresa>
+            <EASY:incidenzamanodopera percentuale="91.09" valore="49.31"/>
+            <EASY:scostamentoconspese><![CDATA[+3,54%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_AT02.L005.010.010">
+            <EASY:livello1 descrizionebreve="Attrezzature tecnologiche"><![CDATA[Attrezzature tecnologiche]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Legname"><![CDATA[Legname]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Nolo di legname di qualunque forma, dimensione o grado di lavorazione (pali, puntoni, travi, travetti, barotti, tavole, ecc) occorrenti per la formazione di steccati e tavolati o per puntellamenti. (il prezzo e' determinato in base al 12% dell'articolo PR060.T005.000.000 per l'articolo AT02.L005.010.000- 16% dello stesso per l'articolo AT02.L005.010.005 - 20% per l'articolo AT02.L005.010.010 - 25% per l'articolo AT02.L005.010.015 - 3% per l'articolo AT02.L005.010.020)"><![CDATA[Nolo di legname di qualunque forma, dimensione o grado di lavorazione (pali, puntoni, travi, travetti, barotti, tavole, ecc) occorrenti per la formazione di steccati e tavolati o per puntellamenti. (il prezzo e' determinato in base al 12% dell'articolo PR060.T005.000.000 per l'articolo AT02.L005.010.000- 16% dello stesso per l'articolo AT02.L005.010.005 - 20% per l'articolo AT02.L005.010.010 - 25% per l'articolo AT02.L005.010.015 - 3% per l'articolo AT02.L005.010.020)]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Per un periodo di tempo fino a 60 giorni"><![CDATA[Per un periodo di tempo fino a 60 giorni]]></EASY:livello4>
+            <EASY:um><![CDATA[m³]]></EASY:um>
+            <EASY:prezzo>67.63</EASY:prezzo>
+            <EASY:prezzosenzasgutil>53.00</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>8.48</EASY:spesegenerali>
+            <EASY:utilidiimpresa>6.15</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR040.L055.015.000">
+            <EASY:livello1 descrizionebreve="Pietre, marmi e grantiti per rivestimenti, pavimentazioni e coperture"><![CDATA[Pietre, marmi e grantiti per rivestimenti, pavimentazioni e coperture]]></EASY:livello1>
+            <EASY:annotazionelivello1><![CDATA[La misurazione della pietra e dei marmi va fatta sul minimo rettangolo circoscritto o sul massimo parallelepipedo rettangolo. I materiali della presente categoria si intendono lavorati a piano di sega con coste fresate.]]></EASY:annotazionelivello1>
+            <EASY:livello2 descrizionebreve="Lastra di granito"><![CDATA[Lastra di granito]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Granito labradorite azzurra"><![CDATA[Granito labradorite azzurra]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="In lastre dello spessore di cm  2"><![CDATA[In lastre dello spessore di cm  2]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>280.02</EASY:prezzo>
+            <EASY:prezzosenzasgutil>219.45</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>35.11</EASY:spesegenerali>
+            <EASY:utilidiimpresa>25.46</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR050.M055.000.000">
+            <EASY:livello1 descrizionebreve="Manufatti metallici"><![CDATA[Manufatti metallici]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Molle"><![CDATA[Molle]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Molle"><![CDATA[Molle]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="..."><![CDATA[...]]></EASY:livello4>
+            <EASY:um><![CDATA[kg]]></EASY:um>
+            <EASY:prezzo>2.88</EASY:prezzo>
+            <EASY:prezzosenzasgutil>2.26</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>0.36</EASY:spesegenerali>
+            <EASY:utilidiimpresa>0.26</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR060.M005.000.025">
+            <EASY:livello1 descrizionebreve="Legname ed elementi di legno"><![CDATA[Legname ed elementi di legno]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Multistrato di legnami vari"><![CDATA[Multistrato di legnami vari]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Multistrato in pioppo (Populus spp.)"><![CDATA[Multistrato in pioppo (Populus spp.)]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Spessore mm 16"><![CDATA[Spessore mm 16]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>20.29</EASY:prezzo>
+            <EASY:prezzosenzasgutil>15.90</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>2.54</EASY:spesegenerali>
+            <EASY:utilidiimpresa>1.84</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR080.P020.005.060">
+            <EASY:livello1 descrizionebreve="Materiali ed elementi per isolamento termo-acustico"><![CDATA[Materiali ed elementi per isolamento termo-acustico]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Pannelli di canapa/kenaf per coperture e pareti"><![CDATA[Pannelli di canapa/kenaf per coperture e pareti]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Pannelli semirigidi in canapa/kenaf per l'isolamento termo acustico di coperture e pareti; esenti da sostanze tossiche e nocive. Densità 30 Kg/m³. Lambda = 0,038 W/mK"><![CDATA[Pannelli semirigidi in canapa/kenaf per l'isolamento termo acustico di coperture e pareti; esenti da sostanze tossiche e nocive. Densità 30 Kg/m³. Lambda = 0,038 W/mK]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Spessore  22 cm"><![CDATA[Spessore  22 cm]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>54.15</EASY:prezzo>
+            <EASY:prezzosenzasgutil>42.44</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>6.79</EASY:spesegenerali>
+            <EASY:utilidiimpresa>4.92</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR085.P125.010.040">
+            <EASY:livello1 descrizionebreve="Pavimentazioni, rivestimenti e coperture"><![CDATA[Pavimentazioni, rivestimenti e coperture]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Prefinito da palchetto di legni vari"><![CDATA[Prefinito da palchetto di legni vari]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="prefinito per palchetto spessore 15 mm, larghezza cm 160, lunghezza 1800/2400 mm"><![CDATA[prefinito per palchetto spessore 15 mm, larghezza cm 160, lunghezza 1800/2400 mm]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="in robinia (Robinia pseudoacacia)"><![CDATA[in robinia (Robinia pseudoacacia)]]></EASY:livello4>
+            <EASY:um><![CDATA[m²]]></EASY:um>
+            <EASY:prezzo>173.01</EASY:prezzo>
+            <EASY:prezzosenzasgutil>135.59</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>21.69</EASY:spesegenerali>
+            <EASY:utilidiimpresa>15.73</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR105.S000.005.025">
+            <EASY:livello1 descrizionebreve="Filtri, saracinesche, rubinetti, valvole e accessori per impianti idrici e termici e gas metano"><![CDATA[Filtri, saracinesche, rubinetti, valvole e accessori per impianti idrici e termici e gas metano]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Saracinesche di bronzo a vite per impianti termici"><![CDATA[Saracinesche di bronzo a vite per impianti termici]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Saracinesche a vite in bronzo fuso, pesanti, con rubinetto di scarico"><![CDATA[Saracinesche a vite in bronzo fuso, pesanti, con rubinetto di scarico]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Diametro 2&#34;"><![CDATA[Diametro 2"]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>21.68</EASY:prezzo>
+            <EASY:prezzosenzasgutil>16.99</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>2.72</EASY:spesegenerali>
+            <EASY:utilidiimpresa>1.97</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR110.C150.000.020">
+            <EASY:livello1 descrizionebreve="Tubazioni e raccorderia per impianti e strutture"><![CDATA[Tubazioni e raccorderia per impianti e strutture]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Curve di pvc per impianti elettrici"><![CDATA[Curve di pvc per impianti elettrici]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Curva in PVC di qualsiasi raggio per tubo rigido con grado di protezione IP 44 / IP 55,"><![CDATA[Curva in PVC di qualsiasi raggio per tubo rigido con grado di protezione IP 44 / IP 55,]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="curva PVC IP55 - D.40"><![CDATA[curva PVC IP55 - D.40]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>1.89</EASY:prezzo>
+            <EASY:prezzosenzasgutil>1.48</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>0.24</EASY:spesegenerali>
+            <EASY:utilidiimpresa>0.17</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR110.T025.000.090">
+            <EASY:livello1 descrizionebreve="Tubazioni e raccorderia per impianti e strutture"><![CDATA[Tubazioni e raccorderia per impianti e strutture]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Tee per impianti termici"><![CDATA[Tee per impianti termici]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Giunzione a tee, DN1 x dn2 :"><![CDATA[Giunzione a tee, DN1 x dn2 :]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="150 x 150"><![CDATA[150 x 150]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>486.08</EASY:prezzo>
+            <EASY:prezzosenzasgutil>380.94</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>60.95</EASY:spesegenerali>
+            <EASY:utilidiimpresa>44.19</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR110.T380.045.040">
+            <EASY:livello1 descrizionebreve="Tubazioni e raccorderia per impianti e strutture"><![CDATA[Tubazioni e raccorderia per impianti e strutture]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Tubi di pead corrugato per impianti fognari"><![CDATA[Tubi di pead corrugato per impianti fognari]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Tubazioni in polietilene ad alta densità corrugate e fessurate, rivestite da un geotessile filtrante, per condotte di drenaggio, SN 4 - DIN EN 295-3 e ISO 9969"><![CDATA[Tubazioni in polietilene ad alta densità corrugate e fessurate, rivestite da un geotessile filtrante, per condotte di drenaggio, SN 4 - DIN EN 295-3 e ISO 9969]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="DE 1200"><![CDATA[DE 1200]]></EASY:livello4>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>445.03</EASY:prezzo>
+            <EASY:prezzosenzasgutil>348.77</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>55.80</EASY:spesegenerali>
+            <EASY:utilidiimpresa>40.46</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR125.A055.000.055">
+            <EASY:livello1 descrizionebreve="Componenti e macchine per impianti termici, di misura, produzione, accumulo di energia"><![CDATA[Componenti e macchine per impianti termici, di misura, produzione, accumulo di energia]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Addolcitori domy per impianti termici"><![CDATA[Addolcitori domy per impianti termici]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Ricambi addolcitori domy c - t o similari"><![CDATA[Ricambi addolcitori domy c - t o similari]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Cabinato per domy c 3 - 4"><![CDATA[Cabinato per domy c 3 - 4]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>385.16</EASY:prezzo>
+            <EASY:prezzosenzasgutil>301.85</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>48.30</EASY:spesegenerali>
+            <EASY:utilidiimpresa>35.01</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR135.C120.005.000">
+            <EASY:livello1 descrizionebreve="Cavi, canaline, blindosbarre e altri prodotti per trasmissione energia elettrica"><![CDATA[Cavi, canaline, blindosbarre e altri prodotti per trasmissione energia elettrica]]></EASY:livello1>
+            <EASY:annotazionelivello1><![CDATA[Blindosbarre per impianti di illuminazione o piccola potenza fino a 63 A e per impianti di potenza da 63 A a 1000 A nominali con conduttori in rame elettrolitico o alluminio per tensione nominale fino a 400V, grado di protezione non inferiore a IP 55, conduttore di neutro pari alla sezione di fase, conduttore di protezione realizzato dall'involucro o dedicato.]]></EASY:annotazionelivello1>
+            <EASY:livello2 descrizionebreve="Cavi di rame e gomma etilpropilenica FG7OM1H1M1"><![CDATA[Cavi di rame e gomma etilpropilenica FG7OM1H1M1]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Cavi in rame rigidi o flessibili, isolati in gomma etilpropilenica ad alto modulo qualità G7, guaina termoplastica di qualità M1, schermo a nastri, fili o treccia  di rame, sotto guaina termoplastica di qualità M1, a norme CEI 20-13, per tensione nominale 0,6/1 kV (Tipo U/R/FG7OM1H1M1 0,6/1 kV) non propagante l'incendio ed a bassissima emissione di fumi opachi e gas tossici e corrosivi secondo le norme CEI 20-22 III; CEI 20-37; CEI 20-38. tripolare"><![CDATA[Cavi in rame rigidi o flessibili, isolati in gomma etilpropilenica ad alto modulo qualità G7, guaina termoplastica di qualità M1, schermo a nastri, fili o treccia  di rame, sotto guaina termoplastica di qualità M1, a norme CEI 20-13, per tensione nominale 0,6/1 kV (Tipo U/R/FG7OM1H1M1 0,6/1 kV) non propagante l'incendio ed a bassissima emissione di fumi opachi e gas tossici e corrosivi secondo le norme CEI 20-22 III; CEI 20-37; CEI 20-38.
+tripolare]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="cavo tipo FG70M1H1M1 0,6/1 kV 3 x   1,5"><![CDATA[cavo tipo FG70M1H1M1 0,6/1 kV 3 x   1,5]]></EASY:livello4>
+            <EASY:um><![CDATA[m]]></EASY:um>
+            <EASY:prezzo>1.95</EASY:prezzo>
+            <EASY:prezzosenzasgutil>1.53</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>0.24</EASY:spesegenerali>
+            <EASY:utilidiimpresa>0.18</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR145.A025.005.025">
+            <EASY:livello1 descrizionebreve="Componenti per impianti elettrici e speciali"><![CDATA[Componenti per impianti elettrici e speciali]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Accessori per interruttori aperti"><![CDATA[Accessori per interruttori aperti]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="parti fisse di interruttori estraibili per interruttori aperti"><![CDATA[parti fisse di interruttori estraibili per interruttori aperti]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="parte fissa per interr. estraibile 3P 5000 A"><![CDATA[parte fissa per interr. estraibile 3P 5000 A]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>2651.12</EASY:prezzo>
+            <EASY:prezzosenzasgutil>2077.68</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>332.43</EASY:spesegenerali>
+            <EASY:utilidiimpresa>241.01</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR145.I125.000.035">
+            <EASY:livello1 descrizionebreve="Componenti per impianti elettrici e speciali"><![CDATA[Componenti per impianti elettrici e speciali]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Inverter trifase in bt per impianti senza trasformatore"><![CDATA[Inverter trifase in bt per impianti senza trasformatore]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Inverter trifase in BT per impianti connessi in rete  senza trasformatore, conversione DC/AC realizzata con tecnica PWM e ponte IGBT, filtri EMC in ingresso e in uscita, scaricatori di sovratensione, interruttori di potenza, dispositivo di distacco automatico dalla rete, tensione di uscita 400 V, con frequenza 50 Hz e distorsione armonica &#60; 3%, efficienza &#62; 98%, display a cristalli liquidi, conforme norme CEI 11-20, grado di protezione minimo IP65."><![CDATA[Inverter trifase in BT per impianti connessi in rete  senza trasformatore, conversione DC/AC realizzata con tecnica PWM e ponte IGBT, filtri EMC in ingresso e in uscita, scaricatori di sovratensione, interruttori di potenza, dispositivo di distacco automatico dalla rete, tensione di uscita 400 V, con frequenza 50 Hz e distorsione armonica < 3%, efficienza > 98%, display a cristalli liquidi, conforme norme CEI 11-20, grado di protezione minimo IP65.]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Potenza nominale 17 kW"><![CDATA[Potenza nominale 17 kW]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>2255.13</EASY:prezzo>
+            <EASY:prezzosenzasgutil>1767.34</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>282.77</EASY:spesegenerali>
+            <EASY:utilidiimpresa>205.01</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR155.E015.000.015">
+            <EASY:livello1 descrizionebreve="Componenti per impianti telefonici, tv, sonori, di sicurezza e antincendio"><![CDATA[Componenti per impianti telefonici, tv, sonori, di sicurezza e antincendio]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Estintori d’incendio per impianti antincendio"><![CDATA[Estintori d’incendio per impianti antincendio]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Estintore d'incendio portatile o carrellato, omologato in base alla normativa vigente. "><![CDATA[Estintore d'incendio portatile o carrellato, omologato in base alla normativa vigente. ]]></EASY:livello3>
+            <EASY:annotazionelivello3><![CDATA[E' indicata la capacità estinguente minima]]></EASY:annotazionelivello3>
+            <EASY:livello4 descrizionebreve="Estintore a Co2 carrellato kg 27 B1C"><![CDATA[Estintore a Co2 carrellato kg 27 B1C]]></EASY:livello4>
+            <EASY:um><![CDATA[cad]]></EASY:um>
+            <EASY:prezzo>608.29</EASY:prezzo>
+            <EASY:prezzosenzasgutil>476.72</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>76.28</EASY:spesegenerali>
+            <EASY:utilidiimpresa>55.30</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+        <EASY:Articolo cam="0" codice="PIE26_PR195.C030.000.000">
+            <EASY:livello1 descrizionebreve="Utensili e altro materiale vario"><![CDATA[Utensili e altro materiale vario]]></EASY:livello1>
+            <EASY:livello2 descrizionebreve="Catadiottri a base vetrosa"><![CDATA[Catadiottri a base vetrosa]]></EASY:livello2>
+            <EASY:livello3 descrizionebreve="Catadiottri a base vetrosa"><![CDATA[Catadiottri a base vetrosa]]></EASY:livello3>
+            <EASY:livello4 descrizionebreve="Dimensione massima diametro  300 micron"><![CDATA[Dimensione massima diametro  300 micron]]></EASY:livello4>
+            <EASY:um><![CDATA[kg]]></EASY:um>
+            <EASY:prezzo>2.05</EASY:prezzo>
+            <EASY:prezzosenzasgutil>1.61</EASY:prezzosenzasgutil>
+            <EASY:spesegenerali>0.26</EASY:spesegenerali>
+            <EASY:utilidiimpresa>0.19</EASY:utilidiimpresa>
+            <EASY:scostamentoconspese><![CDATA[0,00%]]></EASY:scostamentoconspese>
+        </EASY:Articolo>
+    </EASY:Contenuto>
+</EASY:Prezzario>

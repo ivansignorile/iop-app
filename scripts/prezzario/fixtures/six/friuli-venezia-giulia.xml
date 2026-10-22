@@ -1,0 +1,471 @@
+<Documento xmlns="six.xsd">
+  <intestazione intestazioneId="acd63220-ba68-4050-b12b-dd4da2d67925" lingua="it" separatore="." separatoreParametri=";" valuta="EUR" autore="S.T.R. s.p.a." versione="11.47.1.30325" />
+  <categoriaSOA soaId="OG1" soaCategoria="102">
+    <soaDescrizione lingua="it" breve="Edifici civili e industriali" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG10" soaCategoria="103">
+    <soaDescrizione lingua="it" breve="Impianti per la trasformazione alta/media tensione e per la distribuzione di energia elettrica in corrente alternata e continua ed impianti di pubblica illuminazione" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG11" soaCategoria="104">
+    <soaDescrizione lingua="it" breve="Impianti tecnologici" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG12" soaCategoria="105">
+    <soaDescrizione lingua="it" breve="Opere ed impianti di bonifica e protezione ambientale" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG13" soaCategoria="106">
+    <soaDescrizione lingua="it" breve="Opere di ingegneria naturalistica" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG2" soaCategoria="107">
+    <soaDescrizione lingua="it" breve="Restauro e manutenzione dei beni immobili sottoposti a tutela ai sensi delle disposizioni in materia di beni culturali e ambientali" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG3" soaCategoria="108">
+    <soaDescrizione lingua="it" breve="Strade, autostrade, ponti, viadotti, ferrovie, linee tranviarie, metropolitane, funicolari, e piste aeroportuali, e relative opere complementari" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG4" soaCategoria="109">
+    <soaDescrizione lingua="it" breve="Opere d'arte nel sottosuolo" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG5" soaCategoria="110">
+    <soaDescrizione lingua="it" breve="Dighe" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG6" soaCategoria="111">
+    <soaDescrizione lingua="it" breve="Acquedotti, gasdotti, oleodotti, opere di irrigazione e di evacuazione" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG7" soaCategoria="112">
+    <soaDescrizione lingua="it" breve="Opere marittime e lavori di dragaggio" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG8" soaCategoria="113">
+    <soaDescrizione lingua="it" breve="Opere fluviali, di difesa, di sistemazione idraulica e di bonifica" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OG9" soaCategoria="114">
+    <soaDescrizione lingua="it" breve="Impianti per la produzione di energia elettrica" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS1" soaCategoria="115">
+    <soaDescrizione lingua="it" breve="Lavori in terra" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS10" soaCategoria="116">
+    <soaDescrizione lingua="it" breve="Segnaletica stradale non luminosa" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS11" soaCategoria="117">
+    <soaDescrizione lingua="it" breve="Apparecchiature strutturali speciali" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS12" soaCategoria="118">
+    <soaDescrizione lingua="it" breve="Barriere e protezioni stradali" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS12-A" soaCategoria="118">
+    <soaDescrizione lingua="it" breve="Barriere stradali di sicurezza" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS12-B" soaCategoria="118">
+    <soaDescrizione lingua="it" breve="Barriere paramassi, fermaneve e simili" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS13" soaCategoria="119">
+    <soaDescrizione lingua="it" breve="Strutture prefabbricate in cemento armato" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS14" soaCategoria="120">
+    <soaDescrizione lingua="it" breve="Impianti di smaltimento e recupero dei rifiuti" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS15" soaCategoria="121">
+    <soaDescrizione lingua="it" breve="Pulizia di acque marine, lacustri, fluviali" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS16" soaCategoria="122">
+    <soaDescrizione lingua="it" breve="Impianti per centrali produzione energia elettrica" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS17" soaCategoria="123">
+    <soaDescrizione lingua="it" breve="Linee telefoniche ed impianti di telefonia" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS18" soaCategoria="124">
+    <soaDescrizione lingua="it" breve="Componenti strutturali in acciaio o metallo" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS18-A" soaCategoria="124">
+    <soaDescrizione lingua="it" breve="Componenti strutturali in acciaio" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS18-B" soaCategoria="124">
+    <soaDescrizione lingua="it" breve="Componenti per facciate continue" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS19" soaCategoria="125">
+    <soaDescrizione lingua="it" breve="Impianti di reti di telecomunicazione e di trasmissione dati" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS2" soaCategoria="126">
+    <soaDescrizione lingua="it" breve="Superfici decorate e beni mobili di interesse storico e artistico" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS20" soaCategoria="127">
+    <soaDescrizione lingua="it" breve="Rilevamenti topografici" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS20-A" soaCategoria="127">
+    <soaDescrizione lingua="it" breve="Rilevamenti topografici" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS20-B" soaCategoria="127">
+    <soaDescrizione lingua="it" breve="Indagini geognostiche" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS21" soaCategoria="128">
+    <soaDescrizione lingua="it" breve="Opere strutturali speciali" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS22" soaCategoria="129">
+    <soaDescrizione lingua="it" breve="Impianti di potabilizzazione e depurazione" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS23" soaCategoria="130">
+    <soaDescrizione lingua="it" breve="Demolizione di opere" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS24" soaCategoria="131">
+    <soaDescrizione lingua="it" breve="Verde e arredo urbano" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS25" soaCategoria="132">
+    <soaDescrizione lingua="it" breve="Scavi archeologici" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS26" soaCategoria="133">
+    <soaDescrizione lingua="it" breve="Pavimentazioni e sovrastrutture speciali" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS27" soaCategoria="134">
+    <soaDescrizione lingua="it" breve="Impianti per la trazione elettrica" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS28" soaCategoria="135">
+    <soaDescrizione lingua="it" breve="Impianti termici e di condizionamento" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS29" soaCategoria="136">
+    <soaDescrizione lingua="it" breve="Armamento ferroviario" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS2-A" soaCategoria="126">
+    <soaDescrizione lingua="it" breve="Superfici decorate di beni immobili del patrimonio culturale e beni culturali mobili di interesse storico, artistico, archeologico ed etnoantropologico" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS2-B" soaCategoria="126">
+    <soaDescrizione lingua="it" breve="Beni culturali mobili di interesse archivistico e librario" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS3" soaCategoria="137">
+    <soaDescrizione lingua="it" breve="Impianti idrico-sanitario, cucine, lavanderie" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS30" soaCategoria="138">
+    <soaDescrizione lingua="it" breve="Impianti interni elettrici, telefonici, radiotelefonici, e televisivi" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS31" soaCategoria="139">
+    <soaDescrizione lingua="it" breve="Impianti per la mobilità sospesa" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS32" soaCategoria="140">
+    <soaDescrizione lingua="it" breve="Strutture in legno" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS33" soaCategoria="141">
+    <soaDescrizione lingua="it" breve="Coperture speciali" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS34" soaCategoria="142">
+    <soaDescrizione lingua="it" breve="Sistemi antirumore per infrastrutture di mobilità" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS35" soaCategoria="143">
+    <soaDescrizione lingua="it" breve="Interventi a basso impatto ambientale" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS4" soaCategoria="143">
+    <soaDescrizione lingua="it" breve="Impianti elettromeccanici trasportatori" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS5" soaCategoria="144">
+    <soaDescrizione lingua="it" breve="Impianti pneumatici e antintrusione" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS6" soaCategoria="145">
+    <soaDescrizione lingua="it" breve="Finiture di opere generali in materiali lignei, plastici, metallici e vetrosi" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS7" soaCategoria="146">
+    <soaDescrizione lingua="it" breve="Finiture di opere generali di natura edile e tecnica" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS8" soaCategoria="147">
+    <soaDescrizione lingua="it" breve="Opere di impermeabilizzazione" />
+  </categoriaSOA>
+  <categoriaSOA soaId="OS9" soaCategoria="148">
+    <soaDescrizione lingua="it" breve="Impianti per la segnaletica luminosa e la sicurezza del traffico" />
+  </categoriaSOA>
+  <gruppo vlrStruttura="zzzzzzzzzzzzzzzz.zz" tipo="Capitolo" gruppoId="2">
+    <grpValore grpValoreId="40" vlrId="26">
+      <vlrDescrizione lingua="it" breve="PREZZO GUIDA" />
+    </grpValore>
+    <grpValore grpValoreId="41" vlrId="29" />
+    <grpValore grpValoreId="42" vlrId="222" />
+    <grpValore grpValoreId="43" vlrId="R6.AA" />
+  </gruppo>
+  <prezzario prezzarioId="1" przId="FR21328" prdStruttura="zzzzzzz.zzzzzzz.zzzzzzz.zzzzzzz.zzzzzzz.zzzzzzz" categoriaPrezzario="Listino">
+    <unitaDiMisura unitaDiMisuraId="44" udmId="" simbolo="CDM">
+      <udmDescrizione lingua="it" breve="CDM" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="45" udmId="%" simbolo="%" decimali="3">
+      <udmDescrizione lingua="it" breve="%" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="46" udmId="CAD" simbolo="Cad" decimali="4">
+      <udmDescrizione lingua="it" breve="Cad" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="47" udmId="CDM" simbolo="cad.mese" decimali="4">
+      <udmDescrizione lingua="it" breve="cad.mese" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="48" udmId="cm" simbolo="cm" decimali="4">
+      <udmDescrizione lingua="it" breve="cm" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="49" udmId="CM2" simbolo="cm²" decimali="4">
+      <udmDescrizione lingua="it" breve="cm²" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="50" udmId="COR" simbolo="a corpo" decimali="4">
+      <udmDescrizione lingua="it" breve="a corpo" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="51" udmId="DM3" simbolo="dm³" decimali="4">
+      <udmDescrizione lingua="it" breve="dm³" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="52" udmId="DMC" simbolo="dm³" decimali="4">
+      <udmDescrizione lingua="it" breve="dm³" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="53" udmId="G" simbolo="al giorno" decimali="4">
+      <udmDescrizione lingua="it" breve="al giorno" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="54" udmId="H" simbolo="h" decimali="4">
+      <udmDescrizione lingua="it" breve="h" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="55" udmId="KG" simbolo="kg" decimali="4">
+      <udmDescrizione lingua="it" breve="kg" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="56" udmId="Km" simbolo="km" decimali="4">
+      <udmDescrizione lingua="it" breve="km" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="57" udmId="Kwh" simbolo="kwh" decimali="4">
+      <udmDescrizione lingua="it" breve="kwh" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="58" udmId="L" simbolo="l" decimali="4">
+      <udmDescrizione lingua="it" breve="l" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="59" udmId="LAM" simbolo="lav.mese" decimali="4">
+      <udmDescrizione lingua="it" breve="lav.mese" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="60" udmId="LAV" simbolo="lav" decimali="4">
+      <udmDescrizione lingua="it" breve="lav" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="61" udmId="m" simbolo="m" decimali="4">
+      <udmDescrizione lingua="it" breve="m" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="62" udmId="M2" simbolo="m²" decimali="4">
+      <udmDescrizione lingua="it" breve="m²" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="63" udmId="M2M" simbolo="m².mese" decimali="4">
+      <udmDescrizione lingua="it" breve="m².mese" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="64" udmId="M3" simbolo="m³" decimali="4">
+      <udmDescrizione lingua="it" breve="m³" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="65" udmId="MC" simbolo="m3" decimali="4">
+      <udmDescrizione lingua="it" breve="m3" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="66" udmId="MCK" simbolo="m³×km" decimali="4">
+      <udmDescrizione lingua="it" breve="m³×km" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="67" udmId="MES" simbolo="mese" decimali="4">
+      <udmDescrizione lingua="it" breve="mese" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="68" udmId="ml" simbolo="ml" decimali="4">
+      <udmDescrizione lingua="it" breve="ml" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="69" udmId="MME" simbolo="m.mese" decimali="4">
+      <udmDescrizione lingua="it" breve="m.mese" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="70" udmId="MQ" simbolo="m²" decimali="4">
+      <udmDescrizione lingua="it" breve="m²" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="71" udmId="MQC" simbolo="m²×cm" decimali="4">
+      <udmDescrizione lingua="it" breve="m²×cm" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="72" udmId="MQS" simbolo="m²×sett" decimali="4">
+      <udmDescrizione lingua="it" breve="m²×sett" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="73" udmId="N" simbolo="n" decimali="4">
+      <udmDescrizione lingua="it" breve="n" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="74" udmId="PA" simbolo="paia" decimali="4">
+      <udmDescrizione lingua="it" breve="paia" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="75" udmId="PAM" simbolo="paia.mese" decimali="4">
+      <udmDescrizione lingua="it" breve="paia.mese" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="76" udmId="PER" simbolo="%" decimali="4">
+      <udmDescrizione lingua="it" breve="%" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="77" udmId="PEZ" simbolo="pezzo" decimali="4">
+      <udmDescrizione lingua="it" breve="pezzo" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="78" udmId="PZ" simbolo="pz" decimali="4">
+      <udmDescrizione lingua="it" breve="pz" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="79" udmId="q" simbolo="q" decimali="4">
+      <udmDescrizione lingua="it" breve="q" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="80" udmId="QKM" simbolo="q*km" decimali="4">
+      <udmDescrizione lingua="it" breve="q*km" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="81" udmId="T" simbolo="t" decimali="4">
+      <udmDescrizione lingua="it" breve="t" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="82" udmId="TON" simbolo="t" decimali="4">
+      <udmDescrizione lingua="it" breve="t" />
+    </unitaDiMisura>
+    <unitaDiMisura unitaDiMisuraId="83" udmId="W" simbolo="Watt" decimali="4">
+      <udmDescrizione lingua="it" breve="Watt" />
+    </unitaDiMisura>
+    <analisiPercentuale analisiPercentualeId="85" aprId="AC" percento="3.000000000000" />
+    <analisiPercentuale analisiPercentualeId="86" aprId="AF" percento="5.000000000000" />
+    <analisiPercentuale analisiPercentualeId="87" aprId="AFO" percento="15.000000000000" />
+    <analisiPercentuale analisiPercentualeId="88" aprId="DIA" percento="2.000000000000" />
+    <analisiPercentuale analisiPercentualeId="89" aprId="MA" percento="1.000000000000" />
+    <analisiPercentuale analisiPercentualeId="90" aprId="MA15" percento="1.500000000000" />
+    <analisiPercentuale analisiPercentualeId="91" aprId="MACO2" percento="2.000000000000" />
+    <analisiPercentuale analisiPercentualeId="92" aprId="MACO5" percento="5.000000000000" />
+    <analisiPercentuale analisiPercentualeId="93" aprId="MAVA" percento="5.000000000000" />
+    <analisiPercentuale analisiPercentualeId="94" aprId="MAVA10" percento="10.000000000000" />
+    <analisiPercentuale analisiPercentualeId="95" aprId="MEVA" percento="10.000000000000" />
+    <analisiPercentuale analisiPercentualeId="96" aprId="NOT" percento="20.000000000000" />
+    <analisiPercentuale analisiPercentualeId="97" aprId="ONCAR" percento="5.000000000000" />
+    <analisiPercentuale analisiPercentualeId="98" aprId="P04" percento="0.400000000000" />
+    <analisiPercentuale analisiPercentualeId="99" aprId="P06" percento="0.600000000000" />
+    <analisiPercentuale analisiPercentualeId="100" aprId="P07" percento="0.700000000000" />
+    <analisiPercentuale analisiPercentualeId="101" aprId="P1" percento="15.000000000000" />
+    <analisiPercentuale analisiPercentualeId="102" aprId="P10" percento="10.000000000000" />
+    <analisiPercentuale analisiPercentualeId="103" aprId="P100" percento="100.000000000000" />
+    <analisiPercentuale analisiPercentualeId="104" aprId="P12" percento="12.000000000000" />
+    <analisiPercentuale analisiPercentualeId="105" aprId="P15" percento="15.000000000000" />
+    <analisiPercentuale analisiPercentualeId="106" aprId="P16" percento="16.000000000000" />
+    <analisiPercentuale analisiPercentualeId="107" aprId="P2" percento="2.000000000000" />
+    <analisiPercentuale analisiPercentualeId="108" aprId="P20" percento="20.000000000000" />
+    <analisiPercentuale analisiPercentualeId="109" aprId="P2A" percento="2.500000000000" />
+    <analisiPercentuale analisiPercentualeId="110" aprId="P3" percento="3.000000000000" />
+    <analisiPercentuale analisiPercentualeId="111" aprId="P30" percento="30.000000000000" />
+    <analisiPercentuale analisiPercentualeId="112" aprId="P4" percento="10.000000000000" />
+    <analisiPercentuale analisiPercentualeId="113" aprId="P45" percento="45.000000000000" />
+    <analisiPercentuale analisiPercentualeId="114" aprId="P5" percento="5.000000000000" />
+    <analisiPercentuale analisiPercentualeId="115" aprId="P50" percento="50.000000000000" />
+    <analisiPercentuale analisiPercentualeId="116" aprId="P5A" percento="5.000000000000" />
+    <analisiPercentuale analisiPercentualeId="117" aprId="P5B" percento="5.000000000000" />
+    <analisiPercentuale analisiPercentualeId="118" aprId="P6" percento="6.000000000000" />
+    <analisiPercentuale analisiPercentualeId="119" aprId="P65" percento="65.000000000000" />
+    <analisiPercentuale analisiPercentualeId="120" aprId="P7" percento="7.000000000000" />
+    <analisiPercentuale analisiPercentualeId="121" aprId="P8" percento="8.000000000000" />
+    <analisiPercentuale analisiPercentualeId="122" aprId="P80" percento="80.000000000000" />
+    <analisiPercentuale analisiPercentualeId="123" aprId="P9" percento="9.000000000000" />
+    <analisiPercentuale analisiPercentualeId="124" aprId="PER1" percento="1.000000000000" />
+    <analisiPercentuale analisiPercentualeId="125" aprId="PER4" percento="4.000000000000" />
+    <analisiPercentuale analisiPercentualeId="126" aprId="PRCA" percento="1.000000000000" />
+    <analisiPercentuale analisiPercentualeId="127" aprId="PT1" percento="1.000000000000" />
+    <analisiPercentuale analisiPercentualeId="128" aprId="PT4" percento="4.000000000000" />
+    <analisiPercentuale analisiPercentualeId="129" aprId="SPGEN" percento="15.000000000000" />
+    <analisiPercentuale analisiPercentualeId="130" aprId="TP1" percento="1.000000000000" />
+    <analisiPercentuale analisiPercentualeId="131" aprId="TP4" percento="4.000000000000" />
+    <analisiPercentuale analisiPercentualeId="132" aprId="UI" percento="10.000000000000" />
+    <analisiPercentuale analisiPercentualeId="133" aprId="VARO" percento="50.000000000000" />
+    <analisiPercentuale analisiPercentualeId="134" aprId="VER" percento="20.000000000000" />
+    <analisiPercentuale analisiPercentualeId="135" aprId="ZIN" percento="10.000000000000" />
+    <listaQuotazione listaQuotazioneId="84" lqtId="PREZZO">
+      <lqtDescrizione lingua="it" breve="PREZZO" />
+    </listaQuotazione>
+    <przDescrizione lingua="it" breve="Prezzario 2026/1 - SA" />
+    <specie specieId="4764" spcId="60">
+      <spcDescrizione breve="Specie1" />
+    </specie>
+    <specie specieId="11107" spcId="30" tipoMerceologico="Nolo">
+      <spcDescrizione breve="Noli" />
+    </specie>
+    <specie specieId="11306" spcId="20" tipoMerceologico="Manodopera">
+      <spcDescrizione breve="Manodopera" />
+    </specie>
+    <przGruppo gruppoId="2" />
+    <prodotto prodottoId="136" prdId="01">
+      <incidenzaMateriali>29.140000000000</incidenzaMateriali>
+      <prdDescrizione lingua="it" breve="OPERE PROVVISIONALI" />
+      <prdQuotazione valore="0" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="137" prdId="01.1">
+      <prdDescrizione lingua="it" breve="PUNTELLAZIONI" />
+    </prodotto>
+    <prodotto prodottoId="138" prdId="01.1.AB1">
+      <prdDescrizione lingua="it" breve="PUNTELLAZIONE LAVORI EDILIZI IN GENERALE PER UTILIZZO GENERALE" />
+    </prodotto>
+    <prodotto prodottoId="139" prdId="01.1.AB1.01" voce="true">
+      <prdDescrizione lingua="it" breve="PUNTELLAZIONE DI STRUTTURE ORIZZONTALI" estesa="Puntellazione di strutture orizzontali di qualsiasi tipo, con puntelli di acciaio, legname o misti, in opera compreso banchine, apparecchi di armo in genere, armo e disarmo, collegamenti e fissaggi ad evitare qualsiasi movimento delle parti protette.&#xD;&#xA;" />
+    </prodotto>
+    <prodotto prodottoId="140" prdId="01.1.AB1.01.A" unitaDiMisuraId="62">
+      <incidenzaManodopera>29.13</incidenzaManodopera>
+      <incidenzaMateriali>38.550000000000</incidenzaMateriali>
+      <incidenzaAttrezzatura>10.600000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="Puntellazione di travi, rampe scale, solai piani e di copertura fino a 3 m di altezza di puntellazione" />
+      <prdGrpValore grpValoreId="40" />
+      <prdQuotazione valore="27.32" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="141" prdId="01.1.AB1.01.B" unitaDiMisuraId="62">
+      <incidenzaManodopera>32.48</incidenzaManodopera>
+      <incidenzaMateriali>38.270000000000</incidenzaMateriali>
+      <incidenzaAttrezzatura>7.550000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="Per ogni metro in più oltre i primi 3 m di altezza di puntellazione" />
+      <prdQuotazione valore="9.80" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="142" prdId="01.1.AB1.02" unitaDiMisuraId="62" voce="true">
+      <incidenzaManodopera>12.82</incidenzaManodopera>
+      <incidenzaMateriali>59.840000000000</incidenzaMateriali>
+      <incidenzaAttrezzatura>5.200000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="PUNTELLAZIONI DI STRUTTURE VERTICALI" estesa="Puntellazioni di strutture murarie verticali con puntelli in acciaio, legname o misti, compreso banchine, apparecchi da disarmo in genere, sbatacchiature in senso longitudinale e trasversale, controventatura in direzione perpendicolare al muro servito, compreso armo, disarmo, collegamenti, fissaggi." />
+      <prdQuotazione valore="62.09" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="143" prdId="01.1.AB1.03" voce="true">
+      <prdDescrizione lingua="it" breve="BANCHINE E CONTROVENTATURE ORIZZONTALI DI RITEGNO PER STRUTTURE MURARIE" estesa="Esecuzione di banchine e controventature orizzontali di ritegno per la puntellazione di strutture murarie di qualsiasi tipo e dimensione, costituite da coppie di profili in acciaio posti sui due lati delle murature e collegati tra loro da barre in acciaio, compreso, ponteggi, controventi con putrelle in acciaio o elementi tubolari, fori per attraversamenti delle murature, montaggio, fissaggio." />
+    </prodotto>
+    <prodotto prodottoId="144" prdId="01.1.AB1.03.A" unitaDiMisuraId="61">
+      <incidenzaManodopera>9.72</incidenzaManodopera>
+      <incidenzaMateriali>61.390000000000</incidenzaMateriali>
+      <incidenzaAttrezzatura>6.710000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="Banchine orizzontali" />
+      <prdQuotazione valore="52.38" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="145" prdId="01.1.AB1.03.B" unitaDiMisuraId="61">
+      <incidenzaManodopera>8.31</incidenzaManodopera>
+      <incidenzaMateriali>59.910000000000</incidenzaMateriali>
+      <incidenzaAttrezzatura>9.640000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="Controventature orizzontali" />
+      <prdQuotazione valore="30.64" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="146" prdId="01.2">
+      <prdDescrizione lingua="it" breve="SBATACCHIATURE" />
+    </prodotto>
+    <prodotto prodottoId="147" prdId="01.2.AB1">
+      <prdDescrizione lingua="it" breve="SBATACCHIATURE LAVORI  EDILIZI IN GENERALE PER UTILIZZO GENERALE" />
+    </prodotto>
+    <prodotto prodottoId="148" prdId="01.2.AB1.01" unitaDiMisuraId="62" voce="true">
+      <incidenzaManodopera>12.66</incidenzaManodopera>
+      <incidenzaMateriali>63.160000000000</incidenzaMateriali>
+      <incidenzaAttrezzatura>1.960000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="SBATACCHIATURE DI FORI" estesa="Esecuzione di sbatacchiature di fori porte, finestre e simili, costituite da travi ed elementi in legno o metallici, in opera con puntelli verticali, banchine, sbatacchiature orizzontali ed a croce di S.Andrea, cunei di spessoramento, eseguito con cura al fine di preservare gli elementi lapidei, inferriate, modanature, capitelli, fregi eventuali, compreso montaggio, smontaggio, collegamenti, fissaggi, sfridi." />
+      <prdQuotazione valore="82.94" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="149" prdId="10">
+      <prdDescrizione lingua="it" breve="SUOLO" />
+    </prodotto>
+    <prodotto prodottoId="150" prdId="10.1">
+      <prdDescrizione lingua="it" breve="RIMOZIONI" />
+    </prodotto>
+    <prodotto prodottoId="151" prdId="10.1.BY1">
+      <prdDescrizione lingua="it" breve="DEMOLIZIONI, RIMOZIONI -  SECONDO LO STATO FISICO" />
+    </prodotto>
+    <prodotto prodottoId="152" prdId="10.1.BY1.01" voce="true">
+      <prdDescrizione lingua="it" breve="RIMOZIONE DI MACERIE" estesa="Esecuzione della rimozione di macerie di edifici crollati o demoliti, compreso la cernita selettiva dei materiali ed elementi da conservare, accatastamento entro l'area di cantiere dei materiali recuperati, pulitura dei materiali recuperati con getto d'acqua, carico, trasporto e scarico alle pubbliche discariche, esclusa indennità di discarica, compreso ogni altro onere e modalità d'esecuzione per dare il lavoro finito a regola d'arte con la sola esclusione di eventuali materiali contenenti amianto i quali verranno individuati, segregati, allontanati dal cantiere, smaltiti secondo le norme vigenti e compensati a parte con relativi prezzi." />
+    </prodotto>
+    <prodotto prodottoId="153" prdId="10.1.BY1.01.A" unitaDiMisuraId="64">
+      <incidenzaManodopera>15.94</incidenzaManodopera>
+      <incidenzaAttrezzatura>63.140000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="Eseguita con mezzo meccanico" />
+      <prdQuotazione valore="5.99" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="154" prdId="10.1.BY1.01.B" unitaDiMisuraId="64">
+      <incidenzaManodopera>75.46</incidenzaManodopera>
+      <incidenzaAttrezzatura>3.590000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="Eseguita a mano" />
+      <prdQuotazione valore="105.45" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="155" prdId="10.1.BY1.01.C" unitaDiMisuraId="64">
+      <incidenzaManodopera>27.26</incidenzaManodopera>
+      <incidenzaAttrezzatura>51.780000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="Eseguita con mezzo meccanico all'interno di edifici" />
+      <prdQuotazione valore="23.35" validita="2017-05-16T00:00:00+02:00" listaQuotazioneId="84" />
+    </prodotto>
+    <prodotto prodottoId="156" prdId="10.1.BY1.02" voce="true">
+      <prdDescrizione lingua="it" breve="DEMOLIZIONE DI EDIFICI" estesa="Demolizione di fabbricati esistenti di qualsiasi tipologia e condizione, sia sopra che sotto il livello del terreno, con esclusione delle opere strutturali di fondazione, anche frazionata.  Sono comprese murature e setti di ogni tipo, pavimentazioni, impermeabilizzazioni e coperture. Compresa rimozione dei serramenti esterni ed  interni, dei  sanitari, di eventuali strutture metalliche. Compresi il sezionamento, la messa in sicurezza, la dismissione di tutti i servizi ed impianti interni al fabbricato, nonchè gli oneri per l'individuazione degli stessi, la rimozione di quadri tecnologici, tubazioni e cavi. Sono altresì compresi e compensati gli oneri per lo sgombero, la raccolta differenziata del materiale di risulta, il carico, lo scarico, il conferimento del materiale di risulta in centri autorizzati per la raccolta di rifiuti speciali entro 15 km di distanza, e quanto altro necessario per dare il lavoro finito a regola d'arte. E' dedotto il valore attribuito al materiale di demolizione ceduto all'Appaltatore. La misurazione sarà effettuata a metrocubo vuoto per pieno all'esterno delle murature perimetrali, secondo le geometrie solide, per un'altezza misurata dal livello del terreno di riferimento più basso fino all'estradosso del solaio o della struttura di copertura in conglomerato cementizio. Sono escluse dal computo dalla volumetria le sole opere di fondazione e le coperture in legno che saranno compensate a parte. Sono escluse le  indennità dovute allo smaltimento del materiale di risulta in centri autorizzati per la raccolta di rifiuti speciali non pericolosi che saranno computati a parte, e le eventuali lavorazioni relative alla bonifica e rimozione da amianto e da idrocarburi e comunque contaminate dasostanze pericolose (mercurio, PCB, ecc.). &#xD;&#xA;" />
+    </prodotto>
+    <prodotto prodottoId="157" prdId="10.1.BY1.02.A" unitaDiMisuraId="64">
+      <incidenzaManodopera>23.81</incidenzaManodopera>
+      <incidenzaAttrezzatura>30.740000000000</incidenzaAttrezzatura>
+      <prdDescrizione lingua="it" breve="Per edifici del volume fino a 5000 m3" />
+      <prdQuotazione valore="13.37" listaQuotazioneId="84" />
+    </prodotto>
+  </prezzario>
+</Documento>

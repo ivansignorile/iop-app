@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { requireContext } from "@/lib/auth";
+import { prezzariDelleVoci } from "@/lib/prezzari-voci";
+import { etichettaPrezzario } from "@/lib/prezzario-preventivo";
 import { createClient } from "@/lib/supabase/server";
 import { PreventivoEditor } from "./editor";
 import type { PreviewData } from "./preview";
@@ -43,6 +45,10 @@ export default async function PreventivoPage({
         .order("titolo", { ascending: true }),
     ]);
 
+  const { data: prezzari } = await supabase.rpc("prezzario_del_preventivo", { p_preventivo: id });
+  const prezzario = prezzari?.[0] ?? null;
+  const prezzariVoci = await prezzariDelleVoci(supabase, interventi ?? []);
+
   const { data: allegatiRows } = await supabase
     .from("preventivo_allegati")
     .select("storage_path, caption, livello_degrado")
@@ -63,6 +69,8 @@ export default async function PreventivoPage({
 
   const preview: PreviewData = {
     org,
+    prezzario,
+    prezzariVoci,
     preventivo,
     cliente,
     edificio,
@@ -82,7 +90,7 @@ export default async function PreventivoPage({
         interventi={interventi ?? []}
         cicli={cicli ?? []}
         preview={preview}
-        regione={org.regione}
+        prezzario={etichettaPrezzario(prezzario, org.regione)}
       />
     </div>
   );

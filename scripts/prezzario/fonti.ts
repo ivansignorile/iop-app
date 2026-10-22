@@ -1,0 +1,63 @@
+import type { Formato } from "./formati";
+
+export type Fonte = {
+  regione: string;
+  /** Sigla provincia per i listini provinciali (Toscana), '' per l'intera regione. */
+  ambito: string;
+  anno: number;
+  titolo: string;
+  formato: Formato;
+  /** Path relativo a scripts/prezzario/data; `archivio.zip#regex` sceglie il file dentro lo zip. */
+  file: string;
+  url: string;
+  /** Richiesta POST della piattaforma gestione-prezzario (campi del form). */
+  form?: Record<string, string>;
+  licenza: string | null;
+  attivo: boolean;
+};
+
+import { FONTI_ABRUZZO } from "./fonti/abruzzo";
+import { FONTI_CAMPANIA } from "./fonti/campania";
+import { FONTI_EMILIA_ROMAGNA } from "./fonti/emilia-romagna";
+import { FONTI_FRIULI_VENEZIA_GIULIA } from "./fonti/friuli-venezia-giulia";
+import { FONTI_TRENTO } from "./fonti/trento";
+import { FONTI_PIEMONTE } from "./fonti/piemonte";
+import { FONTI_BOLZANO } from "./fonti/bolzano";
+import { FONTI_SARDEGNA } from "./fonti/sardegna";
+import { FONTI_CALABRIA } from "./fonti/calabria";
+import { FONTI_MOLISE } from "./fonti/molise";
+import { FONTI_LAZIO } from "./fonti/lazio";
+import { FONTI_TOSCANA } from "./fonti/toscana";
+import { FONTI_MARCHE } from "./fonti/marche";
+import { FONTI_PUGLIA } from "./fonti/puglia";
+import { FONTI_UMBRIA } from "./fonti/umbria";
+import { FONTI_SICILIA } from "./fonti/sicilia";
+import { FONTI_VALLE_D_AOSTA } from "./fonti/valle-d-aosta";
+import { FONTI_VENETO } from "./fonti/veneto";
+import { FONTI_BASILICATA } from "./fonti/basilicata";
+import { FONTI_LIGURIA } from "./fonti/liguria";
+import { FONTI_LOMBARDIA } from "./fonti/lombardia";
+
+export const FONTI: Fonte[] = [
+  ...FONTI_CAMPANIA,
+  ...FONTI_ABRUZZO,
+  ...FONTI_MOLISE,
+  ...FONTI_LAZIO,
+  ...FONTI_TOSCANA,
+  ...FONTI_MARCHE,
+  ...FONTI_PUGLIA,
+  ...FONTI_UMBRIA,
+  ...FONTI_SICILIA,
+  ...FONTI_VALLE_D_AOSTA,
+  ...FONTI_EMILIA_ROMAGNA,
+  ...FONTI_FRIULI_VENEZIA_GIULIA,
+  ...FONTI_TRENTO,
+  ...FONTI_PIEMONTE,
+  ...FONTI_BOLZANO,
+  ...FONTI_SARDEGNA,
+  ...FONTI_CALABRIA,
+  ...FONTI_VENETO,
+  ...FONTI_BASILICATA,
+  ...FONTI_LIGURIA,
+  ...FONTI_LOMBARDIA,
+];

@@ -1,0 +1,192 @@
+INDICE GENERALE
+
+AVVERTENZE GENERALI                                        15
+RU. MANODOPERA                                             16
+  MANODOPERA CATEGORIA EDILE                               16
+  MANODOPERA CATEGORIA METALMECCANICA                      16
+AT. NOLI                                                   17
+
+Parte A                                                    26
+OPERE EDILI                                                26
+A01. MOVIMENTI DI TERRA                                    28
+  AVVERTENZE                                               28
+  SCAVI DI SBANCAMENTO                                     29
+  SCAVI A SEZIONE OBBLIGATA ESEGUITI CON MEZZI MECCANICI   29
+  SCAVI A SEZIONE OBBLIGATA ESEGUITI A MANO                29
+  RINTERRI E TRASPORTI                                     29
+  AGGOTTAMENTO E ABBASSAMENTO FALDE                        30
+A02. INDAGINI, PROVE, RILIEVI E FONDAZIONI PROFONDE        30
+  AVVERTENZE                                               30
+  GEOGNOSTICA - SONDAGGI STANDARD                          30
+  SONDAGGI AMBIENTALI                                      34
+  PROVE IN SITU                                            36
+  GEOTECNICA - ANALISI E PROVE DI LABORATORIO              40
+  PROSPEZIONI GEOFISICHE                                   43
+  MONITORAGGIO DI STRUTTURE IN CALCESTRUZZO                44
+  MONITORAGGIO DI STRUTTURE IN ACCIAIO                     45
+  MONITORAGGIO DI STRUTTURE IN MURATURA                    45
+  MONITORAGGIO DI STRUTTURE IN LEGNO                       46
+  PROVE DINAMICHE SULLE STRUTTURE                          47
+  PROVE ESTENSIMETRICHE SULLE STRUTTURE                    47
+  PROVE STATICHE SU SOLAI E SCALE                          47
+  ALTRI MONITORAGGI DI STRUTTURE                           48
+  MONITORAGGIO DEI VERSANTI                                48
+  DIAFRAMMI                                                52
+  PALI INFISSI                                             54
+  PALI TRIVELLATI                                          54
+  MICROPALI                                                56
+  TIRANTI                                                  57
+A03. OPERE DI SOTTOFONDO                                   58
+  AVVERTENZE                                               58
+  MASSETTI ISOLANTI                                        58
+  VESPAI                                                   58
+  DRENAGGI                                                 59
+                               1
+                                                     PREZZARIO OPERE PUBBLICHE
+                                                                2026                                                                        PARTE         A
+     CODICE                                                 DESCRIZIONE                                                U.M.      €      % RU % AT % PR
+
+                   SCAVI DI SBANCAMENTO
+                   Scavo di sbancamento effettuato con mezzi meccanici anche in presenza d’acqua fino ad
+                   un battente massimo di 20 cm, compresa la rimozione di arbusti e ceppaie e trovanti di
+MOL26_   A01001    dimensione non superiore a 0,25 mc, la profilatura delle pareti, la regolarizzazione del fondo,
+                   il carico sugli automezzi ed il trasporto a rinterro o rilevato nell’ambito del cantiere fino ad
+                   una distanza massima di 1.500 m:
+MOL26_   A01001a   in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)                                mc      8,04    48,00    52,00
+
+MOL26_   A01001b   in roccia alterata                                                                                   mc     15,55    45,00    55,00
+
+MOL26_   A01001c   in roccia compatta con uso di mine                                                                   mc     42,54    42,00    51,00   8,00
+
+MOL26_   A01001d   in roccia compatta, senza uso di mine, con l’ausilio di mezzi di demolizione meccanica               mc     64,23    36,00    64,00
+
+                   SCAVI A SEZIONE OBBLIGATA ESEGUITI CON MEZZI MECCANICI
+                   Scavo a sezione obbligata, fino alla profondità di 2 m, compresa l’estrazione e l’aggotto
+                   di eventuali acque nonché la rimozione di arbusti, ceppaie e trovanti di dimensione non
+MOL26_   A01002
+                   superiore a 0,25 mc, fino ad un battente massimo di 20 cm, il carico su mezzi di trasporto e
+                   l’allontanamento del materiale scavato fino ad un massimo di 1.500 m:
+MOL26_   A01002a   in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)                                mc      9,22    47,00    53,00
+
+MOL26_   A01002b   in roccia alterata                                                                                   mc     17,40    47,00    53,00
+                   in roccia compatta, senza uso di mine, con l’ausilio di mezzi di demolizione meccanica
+MOL26_   A01002c                                                                                                        mc     118,60   42,00    58,00
+                   compreso l’incidenza dello scavo oltre la sezione di calcolo
+                   Sovrapprezzo allo scavo a sezione obbligata per ogni metro o frazione di metro di maggiore
+MOL26_   A01003
+                   profondità oltre 2 m:
+MOL26_   A01003a   in rocce sciolte (argilla, sabbia, ghiaia, terreno vegetale e simili)                                mc      0,64    47,00    53,00
+
+MOL26_   A01003b   in roccia alterata                                                                                   mc      1,23    47,00    53,00
+                   in roccia compatta, senza uso di mine, con l’ausilio di mezzi di demolizione meccanica
+MOL26_   A01003c                                                                                                        mc     11,01    42,00    58,00
+                   compreso l’incidenza dello scavo oltre la sezione di calcolo
+                   SCAVI A SEZIONE OBBLIGATA ESEGUITI A MANO
+                   Scavo a sezione obbligata, in terre di qualsiasi natura e compattezza, con esclusione di
+MOL26_   A01004    quelle rocciose e argillose, compresa l’estrazione a bordo scavo ed escluso dal prezzo
+                   l’allontanamento del materiale dal bordo dello scavo:
+MOL26_   A01004a   per profondità fino a 2 m                                                                            mc     81,76    100,00
+
+MOL26_   A01004b   per profondità da 2 m a 4 m                                                                          mc     170,79   96,00    4,00    1,00
+
+MOL26_   A01005    Compenso allo scavo se effettuato in presenza di terre argillose                                     mc     19,62    100,00
+
+MOL26_   A01006    Compenso allo scavo se effettuato in ambienti sotterranei, chiusi e con luce artificiale             mc     13,08    100,00
+                   Compenso allo scavo se effettuato in presenza di strutture archeologiche o di sepolture
+MOL26_   A01007                                                                                                         mc     56,08    93,00
+                   umane con l’onere del vaglio del terriccio e la custodia delle risultanze in apposite cassette
+                   Compenso allo scavo per l’esecuzione in presenza d’acqua (falda in quota di scavo),
+MOL26_   A01008    compreso l’onere della canalizzazione provvisoria ed il prosciugamento con pompa elettrica
+                   ad immersione, nonchè per scavo a campione:
+MOL26_   A01008a   valutato a mc di scavo                                                                               mc     36,73    94,00
+
+MOL26_   A01008b   valutato per ogni ora di utilizzo della pompa                                                        ora    12,21    83,00
+
+                   RINTERRI E TRASPORTI
+                   Trasporto a rifiuto o ad idoneo impianto di recupero di materiale proveniente da lavori
+                   di movimento terra effettuata con autocarri, con portata superiore a 50 q, compreso lo
+MOL26_   A01009    spandimento e livellamento del materiale ed esclusi gli eventuali oneri di discarica autorizzata.
+                   Valutato a m³ di volume effettivo di scavo per ogni km percorso sulla distanza tra cantiere
+                   e discarica:
+MOL26_   A01009a   per trasporti fino a 10 km                                                                          mc/km    0,74    31,00    69,00
+
+
+                                                                           | 29 |
+PARTE    A                                           PREZZARIO OPERE PUBBLICHE
+                                                                2026
+
+
+     CODICE                                                 DESCRIZIONE                                                   U.M.     €      % RU % AT % PR
+                   Impermeabilizzazione di muri di fondazione con miscela di cementi speciali ed inerti
+                   additivata con prodotti sintetici ed impermeabili, data a pennello in due mani a superfici
+MOL26_   A10055                                                                                                           mq     10,02    54,00          46,00
+                   umide, escluse stuccature delle imperfezioni e intonacatura sottostante, con spessore di
+                   circa 2 mm, incidenza minima di 4 kg per mq
+                   Impermeabilizzazione e protezione di pareti esterne esposte agli agenti atmosferici con malta
+                   cementizia premiscelata elastica, impermeabile, traspirante, additivata con resina acrilica,
+MOL26_   A10056                                                                                                           mq     15,49    34,00          66,00
+                   stesa in 2 strati millimetrici a pennello su fondo preventivamente bagnato, con incidenza
+                   minima di 4 kg per mq
+                   Impermeabilizzazione e protezione di strutture interrate in calcestruzzo o muratura soggette
+                   a spinta idrostatica positiva o negativa (fino ad 1,5 atm) mediante applicazione a rullo o a
+                   pennello in due mani di malta bicomponente elastica a base cementizia, inerti selezionati
+MOL26_   A10057                                                                                                           mq     23,07    45,00          55,00
+                   a grana fine, additivi speciali e polimeri sintetici in dispersione acquosa per uno spessore
+                   finale non inferiore a 2 mm, con un consumo di 1,6 kg/mq per mm di spessore, esclusa la
+                   preparazione del supporto
+                   Impermeabilizzazione di superfici in calcestruzzo e muratura, interrate e fuori terra, eseguita
+                   con malta bicomponente elastica a base cementizia, inerti a grana fine, fibre sintetiche e
+                   resine acriliche in dispersione acquosa:
+                   impasto con consistenza plastica, rinforzato con rete in fibra di vetro resistente agli alcali,
+MOL26_   A10058                                                                                                           mq     20,31    34,00          66,00
+                   peso 150 g/mq, applicato a spatola
+MOL26_   A10059    impasto con consistenza fluida, applicato con rullo o a pennello:
+
+MOL26_   A10059a   rinforzato con rete in fibra di vetro resistente agli alcali, peso 150 g/mq                            mq     22,26    31,00          69,00
+                   rinforzato con tessuto non tessuto macroforato in polipropilene, spessore 0,6 mm, peso 80
+MOL26_   A10059b                                                                                                          mq     35,33    43,00          57,00
+                   g/m2, resistente agli alcali
+                   IMPERMEABILIZZAZIONI MULTISTRATO
+                   Sistema elastomerico leggero, multistrato, a base di resine poliuretaniche ad alte prestazioni,
+                   avente spessore > 3,5 mm, comprensivo di primer consolidante, promotore di adesione,
+                   membrana impermeabilizzante elastica ad alte prestazioni, da applicare a spruzzo, tappetino
+MOL26_   A10060    antiusura e finiture protettive, per impermeabilizzazione carrabile di parcheggi multipiano,           mq     113,48   18,00   1,00   81,00
+                   coperture adibite a parcheggio, solai in calcestruzzo e cemento armato, compreso ogni onere
+                   per dare il lavoro finito a perfetta regola d’arte, esclusi la regolarizzazione e la sigillatura dei
+                   giunti ed i sigillanti
+                   Sistema elastomerico leggero, multistrato, a base di resine poliuretaniche ad alte prestazioni,
+                   avente spessore di 2,0 - 3,0 mm, comprensivo di primer consolidante, promotore di
+                   adesione, membrana impermeabilizzante poliuretanica elastica, ad indurimento immediato
+MOL26_   A10061    applicata a spruzzo, e finiture protettive, per impermeabilizzazione pedonabile di coperture           mq     71,95    23,00   1,00   76,00
+                   piane ed in pendenza, terrazzi pedonabili e terrazzi giardino, su supporti in calcestruzzo ed
+                   in guaina bituminosa, compreso ogni onere per dare il lavoro finito a perfetta regola d’arte,
+                   esclusi la regolarizzazione e la sigillatura dei giunti ed i sigillanti
+                   IMPERMEABILIZZAZIONI CON RESINE POLIUREICHE
+                   Rivestimento impermeabilizzante leggero costituito da resine poliureiche pure, a base
+                   di poliammine, estensori di catena ed isocianati aromatici, esente da solvente e cariche,
+                   bicomponente (isocianato + poliammine), a rapidissimo indurimento, applicabile a spruzzo,
+                   previa applicazione di primer d’adesione e finitura antiscivolo e protettiva ai raggi UV a base
+MOL26_   A10062    di resine poliuretaniche alifatiche, per impermeabilizzazioni pedonabili e/o trafficabili quali
+                   parcheggio multipiano, coperture adibite a parcheggio, coperture piane ed in pendenza,
+                   terrazzi pedonabili e terrazzi giardino, su supporti in cemento, guaina bituminosa, legno,
+                   acciaio ed asfalto, compresi applicazione del primer ed ogni onere per dare il lavoro finito
+                   a perfetta regola d’arte, escluse le regolarizzazioni delle superfici e la sigillatura dei giunti:
+MOL26_   A10062a   spessore 2 mm, poliurea pura                                                                           mq     74,70    30,00          70,00
+
+MOL26_   A10062b   per ogni mm in più di poliurea pura                                                                    mq                             100,00
+                   spessore 2 mm, con barriera vapore a base di resine epossidiche tricomponente in emulsione
+MOL26_   A10062c                                                                                                          mq     96,09    36,00          64,00
+                   acquosa
+MOL26_   A10062d   spessore 2 mm, certificato al contatto diretto con acqua potabile                                      mq     75,94    29,00          71,00
+
+MOL26_   A10062e   spessore 2 mm, autoestinguente                                                                         mq     78,47    28,00          72,00
+
+
+
+                                                                          | 144 |
+       CODICE                                                         DESCRIZIONE                                                             U.M.      €       % RU   % AT   % PR
+MOL26_ A10062b       per ogni mm in più di poliurea pura                                                                                       mq     22,77                   100,00
+MOL26_ A13137b       sovrapprezzo per coloritura rosso o tabacco con impiego di ossidi (ossido di ferro)                                       mq     1,01                    100,00
+                     Zoccolino areato in legno di faggio, idoneo per pavimentazione per danza anallergici in legno, dimensioni 38 x 48
+MOL26_ A14042                                                                                                                                  m      32,00
+                     x 2400 mm
